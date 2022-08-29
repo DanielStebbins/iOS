@@ -16,6 +16,7 @@ struct WordListView: View {
                     SingleWordView(word: word)
                 }
             }
+            .padding()
         }
     }
 }

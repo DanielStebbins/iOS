@@ -9,7 +9,14 @@ import SwiftUI
 
 struct SubmitButtonView: View {
     var body: some View {
-        Button("Submit", action: {})
+        Button(action: {}) {
+            Text("Submit")
+                .font(.largeTitle)
+                .frame(maxWidth: .infinity)
+        }
+        .padding()
+        .buttonStyle(.borderedProminent)
+        .cornerRadius(10)
     }
 }
 

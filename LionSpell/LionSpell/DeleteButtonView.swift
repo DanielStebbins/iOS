@@ -7,11 +7,7 @@
 
 import SwiftUI
 
-struct DeleteButtonView: View {
-    var body: some View {
-        Button("Delete", role: .destructive, action: {})
-    }
-}
+
 
 struct DeleteButtonView_Previews: PreviewProvider {
     static var previews: some View {

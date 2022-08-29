@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ScoreDisplayView: View {
+    let score: Int
     var body: some View {
-        Text("13")
-            .font(.largeTitle)
+        Text("\(score)")
+            .font(.system(size: 60, weight: .heavy, design: .monospaced))
     }
 }
 
 struct ScoreDisplayView_Previews: PreviewProvider {
     static var previews: some View {
-        ScoreDisplayView()
+        ScoreDisplayView(score: 13)
     }
 }
