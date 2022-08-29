@@ -8,12 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		BA5CFC8428BD15D00068089B /* LionSpellApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8328BD15D00068089B /* LionSpellApp.swift */; };
-		BA5CFC8628BD15D00068089B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8528BD15D00068089B /* ContentView.swift */; };
+		BA5CFC8628BD15D00068089B /* LionSpellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8528BD15D00068089B /* LionSpellView.swift */; };
 		BA5CFC8828BD15D40068089B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5CFC8728BD15D40068089B /* Assets.xcassets */; };
 		BA5CFC8B28BD15D40068089B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5CFC8A28BD15D40068089B /* Preview Assets.xcassets */; };
 		BA5CFC9528BD15D40068089B /* LionSpellTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC9428BD15D40068089B /* LionSpellTests.swift */; };
 		BA5CFC9F28BD15D40068089B /* LionSpellUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC9E28BD15D40068089B /* LionSpellUITests.swift */; };
 		BA5CFCA128BD15D40068089B /* LionSpellUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCA028BD15D40068089B /* LionSpellUITestsLaunchTests.swift */; };
+		BA5CFCAE28BD18090068089B /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCAD28BD18090068089B /* WordListView.swift */; };
+		BA5CFCB028BD1A4C0068089B /* CurrentWordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCAF28BD1A4C0068089B /* CurrentWordView.swift */; };
+		BA5CFCB228BD1B1B0068089B /* LetterButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCB128BD1B1B0068089B /* LetterButtonsView.swift */; };
+		BA5CFCB428BD1C8C0068089B /* DeleteButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCB328BD1C8C0068089B /* DeleteButtonView.swift */; };
+		BA5CFCB628BD1CE20068089B /* SubmitButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCB528BD1CE20068089B /* SubmitButtonView.swift */; };
+		BA5CFCB828BD1D200068089B /* ScoreDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCB728BD1D200068089B /* ScoreDisplayView.swift */; };
+		BA5CFCBA28BD1D710068089B /* NewGameButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCB928BD1D710068089B /* NewGameButtonView.swift */; };
+		BA5CFCBC28BD1D910068089B /* HintButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCBB28BD1D910068089B /* HintButtonView.swift */; };
+		BA5CFCBE28BD1DC00068089B /* PreferencesButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFCBD28BD1DC00068089B /* PreferencesButtonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +45,7 @@
 /* Begin PBXFileReference section */
 		BA5CFC8028BD15D00068089B /* LionSpell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LionSpell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5CFC8328BD15D00068089B /* LionSpellApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellApp.swift; sourceTree = "<group>"; };
-		BA5CFC8528BD15D00068089B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BA5CFC8528BD15D00068089B /* LionSpellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellView.swift; sourceTree = "<group>"; };
 		BA5CFC8728BD15D40068089B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA5CFC8A28BD15D40068089B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA5CFC9028BD15D40068089B /* LionSpellTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LionSpellTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +53,15 @@
 		BA5CFC9A28BD15D40068089B /* LionSpellUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LionSpellUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5CFC9E28BD15D40068089B /* LionSpellUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellUITests.swift; sourceTree = "<group>"; };
 		BA5CFCA028BD15D40068089B /* LionSpellUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BA5CFCAD28BD18090068089B /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
+		BA5CFCAF28BD1A4C0068089B /* CurrentWordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWordView.swift; sourceTree = "<group>"; };
+		BA5CFCB128BD1B1B0068089B /* LetterButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterButtonsView.swift; sourceTree = "<group>"; };
+		BA5CFCB328BD1C8C0068089B /* DeleteButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButtonView.swift; sourceTree = "<group>"; };
+		BA5CFCB528BD1CE20068089B /* SubmitButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButtonView.swift; sourceTree = "<group>"; };
+		BA5CFCB728BD1D200068089B /* ScoreDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreDisplayView.swift; sourceTree = "<group>"; };
+		BA5CFCB928BD1D710068089B /* NewGameButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameButtonView.swift; sourceTree = "<group>"; };
+		BA5CFCBB28BD1D910068089B /* HintButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintButtonView.swift; sourceTree = "<group>"; };
+		BA5CFCBD28BD1DC00068089B /* PreferencesButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesButtonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,9 +113,18 @@
 			isa = PBXGroup;
 			children = (
 				BA5CFC8328BD15D00068089B /* LionSpellApp.swift */,
-				BA5CFC8528BD15D00068089B /* ContentView.swift */,
+				BA5CFC8528BD15D00068089B /* LionSpellView.swift */,
 				BA5CFC8728BD15D40068089B /* Assets.xcassets */,
 				BA5CFC8928BD15D40068089B /* Preview Content */,
+				BA5CFCAD28BD18090068089B /* WordListView.swift */,
+				BA5CFCAF28BD1A4C0068089B /* CurrentWordView.swift */,
+				BA5CFCB128BD1B1B0068089B /* LetterButtonsView.swift */,
+				BA5CFCB328BD1C8C0068089B /* DeleteButtonView.swift */,
+				BA5CFCB528BD1CE20068089B /* SubmitButtonView.swift */,
+				BA5CFCB728BD1D200068089B /* ScoreDisplayView.swift */,
+				BA5CFCB928BD1D710068089B /* NewGameButtonView.swift */,
+				BA5CFCBB28BD1D910068089B /* HintButtonView.swift */,
+				BA5CFCBD28BD1DC00068089B /* PreferencesButtonView.swift */,
 			);
 			path = LionSpell;
 			sourceTree = "<group>";
@@ -257,8 +284,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA5CFC8628BD15D00068089B /* ContentView.swift in Sources */,
+				BA5CFCB628BD1CE20068089B /* SubmitButtonView.swift in Sources */,
+				BA5CFC8628BD15D00068089B /* LionSpellView.swift in Sources */,
+				BA5CFCB228BD1B1B0068089B /* LetterButtonsView.swift in Sources */,
+				BA5CFCAE28BD18090068089B /* WordListView.swift in Sources */,
+				BA5CFCB028BD1A4C0068089B /* CurrentWordView.swift in Sources */,
+				BA5CFCBA28BD1D710068089B /* NewGameButtonView.swift in Sources */,
 				BA5CFC8428BD15D00068089B /* LionSpellApp.swift in Sources */,
+				BA5CFCB828BD1D200068089B /* ScoreDisplayView.swift in Sources */,
+				BA5CFCB428BD1C8C0068089B /* DeleteButtonView.swift in Sources */,
+				BA5CFCBC28BD1D910068089B /* HintButtonView.swift in Sources */,
+				BA5CFCBE28BD1DC00068089B /* PreferencesButtonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
