@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct WordListView: View {
+    let words: Array<String>
     var body: some View {
         ScrollView(.horizontal) {
             HStack {
-                ForEach(0..<11) {
-                    Text("Row \($0)")
+                ForEach(words, id: \.self) { word in
+                    SingleWordView(word: word)
                 }
             }
         }
@@ -21,6 +22,13 @@ struct WordListView: View {
 
 struct WordListView_Previews: PreviewProvider {
     static var previews: some View {
-        WordListView()
+        WordListView(words: ["PEST", "TYPES"])
+    }
+}
+
+struct SingleWordView: View {
+    let word: String
+    var body: some View {
+        Text(word)
     }
 }

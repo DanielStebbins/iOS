@@ -10,7 +10,7 @@ import SwiftUI
 struct LionSpellView: View {
     var body: some View {
         VStack {
-            WordListView()
+            WordListView(words: ["PEST", "TYPES"])
             CurrentWordView(word: "PEPPY")
             LetterButtonsView(options: "TPESY")
             DeleteButtonView()
