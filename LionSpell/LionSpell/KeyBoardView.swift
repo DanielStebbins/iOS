@@ -31,9 +31,10 @@ struct LetterButtonView: View {
         Button(action: {}) {
             Text(String(letter))
                 .font(.title)
+                .foregroundColor(.white)
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(.black, lineWidth: 2))
+                    .stroke(.white, lineWidth: 2))
         }
     }
 }
@@ -42,10 +43,11 @@ struct DeleteButtonView: View {
     var body: some View {
         Button(action: {}) {
             Image(systemName: "delete.left")
+                .foregroundColor(.red)
                 .padding([.top, .bottom])
                 .padding([.leading, .trailing], 8)
                 .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(.black, lineWidth: 2))
+                    .stroke(.white, lineWidth: 2))
         }
     }
 }

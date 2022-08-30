@@ -31,5 +31,9 @@ struct SingleWordView: View {
     let word: String
     var body: some View {
         Text(word)
+            .foregroundColor(.white)
+            .padding(5)
+            .overlay(RoundedRectangle(cornerRadius: 10)
+                .stroke(.white, lineWidth: 2))
     }
 }

@@ -12,6 +12,7 @@ struct ScoreDisplayView: View {
     var body: some View {
         Text("\(score)")
             .font(.system(size: 60, weight: .heavy, design: .monospaced))
+            .foregroundColor(.white)
     }
 }
 

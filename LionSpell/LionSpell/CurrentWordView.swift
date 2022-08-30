@@ -30,5 +30,6 @@ struct SingleLetterView: View {
         Text(letter)
             .font(.largeTitle)
             .padding(10)
+            .foregroundColor(.white)
     }
 }

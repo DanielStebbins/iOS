@@ -15,7 +15,6 @@ struct OptionBarView: View {
             NewGameButtonView()
         }
         .padding([.bottom])
-        .foregroundColor(Color(red: 17/255, green: 46/255, blue: 95/255))
     }
 }
 
@@ -32,7 +31,7 @@ struct NewGameButtonView: View {
                 .resizable()
                 .scaledToFit()
         }
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing], 25)
     }
 }
 
@@ -43,7 +42,7 @@ struct HintButtonView: View {
                 .resizable()
                 .scaledToFit()
         }
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing], 25)
     }
 }
 
@@ -54,6 +53,6 @@ struct PreferencesButtonView: View {
                 .resizable()
                 .scaledToFit()
         }
-        .padding([.leading, .trailing], 20)
+        .padding([.leading, .trailing], 25)
     }
 }

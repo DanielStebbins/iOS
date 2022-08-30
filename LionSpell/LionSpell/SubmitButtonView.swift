@@ -15,9 +15,7 @@ struct SubmitButtonView: View {
                 .frame(maxWidth: .infinity)
         }
         .padding()
-        .buttonStyle(.bordered)
-        .foregroundColor(.gray)
-        .background(.white)
+        .buttonStyle(.borderedProminent)
         .cornerRadius(10)
     }
 }
