@@ -15,7 +15,6 @@ struct KeyBoardView: View {
                 LetterButtonView(letter: String(char))
             }
             DeleteButtonView()
-                .padding()
         }
     }
 }
@@ -29,9 +28,13 @@ struct LetterButtonsView_Previews: PreviewProvider {
 struct LetterButtonView: View {
     let letter: String
     var body: some View {
-        Button(letter, action: {})
-            .font(.title)
-            .padding(10)
+        Button(action: {}) {
+            Text(String(letter))
+                .font(.title)
+                .padding(10)
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(.black, lineWidth: 2))
+        }
     }
 }
 
@@ -39,6 +42,10 @@ struct DeleteButtonView: View {
     var body: some View {
         Button(action: {}) {
             Image(systemName: "delete.left")
+                .padding([.top, .bottom])
+                .padding([.leading, .trailing], 8)
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(.black, lineWidth: 2))
         }
     }
 }

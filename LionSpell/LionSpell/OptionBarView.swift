@@ -15,6 +15,7 @@ struct OptionBarView: View {
             NewGameButtonView()
         }
         .padding([.bottom])
+        .foregroundColor(Color(red: 17/255, green: 46/255, blue: 95/255))
     }
 }
 

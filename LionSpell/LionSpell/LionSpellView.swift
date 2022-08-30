@@ -9,14 +9,18 @@ import SwiftUI
 
 struct LionSpellView: View {
     var body: some View {
-        VStack {
-            ScoreDisplayView(score: 13)
-            WordListView(words: ["PEST", "TYPES"])
-            Spacer()
-            CurrentWordView(word: "PEPPY")
-            KeyBoardView(options: "TPESY")
-            SubmitButtonView()
-            OptionBarView()
+        ZStack {
+            Color("PSUBlue")
+                .ignoresSafeArea()
+            VStack {
+                ScoreDisplayView(score: 13)
+                WordListView(words: ["PEST", "TYPES"])
+                Spacer()
+                CurrentWordView(word: "PEPPY")
+                KeyBoardView(options: "TPESY")
+                SubmitButtonView()
+                OptionBarView()
+            }
         }
     }
 }

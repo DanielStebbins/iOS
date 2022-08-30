@@ -29,5 +29,6 @@ struct SingleLetterView: View {
     var body: some View {
         Text(letter)
             .font(.largeTitle)
+            .padding(10)
     }
 }
