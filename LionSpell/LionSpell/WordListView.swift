@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Displays the list of correctly guessed words horizontally.
 struct WordListView: View {
     let words: Array<String>
     var body: some View {
@@ -16,24 +17,26 @@ struct WordListView: View {
                     SingleWordView(word: word)
                 }
             }
+            .foregroundColor(.white)
             .padding()
         }
     }
 }
 
-struct WordListView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordListView(words: ["PEST", "TYPES"])
-    }
-}
-
+// Displays a single guessed word inside a fancy border.
 struct SingleWordView: View {
     let word: String
     var body: some View {
         Text(word)
-            .foregroundColor(.white)
             .padding(5)
             .overlay(RoundedRectangle(cornerRadius: 10)
                 .stroke(.white, lineWidth: 2))
+    }
+}
+
+
+struct WordListView_Previews: PreviewProvider {
+    static var previews: some View {
+        WordListView(words: ["PEST", "TYPES"])
     }
 }

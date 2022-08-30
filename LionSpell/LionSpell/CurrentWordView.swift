@@ -7,29 +7,24 @@
 
 import SwiftUI
 
+// Displays the current string of letters the user typed.
 struct CurrentWordView: View {
     let word: String
     var body: some View {
         HStack {
-            ForEach(Array(word), id: \.self) { char in
-                SingleLetterView(letter: String(char))
+            ForEach(Array(word), id: \.self) { letter in
+                Text(String(letter))
+                    .padding(10)
             }
         }
+        .font(.largeTitle)
+        .foregroundColor(.white)
     }
 }
+
 
 struct CurrentWordView_Previews: PreviewProvider {
     static var previews: some View {
         CurrentWordView(word: "PEPPY")
-    }
-}
-
-struct SingleLetterView: View {
-    let letter: String
-    var body: some View {
-        Text(letter)
-            .font(.largeTitle)
-            .padding(10)
-            .foregroundColor(.white)
     }
 }

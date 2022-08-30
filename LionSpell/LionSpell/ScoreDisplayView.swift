@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Displays the score number.
 struct ScoreDisplayView: View {
     let score: Int
     var body: some View {

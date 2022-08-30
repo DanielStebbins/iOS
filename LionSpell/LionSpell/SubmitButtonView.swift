@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Displays the submit button.
 struct SubmitButtonView: View {
     var body: some View {
         Button(action: {}) {

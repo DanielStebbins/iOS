@@ -10,8 +10,11 @@ import SwiftUI
 struct LionSpellView: View {
     var body: some View {
         ZStack {
+            // Background Color
             Color("PSUBlue")
                 .ignoresSafeArea()
+            
+            // Holds all sub-views.
             VStack {
                 ScoreDisplayView(score: 13)
                 WordListView(words: ["PEST", "TYPES"])

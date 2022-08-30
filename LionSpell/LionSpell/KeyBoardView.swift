@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Displays the letter buttons and the delete button.
 struct KeyBoardView: View {
     let options: String
     var body: some View {
@@ -19,12 +20,7 @@ struct KeyBoardView: View {
     }
 }
 
-struct LetterButtonsView_Previews: PreviewProvider {
-    static var previews: some View {
-        KeyBoardView(options: "TPESY")
-    }
-}
-
+// Displays a button for typing a single letter.
 struct LetterButtonView: View {
     let letter: String
     var body: some View {
@@ -39,6 +35,7 @@ struct LetterButtonView: View {
     }
 }
 
+// Displays the delete button, for removing one letter.
 struct DeleteButtonView: View {
     var body: some View {
         Button(action: {}) {
@@ -49,5 +46,12 @@ struct DeleteButtonView: View {
                 .overlay(RoundedRectangle(cornerRadius: 10)
                     .stroke(.white, lineWidth: 2))
         }
+    }
+}
+
+
+struct LetterButtonsView_Previews: PreviewProvider {
+    static var previews: some View {
+        KeyBoardView(options: "TPESY")
     }
 }
