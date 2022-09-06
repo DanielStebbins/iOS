@@ -17,7 +17,6 @@ struct Scramble {
         while(word.count != numLetters) {
             word = Words.words.randomElement()!
         }
-        print(word)
         var tempLetters: String = ""
         for _ in 0..<numLetters {
             // If the random 5-letter word has been exhausted (it might have had repeat letters).
@@ -36,7 +35,6 @@ struct Scramble {
             tempLetters.append(letter)
         }
         letters = tempLetters
-        print(letters)
     }
 }
 
