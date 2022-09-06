@@ -55,6 +55,5 @@ class GameManager : ObservableObject {
         {
             score += currentWordLower.count
         }
-        
     }
 }
