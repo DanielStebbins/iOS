@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LionSpellView: View {
+    @EnvironmentObject var gameManager: GameManager
     var body: some View {
         ZStack {
             // Background Color
@@ -16,10 +17,10 @@ struct LionSpellView: View {
             
             // Holds all sub-views.
             VStack {
-                ScoreDisplayView(score: 13)
-                WordListView(words: ["PEST", "TYPES"])
+                ScoreDisplayView(score: gameManager.score)
+                WordListView(words: gameManager.guessedWords)
                 Spacer()
-                CurrentWordView(word: "PEPPY")
+                CurrentWordView(word: gameManager.currentWordUpper)
                 KeyBoardView(options: "TPESY")
                 SubmitButtonView()
                 OptionBarView()

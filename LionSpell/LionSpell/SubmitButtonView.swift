@@ -9,8 +9,9 @@ import SwiftUI
 
 // Displays the submit button.
 struct SubmitButtonView: View {
+    @EnvironmentObject var gameManager : GameManager
     var body: some View {
-        Button(action: {}) {
+        Button(action: gameManager.submitButtonPress) {
             Text("Submit")
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity)
@@ -18,6 +19,7 @@ struct SubmitButtonView: View {
         .padding()
         .buttonStyle(.borderedProminent)
         .cornerRadius(10)
+        .disabled(gameManager.submitButtonDisabled)
     }
 }
 
