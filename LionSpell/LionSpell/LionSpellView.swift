@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LionSpellView: View {
+    @EnvironmentObject var gameManager: GameManager
     var body: some View {
         ZStack {
             // Background Color
@@ -16,11 +17,11 @@ struct LionSpellView: View {
             
             // Holds all sub-views.
             VStack {
-                ScoreDisplayView(score: 13)
-                WordListView(words: ["PEST", "TYPES"])
+                ScoreDisplayView(score: gameManager.score)
+                WordListView(words: gameManager.guessedWords)
                 Spacer()
-                CurrentWordView(word: "PEPPY")
-                KeyBoardView(options: "TPESY")
+                CurrentWordView(word: gameManager.currentWordUpper)
+                KeyBoardView(options: gameManager.scramble.letters)
                 SubmitButtonView()
                 OptionBarView()
             }
@@ -31,5 +32,6 @@ struct LionSpellView: View {
 struct LionSpellView_Preview: PreviewProvider {
     static var previews: some View {
         LionSpellView()
+            .environmentObject(GameManager())
     }
 }

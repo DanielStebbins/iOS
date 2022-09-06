@@ -12,8 +12,8 @@ struct CurrentWordView: View {
     let word: String
     var body: some View {
         HStack {
-            ForEach(Array(word), id: \.self) { letter in
-                Text(String(letter))
+            ForEach(Array(word.enumerated()), id: \.offset) { letter in
+                Text(String(letter.element))
                     .padding(10)
             }
         }

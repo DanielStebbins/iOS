@@ -9,43 +9,23 @@ import SwiftUI
 
 // Displays the 3 option buttons: preferences, hint, and new game.
 struct OptionBarView: View {
+    @EnvironmentObject var gameManager: GameManager
     var body: some View {
         HStack {
-            PreferencesButtonView()
-            HintButtonView()
-            NewGameButtonView()
+            OptionButtonView(sfName: "gearshape.fill", action: {})
+            OptionButtonView(sfName: "questionmark.circle", action: {})
+            OptionButtonView(sfName: "plus.circle", action: gameManager.newGameButtonPress)
         }
         .padding([.bottom])
     }
 }
 
-// These three button views are similar, but the directions stressed separate views and each will have a unique action.
-struct PreferencesButtonView: View {
+struct OptionButtonView: View {
+    var sfName: String
+    var action: () -> Void
     var body: some View {
-        Button(action: {}) {
-            Image(systemName: "gearshape.fill")
-                .resizable()
-                .scaledToFit()
-        }
-        .padding([.leading, .trailing], 25)
-    }
-}
-
-struct HintButtonView: View {
-    var body: some View {
-        Button(action: {}) {
-            Image(systemName: "questionmark.circle")
-                .resizable()
-                .scaledToFit()
-        }
-        .padding([.leading, .trailing], 25)
-    }
-}
-
-struct NewGameButtonView: View {
-    var body: some View {
-        Button(action: {}) {
-            Image(systemName: "plus.circle")
+        Button(action: action) {
+            Image(systemName: sfName)
                 .resizable()
                 .scaledToFit()
         }

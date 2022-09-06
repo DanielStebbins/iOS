@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct LionSpellApp: App {
+    @StateObject var gameManager = GameManager()
     var body: some Scene {
         WindowGroup {
             LionSpellView()
+                .environmentObject(gameManager)
         }
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		252A90CB28C6E2030055A67D /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252A90CA28C6E2030055A67D /* GameModel.swift */; };
+		252A90CD28C6E4040055A67D /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252A90CC28C6E4040055A67D /* GameManager.swift */; };
 		BA5CFC8428BD15D00068089B /* LionSpellApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8328BD15D00068089B /* LionSpellApp.swift */; };
 		BA5CFC8628BD15D00068089B /* LionSpellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8528BD15D00068089B /* LionSpellView.swift */; };
 		BA5CFC8828BD15D40068089B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5CFC8728BD15D40068089B /* Assets.xcassets */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		252A90CA28C6E2030055A67D /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
+		252A90CC28C6E4040055A67D /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
 		BA5CFC8028BD15D00068089B /* LionSpell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LionSpell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5CFC8328BD15D00068089B /* LionSpellApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellApp.swift; sourceTree = "<group>"; };
 		BA5CFC8528BD15D00068089B /* LionSpellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellView.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 				BA5CFCB528BD1CE20068089B /* SubmitButtonView.swift */,
 				BA5CFCB728BD1D200068089B /* ScoreDisplayView.swift */,
 				BAAFF67F28BD513B00E9312B /* OptionBarView.swift */,
+				252A90CA28C6E2030055A67D /* GameModel.swift */,
+				252A90CC28C6E4040055A67D /* GameManager.swift */,
 			);
 			path = LionSpell;
 			sourceTree = "<group>";
@@ -277,12 +283,14 @@
 			files = (
 				BA5CFCB628BD1CE20068089B /* SubmitButtonView.swift in Sources */,
 				BA5CFC8628BD15D00068089B /* LionSpellView.swift in Sources */,
+				252A90CB28C6E2030055A67D /* GameModel.swift in Sources */,
 				BA5CFCB228BD1B1B0068089B /* KeyBoardView.swift in Sources */,
 				BA5CFCAE28BD18090068089B /* WordListView.swift in Sources */,
 				BA5CFCB028BD1A4C0068089B /* CurrentWordView.swift in Sources */,
 				BA5CFC8428BD15D00068089B /* LionSpellApp.swift in Sources */,
 				BAAFF68028BD513B00E9312B /* OptionBarView.swift in Sources */,
 				BA5CFCB828BD1D200068089B /* ScoreDisplayView.swift in Sources */,
+				252A90CD28C6E4040055A67D /* GameManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
