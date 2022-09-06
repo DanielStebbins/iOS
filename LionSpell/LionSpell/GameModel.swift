@@ -33,6 +33,7 @@ struct Scramble {
             tempLetters.append(letter)
         }
         letters = tempLetters
+        print(letters)
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 // Displays the letter buttons and the delete button.
 struct KeyBoardView: View {
-    @EnvironmentObject var gameManager : GameManager
+    @EnvironmentObject var gameManager: GameManager
     let options: String
     var body: some View {
         HStack {
@@ -23,12 +23,12 @@ struct KeyBoardView: View {
 
 // Displays a button for typing a single letter.
 struct LetterButtonView: View {
-    @EnvironmentObject var gameManager : GameManager
+    @EnvironmentObject var gameManager: GameManager
     let letter: String
     var body: some View {
         Button(action: gameManager.letterButtonPress(letter: letter)) {
             Text(String(letter))
-                .font(.title)
+                .font(.title.monospaced())
                 .foregroundColor(.white)
                 .padding(10)
                 .overlay(RoundedRectangle(cornerRadius: 10)
@@ -39,7 +39,7 @@ struct LetterButtonView: View {
 
 // Displays the delete button, for removing one letter.
 struct DeleteButtonView: View {
-    @EnvironmentObject var gameManager : GameManager
+    @EnvironmentObject var gameManager: GameManager
     var body: some View {
         Button(action: gameManager.deleteButtonPress) {
             Image(systemName: "delete.left")

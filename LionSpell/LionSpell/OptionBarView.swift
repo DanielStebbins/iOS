@@ -9,11 +9,12 @@ import SwiftUI
 
 // Displays the 3 option buttons: preferences, hint, and new game.
 struct OptionBarView: View {
+    @EnvironmentObject var gameManager: GameManager
     var body: some View {
         HStack {
             OptionButtonView(sfName: "gearshape.fill", action: {})
             OptionButtonView(sfName: "questionmark.circle", action: {})
-            OptionButtonView(sfName: "plus.circle", action: {})
+            OptionButtonView(sfName: "plus.circle", action: gameManager.newGameButtonPress)
         }
         .padding([.bottom])
     }
@@ -23,7 +24,7 @@ struct OptionButtonView: View {
     var sfName: String
     var action: () -> Void
     var body: some View {
-        Button(action: {}) {
+        Button(action: action) {
             Image(systemName: sfName)
                 .resizable()
                 .scaledToFit()

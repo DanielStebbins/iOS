@@ -8,12 +8,12 @@
 import Foundation
 
 class GameManager : ObservableObject {
-    let scramble = Scramble()
+    @Published var scramble = Scramble()
     
     @Published var score: Int = 0
     
     // The Words struct uses lowercase, but I like the way uppercase looks in the GUI, so I have the upper case as a computed property.
-    @Published var currentWordLower = "peppy"
+    @Published var currentWordLower = ""
     var currentWordUpper: String {
         currentWordLower.uppercased()
     }
@@ -25,7 +25,7 @@ class GameManager : ObservableObject {
     }
     
     var submitButtonDisabled: Bool {
-        !Words.words.contains(currentWordLower) && guessedWords.contains(currentWordUpper)
+        !Words.words.contains(currentWordLower) || guessedWords.contains(currentWordUpper)
     }
     
     // Returns the function letter buttons should call, since each button action uses a different letter.
@@ -45,15 +45,28 @@ class GameManager : ObservableObject {
         currentWordLower = ""
     }
     
-    func updateScore()
-    {
-        if(currentWordLower.count == 4)
-        {
+    func newGameButtonPress() {
+        scramble = Scramble()
+        score = 0
+        currentWordLower = ""
+        guessedWords = []
+    }
+    
+    func updateScore() {
+        if(currentWordLower.count == 4) {
             score += 1
         }
-        else
-        {
+        else {
             score += currentWordLower.count
+        }
+        var usesAll: Bool = true
+        for char in scramble.letters {
+            if(!currentWordLower.contains(char)) {
+                usesAll = false
+            }
+        }
+        if(usesAll) {
+            score += scramble.numLetters
         }
     }
 }

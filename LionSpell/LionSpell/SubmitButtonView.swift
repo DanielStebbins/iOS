@@ -9,7 +9,7 @@ import SwiftUI
 
 // Displays the submit button.
 struct SubmitButtonView: View {
-    @EnvironmentObject var gameManager : GameManager
+    @EnvironmentObject var gameManager: GameManager
     var body: some View {
         Button(action: gameManager.submitButtonPress) {
             Text("Submit")
