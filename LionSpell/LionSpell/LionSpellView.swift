@@ -32,5 +32,6 @@ struct LionSpellView: View {
 struct LionSpellView_Preview: PreviewProvider {
     static var previews: some View {
         LionSpellView()
+            .environmentObject(GameManager())
     }
 }

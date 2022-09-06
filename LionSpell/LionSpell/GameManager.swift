@@ -7,18 +7,20 @@
 
 import Foundation
 
+let numLetters: Int = 5
+let lowScoreCutoffLength: Int = 4
+
 class GameManager : ObservableObject {
-    @Published var scramble = Scramble()
-    
+    // The new game button changes the Scramble, which requires the letter buttons to be redrawn.
+    @Published var scramble = Scramble(letterCount: numLetters)
     @Published var score: Int = 0
+    @Published var currentWordLower = ""
+    @Published var guessedWords: Array<String> = []
     
     // The Words struct uses lowercase, but I like the way uppercase looks in the GUI, so I have the upper case as a computed property.
-    @Published var currentWordLower = ""
     var currentWordUpper: String {
         currentWordLower.uppercased()
     }
-    
-    @Published var guessedWords: Array<String> = []
     
     var deleteButtonDisabled: Bool {
         currentWordLower.isEmpty
@@ -46,14 +48,14 @@ class GameManager : ObservableObject {
     }
     
     func newGameButtonPress() {
-        scramble = Scramble()
+        scramble = Scramble(letterCount: numLetters)
         score = 0
         currentWordLower = ""
         guessedWords = []
     }
     
-    func updateScore() {
-        if(currentWordLower.count == 4) {
+    private func updateScore() {
+        if(currentWordLower.count <= lowScoreCutoffLength) {
             score += 1
         }
         else {
