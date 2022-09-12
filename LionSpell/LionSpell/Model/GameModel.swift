@@ -13,28 +13,19 @@ struct Scramble {
     
     init(letterCount: Int) {
         numLetters = letterCount
-        var word: String = Words.words.randomElement()!
-        while(word.count != numLetters) {
-            word = Words.words.randomElement()!
-        }
-        var tempLetters: String = ""
-        for _ in 0..<numLetters {
-            // If the random 5-letter word has been exhausted (it might have had repeat letters).
-            if(word.isEmpty) {
-                word = Words.words.randomElement()!
-            }
-            var letter: Character = word.randomElement()!
-            word = word.filter({ $0 != letter })
-            while(tempLetters.contains(letter)) {
-                if(word.isEmpty) {
-                    word = Words.words.randomElement()!
-                }
-                letter = word.randomElement()!
-                word = word.filter({ $0 != letter })
-            }
-            tempLetters.append(letter)
-        }
-        letters = tempLetters
+        
+        // Generate array of words with 5 unique letters.
+        let words = Words.words.filter({ $0.uniqueLetters.count == letterCount })
+
+        // Pick a random word and randomize the order of its letters.
+        letters = String(Array(words.randomElement()!.uniqueLetters).shuffled())
+    }
+}
+
+extension String {
+    var uniqueLetters: String {
+        var letters: Set<Character> = []
+        return filter{ letters.insert($0).inserted }
     }
 }
 

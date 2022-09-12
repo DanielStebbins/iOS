@@ -61,13 +61,7 @@ class GameManager : ObservableObject {
         else {
             score += currentWordLower.count
         }
-        var usesAll: Bool = true
-        for char in scramble.letters {
-            if(!currentWordLower.contains(char)) {
-                usesAll = false
-            }
-        }
-        if(usesAll) {
+        if(Set(currentWordLower) == Set(scramble.letters)) {
             score += scramble.numLetters
         }
     }
