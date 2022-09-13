@@ -42,7 +42,7 @@ extension String {
 
 struct Words {
 
-    static let words = ["test", "tests", "while", "greats", "lyrical"]
+    static let words = ["test", "tests", "while", "greats", "postage"]
     
     static let frenchWords = ["être", "avoir", "pour"]
 }

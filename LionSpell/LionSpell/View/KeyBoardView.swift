@@ -14,15 +14,18 @@ struct KeyBoardView: View {
     var body: some View {
         HStack {
             ZStack {
-                let offset = CGFloat(35)
+                let offset = CGFloat(50)
                 let offsetAngle: CGFloat = CGFloat(2) * CGFloat.pi / CGFloat(options.count - 1)
                 let initialAngle: CGFloat = offsetAngle / CGFloat(2)
                 
-                LetterButtonView(letter: String(options.first!), shapeColor: .yellow, rotation: CGFloat.zero)
+                let initialCorrection = gameManager.preferences.difficulty == .six ? CGFloat.pi / CGFloat(3.3) : 0
+                let correction = gameManager.preferences.difficulty == .six ? CGFloat.pi / CGFloat(2.5) : 0
+                
+                LetterButtonView(letter: String(options.first!), shapeColor: .yellow, rotation: initialCorrection)
                 let lettersArray = Array(options)
                 ForEach(1..<lettersArray.count, id: \.self) { i in
-                    LetterButtonView(letter: String(lettersArray[i]), shapeColor: .blue, rotation: CGFloat.zero)
-                        .offset(x: cos(initialAngle + offsetAngle * CGFloat(i)) * offset, y: sin(initialAngle + offsetAngle * CGFloat(i)) * offset)
+                    LetterButtonView(letter: String(lettersArray[i]), shapeColor: .blue, rotation: -initialCorrection)
+                        .offset(x: cos(initialCorrection + initialAngle + offsetAngle * CGFloat(i)) * offset, y: sin(initialCorrection + initialAngle + offsetAngle * CGFloat(i)) * offset)
                 }
             }
             DeleteButtonView()
@@ -41,7 +44,7 @@ struct LetterButtonView: View {
             Text(letter)
                 .font(.title.monospaced())
                 .foregroundColor(.white)
-                .padding(10)
+                .padding(20)
                 .background(ShapeView(sides: gameManager.preferences.difficulty.rawValue - 1)
                     .fill(shapeColor)
                     .rotationEffect(Angle(radians: rotation)))
@@ -76,6 +79,7 @@ struct DeleteButtonView: View {
                 .foregroundColor({gameManager.deleteButtonDisabled ? .gray : .red}())
         }
         .disabled(gameManager.deleteButtonDisabled)
+        .padding()
     }
 }
 
