@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		252A90CB28C6E2030055A67D /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252A90CA28C6E2030055A67D /* GameModel.swift */; };
 		252A90CD28C6E4040055A67D /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252A90CC28C6E4040055A67D /* GameManager.swift */; };
+		BA51867328CFF3F800011A58 /* PreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51867228CFF3F800011A58 /* PreferencesView.swift */; };
+		BA51867528CFF4B800011A58 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51867428CFF4B800011A58 /* Preferences.swift */; };
+		BA51867728CFF7CE00011A58 /* HintsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA51867628CFF7CE00011A58 /* HintsView.swift */; };
 		BA5CFC8428BD15D00068089B /* LionSpellApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8328BD15D00068089B /* LionSpellApp.swift */; };
 		BA5CFC8628BD15D00068089B /* LionSpellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA5CFC8528BD15D00068089B /* LionSpellView.swift */; };
 		BA5CFC8828BD15D40068089B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA5CFC8728BD15D40068089B /* Assets.xcassets */; };
@@ -44,6 +47,9 @@
 /* Begin PBXFileReference section */
 		252A90CA28C6E2030055A67D /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		252A90CC28C6E4040055A67D /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		BA51867228CFF3F800011A58 /* PreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesView.swift; sourceTree = "<group>"; };
+		BA51867428CFF4B800011A58 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Preferences.swift; sourceTree = "<group>"; };
+		BA51867628CFF7CE00011A58 /* HintsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsView.swift; sourceTree = "<group>"; };
 		BA5CFC8028BD15D00068089B /* LionSpell.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LionSpell.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5CFC8328BD15D00068089B /* LionSpellApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellApp.swift; sourceTree = "<group>"; };
 		BA5CFC8528BD15D00068089B /* LionSpellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LionSpellView.swift; sourceTree = "<group>"; };
@@ -97,6 +103,8 @@
 				BA5CFCB528BD1CE20068089B /* SubmitButtonView.swift */,
 				BA5CFCB728BD1D200068089B /* ScoreDisplayView.swift */,
 				BAAFF67F28BD513B00E9312B /* OptionBarView.swift */,
+				BA51867228CFF3F800011A58 /* PreferencesView.swift */,
+				BA51867628CFF7CE00011A58 /* HintsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -113,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				252A90CC28C6E4040055A67D /* GameManager.swift */,
+				BA51867428CFF4B800011A58 /* Preferences.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -307,14 +316,17 @@
 			files = (
 				BA5CFCB628BD1CE20068089B /* SubmitButtonView.swift in Sources */,
 				BA5CFC8628BD15D00068089B /* LionSpellView.swift in Sources */,
+				BA51867528CFF4B800011A58 /* Preferences.swift in Sources */,
 				252A90CB28C6E2030055A67D /* GameModel.swift in Sources */,
 				BA5CFCB228BD1B1B0068089B /* KeyBoardView.swift in Sources */,
 				BA5CFCAE28BD18090068089B /* WordListView.swift in Sources */,
 				BA5CFCB028BD1A4C0068089B /* CurrentWordView.swift in Sources */,
+				BA51867728CFF7CE00011A58 /* HintsView.swift in Sources */,
 				BA5CFC8428BD15D00068089B /* LionSpellApp.swift in Sources */,
 				BAAFF68028BD513B00E9312B /* OptionBarView.swift in Sources */,
 				BA5CFCB828BD1D200068089B /* ScoreDisplayView.swift in Sources */,
 				252A90CD28C6E4040055A67D /* GameManager.swift in Sources */,
+				BA51867328CFF3F800011A58 /* PreferencesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

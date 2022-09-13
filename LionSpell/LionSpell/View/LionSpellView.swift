@@ -7,8 +7,14 @@
 
 import SwiftUI
 
+enum Showing : String, Identifiable, CaseIterable {
+    case preferences, hints
+    var id: RawValue { rawValue }
+}
+
 struct LionSpellView: View {
     @EnvironmentObject var gameManager: GameManager
+    @State private var showing: Showing?
     var body: some View {
         ZStack {
             // Background Color
@@ -20,10 +26,16 @@ struct LionSpellView: View {
                 ScoreDisplayView(score: gameManager.score)
                 WordListView(words: gameManager.guessedWords)
                 Spacer()
-                CurrentWordView(word: gameManager.currentWordUpper)
+                CurrentWordView(word: gameManager.currentWordUpper, highlighted: String(gameManager.scramble.letters.first!))
                 KeyBoardView(options: gameManager.scramble.letters)
                 SubmitButtonView()
-                OptionBarView()
+                OptionBarView(showing: $showing)
+            }
+        }
+        .sheet(item: $showing) { item in
+            switch item {
+            case .preferences: PreferencesView(preferences: $gameManager.preferences)
+            case .hints: HintsView()
             }
         }
     }

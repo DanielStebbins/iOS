@@ -16,7 +16,8 @@ struct SubmitButtonView: View {
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity)
         }
-        .padding()
+        .padding(5)
+        .padding(.top, 50)
         .buttonStyle(.borderedProminent)
         .cornerRadius(10)
         .disabled(gameManager.submitButtonDisabled)
@@ -26,5 +27,6 @@ struct SubmitButtonView: View {
 struct SubmitButtonView_Previews: PreviewProvider {
     static var previews: some View {
         SubmitButtonView()
+            .environmentObject(GameManager())
     }
 }
