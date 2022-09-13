@@ -37,22 +37,6 @@ struct LetterButtonView: View {
     }
 }
 
-struct ShapeView: Shape {
-//    @EnvironmentObject var gameManager: GameManager
-    let sides: Int
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        path.move(to: CGPoint(x: rect.maxX, y: rect.midY))
-        let slice = CGFloat(2) * CGFloat.pi/CGFloat(sides)
-        for i in 1..<sides - 1 {
-            let angle = slice * CGFloat(i)
-            path.addLine(to: CGPoint(x: cos(angle) * rect.maxX, y: sin(angle) * rect.maxY))
-        }
-        path.closeSubpath()
-        return path
-    }
-}
-
 // Displays the delete button, for removing one letter.
 struct DeleteButtonView: View {
     @EnvironmentObject var gameManager: GameManager
