@@ -27,12 +27,11 @@ struct LetterButtonView: View {
     let letter: String
     var body: some View {
         Button(action: gameManager.letterButtonPress(letter: letter)) {
-            Text(String(letter))
+            Text(letter)
                 .font(.title.monospaced())
                 .foregroundColor(.white)
                 .padding(10)
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(.white, lineWidth: 2))
+                .background(ShapeView(sides: 4, rotation: CGFloat(0)))
         }
     }
 }
@@ -40,15 +39,18 @@ struct LetterButtonView: View {
 struct ShapeView: Shape {
 //    @EnvironmentObject var gameManager: GameManager
     let sides: Int
+    let rotation: CGFloat
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: rect.maxX, y: rect.midY))
+        
+        let radius = min(rect.width,rect.height)/2
+        path.move(to: CGPoint(x: rect.midX + cos(rotation) * radius, y: rect.midY + sin(rotation) * radius))
+        
         let slice = CGFloat(2) * CGFloat.pi/CGFloat(sides)
-        for i in 1..<sides - 1 {
+        for i in 1..<sides{
             let angle = slice * CGFloat(i)
-            path.addLine(to: CGPoint(x: cos(angle) * rect.maxX, y: sin(angle) * rect.maxY))
+            path.addLine(to: CGPoint(x: rect.midX + cos(angle + rotation) * radius, y: rect.midY + sin(angle + rotation) * radius))
         }
-        path.closeSubpath()
         return path
     }
 }
@@ -72,7 +74,7 @@ struct DeleteButtonView: View {
 
 struct LetterButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        KeyBoardView(options: "TPESY")
+        LetterButtonView(letter: "W")
             .environmentObject(GameManager())
     }
 }
