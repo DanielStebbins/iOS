@@ -92,7 +92,7 @@ class GameManager : ObservableObject {
     
     // Returns an array of all word lengths present in any answer.
     func wordLengths() -> Array<Int> {
-        scramble.words.map({ $0.count }).unique()
+        scramble.words.map({ $0.count }).unique().sorted()
     }
     
     // Returns a dictionary mapping a letter to the number of words of length "length" that start with that letter.

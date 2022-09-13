@@ -21,7 +21,7 @@ struct HintsView: View {
             ForEach(gameManager.wordLengths(), id: \.self) { length in
                 Section(header: Text("Words of Length \(length) That Begin With:")) {
                     ForEach(gameManager.firstLetterFrequencies(length: length).sorted(by: >), id: \.key) { key, value in
-                        Text("'\(key)': \(value)")
+                        Text("\(key): \(value)")
                     }
                 }
             }
