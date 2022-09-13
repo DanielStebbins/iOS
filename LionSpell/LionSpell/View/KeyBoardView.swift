@@ -14,18 +14,17 @@ struct KeyBoardView: View {
     var body: some View {
         HStack {
             ZStack {
-                let offset = CGFloat(50)
+                let offset = CGFloat(50 + 2 * options.count)
                 let offsetAngle: CGFloat = CGFloat(2) * CGFloat.pi / CGFloat(options.count - 1)
                 let initialAngle: CGFloat = offsetAngle / CGFloat(2)
                 
-                let initialCorrection = gameManager.preferences.difficulty == .six ? CGFloat.pi / CGFloat(3.3) : 0
-                let correction = gameManager.preferences.difficulty == .six ? CGFloat.pi / CGFloat(2.5) : 0
+                let correction = gameManager.preferences.difficulty == .six ? CGFloat.pi / CGFloat(3.3) : 0
                 
-                LetterButtonView(letter: String(options.first!), shapeColor: .yellow, rotation: initialCorrection)
+                LetterButtonView(letter: String(options.first!), shapeColor: .yellow, rotation: correction)
                 let lettersArray = Array(options)
                 ForEach(1..<lettersArray.count, id: \.self) { i in
-                    LetterButtonView(letter: String(lettersArray[i]), shapeColor: .blue, rotation: -initialCorrection)
-                        .offset(x: cos(initialCorrection + initialAngle + offsetAngle * CGFloat(i)) * offset, y: sin(initialCorrection + initialAngle + offsetAngle * CGFloat(i)) * offset)
+                    LetterButtonView(letter: String(lettersArray[i]), shapeColor: .blue, rotation: -correction)
+                        .offset(x: cos(correction + initialAngle + offsetAngle * CGFloat(i)) * offset, y: sin(correction + initialAngle + offsetAngle * CGFloat(i)) * offset)
                 }
             }
             DeleteButtonView()
@@ -79,7 +78,7 @@ struct DeleteButtonView: View {
                 .foregroundColor({gameManager.deleteButtonDisabled ? .gray : .red}())
         }
         .disabled(gameManager.deleteButtonDisabled)
-        .padding()
+        .padding(.leading, 40)
     }
 }
 

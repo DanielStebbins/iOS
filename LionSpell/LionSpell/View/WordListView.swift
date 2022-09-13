@@ -18,7 +18,8 @@ struct WordListView: View {
                 }
             }
             .foregroundColor(.white)
-            .padding()
+            .padding([.leading, .trailing], 10)
+            .padding([.top, .bottom], 4)
         }
     }
 }

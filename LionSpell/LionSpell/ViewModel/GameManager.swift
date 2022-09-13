@@ -10,8 +10,8 @@ import Foundation
 let lowScoreCutoffLength: Int = 4
 
 class GameManager : ObservableObject {
-    // The new game button changes the Scramble, which requires the letter buttons to be redrawn.
-    @Published var scramble = Scramble(letterCount: Difficulty.five.rawValue, language: Language.english)
+    // Initializes the first Scramble with default preferences because the preferences variable cannot be referenced before initialization.
+    @Published var scramble = Scramble(preferences: Preferences())
     @Published var score: Int = 0
     @Published var currentWordLower: String = ""
     @Published var guessedWords: Array<String> = []
@@ -57,7 +57,7 @@ class GameManager : ObservableObject {
     }
     
     func newGame() {
-        scramble = Scramble(letterCount: preferences.difficulty.rawValue, language: preferences.language)
+        scramble = Scramble(preferences: preferences)
         score = 0
         currentWordLower = ""
         guessedWords = []

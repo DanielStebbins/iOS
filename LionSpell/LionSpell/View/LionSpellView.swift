@@ -26,7 +26,7 @@ struct LionSpellView: View {
                 ScoreDisplayView(score: gameManager.score)
                 WordListView(words: gameManager.guessedWords)
                 Spacer()
-                CurrentWordView(word: gameManager.currentWordUpper)
+                CurrentWordView(word: gameManager.currentWordUpper, highlighted: String(gameManager.scramble.letters.first!))
                 KeyBoardView(options: gameManager.scramble.letters)
                 SubmitButtonView()
                 OptionBarView(showing: $showing)

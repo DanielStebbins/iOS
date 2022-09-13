@@ -7,14 +7,15 @@
 
 import Foundation
 
-enum Difficulty : Int, Identifiable, CaseIterable {
+// I know the directions said to use String enums, but I really think Int makes more sense for this one.
+enum Difficulty: Int, Identifiable, CaseIterable {
     case five = 5
     case six = 6
     case seven = 7
     var id: RawValue { rawValue }
 }
 
-enum Language : String, Identifiable, CaseIterable {
+enum Language:  String, Identifiable, CaseIterable {
     case english, french
     var id: RawValue { rawValue }
 }

@@ -16,8 +16,8 @@ struct SubmitButtonView: View {
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity)
         }
-        .padding()
-        .padding(.top)
+        .padding(5)
+        .padding(.top, 50)
         .buttonStyle(.borderedProminent)
         .cornerRadius(10)
         .disabled(gameManager.submitButtonDisabled)
