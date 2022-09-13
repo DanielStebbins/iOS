@@ -9,12 +9,18 @@ import SwiftUI
 
 // Displays the letter buttons and the delete button.
 struct KeyBoardView: View {
-    @EnvironmentObject var gameManager: GameManager
+//    @EnvironmentObject var gameManager: GameManager
     let options: String
     var body: some View {
         HStack {
-            ForEach(Array(options), id: \.self) { char in
-                LetterButtonView(letter: String(char))
+            ZStack {
+                LetterButtonView(letter: String(options.first!), sides: options.count - 1)
+                let lettersArray = Array(options)
+                ForEach(1..<lettersArray.count, id: \.self) { i in
+                    LetterButtonView(letter: String(lettersArray[i]), sides: lettersArray.count - 1)
+                        .offset(x: CGFloat.zero, y: CGFloat(i * 50))
+//                        .rotationEffect(Angle(radians: CGFloat(i) * CGFloat.pi/CGFloat(lettersArray.count)))
+                }
             }
             DeleteButtonView()
         }
@@ -23,15 +29,17 @@ struct KeyBoardView: View {
 
 // Displays a button for typing a single letter.
 struct LetterButtonView: View {
-    @EnvironmentObject var gameManager: GameManager
+//    @EnvironmentObject var gameManager: GameManager
+//    gameManager.letterButtonPress(letter: letter)
     let letter: String
+    let sides: Int
     var body: some View {
-        Button(action: gameManager.letterButtonPress(letter: letter)) {
+        Button(action: {}) {
             Text(letter)
                 .font(.title.monospaced())
                 .foregroundColor(.white)
                 .padding(10)
-                .background(ShapeView(sides: 4, rotation: CGFloat(0)))
+                .background(ShapeView(sides: sides, rotation: CGFloat(0)))
         }
     }
 }
@@ -74,7 +82,7 @@ struct DeleteButtonView: View {
 
 struct LetterButtonsView_Previews: PreviewProvider {
     static var previews: some View {
-        LetterButtonView(letter: "W")
+        KeyBoardView(options: "TPESY")
             .environmentObject(GameManager())
     }
 }
