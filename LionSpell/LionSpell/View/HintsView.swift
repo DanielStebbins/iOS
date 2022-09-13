@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HintsView: View {
     @EnvironmentObject var gameManager: GameManager
+    @Environment (\.dismiss) private var dismiss
     var body: some View {
         Form {
             Section(header: Text("Summary")) {
@@ -23,6 +24,10 @@ struct HintsView: View {
                         Text("'\(key)': \(value)")
                     }
                 }
+            }
+            
+            Button("Dismiss") {
+                dismiss()
             }
         }
     }

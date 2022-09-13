@@ -9,17 +9,20 @@ import SwiftUI
 
 // Displays the letter buttons and the delete button.
 struct KeyBoardView: View {
-//    @EnvironmentObject var gameManager: GameManager
+    @EnvironmentObject var gameManager: GameManager
     let options: String
     var body: some View {
         HStack {
             ZStack {
-                LetterButtonView(letter: String(options.first!), sides: options.count - 1)
+                let offset = CGFloat(35)
+                let offsetAngle: CGFloat = CGFloat(2) * CGFloat.pi / CGFloat(options.count - 1)
+                let initialAngle: CGFloat = offsetAngle / CGFloat(2)
+                
+                LetterButtonView(letter: String(options.first!), shapeColor: .yellow, rotation: CGFloat.zero)
                 let lettersArray = Array(options)
                 ForEach(1..<lettersArray.count, id: \.self) { i in
-                    LetterButtonView(letter: String(lettersArray[i]), sides: lettersArray.count - 1)
-                        .offset(x: CGFloat.zero, y: CGFloat(i * 50))
-//                        .rotationEffect(Angle(radians: CGFloat(i) * CGFloat.pi/CGFloat(lettersArray.count)))
+                    LetterButtonView(letter: String(lettersArray[i]), shapeColor: .blue, rotation: CGFloat.zero)
+                        .offset(x: cos(initialAngle + offsetAngle * CGFloat(i)) * offset, y: sin(initialAngle + offsetAngle * CGFloat(i)) * offset)
                 }
             }
             DeleteButtonView()
@@ -29,35 +32,36 @@ struct KeyBoardView: View {
 
 // Displays a button for typing a single letter.
 struct LetterButtonView: View {
-//    @EnvironmentObject var gameManager: GameManager
-//    gameManager.letterButtonPress(letter: letter)
+    @EnvironmentObject var gameManager: GameManager
     let letter: String
-    let sides: Int
+    let shapeColor: Color
+    let rotation: CGFloat
     var body: some View {
-        Button(action: {}) {
+        Button(action: gameManager.letterButtonPress(letter: letter)) {
             Text(letter)
                 .font(.title.monospaced())
                 .foregroundColor(.white)
                 .padding(10)
-                .background(ShapeView(sides: sides, rotation: CGFloat(0)))
+                .background(ShapeView(sides: gameManager.preferences.difficulty.rawValue - 1)
+                    .fill(shapeColor)
+                    .rotationEffect(Angle(radians: rotation)))
         }
+        .padding()
     }
 }
 
 struct ShapeView: Shape {
-//    @EnvironmentObject var gameManager: GameManager
     let sides: Int
-    let rotation: CGFloat
     func path(in rect: CGRect) -> Path {
         var path = Path()
         
         let radius = min(rect.width,rect.height)/2
-        path.move(to: CGPoint(x: rect.midX + cos(rotation) * radius, y: rect.midY + sin(rotation) * radius))
+        path.move(to: CGPoint(x: rect.maxX, y: rect.midY))
         
         let slice = CGFloat(2) * CGFloat.pi/CGFloat(sides)
         for i in 1..<sides{
             let angle = slice * CGFloat(i)
-            path.addLine(to: CGPoint(x: rect.midX + cos(angle + rotation) * radius, y: rect.midY + sin(angle + rotation) * radius))
+            path.addLine(to: CGPoint(x: rect.midX + cos(angle) * radius, y: rect.midY + sin(angle) * radius))
         }
         return path
     }
@@ -70,10 +74,6 @@ struct DeleteButtonView: View {
         Button(action: gameManager.deleteButtonPress) {
             Image(systemName: "delete.left")
                 .foregroundColor({gameManager.deleteButtonDisabled ? .gray : .red}())
-                .padding([.top, .bottom])
-                .padding([.leading, .trailing], 8)
-                .overlay(RoundedRectangle(cornerRadius: 10)
-                    .stroke(.white, lineWidth: 2))
         }
         .disabled(gameManager.deleteButtonDisabled)
     }
