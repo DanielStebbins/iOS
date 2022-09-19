@@ -35,6 +35,7 @@ struct BoardButtonView: View {
         Button(action: manager.boardButtonPress(num: boardNum)) {
             Image(manager.toButtonImage(num: boardNum))
         }
+        .padding()
     }
 }
 

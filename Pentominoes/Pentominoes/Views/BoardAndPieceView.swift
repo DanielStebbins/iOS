@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct BoardAndPieceView: View {
-    let board: String
+    @EnvironmentObject var manager: Manager
     let pieces: Array<Piece>
     var body: some View {
         ZStack(alignment: .topLeading) {
-            Image(board)
+            Image(manager.boardImage)
             ForEach(0..<pieces.count, id: \.self) { i in
                 PieceView(piece: pieces[i])
             }
@@ -20,8 +20,16 @@ struct BoardAndPieceView: View {
     }
 }
 
+struct PieceView: View {
+    let piece: Piece
+    var body: some View {
+        Image(piece.tile.name)
+    }
+}
+
 struct BoardAndPieceView_Previews: PreviewProvider {
     static var previews: some View {
-        BoardAndPieceView(board: "Board0", pieces: [Piece.standard, Piece.standard])
+        BoardAndPieceView(pieces: [Piece.standard, Piece.standard])
+            .environmentObject(Manager())
     }
 }

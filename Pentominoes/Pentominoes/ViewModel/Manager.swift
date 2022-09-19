@@ -10,14 +10,14 @@ import Foundation
 class Manager: ObservableObject {
     @Published var board: Int = 0
     
+    var boardImage: String {
+        "Board\(board)"
+    }
+    
     func boardButtonPress(num: Int) -> () -> Void {
         {
             self.board = num
         }
-    }
-    
-    func toBoardImage(num: Int) -> String {
-        "Board\(num)"
     }
     
     func toButtonImage(num: Int) -> String {

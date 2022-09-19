@@ -15,7 +15,7 @@ struct MainView: View {
                  .ignoresSafeArea()
             HStack {
                 ButtonColumn(boardNums: [0, 1, 2], SFImage: "arrow.counterclockwise.circle")
-                BoardAndPieceView(board: "Board0", pieces: [Piece.standard, Piece.standard])
+                BoardAndPieceView(pieces: [Piece.standard, Piece.standard])
                 ButtonColumn(boardNums: [3, 4, 5], SFImage: "arrow.forward.circle")
             }
             .padding(.top)
