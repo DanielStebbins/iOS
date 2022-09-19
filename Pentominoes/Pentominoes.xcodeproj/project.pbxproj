@@ -14,7 +14,11 @@
 		BAE345EC28D8C1530016D088 /* PentominoesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345EB28D8C1530016D088 /* PentominoesTests.swift */; };
 		BAE345F628D8C1530016D088 /* PentominoesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345F528D8C1530016D088 /* PentominoesUITests.swift */; };
 		BAE345F828D8C1530016D088 /* PentominoesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345F728D8C1530016D088 /* PentominoesUITestsLaunchTests.swift */; };
-		BAE3460E28D8C3D60016D088 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE3460D28D8C3D50016D088 /* Model.swift */; };
+		BAE346B528D8CB310016D088 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B428D8CB310016D088 /* Model.swift */; };
+		BAE346B728D8CC500016D088 /* ButtonColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B628D8CC500016D088 /* ButtonColumn.swift */; };
+		BAE346B928D8D3B60016D088 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B828D8D3B60016D088 /* PieceView.swift */; };
+		BAE346BB28D8D4490016D088 /* BoardAndPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */; };
+		BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346BD28D8D6B10016D088 /* Manager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,7 +51,11 @@
 		BAE345F728D8C1530016D088 /* PentominoesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentominoesUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BAE3460828D8C2800016D088 /* Solutions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Solutions.json; sourceTree = "<group>"; };
 		BAE3460928D8C2860016D088 /* Tiles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tiles.json; sourceTree = "<group>"; };
-		BAE3460D28D8C3D50016D088 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = "../../../../../Downloads/Pentomino Assets/Model.swift"; sourceTree = "<group>"; };
+		BAE346B428D8CB310016D088 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = "../../../../../Downloads/Pentomino Assets 2/Model.swift"; sourceTree = "<group>"; };
+		BAE346B628D8CC500016D088 /* ButtonColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColumn.swift; sourceTree = "<group>"; };
+		BAE346B828D8D3B60016D088 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
+		BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAndPieceView.swift; sourceTree = "<group>"; };
+		BAE346BD28D8D6B10016D088 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,9 +108,9 @@
 		BAE345D928D8C1510016D088 /* Pentominoes */ = {
 			isa = PBXGroup;
 			children = (
+				BAE346BC28D8D69C0016D088 /* ViewModel */,
+				BAE346B328D8CB230016D088 /* Model */,
 				BAE3460C28D8C3C50016D088 /* Views */,
-				BAE3460B28D8C3BD0016D088 /* ViewModel */,
-				BAE3460A28D8C3B60016D088 /* Model */,
 				BAE345DA28D8C1510016D088 /* PentominoesApp.swift */,
 				BAE345DE28D8C1530016D088 /* Assets.xcassets */,
 				BAE345E028D8C1530016D088 /* Preview Content */,
@@ -135,27 +143,31 @@
 			path = PentominoesUITests;
 			sourceTree = "<group>";
 		};
-		BAE3460A28D8C3B60016D088 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				BAE3460D28D8C3D50016D088 /* Model.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		BAE3460B28D8C3BD0016D088 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		BAE3460C28D8C3C50016D088 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				BAE345DC28D8C1510016D088 /* MainView.swift */,
+				BAE346B628D8CC500016D088 /* ButtonColumn.swift */,
+				BAE346B828D8D3B60016D088 /* PieceView.swift */,
+				BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BAE346B328D8CB230016D088 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BAE346B428D8CB310016D088 /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BAE346BC28D8D69C0016D088 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BAE346BD28D8D6B10016D088 /* Manager.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,7 +300,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAE3460E28D8C3D60016D088 /* Model.swift in Sources */,
+				BAE346BB28D8D4490016D088 /* BoardAndPieceView.swift in Sources */,
+				BAE346B928D8D3B60016D088 /* PieceView.swift in Sources */,
+				BAE346B728D8CC500016D088 /* ButtonColumn.swift in Sources */,
+				BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */,
+				BAE346B528D8CB310016D088 /* Model.swift in Sources */,
 				BAE345DD28D8C1510016D088 /* MainView.swift in Sources */,
 				BAE345DB28D8C1510016D088 /* PentominoesApp.swift in Sources */,
 			);
