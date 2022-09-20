@@ -8,6 +8,7 @@
 import Foundation
 
 class Manager: ObservableObject {
+    let model: Model = Model()
     @Published var board: Int = 0
     
     var boardImage: String {
@@ -17,6 +18,7 @@ class Manager: ObservableObject {
     func boardButtonPress(num: Int) -> () -> Void {
         {
             self.board = num
+            print(self.model.tiles)
         }
     }
     

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BAA479DF28D9220E009B9D58 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA479DE28D9220E009B9D58 /* Model.swift */; };
+		BAA479E128D9260F009B9D58 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA479E028D9260F009B9D58 /* FileInfo.swift */; };
+		BAA5DACB28D93C6700E095C9 /* Tiles.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DAC928D93C6700E095C9 /* Tiles.json */; };
+		BAA5DACC28D93C6700E095C9 /* Solutions.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DACA28D93C6700E095C9 /* Solutions.json */; };
 		BAE345DB28D8C1510016D088 /* PentominoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345DA28D8C1510016D088 /* PentominoesApp.swift */; };
 		BAE345DD28D8C1510016D088 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345DC28D8C1510016D088 /* MainView.swift */; };
 		BAE345DF28D8C1530016D088 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAE345DE28D8C1530016D088 /* Assets.xcassets */; };
@@ -14,7 +18,6 @@
 		BAE345EC28D8C1530016D088 /* PentominoesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345EB28D8C1530016D088 /* PentominoesTests.swift */; };
 		BAE345F628D8C1530016D088 /* PentominoesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345F528D8C1530016D088 /* PentominoesUITests.swift */; };
 		BAE345F828D8C1530016D088 /* PentominoesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345F728D8C1530016D088 /* PentominoesUITestsLaunchTests.swift */; };
-		BAE346B528D8CB310016D088 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B428D8CB310016D088 /* Model.swift */; };
 		BAE346B728D8CC500016D088 /* ButtonColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B628D8CC500016D088 /* ButtonColumn.swift */; };
 		BAE346BB28D8D4490016D088 /* BoardAndPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */; };
 		BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346BD28D8D6B10016D088 /* Manager.swift */; };
@@ -39,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BAA479DE28D9220E009B9D58 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		BAA479E028D9260F009B9D58 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
+		BAA5DAC928D93C6700E095C9 /* Tiles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tiles.json; sourceTree = "<group>"; };
+		BAA5DACA28D93C6700E095C9 /* Solutions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Solutions.json; sourceTree = "<group>"; };
 		BAE345D728D8C1510016D088 /* Pentominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pentominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAE345DA28D8C1510016D088 /* PentominoesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentominoesApp.swift; sourceTree = "<group>"; };
 		BAE345DC28D8C1510016D088 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -49,9 +56,6 @@
 		BAE345F128D8C1530016D088 /* PentominoesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PentominoesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAE345F528D8C1530016D088 /* PentominoesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentominoesUITests.swift; sourceTree = "<group>"; };
 		BAE345F728D8C1530016D088 /* PentominoesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentominoesUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BAE3460828D8C2800016D088 /* Solutions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Solutions.json; sourceTree = "<group>"; };
-		BAE3460928D8C2860016D088 /* Tiles.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Tiles.json; sourceTree = "<group>"; };
-		BAE346B428D8CB310016D088 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Model.swift; path = "../../../../../Downloads/Pentomino Assets 2/Model.swift"; sourceTree = "<group>"; };
 		BAE346B628D8CC500016D088 /* ButtonColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColumn.swift; sourceTree = "<group>"; };
 		BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAndPieceView.swift; sourceTree = "<group>"; };
 		BAE346BD28D8D6B10016D088 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -89,8 +93,6 @@
 				BAE345D928D8C1510016D088 /* Pentominoes */,
 				BAE345EA28D8C1530016D088 /* PentominoesTests */,
 				BAE345F428D8C1530016D088 /* PentominoesUITests */,
-				BAE3460828D8C2800016D088 /* Solutions.json */,
-				BAE3460928D8C2860016D088 /* Tiles.json */,
 				BAE345D828D8C1510016D088 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,6 +110,8 @@
 		BAE345D928D8C1510016D088 /* Pentominoes */ = {
 			isa = PBXGroup;
 			children = (
+				BAA5DACA28D93C6700E095C9 /* Solutions.json */,
+				BAA5DAC928D93C6700E095C9 /* Tiles.json */,
 				BAE346BC28D8D69C0016D088 /* ViewModel */,
 				BAE346B328D8CB230016D088 /* Model */,
 				BAE3460C28D8C3C50016D088 /* Views */,
@@ -156,8 +160,9 @@
 		BAE346B328D8CB230016D088 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BAE346B428D8CB310016D088 /* Model.swift */,
+				BAA479DE28D9220E009B9D58 /* Model.swift */,
 				BAE346C128D8DEA50016D088 /* StorageManager.swift */,
+				BAA479E028D9260F009B9D58 /* FileInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -275,6 +280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAE345E228D8C1530016D088 /* Preview Assets.xcassets in Resources */,
+				BAA5DACB28D93C6700E095C9 /* Tiles.json in Resources */,
+				BAA5DACC28D93C6700E095C9 /* Solutions.json in Resources */,
 				BAE345DF28D8C1530016D088 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -303,10 +310,11 @@
 				BAE346BB28D8D4490016D088 /* BoardAndPieceView.swift in Sources */,
 				BAE346B728D8CC500016D088 /* ButtonColumn.swift in Sources */,
 				BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */,
-				BAE346B528D8CB310016D088 /* Model.swift in Sources */,
 				BAE345DD28D8C1510016D088 /* MainView.swift in Sources */,
 				BAE345DB28D8C1510016D088 /* PentominoesApp.swift in Sources */,
+				BAA479E128D9260F009B9D58 /* FileInfo.swift in Sources */,
 				BAE346C228D8DEA50016D088 /* StorageManager.swift in Sources */,
+				BAA479DF28D9220E009B9D58 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
