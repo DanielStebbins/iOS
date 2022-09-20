@@ -12,9 +12,9 @@ struct MainView: View {
     var body: some View {
         ZStack(alignment: .topLeading) {
             Color("PSUBlue")
-                 .ignoresSafeArea()
+                .ignoresSafeArea()
             BoardAndButtonsView()
-            .padding(.top)
+                .padding(.top)
             ForEach(0..<manager.model.pieces.count, id: \.self) { i in
                 PieceView(piece: manager.model.pieces[i])
             }

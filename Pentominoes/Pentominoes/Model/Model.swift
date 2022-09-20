@@ -28,6 +28,7 @@ struct Model {
     }
 }
 
+
 // A tile with width/height in unit coordinates.
 struct Tile: Codable {
     let name: String
@@ -36,6 +37,7 @@ struct Tile: Codable {
     
     static let standard = Tile(name: "I", width: 1, height: 4)
 }
+
 
 // Specifies the complete orientation of a piece using unit coordinates.
 struct Position: Codable {
@@ -66,6 +68,7 @@ extension Position {
         self.y = y
     }
 }
+
 
 // A Piece is the model data that the view uses to display a pentomino.
 struct Piece {
