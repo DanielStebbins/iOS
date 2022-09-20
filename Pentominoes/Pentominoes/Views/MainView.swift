@@ -10,16 +10,24 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
-        ZStack(alignment: .top) {
+        ZStack(alignment: .topLeading) {
             Color("PSUBlue")
                  .ignoresSafeArea()
-            HStack {
-                ButtonColumn(boardNums: [0, 1, 2], SFImage: "arrow.counterclockwise.circle")
-                BoardAndPieceView(pieces: [Piece.standard, Piece.standard])
-                ButtonColumn(boardNums: [3, 4, 5], SFImage: "arrow.forward.circle")
-            }
+            BoardAndButtonsView()
             .padding(.top)
+            ForEach(0..<manager.model.pieces.count, id: \.self) { i in
+                PieceView(piece: manager.model.pieces[i])
+            }
         }
+    }
+}
+    
+struct PieceView: View {
+    @EnvironmentObject var manager: Manager
+    let piece: Piece
+    var body: some View {
+        Image(piece.tile.name)
+            .position(CGPoint(x: piece.center.x * manager.tileSize, y: piece.center.y * manager.tileSize))
     }
 }
 

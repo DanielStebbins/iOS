@@ -7,6 +7,17 @@
 
 import SwiftUI
 
+struct BoardAndButtonsView: View {
+    @EnvironmentObject var manager: Manager
+    var body: some View {
+        HStack {
+            ButtonColumn(boardNums: [0, 1, 2], SFImage: "arrow.counterclockwise.circle")
+            Image(manager.model.boardNames[manager.board])
+            ButtonColumn(boardNums: [3, 4, 5], SFImage: "arrow.forward.circle")
+        }
+    }
+}
+
 struct ButtonColumn: View {
     @EnvironmentObject var manager: Manager
     let boardNums: Array<Int>
@@ -33,7 +44,7 @@ struct BoardButtonView: View {
     let boardNum: Int
     var body: some View {
         Button(action: manager.boardButtonPress(num: boardNum)) {
-            Image(manager.toButtonImage(num: boardNum))
+            Image(manager.model.buttonNames[boardNum])
         }
         .padding()
     }

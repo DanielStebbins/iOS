@@ -8,39 +8,21 @@
 import Foundation
 
 class StorageManager {
-    static func readTiles(file: String) -> [Tile] {
+    static func readFrom<T: Codable>(file: String, into: T.Type) -> T? {
         let mainBundle = Bundle.main
         let url = mainBundle.url(forResource: file, withExtension: "json")
 
         guard url != nil else {
-            return []
+            return nil
         }
         do {
             let data = try Data.init(contentsOf: url!)
             let decoder = JSONDecoder()
-            return try decoder.decode([Tile].self, from: data)
+            return try decoder.decode(T.self, from: data)
         }
         catch {
             print(error)
-            return []
-        }
-    }
-    
-    static func readSolutions(file: String) -> [[String: Position]] {
-        let mainBundle = Bundle.main
-        let url = mainBundle.url(forResource: file, withExtension: "json")
-
-        guard url != nil else {
-            return []
-        }
-        do {
-            let data = try Data.init(contentsOf: url!)
-            let decoder = JSONDecoder()
-            return try decoder.decode([[String: Position]].self, from: data)
-        }
-        catch {
-            print(error)
-            return []
+            return nil
         }
     }
 }

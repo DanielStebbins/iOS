@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		BAA479DF28D9220E009B9D58 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA479DE28D9220E009B9D58 /* Model.swift */; };
-		BAA479E128D9260F009B9D58 /* FileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA479E028D9260F009B9D58 /* FileInfo.swift */; };
 		BAA5DACB28D93C6700E095C9 /* Tiles.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DAC928D93C6700E095C9 /* Tiles.json */; };
 		BAA5DACC28D93C6700E095C9 /* Solutions.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DACA28D93C6700E095C9 /* Solutions.json */; };
 		BAE345DB28D8C1510016D088 /* PentominoesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345DA28D8C1510016D088 /* PentominoesApp.swift */; };
@@ -18,8 +17,7 @@
 		BAE345EC28D8C1530016D088 /* PentominoesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345EB28D8C1530016D088 /* PentominoesTests.swift */; };
 		BAE345F628D8C1530016D088 /* PentominoesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345F528D8C1530016D088 /* PentominoesUITests.swift */; };
 		BAE345F828D8C1530016D088 /* PentominoesUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE345F728D8C1530016D088 /* PentominoesUITestsLaunchTests.swift */; };
-		BAE346B728D8CC500016D088 /* ButtonColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B628D8CC500016D088 /* ButtonColumn.swift */; };
-		BAE346BB28D8D4490016D088 /* BoardAndPieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */; };
+		BAE346B728D8CC500016D088 /* BoardAndButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346B628D8CC500016D088 /* BoardAndButtonsView.swift */; };
 		BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346BD28D8D6B10016D088 /* Manager.swift */; };
 		BAE346C228D8DEA50016D088 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAE346C128D8DEA50016D088 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +41,6 @@
 
 /* Begin PBXFileReference section */
 		BAA479DE28D9220E009B9D58 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		BAA479E028D9260F009B9D58 /* FileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileInfo.swift; sourceTree = "<group>"; };
 		BAA5DAC928D93C6700E095C9 /* Tiles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tiles.json; sourceTree = "<group>"; };
 		BAA5DACA28D93C6700E095C9 /* Solutions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Solutions.json; sourceTree = "<group>"; };
 		BAE345D728D8C1510016D088 /* Pentominoes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pentominoes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,8 +53,7 @@
 		BAE345F128D8C1530016D088 /* PentominoesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PentominoesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAE345F528D8C1530016D088 /* PentominoesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentominoesUITests.swift; sourceTree = "<group>"; };
 		BAE345F728D8C1530016D088 /* PentominoesUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PentominoesUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BAE346B628D8CC500016D088 /* ButtonColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonColumn.swift; sourceTree = "<group>"; };
-		BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAndPieceView.swift; sourceTree = "<group>"; };
+		BAE346B628D8CC500016D088 /* BoardAndButtonsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardAndButtonsView.swift; sourceTree = "<group>"; };
 		BAE346BD28D8D6B10016D088 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		BAE346C128D8DEA50016D088 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,8 +147,7 @@
 			isa = PBXGroup;
 			children = (
 				BAE345DC28D8C1510016D088 /* MainView.swift */,
-				BAE346B628D8CC500016D088 /* ButtonColumn.swift */,
-				BAE346BA28D8D4490016D088 /* BoardAndPieceView.swift */,
+				BAE346B628D8CC500016D088 /* BoardAndButtonsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -162,7 +157,6 @@
 			children = (
 				BAA479DE28D9220E009B9D58 /* Model.swift */,
 				BAE346C128D8DEA50016D088 /* StorageManager.swift */,
-				BAA479E028D9260F009B9D58 /* FileInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,12 +301,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAE346BB28D8D4490016D088 /* BoardAndPieceView.swift in Sources */,
-				BAE346B728D8CC500016D088 /* ButtonColumn.swift in Sources */,
+				BAE346B728D8CC500016D088 /* BoardAndButtonsView.swift in Sources */,
 				BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */,
 				BAE345DD28D8C1510016D088 /* MainView.swift in Sources */,
 				BAE345DB28D8C1510016D088 /* PentominoesApp.swift in Sources */,
-				BAA479E128D9260F009B9D58 /* FileInfo.swift in Sources */,
 				BAE346C228D8DEA50016D088 /* StorageManager.swift in Sources */,
 				BAA479DF28D9220E009B9D58 /* Model.swift in Sources */,
 			);
