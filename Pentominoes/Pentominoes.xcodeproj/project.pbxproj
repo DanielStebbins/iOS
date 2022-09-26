@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA21405228E2160500F9D3E8 /* PieceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21405128E2160500F9D3E8 /* PieceView.swift */; };
 		BAA479DF28D9220E009B9D58 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA479DE28D9220E009B9D58 /* Model.swift */; };
 		BAA5DACB28D93C6700E095C9 /* Tiles.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DAC928D93C6700E095C9 /* Tiles.json */; };
 		BAA5DACC28D93C6700E095C9 /* Solutions.json in Resources */ = {isa = PBXBuildFile; fileRef = BAA5DACA28D93C6700E095C9 /* Solutions.json */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA21405128E2160500F9D3E8 /* PieceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieceView.swift; sourceTree = "<group>"; };
 		BAA479DE28D9220E009B9D58 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		BAA5DAC928D93C6700E095C9 /* Tiles.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Tiles.json; sourceTree = "<group>"; };
 		BAA5DACA28D93C6700E095C9 /* Solutions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Solutions.json; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 			children = (
 				BAE345DC28D8C1510016D088 /* MainView.swift */,
 				BAE346B628D8CC500016D088 /* BoardAndButtonsView.swift */,
+				BA21405128E2160500F9D3E8 /* PieceView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			files = (
 				BAE346B728D8CC500016D088 /* BoardAndButtonsView.swift in Sources */,
 				BAE346BE28D8D6B10016D088 /* Manager.swift in Sources */,
+				BA21405228E2160500F9D3E8 /* PieceView.swift in Sources */,
 				BAE345DD28D8C1510016D088 /* MainView.swift in Sources */,
 				BAE345DB28D8C1510016D088 /* PentominoesApp.swift in Sources */,
 				BAE346C228D8DEA50016D088 /* StorageManager.swift in Sources */,

@@ -40,15 +40,16 @@ struct Tile: Codable {
 
 
 // Specifies the complete orientation of a piece using unit coordinates.
+// Changed to use Double coordinates to adjust by 0.5 depending on whether the number of tiles is even or odd.
 struct Position: Codable {
-    var x: Int
-    var y: Int
+    var x: Double
+    var y: Double
     var isFlipped : Bool
     var rotations : Int
     
     init() {
-        x = 0
-        y = 0
+        x = 0.0
+        y = 0.0
         isFlipped = false
         rotations = 0
     }
@@ -56,36 +57,49 @@ struct Position: Codable {
 
 // More x,y control.
 extension Position {
-    init(x: Int, y: Int) {
+    init(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y
         isFlipped = false
         rotations = 0
     }
     
-    mutating func moveTo(_ x: Int, _ y: Int) {
+    mutating func moveTo(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y
+    }
+    
+    mutating func moveBy(_ x: Double, _ y: Double) {
+        self.x += x
+        self.y += y
     }
 }
 
 
 // A Piece is the model data that the view uses to display a pentomino.
-struct Piece {
+struct Piece: Identifiable {
     let tile: Tile
     var position: Position
+    var id = UUID()
     
     static let standard = Piece(tile: Tile.standard, position: Position())
 }
 
 // Movable
 extension Piece {
+    var currentWidth: Int { position.rotations % 2 == 0 ? tile.width : tile.height }
+    var currentHeight: Int { position.rotations % 2 == 0 ? tile.height : tile.width }
+    
     var center: Position {
-        Position(x: position.x + tile.width / 2, y: position.y + tile.height / 2)
+        Position(position.x + Double(currentWidth) / 2 - 0.5, position.y + Double(currentHeight) / 2 - 0.5)
     }
     
-    mutating func moveTo(_ x: Int, _ y: Int) {
+    mutating func moveTo(_ x: Double, _ y: Double) {
         position.moveTo(x, y)
+    }
+    
+    mutating func moveBy(_ x: Double, _ y: Double) {
+        position.moveBy(x, y)
     }
 }
 

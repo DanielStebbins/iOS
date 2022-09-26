@@ -15,19 +15,10 @@ struct MainView: View {
                 .ignoresSafeArea()
             BoardAndButtonsView()
                 .padding(.top)
-            ForEach(0..<manager.model.pieces.count, id: \.self) { i in
-                PieceView(piece: manager.model.pieces[i])
+            ForEach($manager.model.pieces) { $p in
+                PieceView(piece: $p)
             }
         }
-    }
-}
-    
-struct PieceView: View {
-    @EnvironmentObject var manager: Manager
-    let piece: Piece
-    var body: some View {
-        Image(piece.tile.name)
-            .position(CGPoint(x: piece.center.x * manager.tileSize, y: piece.center.y * manager.tileSize))
     }
 }
 
