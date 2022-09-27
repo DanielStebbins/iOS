@@ -56,7 +56,7 @@ struct Position: Codable {
 }
 
 // More x,y control.
-extension Position {
+extension Position: Equatable {
     init(_ x: Double, _ y: Double) {
         self.x = x
         self.y = y
