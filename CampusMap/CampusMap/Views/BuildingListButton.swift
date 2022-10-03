@@ -13,12 +13,6 @@ import SwiftUI
 struct BuildingListButton: View {
     @EnvironmentObject var manager : Manager
     var body: some View {
-//        List {
-//            ForEach(manager.model.buildings) { building in
-//                Text(building.name)
-//            }
-//        }
-        
         Menu {
             ForEach(manager.model.buildings) { building in
                 Text(building.name)
