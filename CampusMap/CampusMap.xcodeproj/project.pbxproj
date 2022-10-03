@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA8A0D4828EB5B6900C7B0A4 /* BuildingDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8A0D4728EB5B6900C7B0A4 /* BuildingDetails.swift */; };
 		BAD026BB28EA7F2A00721A0D /* CampusMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD026BA28EA7F2A00721A0D /* CampusMapApp.swift */; };
 		BAD026BD28EA7F2A00721A0D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD026BC28EA7F2A00721A0D /* MainView.swift */; };
 		BAD026BF28EA7F2B00721A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD026BE28EA7F2B00721A0D /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA8A0D4728EB5B6900C7B0A4 /* BuildingDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetails.swift; sourceTree = "<group>"; };
 		BAD026B728EA7F2A00721A0D /* CampusMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD026BA28EA7F2A00721A0D /* CampusMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapApp.swift; sourceTree = "<group>"; };
 		BAD026BC28EA7F2A00721A0D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				BAD026BC28EA7F2A00721A0D /* MainView.swift */,
 				BAD026E828EA817000721A0D /* CampusMap.swift */,
 				BAD026EE28EA872100721A0D /* BuildingListButton.swift */,
+				BA8A0D4728EB5B6900C7B0A4 /* BuildingDetails.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				BAD026ED28EA823500721A0D /* Model.swift in Sources */,
 				BAD026EF28EA872100721A0D /* BuildingListButton.swift in Sources */,
 				BAD026E928EA817000721A0D /* CampusMap.swift in Sources */,
+				BA8A0D4828EB5B6900C7B0A4 /* BuildingDetails.swift in Sources */,
 				BAD026BD28EA7F2A00721A0D /* MainView.swift in Sources */,
 				BAD026BB28EA7F2A00721A0D /* CampusMapApp.swift in Sources */,
 				BAD026EB28EA81A100721A0D /* Manager.swift in Sources */,

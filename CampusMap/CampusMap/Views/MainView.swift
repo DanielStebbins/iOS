@@ -20,6 +20,20 @@ struct MainView: View {
                 .toolbar {
                     buildingListToolbarItem
                 }
+                .confirmationDialog("Building", isPresented: $manager.showConfirmation, presenting: manager.selectedBuilding) { building in
+                    Button(building.isFavorite! ? "Unfavorite" : "Favorite") {
+                        manager.toggleFavorite(building)
+                    }
+                    Button("Details") {
+                        manager.selectedBuilding = building
+                        manager.showSheet = true
+                    }
+                } message: { building in
+                    Text(building.name)
+                }
+                .sheet(isPresented: $manager.showSheet, content: {
+                    BuildingDetails(building: manager.selectedBuilding)
+                })
         }
         
     }

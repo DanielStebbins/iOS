@@ -11,7 +11,20 @@ import MapKit
 struct CampusMap: View {
     @EnvironmentObject var manager : Manager
     var body: some View {
-        Map(coordinateRegion: $manager.region)
+        Map(coordinateRegion: $manager.region, annotationItems: manager.model.shown, annotationContent: annotationFor(building:))
+    }
+    
+    func annotationFor(building: Building) -> some MapAnnotationProtocol {
+        MapAnnotation(coordinate: building.cll2d) {
+            Button(action: {
+                manager.selectedBuilding = building
+                manager.showConfirmation = true
+            }) {
+                Image(systemName: "mappin.circle.fill")
+                    .foregroundColor(building.isFavorite! ? .yellow : .blue)
+                    .font(.system(size: 40))
+            }
+        }
     }
 }
 

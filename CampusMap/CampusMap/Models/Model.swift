@@ -7,14 +7,15 @@
 
 import Foundation
 
-struct Coordinate {
-    var latitude : Double
-    var longitude : Double
-}
-
 struct Model {
-    let center: Coordinate
+    let centerLatitude: Double = 40.7982
+    let centerLongitude: Double = -77.8599
     var buildings: [Building]
+    
+    var shown: [Building] {
+        print(buildings.filter({ $0.isShown! == true }))
+        return buildings.filter({ $0.isShown! == true })
+    }
     
     init() {
         var tempBuildings : [Building] = []
@@ -26,14 +27,16 @@ struct Model {
             print("Error decoding buildings: \(error)")
             tempBuildings = []
         }
-        let centerBuilding = tempBuildings.first(where: { $0.name == "Chemistry Building" })!
+        // The initial dataset does not include a favorite boolean.
+        for i in tempBuildings.indices {
+            tempBuildings[i].isShown = tempBuildings[i].isShown ?? false
+            tempBuildings[i].isFavorite = tempBuildings[i].isFavorite ?? false
+        }
         
-        center = Coordinate(latitude: centerBuilding.latitude, longitude: centerBuilding.longitude)
-        buildings = tempBuildings
+        // TEST PIN, DELETE
+        let index = tempBuildings.firstIndex(where: { $0.name == "Chemistry Building" })!
+        tempBuildings[index].isShown = true
+        
+        buildings = tempBuildings.sorted(by: { $0.name < $1.name })
     }
-    
-//    let favorites : [Spot] =
-//        [Spot(coord: Coord(latitude: 40.79550030, longitude: -77.85900170), title: "Cheese Shoppe") ,
-//         Spot(coord: Coord(latitude: +40.79414797, longitude: -77.86152899), title: "The Corner Room")]
-    
 }
