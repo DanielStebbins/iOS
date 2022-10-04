@@ -13,30 +13,23 @@ struct Model {
     var buildings: [Building]
     
     var shown: [Building] {
-        print(buildings.filter({ $0.isShown! == true }))
         return buildings.filter({ $0.isShown! == true })
     }
     
+    private let storageManager: StorageManager<[Building]>
     init() {
-        var tempBuildings : [Building] = []
-        let url = Bundle.main.url(forResource: "buildings", withExtension: "json")!
-        do {
-            let data = try Data(contentsOf: url)
-            tempBuildings = try JSONDecoder().decode([Building].self, from: data)
-        } catch   {
-            print("Error decoding buildings: \(error)")
-            tempBuildings = []
-        }
+        storageManager = StorageManager(name: "buildings")
+        var tempBuildings = storageManager.modelData ?? []
+        
         // The initial dataset does not include a favorite boolean.
         for i in tempBuildings.indices {
             tempBuildings[i].isShown = tempBuildings[i].isShown ?? false
             tempBuildings[i].isFavorite = tempBuildings[i].isFavorite ?? false
         }
-        
-        // TEST PIN, DELETE
-        let index = tempBuildings.firstIndex(where: { $0.name == "Chemistry Building" })!
-        tempBuildings[index].isShown = true
-        
         buildings = tempBuildings.sorted(by: { $0.name < $1.name })
+    }
+    
+    func save() {
+        storageManager.save(modelData: buildings)
     }
 }

@@ -8,32 +8,48 @@
 import SwiftUI
 
 struct MainView: View {
-    @EnvironmentObject var manager : Manager
+    @EnvironmentObject var manager: Manager
     var body: some View {
         
-        let buildingListToolbarItem = ToolbarItem(placement: .navigationBarTrailing) {
-            BuildingListButton()
+        let toolbar = ToolbarItemGroup(placement: .bottomBar) {
+            Button(action: manager.hideAll) {
+                Image(systemName: "eye.slash")
+            }
+            Spacer()
+            Button(action: manager.showFavorites) {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
+            Spacer()
+            Button(action: manager.hideFavorites) {
+                Image(systemName: "star")
+                    .foregroundColor(.yellow)
+            }
+            Spacer()
+            Button(action: { manager.shownSheet = .buildingList }) {
+                Image(systemName: "magnifyingglass")
+            }
         }
         
         NavigationStack {
             CampusMap()
                 .toolbar {
-                    buildingListToolbarItem
+                    toolbar
                 }
                 .confirmationDialog("Building", isPresented: $manager.showConfirmation, presenting: manager.selectedBuilding) { building in
-                    Button(building.isFavorite! ? "Unfavorite" : "Favorite") {
-                        manager.toggleFavorite(building)
-                    }
                     Button("Details") {
                         manager.selectedBuilding = building
-                        manager.showSheet = true
+                        manager.shownSheet = .details
                     }
                 } message: { building in
                     Text(building.name)
                 }
-                .sheet(isPresented: $manager.showSheet, content: {
-                    BuildingDetails(building: manager.selectedBuilding)
-                })
+                .sheet(item: $manager.shownSheet) { item in
+                    switch item {
+                    case .details: BuildingDetailsSheet()
+                    case .buildingList: BuildingListSheet()
+                    }
+                }
         }
         
     }

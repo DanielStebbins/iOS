@@ -9,7 +9,8 @@ import SwiftUI
 import MapKit
 
 struct CampusMap: View {
-    @EnvironmentObject var manager : Manager
+    @EnvironmentObject var manager: Manager
+    
     var body: some View {
         Map(coordinateRegion: $manager.region, annotationItems: manager.model.shown, annotationContent: annotationFor(building:))
     }
