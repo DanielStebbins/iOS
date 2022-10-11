@@ -38,8 +38,20 @@ class Manager: NSObject, ObservableObject {
         switch listedBuildings {
         case .all: return true
         case .favorites: return building.isFavorite!
-        case .nearby: return true
+        case .nearby: return distance(from: building) < 400
         }
+    }
+    
+    // In meters.
+    func distance(from building: Building) -> Double {
+        let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
+        let currentLocation: CLLocation
+        if let user = lastUserLocation {
+            currentLocation = user
+        } else {
+            currentLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+        }
+        return buildingLocation.distance(from: currentLocation)
     }
     
     func adjustRegion() {
