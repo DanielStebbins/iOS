@@ -19,19 +19,27 @@ struct BuildingListSheet: View {
         }
         
         NavigationStack {
-            List {
-                Picker("Difficulty", selection: $manager.listedBuildings) {
-                    ForEach(ListedBuildings.allCases) {
-                        Text(String($0.rawValue)).tag($0)
+            Form {
+                Section(header: Text("Selector")) {
+                    Picker("Listed Buildings", selection: $manager.listedBuildings) {
+                        ForEach(ListedBuildings.allCases) {
+                            Text(String($0.rawValue)).tag($0)
+                        }
+                    } .pickerStyle(.segmented)
+                }
+                Section(header: Text("Buildings"))
+                {
+                    List {
+                        ForEach($manager.model.buildings) { $building in
+                            if(manager.isListed(building: building))
+                            {
+                                BuildingRow(building: $building)
+                            }
+                        }
                     }
-                } .pickerStyle(.segmented)
-                ForEach($manager.buildingList) { $building in
-                    BuildingRow(building: $building)
                 }
             }
-            .toolbar {
-                dismissButton
-            }
+            .toolbar { dismissButton }
         }
     }
 }

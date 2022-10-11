@@ -22,14 +22,6 @@ class Manager: NSObject, ObservableObject {
     let locationManager : CLLocationManager
     var lastUserLocation: CLLocation?
     
-    var buildingList: [Building] {
-        switch listedBuildings {
-        case .all: return model.buildings
-        case .favorites: return model.buildings.filter({ $0.isFavorite! })
-        case .nearby: return model.buildings
-        }
-    }
-    
     override init() {
         let tempModel = Model()
         region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: tempModel.centerLatitude, longitude: tempModel.centerLongitude), span: span)
@@ -42,10 +34,16 @@ class Manager: NSObject, ObservableObject {
         locationManager.delegate = self
     }
     
+    func isListed(building: Building) -> Bool {
+        switch listedBuildings {
+        case .all: return true
+        case .favorites: return building.isFavorite!
+        case .nearby: return true
+        }
+    }
+    
     func adjustRegion() {
-        print("test")
-        if(!model.shown.isEmpty || lastUserLocation != nil)
-        {
+        if(!model.shown.isEmpty || lastUserLocation != nil) {
             var topLeft: CLLocationCoordinate2D
             var bottomRight: CLLocationCoordinate2D
             if let user = lastUserLocation {
@@ -64,11 +62,15 @@ class Manager: NSObject, ObservableObject {
             }
             
             if(topLeft == bottomRight) {
-                region.center = topLeft
+                if(tracking == .none) {
+                    region.center = topLeft
+                }
                 region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
             } else {
-                region.center.latitude = (topLeft.latitude + bottomRight.latitude) / 2
-                region.center.longitude = (topLeft.longitude + bottomRight.longitude) / 2
+                if(tracking == .none) {
+                    region.center.latitude = (topLeft.latitude + bottomRight.latitude) / 2
+                    region.center.longitude = (topLeft.longitude + bottomRight.longitude) / 2
+                }
                 region.span = MKCoordinateSpan.init(latitudeDelta: abs(topLeft.latitude - bottomRight.latitude) * 1.2, longitudeDelta: abs(bottomRight.longitude - topLeft.longitude) * 1.2)
             }
         }
@@ -84,6 +86,7 @@ class Manager: NSObject, ObservableObject {
         for i in model.buildings.indices {
             model.buildings[i].isShown = false
         }
+        adjustRegion()
     }
     
     func showFavorites() {
@@ -92,6 +95,7 @@ class Manager: NSObject, ObservableObject {
                 model.buildings[i].isShown = true
             }
         }
+        adjustRegion()
     }
     
     func hideFavorites() {
@@ -100,6 +104,7 @@ class Manager: NSObject, ObservableObject {
                 model.buildings[i].isShown = false
             }
         }
+        adjustRegion()
     }
     
     func save() {

@@ -14,8 +14,9 @@ struct MainView: View {
         
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
             Button(action: { manager.tracking = MapUserTrackingMode.follow; print(manager.tracking) }) {
-                Image(systemName: "location")
+                Image(systemName: "location.fill")
             }
+            .disabled(manager.tracking == .follow)
             Spacer()
             Button(action: manager.hideAll) {
                 Image(systemName: "eye.slash")
