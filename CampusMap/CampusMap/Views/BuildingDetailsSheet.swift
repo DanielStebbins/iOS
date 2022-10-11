@@ -33,10 +33,13 @@ struct BuildingDetailsSheet: View {
                             .padding()
                     }
                 }
+                HStack {
+                    Text("Walking Time: \(manager.walkingTime)")
+                    Image(systemName: "arrow.right")
+                        .rotationEffect(manager.headingToSelectedBuilding())
+                }
             }
-            .toolbar {
-                dismissButton
-            }
+            .toolbar { dismissButton }
         }
     }
 }

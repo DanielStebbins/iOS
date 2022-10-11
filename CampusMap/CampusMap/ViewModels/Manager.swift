@@ -17,6 +17,7 @@ class Manager: NSObject, ObservableObject {
     @Published var shownSheet: ActiveSheet?
     @Published var tracking: MapUserTrackingMode = .none
     @Published var listedBuildings: ListedBuildings = .all
+    @Published var walkingTime: String = "Unknown Time"
     
     var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     let locationManager : CLLocationManager
@@ -52,6 +53,40 @@ class Manager: NSObject, ObservableObject {
             currentLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
         }
         return buildingLocation.distance(from: currentLocation)
+    }
+    
+    func timeToSelectedBuilding() {
+        let request = MKDirections.Request()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedBuilding!.cll2d))
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard error == nil else {return}
+            if let route = response?.routes.first {
+                let formatter = DateComponentsFormatter()
+                formatter.unitsStyle = .abbreviated
+                formatter.includesApproximationPhrase = false
+                formatter.includesTimeRemainingPhrase = false
+                formatter.allowedUnits = [.minute, .second]
+                self.walkingTime = formatter.string(from: route.expectedTravelTime) ?? "Unknown Time"
+            }
+        }
+    }
+    
+    func headingToSelectedBuilding() -> Angle {
+        let lat1 = lastUserLocation!.coordinate.latitude * Double.pi / 180
+        let lon1 = lastUserLocation!.coordinate.longitude * Double.pi / 180
+
+        let lat2 = selectedBuilding!.cll2d.latitude * Double.pi / 180
+        let lon2 = selectedBuilding!.cll2d.longitude * Double.pi / 180
+
+        let dLon = lon2 - lon1
+        let y = sin(dLon) * cos(lat2)
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon)
+
+        return Angle(degrees: -atan2(x, y) * 180 / Double.pi)
     }
     
     func adjustRegion() {

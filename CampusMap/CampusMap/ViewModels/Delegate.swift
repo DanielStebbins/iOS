@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 extension Manager : CLLocationManagerDelegate {
-    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
         case .notDetermined:
@@ -21,19 +20,16 @@ extension Manager : CLLocationManagerDelegate {
         }
     }
     
-
-    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let firstLocation = locations[0]
             lastUserLocation = firstLocation
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
     }
     
-    // For use by SwiftUI's LocationButton
     func requestLocation() {
         locationManager.requestLocation()
     }
-
 }
