@@ -6,12 +6,18 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
         
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
+            Button(action: { manager.tracking = MapUserTrackingMode.follow; print(manager.tracking) }) {
+                Image(systemName: "location.fill")
+            }
+            .disabled(manager.tracking == .follow)
+            Spacer()
             Button(action: manager.hideAll) {
                 Image(systemName: "eye.slash")
             }
@@ -46,7 +52,7 @@ struct MainView: View {
                 }
                 .sheet(item: $manager.shownSheet) { item in
                     switch item {
-                    case .details: BuildingDetailsSheet()
+                    case .details: BuildingDetailsSheet().onAppear{ manager.timeToSelectedBuilding() }
                     case .buildingList: BuildingListSheet()
                     }
                 }

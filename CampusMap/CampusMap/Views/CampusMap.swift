@@ -12,7 +12,8 @@ struct CampusMap: View {
     @EnvironmentObject var manager: Manager
     
     var body: some View {
-        Map(coordinateRegion: $manager.region, annotationItems: manager.model.shown, annotationContent: annotationFor(building:))
+        Map(coordinateRegion: $manager.region, showsUserLocation: true, userTrackingMode: $manager.tracking, annotationItems: manager.model.shown, annotationContent: annotationFor(building:))
+            .gesture(DragGesture().onChanged { _ in manager.tracking = MapUserTrackingMode.none })
     }
     
     func annotationFor(building: Building) -> some MapAnnotationProtocol {
@@ -26,11 +27,5 @@ struct CampusMap: View {
                     .font(.system(size: 40))
             }
         }
-    }
-}
-
-struct CampusMap_Previews: PreviewProvider {
-    static var previews: some View {
-        CampusMap()
     }
 }
