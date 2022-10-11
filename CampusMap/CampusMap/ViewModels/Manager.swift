@@ -35,6 +35,7 @@ class Manager: NSObject, ObservableObject {
         locationManager.delegate = self
     }
     
+    // Controls which buildings to display in the list.
     func isListed(building: Building) -> Bool {
         switch listedBuildings {
         case .all: return true
@@ -43,7 +44,7 @@ class Manager: NSObject, ObservableObject {
         }
     }
     
-    // In meters.
+    // Gets the distance from the user to the given building.
     func distance(from building: Building) -> Double {
         let buildingLocation = CLLocation(latitude: building.latitude, longitude: building.longitude)
         let currentLocation: CLLocation
@@ -55,6 +56,7 @@ class Manager: NSObject, ObservableObject {
         return buildingLocation.distance(from: currentLocation)
     }
     
+    // Gets the walking time from the user to the selected building.
     func timeToSelectedBuilding() {
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
@@ -75,6 +77,7 @@ class Manager: NSObject, ObservableObject {
         }
     }
     
+    // Gets the angle to the selected building.
     func headingToSelectedBuilding() -> Angle {
         let lat1 = lastUserLocation!.coordinate.latitude * Double.pi / 180
         let lon1 = lastUserLocation!.coordinate.longitude * Double.pi / 180
@@ -89,6 +92,7 @@ class Manager: NSObject, ObservableObject {
         return Angle(degrees: -atan2(x, y) * 180 / Double.pi)
     }
     
+    // Centers and zooms the map to show all buildings and the user. Has a default zoom for when only one thing is shown.
     func adjustRegion() {
         if(!model.shown.isEmpty || lastUserLocation != nil) {
             var topLeft: CLLocationCoordinate2D

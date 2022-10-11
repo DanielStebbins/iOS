@@ -36,6 +36,7 @@ struct BuildingDetailsSheet: View {
                 HStack {
                     Text("Walking Time: \(manager.walkingTime)")
                     Image(systemName: "arrow.right")
+                        .foregroundColor(.blue)
                         .rotationEffect(manager.headingToSelectedBuilding())
                 }
             }
