@@ -20,7 +20,12 @@ struct BuildingListSheet: View {
         
         NavigationStack {
             List {
-                ForEach($manager.model.buildings) { $building in
+                Picker("Difficulty", selection: $manager.listedBuildings) {
+                    ForEach(ListedBuildings.allCases) {
+                        Text(String($0.rawValue)).tag($0)
+                    }
+                } .pickerStyle(.segmented)
+                ForEach($manager.buildingList) { $building in
                     BuildingRow(building: $building)
                 }
             }
@@ -36,7 +41,7 @@ struct BuildingRow: View {
     @Binding var building: Building
     
     var body: some View {
-        Button(action: { building.isShown = !building.isShown! }) {
+        Button(action: { building.isShown = !building.isShown!; manager.adjustRegion() }) {
             HStack {
                 Text(building.name)
                 Spacer()

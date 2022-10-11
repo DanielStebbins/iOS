@@ -7,20 +7,71 @@
 
 import Foundation
 import MapKit
+import SwiftUI
 
-class Manager: ObservableObject {
+class Manager: NSObject, ObservableObject {
     @Published var model: Model
     @Published var region : MKCoordinateRegion
     @Published var selectedBuilding: Building?
     @Published var showConfirmation: Bool = false
     @Published var shownSheet: ActiveSheet?
+    @Published var tracking: MapUserTrackingMode = .none
+    @Published var listedBuildings: ListedBuildings = .all
     
-    let span = 0.01
+    var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let locationManager : CLLocationManager
+    var lastUserLocation: CLLocation?
     
-    init() {
+    var buildingList: [Building] {
+        switch listedBuildings {
+        case .all: return model.buildings
+        case .favorites: return model.buildings.filter({ $0.isFavorite! })
+        case .nearby: return model.buildings
+        }
+    }
+    
+    override init() {
         let tempModel = Model()
-        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: tempModel.centerLatitude, longitude: tempModel.centerLongitude), span: MKCoordinateSpan(latitudeDelta: span, longitudeDelta: span))
+        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: tempModel.centerLatitude, longitude: tempModel.centerLongitude), span: span)
         self.model = tempModel
+        locationManager = CLLocationManager()
+        
+        super.init()
+        
+        locationManager.desiredAccuracy = .leastNonzeroMagnitude
+        locationManager.delegate = self
+    }
+    
+    func adjustRegion() {
+        print("test")
+        if(!model.shown.isEmpty || lastUserLocation != nil)
+        {
+            var topLeft: CLLocationCoordinate2D
+            var bottomRight: CLLocationCoordinate2D
+            if let user = lastUserLocation {
+                topLeft = user.coordinate
+                bottomRight = user.coordinate
+            } else {
+                topLeft = model.shown[0].cll2d
+                bottomRight = model.shown[0].cll2d
+            }
+            
+            for building in model.shown {
+                topLeft.latitude = max(topLeft.latitude, building.latitude)
+                topLeft.longitude = min(topLeft.longitude, building.longitude)
+                bottomRight.latitude = min(bottomRight.latitude, building.latitude)
+                bottomRight.longitude = max(bottomRight.longitude, building.longitude)
+            }
+            
+            if(topLeft == bottomRight) {
+                region.center = topLeft
+                region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            } else {
+                region.center.latitude = (topLeft.latitude + bottomRight.latitude) / 2
+                region.center.longitude = (topLeft.longitude + bottomRight.longitude) / 2
+                region.span = MKCoordinateSpan.init(latitudeDelta: abs(topLeft.latitude - bottomRight.latitude) * 1.2, longitudeDelta: abs(bottomRight.longitude - topLeft.longitude) * 1.2)
+            }
+        }
     }
     
     func toggleFavorite() {
@@ -65,4 +116,15 @@ extension Building {
     var cll2d : CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
     }
+}
+
+extension CLLocationCoordinate2D: Equatable {
+    public static func == (lhs: CLLocationCoordinate2D, rhs: CLLocationCoordinate2D) -> Bool {
+        return lhs.latitude == rhs.latitude && lhs.longitude == rhs.longitude
+    }
+}
+
+enum ListedBuildings: String, Identifiable, CaseIterable {
+    case all, favorites, nearby
+    var id: RawValue { rawValue }
 }

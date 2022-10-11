@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
         
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
+            Button(action: { manager.tracking = MapUserTrackingMode.follow; print(manager.tracking) }) {
+                Image(systemName: "location")
+            }
+            Spacer()
             Button(action: manager.hideAll) {
                 Image(systemName: "eye.slash")
             }
