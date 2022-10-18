@@ -57,16 +57,8 @@ class MapCoordinator: NSObject, MKMapViewDelegate {
         case is MKPolyline:
             let polyline = overlay as! MKPolyline
             let renderer = MKPolylineRenderer(polyline: polyline)
-            renderer.strokeColor = UIColor.red
-            renderer.lineWidth = 4
-            return renderer
-        case is MKCircle:
-            let circle = overlay as! MKCircle
-            let renderer = MKCircleRenderer(overlay: circle)
-            return renderer
-        case is MKPolygon:
-            let polygon = overlay as! MKPolygon
-            let renderer = MKPolygonRenderer(polygon: polygon)
+            renderer.strokeColor = UIColor.blue
+            renderer.lineWidth = 6
             return renderer
         default:
             assert(false, "Unhandled Overlay")

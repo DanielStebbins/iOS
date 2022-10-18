@@ -16,7 +16,11 @@ class Manager: NSObject, ObservableObject {
     @Published var shownSheet: ActiveSheet?
     @Published var tracking: MKUserTrackingMode = .none
     @Published var listedBuildings: ListedBuildings = .all
+    
+    @Published var route: MKPolyline?
+    @Published var routedBuilding: Building?
     @Published var walkingTime: String = "Unknown Time"
+    
     @Published var mapType: MKMapConfiguration = MKStandardMapConfiguration()
     
     @Published var pins = [Pin]()
@@ -61,7 +65,7 @@ class Manager: NSObject, ObservableObject {
     }
     
     // Gets the walking time from the user to the selected building.
-    func timeToSelectedBuilding() {
+    func routeToSelectedBuilding() {
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
         request.destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedBuilding!.coordinate))
@@ -76,7 +80,10 @@ class Manager: NSObject, ObservableObject {
                 formatter.includesApproximationPhrase = false
                 formatter.includesTimeRemainingPhrase = false
                 formatter.allowedUnits = [.minute, .second]
+                
                 self.walkingTime = formatter.string(from: route.expectedTravelTime) ?? "Unknown Time"
+                self.route = route.polyline
+                self.routedBuilding = self.selectedBuilding
             }
         }
     }

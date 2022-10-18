@@ -42,7 +42,7 @@ struct MainView: View {
         }
         .sheet(item: $manager.shownSheet) { item in
             switch item {
-            case .details: BuildingDetailsSheet().onAppear{ manager.timeToSelectedBuilding() }
+            case .details: BuildingDetailsSheet().onAppear{ manager.routeToSelectedBuilding() }
             case .buildingList: BuildingListSheet()
             }
         }

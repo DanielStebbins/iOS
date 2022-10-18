@@ -35,8 +35,10 @@ struct CampusMap: UIViewRepresentable {
         mapView.addAnnotations(manager.pins)
         mapView.preferredConfiguration = manager.mapType
     
-//        mapView.removeOverlays(mapView.overlays)
-//        mapView.addOverlays(manager.routes)
+        mapView.removeOverlays(mapView.overlays)
+        if manager.route != nil {
+            mapView.addOverlay(manager.route!)
+        }
     }
     
     func makeCoordinator() -> MapCoordinator {
