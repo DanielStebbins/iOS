@@ -12,20 +12,19 @@ import SwiftUI
 class Manager: NSObject, ObservableObject {
     @Published var model: Model
     @Published var region: MKCoordinateRegion
+    @Published var mapType: MKMapConfiguration = MKStandardMapConfiguration()
     @Published var selectedBuilding: Building?
     @Published var shownSheet: ActiveSheet?
     @Published var tracking: MKUserTrackingMode = .none
     @Published var listedBuildings: ListedBuildings = .all
     
-    @Published var route: MKPolyline?
+    @Published var route: MKRoute?
     @Published var routedBuilding: Building?
+    @Published var routedPin: Pin?
     @Published var walkingTime: String = "Unknown Time"
-    
-    @Published var mapType: MKMapConfiguration = MKStandardMapConfiguration()
     
     @Published var pins = [Pin]()
     @Published var selectedPin: Pin?
-    @Published var showConfirmation: Bool = false
     
     var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     let locationManager : CLLocationManager
@@ -64,11 +63,11 @@ class Manager: NSObject, ObservableObject {
         return buildingLocation.distance(from: currentLocation)
     }
     
-    // Gets the walking time from the user to the selected building.
-    func routeToSelectedBuilding() {
+    // Gets the walking time from the user to the given coordinate.
+    func timeTo(_ coordinate: CLLocationCoordinate2D) {
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedBuilding!.coordinate))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
         request.transportType = .walking
         
         let directions = MKDirections(request: request)
@@ -82,19 +81,40 @@ class Manager: NSObject, ObservableObject {
                 formatter.allowedUnits = [.minute, .second]
                 
                 self.walkingTime = formatter.string(from: route.expectedTravelTime) ?? "Unknown Time"
-                self.route = route.polyline
-                self.routedBuilding = self.selectedBuilding
+            }
+        }
+    }
+    
+    // Gets the route to the given coordinate.
+    func routeTo(_ coordinate: CLLocationCoordinate2D) {
+        let request = MKDirections.Request()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard error == nil else {return}
+            if let route = response?.routes.first {
+                self.route = route
+                if(self.shownSheet == .building) {
+                    self.routedBuilding = self.selectedBuilding
+                    self.routedPin = nil
+                } else {
+                    self.routedPin = self.selectedPin
+                    self.routedBuilding = nil
+                }
             }
         }
     }
     
     // Gets the angle to the selected building.
-    func headingToSelectedBuilding() -> Angle {
+    func heading(to coordinate: CLLocationCoordinate2D) -> Angle {
         let lat1 = lastUserLocation!.coordinate.latitude * Double.pi / 180
         let lon1 = lastUserLocation!.coordinate.longitude * Double.pi / 180
 
-        let lat2 = selectedBuilding!.coordinate.latitude * Double.pi / 180
-        let lon2 = selectedBuilding!.coordinate.longitude * Double.pi / 180
+        let lat2 = coordinate.latitude * Double.pi / 180
+        let lon2 = coordinate.longitude * Double.pi / 180
 
         let dLon = lon2 - lon1
         let y = sin(dLon) * cos(lat2)
@@ -140,7 +160,7 @@ class Manager: NSObject, ObservableObject {
                     region.center.latitude = (topLeft.latitude + bottomRight.latitude) / 2
                     region.center.longitude = (topLeft.longitude + bottomRight.longitude) / 2
                 }
-                region.span = MKCoordinateSpan.init(latitudeDelta: abs(topLeft.latitude - bottomRight.latitude) * 1.2, longitudeDelta: abs(bottomRight.longitude - topLeft.longitude) * 1.2)
+                region.span = MKCoordinateSpan.init(latitudeDelta: abs(topLeft.latitude - bottomRight.latitude) * 1.5, longitudeDelta: abs(bottomRight.longitude - topLeft.longitude) * 1.5)
             }
         }
     }
@@ -151,10 +171,25 @@ class Manager: NSObject, ObservableObject {
         selectedBuilding = model.buildings[index]
     }
     
-    func hideAll() {
+    func hideAllBuildings() {
         for i in model.buildings.indices {
             model.buildings[i].isShown = false
         }
+        selectedBuilding = nil
+        if(routedBuilding != nil) {
+            route = nil
+        }
+        routedBuilding = nil
+        adjustRegion()
+    }
+    
+    func hideAllPins() {
+        pins.removeAll()
+        selectedPin = nil
+        if(routedPin != nil) {
+            route = nil
+        }
+        routedPin = nil
         adjustRegion()
     }
     
@@ -197,7 +232,7 @@ class Manager: NSObject, ObservableObject {
 }
 
 enum ActiveSheet: String, Identifiable {
-    case details, buildingList
+    case building, pin, buildingList
     var id: RawValue { rawValue }
 }
 

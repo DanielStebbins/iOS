@@ -43,26 +43,21 @@ class MapCoordinator: NSObject, MKMapViewDelegate {
         case UIColor.red:
             let pin = view.annotation as! Pin
             manager.selectedPin = pin
-            manager.showConfirmation = true
+            manager.shownSheet = .pin
         case UIColor.yellow, UIColor.blue:
             let building = view.annotation as! Building
             manager.selectedBuilding = building
-            manager.shownSheet = .details
+            manager.shownSheet = .building
         default: return
         }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        switch overlay {
-        case is MKPolyline:
-            let polyline = overlay as! MKPolyline
-            let renderer = MKPolylineRenderer(polyline: polyline)
-            renderer.strokeColor = UIColor.blue
-            renderer.lineWidth = 6
-            return renderer
-        default:
-            assert(false, "Unhandled Overlay")
-        }
+        let polyline = overlay as! MKPolyline
+        let renderer = MKPolylineRenderer(polyline: polyline)
+        renderer.strokeColor = UIColor.blue
+        renderer.lineWidth = 6
+        return renderer
     }
     
     @objc func addPin(recognizer: UILongPressGestureRecognizer) {

@@ -14,6 +14,7 @@
 		BA3F9E1E28FDB6ED00486A45 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3F9E1D28FDB6ED00486A45 /* MapCoordinator.swift */; };
 		BA8A0D4828EB5B6900C7B0A4 /* BuildingDetailsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8A0D4728EB5B6900C7B0A4 /* BuildingDetailsSheet.swift */; };
 		BAA4B2B528EBE24200238217 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA4B2B428EBE24200238217 /* StorageManager.swift */; };
+		BAAFABF628FE5D52008FABE7 /* PinSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAAFABF528FE5D52008FABE7 /* PinSheet.swift */; };
 		BAD026BB28EA7F2A00721A0D /* CampusMapApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD026BA28EA7F2A00721A0D /* CampusMapApp.swift */; };
 		BAD026BD28EA7F2A00721A0D /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD026BC28EA7F2A00721A0D /* MainView.swift */; };
 		BAD026BF28EA7F2B00721A0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BAD026BE28EA7F2B00721A0D /* Assets.xcassets */; };
@@ -49,12 +50,12 @@
 /* Begin PBXFileReference section */
 		BA0409BD28FE283400CE8BCE /* MapTypeMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTypeMenu.swift; sourceTree = "<group>"; };
 		BA0409BF28FE2A4300CE8BCE /* Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pin.swift; sourceTree = "<group>"; };
-		BA0409C128FE2BA100CE8BCE /* walk.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = walk.gpx; path = ../../../walk.gpx; sourceTree = "<group>"; };
 		BA0409C228FE356400CE8BCE /* HideAllMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HideAllMenu.swift; sourceTree = "<group>"; };
 		BA111DB528F4DA8D00F4A63C /* Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delegate.swift; sourceTree = "<group>"; };
 		BA3F9E1D28FDB6ED00486A45 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		BA8A0D4728EB5B6900C7B0A4 /* BuildingDetailsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingDetailsSheet.swift; sourceTree = "<group>"; };
 		BAA4B2B428EBE24200238217 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		BAAFABF528FE5D52008FABE7 /* PinSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinSheet.swift; sourceTree = "<group>"; };
 		BAD026B728EA7F2A00721A0D /* CampusMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CampusMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BAD026BA28EA7F2A00721A0D /* CampusMapApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusMapApp.swift; sourceTree = "<group>"; };
 		BAD026BC28EA7F2A00721A0D /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		BAD026AE28EA7F2A00721A0D = {
 			isa = PBXGroup;
 			children = (
-				BA0409C128FE2BA100CE8BCE /* walk.gpx */,
 				BAD026F028EA877C00721A0D /* buildings.json */,
 				BAD026B928EA7F2A00721A0D /* CampusMap */,
 				BAD026CA28EA7F2B00721A0D /* CampusMapTests */,
@@ -168,6 +168,7 @@
 				BA3F9E1D28FDB6ED00486A45 /* MapCoordinator.swift */,
 				BA0409BD28FE283400CE8BCE /* MapTypeMenu.swift */,
 				BA0409C228FE356400CE8BCE /* HideAllMenu.swift */,
+				BAAFABF528FE5D52008FABE7 /* PinSheet.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +333,7 @@
 				BAA4B2B528EBE24200238217 /* StorageManager.swift in Sources */,
 				BA0409C028FE2A4300CE8BCE /* Pin.swift in Sources */,
 				BA8A0D4828EB5B6900C7B0A4 /* BuildingDetailsSheet.swift in Sources */,
+				BAAFABF628FE5D52008FABE7 /* PinSheet.swift in Sources */,
 				BAD026BD28EA7F2A00721A0D /* MainView.swift in Sources */,
 				BA111DB628F4DA8D00F4A63C /* Delegate.swift in Sources */,
 				BAD026BB28EA7F2A00721A0D /* CampusMapApp.swift in Sources */,

@@ -13,14 +13,18 @@ struct MainView: View {
     var body: some View {
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
             MapTypeMenu()
+            Spacer()
             HideAllMenu()
+            Spacer()
             Button(action: manager.toggleTracking) {
                 Image(systemName: "location.fill")
             }
+            Spacer()
             Button(action: manager.showFavorites) {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
             }
+            Spacer()
             Button(action: { manager.shownSheet = .buildingList }) {
                 Image(systemName: "magnifyingglass")
             }
@@ -31,18 +35,11 @@ struct MainView: View {
                 .toolbar {
                     toolbar
                 }
-                .confirmationDialog("Pin", isPresented: $manager.showConfirmation, presenting: manager.selectedPin) { pin in
-                    Button("Directions") {
-                        
-                    }
-                    Button("Delete") {
-                        manager.deletePin()
-                    }
-                }
         }
         .sheet(item: $manager.shownSheet) { item in
             switch item {
-            case .details: BuildingDetailsSheet().onAppear{ manager.routeToSelectedBuilding() }
+            case .building: BuildingDetailsSheet().onAppear{ manager.timeTo(manager.selectedBuilding!.coordinate) }
+            case .pin: PinSheet().onAppear{ manager.timeTo(manager.selectedPin!.coordinate) }
             case .buildingList: BuildingListSheet()
             }
         }

@@ -12,17 +12,17 @@ struct HideAllMenu: View {
     var body: some View {
         Menu {
                 Button("Buildings") {
-                    manager.hideAll()
+                    manager.hideAllBuildings()
                 }
-                .buttonStyle(.bordered)
                 Button("Favorites") {
                     manager.hideFavorites()
                 }
-                .buttonStyle(.bordered)
                 Button("Pins") {
-                    manager.pins.removeAll()
+                    manager.hideAllPins()
                 }
-                .buttonStyle(.bordered)
+                Button("Route") {
+                    manager.route = nil
+                }
         } label: {
             Image(systemName: "eye.slash")
         }

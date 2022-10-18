@@ -37,7 +37,7 @@ struct CampusMap: UIViewRepresentable {
     
         mapView.removeOverlays(mapView.overlays)
         if manager.route != nil {
-            mapView.addOverlay(manager.route!)
+            mapView.addOverlay(manager.route!.polyline)
         }
     }
     
