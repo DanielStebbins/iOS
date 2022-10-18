@@ -117,7 +117,6 @@ class Manager: NSObject, ObservableObject {
             }
             
             for pin in pins {
-                print(pin)
                 topLeft.latitude = max(topLeft.latitude, pin.coordinate.latitude)
                 topLeft.longitude = min(topLeft.longitude, pin.coordinate.longitude)
                 bottomRight.latitude = min(bottomRight.latitude, pin.coordinate.latitude)
@@ -175,6 +174,14 @@ class Manager: NSObject, ObservableObject {
         pins.remove(at: index)
         selectedPin = nil
         adjustRegion()
+    }
+    
+    func toggleTracking() {
+        if(tracking == .follow) {
+            tracking = .none
+        } else {
+            tracking = .follow
+        }
     }
     
     func save() {

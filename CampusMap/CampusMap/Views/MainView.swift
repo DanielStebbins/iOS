@@ -14,10 +14,9 @@ struct MainView: View {
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
             MapTypeMenu()
             HideAllMenu()
-            Button(action: { manager.tracking = MKUserTrackingMode.follow }) {
+            Button(action: manager.toggleTracking) {
                 Image(systemName: "location.fill")
             }
-            .disabled(manager.tracking == .follow)
             Button(action: manager.showFavorites) {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)

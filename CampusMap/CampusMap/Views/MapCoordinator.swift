@@ -84,11 +84,4 @@ class MapCoordinator: NSObject, MKMapViewDelegate {
         manager.adjustRegion()
         view.addAnnotation(pin)
     }
-    
-    @IBAction func stopFollow(recognizer: UIPanGestureRecognizer) {
-        print("stopFollow")
-        guard recognizer.state == .began else {return}
-        manager.tracking = .none
-        print("stopFollow2")
-    }
 }
