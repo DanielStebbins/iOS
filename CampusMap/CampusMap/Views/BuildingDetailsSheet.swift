@@ -11,6 +11,7 @@ struct BuildingDetailsSheet: View {
     @EnvironmentObject var manager: Manager
     @Environment (\.dismiss) private var dismiss
     
+    
     var body: some View {
         let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button("Dismiss") {
@@ -39,6 +40,12 @@ struct BuildingDetailsSheet: View {
                         .foregroundColor(.blue)
                         .rotationEffect(manager.headingToSelectedBuilding())
                 }
+                Button("Directions") {
+                     
+                 }
+                 .padding(5)
+                 .buttonStyle(.borderedProminent)
+                 .cornerRadius(10)
             }
             .toolbar { dismissButton }
         }

@@ -11,13 +11,17 @@ import SwiftUI
 
 class Manager: NSObject, ObservableObject {
     @Published var model: Model
-    @Published var region : MKCoordinateRegion
+    @Published var region: MKCoordinateRegion
     @Published var selectedBuilding: Building?
-    @Published var showConfirmation: Bool = false
     @Published var shownSheet: ActiveSheet?
-    @Published var tracking: MapUserTrackingMode = .none
+    @Published var tracking: MKUserTrackingMode = .none
     @Published var listedBuildings: ListedBuildings = .all
     @Published var walkingTime: String = "Unknown Time"
+    @Published var mapType: MKMapConfiguration = MKStandardMapConfiguration()
+    
+    @Published var pins = [Pin]()
+    @Published var selectedPin: Pin?
+    @Published var showConfirmation: Bool = false
     
     var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     let locationManager : CLLocationManager
@@ -60,7 +64,7 @@ class Manager: NSObject, ObservableObject {
     func timeToSelectedBuilding() {
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedBuilding!.cll2d))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedBuilding!.coordinate))
         request.transportType = .walking
         
         let directions = MKDirections(request: request)
@@ -82,8 +86,8 @@ class Manager: NSObject, ObservableObject {
         let lat1 = lastUserLocation!.coordinate.latitude * Double.pi / 180
         let lon1 = lastUserLocation!.coordinate.longitude * Double.pi / 180
 
-        let lat2 = selectedBuilding!.cll2d.latitude * Double.pi / 180
-        let lon2 = selectedBuilding!.cll2d.longitude * Double.pi / 180
+        let lat2 = selectedBuilding!.coordinate.latitude * Double.pi / 180
+        let lon2 = selectedBuilding!.coordinate.longitude * Double.pi / 180
 
         let dLon = lon2 - lon1
         let y = sin(dLon) * cos(lat2)
@@ -101,8 +105,8 @@ class Manager: NSObject, ObservableObject {
                 topLeft = user.coordinate
                 bottomRight = user.coordinate
             } else {
-                topLeft = model.shown[0].cll2d
-                bottomRight = model.shown[0].cll2d
+                topLeft = model.shown[0].coordinate
+                bottomRight = model.shown[0].coordinate
             }
             
             for building in model.shown {
@@ -112,11 +116,19 @@ class Manager: NSObject, ObservableObject {
                 bottomRight.longitude = max(bottomRight.longitude, building.longitude)
             }
             
+            for pin in pins {
+                print(pin)
+                topLeft.latitude = max(topLeft.latitude, pin.coordinate.latitude)
+                topLeft.longitude = min(topLeft.longitude, pin.coordinate.longitude)
+                bottomRight.latitude = min(bottomRight.latitude, pin.coordinate.latitude)
+                bottomRight.longitude = max(bottomRight.longitude, pin.coordinate.longitude)
+            }
+            
             if(topLeft == bottomRight) {
                 if(tracking == .none) {
                     region.center = topLeft
                 }
-                region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                region.span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
             } else {
                 if(tracking == .none) {
                     region.center.latitude = (topLeft.latitude + bottomRight.latitude) / 2
@@ -130,7 +142,7 @@ class Manager: NSObject, ObservableObject {
     func toggleFavorite() {
         guard let index = model.buildings.firstIndex(of: selectedBuilding!) else {return}
         model.buildings[index].isFavorite!.toggle()
-        selectedBuilding!.isFavorite!.toggle()
+        selectedBuilding = model.buildings[index]
     }
     
     func hideAll() {
@@ -158,6 +170,13 @@ class Manager: NSObject, ObservableObject {
         adjustRegion()
     }
     
+    func deletePin() {
+        guard let index = pins.firstIndex(of: selectedPin!) else {return}
+        pins.remove(at: index)
+        selectedPin = nil
+        adjustRegion()
+    }
+    
     func save() {
         model.save()
     }
@@ -166,12 +185,6 @@ class Manager: NSObject, ObservableObject {
 enum ActiveSheet: String, Identifiable {
     case details, buildingList
     var id: RawValue { rawValue }
-}
-
-extension Building {
-    var cll2d : CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
-    }
 }
 
 extension CLLocationCoordinate2D: Equatable {

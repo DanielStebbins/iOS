@@ -11,51 +11,41 @@ import MapKit
 struct MainView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
-        
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
-            Button(action: { manager.tracking = MapUserTrackingMode.follow; print(manager.tracking) }) {
+            MapTypeMenu()
+            HideAllMenu()
+            Button(action: { manager.tracking = MKUserTrackingMode.follow }) {
                 Image(systemName: "location.fill")
             }
             .disabled(manager.tracking == .follow)
-            Spacer()
-            Button(action: manager.hideAll) {
-                Image(systemName: "eye.slash")
-            }
-            Spacer()
             Button(action: manager.showFavorites) {
                 Image(systemName: "star.fill")
                     .foregroundColor(.yellow)
             }
-            Spacer()
-            Button(action: manager.hideFavorites) {
-                Image(systemName: "star")
-                    .foregroundColor(.yellow)
-            }
-            Spacer()
             Button(action: { manager.shownSheet = .buildingList }) {
                 Image(systemName: "magnifyingglass")
             }
         }
         
         NavigationStack {
-            CampusMap()
+            CampusMap(manager: manager)
                 .toolbar {
                     toolbar
                 }
-                .confirmationDialog("Building", isPresented: $manager.showConfirmation, presenting: manager.selectedBuilding) { building in
-                    Button("Details") {
-                        manager.selectedBuilding = building
-                        manager.shownSheet = .details
+                .confirmationDialog("Pin", isPresented: $manager.showConfirmation, presenting: manager.selectedPin) { pin in
+                    Button("Directions") {
+                        
                     }
-                } message: { building in
-                    Text(building.name)
-                }
-                .sheet(item: $manager.shownSheet) { item in
-                    switch item {
-                    case .details: BuildingDetailsSheet().onAppear{ manager.timeToSelectedBuilding() }
-                    case .buildingList: BuildingListSheet()
+                    Button("Delete") {
+                        manager.deletePin()
                     }
                 }
+        }
+        .sheet(item: $manager.shownSheet) { item in
+            switch item {
+            case .details: BuildingDetailsSheet().onAppear{ manager.timeToSelectedBuilding() }
+            case .buildingList: BuildingListSheet()
+            }
         }
         
     }
