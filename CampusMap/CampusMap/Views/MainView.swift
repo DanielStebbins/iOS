@@ -11,24 +11,17 @@ import MapKit
 struct MainView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
-        
         let toolbar = ToolbarItemGroup(placement: .bottomBar) {
-            Button(action: { manager.tracking = MapUserTrackingMode.follow; print(manager.tracking) }) {
-                Image(systemName: "location.fill")
-            }
-            .disabled(manager.tracking == .follow)
+            MapTypeMenu()
             Spacer()
-            Button(action: manager.hideAll) {
-                Image(systemName: "eye.slash")
+            HideAllMenu()
+            Spacer()
+            Button(action: manager.toggleTracking) {
+                Image(systemName: "location.fill")
             }
             Spacer()
             Button(action: manager.showFavorites) {
                 Image(systemName: "star.fill")
-                    .foregroundColor(.yellow)
-            }
-            Spacer()
-            Button(action: manager.hideFavorites) {
-                Image(systemName: "star")
                     .foregroundColor(.yellow)
             }
             Spacer()
@@ -38,24 +31,17 @@ struct MainView: View {
         }
         
         NavigationStack {
-            CampusMap()
+            CampusMap(manager: manager)
                 .toolbar {
                     toolbar
                 }
-                .confirmationDialog("Building", isPresented: $manager.showConfirmation, presenting: manager.selectedBuilding) { building in
-                    Button("Details") {
-                        manager.selectedBuilding = building
-                        manager.shownSheet = .details
-                    }
-                } message: { building in
-                    Text(building.name)
-                }
-                .sheet(item: $manager.shownSheet) { item in
-                    switch item {
-                    case .details: BuildingDetailsSheet().onAppear{ manager.timeToSelectedBuilding() }
-                    case .buildingList: BuildingListSheet()
-                    }
-                }
+        }
+        .sheet(item: $manager.shownSheet) { item in
+            switch item {
+            case .building: BuildingDetailsSheet().onAppear{ manager.timeTo(manager.selectedBuilding!.coordinate) }
+            case .pin: PinSheet().onAppear{ manager.timeTo(manager.selectedPin!.coordinate) }
+            case .buildingList: BuildingListSheet()
+            }
         }
         
     }

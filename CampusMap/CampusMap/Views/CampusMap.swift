@@ -8,24 +8,40 @@
 import SwiftUI
 import MapKit
 
-struct CampusMap: View {
-    @EnvironmentObject var manager: Manager
+struct CampusMap: UIViewRepresentable {
+    @ObservedObject var manager: Manager
+    let mapView = MKMapView()
     
-    var body: some View {
-        Map(coordinateRegion: $manager.region, showsUserLocation: true, userTrackingMode: $manager.tracking, annotationItems: manager.model.shown, annotationContent: annotationFor(building:))
-            .gesture(DragGesture().onChanged { _ in manager.tracking = MapUserTrackingMode.none })
+    func makeUIView(context: Context) -> MKMapView {
+        mapView.mapType = .standard
+        mapView.showsUserLocation = true
+        mapView.preferredConfiguration = manager.mapType
+        mapView.userTrackingMode = manager.tracking
+        mapView.delegate = context.coordinator
+        
+        let longPress = UILongPressGestureRecognizer(target: context.coordinator, action: #selector(context.coordinator.addPin(recognizer:)))
+        mapView.addGestureRecognizer(longPress)
+        
+        return mapView
     }
     
-    func annotationFor(building: Building) -> some MapAnnotationProtocol {
-        MapAnnotation(coordinate: building.cll2d) {
-            Button(action: {
-                manager.selectedBuilding = building
-                manager.showConfirmation = true
-            }) {
-                Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(building.isFavorite! ? .yellow : .blue)
-                    .font(.system(size: 40))
-            }
+    func updateUIView(_ mapView: MKMapView, context: Context) {
+        mapView.userTrackingMode = manager.tracking
+        if(mapView.userTrackingMode == .none) {
+            mapView.setRegion(manager.region, animated: true)
         }
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotations(manager.model.shown)
+        mapView.addAnnotations(manager.pins)
+        mapView.preferredConfiguration = manager.mapType
+    
+        mapView.removeOverlays(mapView.overlays)
+        if manager.route != nil {
+            mapView.addOverlay(manager.route!.polyline)
+        }
+    }
+    
+    func makeCoordinator() -> MapCoordinator {
+        return MapCoordinator(manager: manager, map: mapView)
     }
 }

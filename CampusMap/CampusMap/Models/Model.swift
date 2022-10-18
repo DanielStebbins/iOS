@@ -19,7 +19,7 @@ struct Model {
     private let storageManager: StorageManager<[Building]>
     init() {
         storageManager = StorageManager(name: "buildings")
-        var tempBuildings = storageManager.modelData ?? []
+        let tempBuildings = storageManager.modelData ?? []
         
         // The initial dataset does not include a favorite boolean.
         for i in tempBuildings.indices {

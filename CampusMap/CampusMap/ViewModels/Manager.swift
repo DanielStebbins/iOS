@@ -11,13 +11,20 @@ import SwiftUI
 
 class Manager: NSObject, ObservableObject {
     @Published var model: Model
-    @Published var region : MKCoordinateRegion
+    @Published var region: MKCoordinateRegion
+    @Published var mapType: MKMapConfiguration = MKStandardMapConfiguration()
     @Published var selectedBuilding: Building?
-    @Published var showConfirmation: Bool = false
     @Published var shownSheet: ActiveSheet?
-    @Published var tracking: MapUserTrackingMode = .none
+    @Published var tracking: MKUserTrackingMode = .none
     @Published var listedBuildings: ListedBuildings = .all
+    
+    @Published var route: MKRoute?
+    @Published var routedBuilding: Building?
+    @Published var routedPin: Pin?
     @Published var walkingTime: String = "Unknown Time"
+    
+    @Published var pins = [Pin]()
+    @Published var selectedPin: Pin?
     
     var span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     let locationManager : CLLocationManager
@@ -56,11 +63,11 @@ class Manager: NSObject, ObservableObject {
         return buildingLocation.distance(from: currentLocation)
     }
     
-    // Gets the walking time from the user to the selected building.
-    func timeToSelectedBuilding() {
+    // Gets the walking time from the user to the given coordinate.
+    func timeTo(_ coordinate: CLLocationCoordinate2D) {
         let request = MKDirections.Request()
         request.source = MKMapItem.forCurrentLocation()
-        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: selectedBuilding!.cll2d))
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
         request.transportType = .walking
         
         let directions = MKDirections(request: request)
@@ -72,18 +79,42 @@ class Manager: NSObject, ObservableObject {
                 formatter.includesApproximationPhrase = false
                 formatter.includesTimeRemainingPhrase = false
                 formatter.allowedUnits = [.minute, .second]
+                
                 self.walkingTime = formatter.string(from: route.expectedTravelTime) ?? "Unknown Time"
             }
         }
     }
     
+    // Gets the route to the given coordinate.
+    func routeTo(_ coordinate: CLLocationCoordinate2D) {
+        let request = MKDirections.Request()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = MKMapItem(placemark: MKPlacemark(coordinate: coordinate))
+        request.transportType = .walking
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { response, error in
+            guard error == nil else {return}
+            if let route = response?.routes.first {
+                self.route = route
+                if(self.shownSheet == .building) {
+                    self.routedBuilding = self.selectedBuilding
+                    self.routedPin = nil
+                } else {
+                    self.routedPin = self.selectedPin
+                    self.routedBuilding = nil
+                }
+            }
+        }
+    }
+    
     // Gets the angle to the selected building.
-    func headingToSelectedBuilding() -> Angle {
+    func heading(to coordinate: CLLocationCoordinate2D) -> Angle {
         let lat1 = lastUserLocation!.coordinate.latitude * Double.pi / 180
         let lon1 = lastUserLocation!.coordinate.longitude * Double.pi / 180
 
-        let lat2 = selectedBuilding!.cll2d.latitude * Double.pi / 180
-        let lon2 = selectedBuilding!.cll2d.longitude * Double.pi / 180
+        let lat2 = coordinate.latitude * Double.pi / 180
+        let lon2 = coordinate.longitude * Double.pi / 180
 
         let dLon = lon2 - lon1
         let y = sin(dLon) * cos(lat2)
@@ -101,8 +132,8 @@ class Manager: NSObject, ObservableObject {
                 topLeft = user.coordinate
                 bottomRight = user.coordinate
             } else {
-                topLeft = model.shown[0].cll2d
-                bottomRight = model.shown[0].cll2d
+                topLeft = model.shown[0].coordinate
+                bottomRight = model.shown[0].coordinate
             }
             
             for building in model.shown {
@@ -112,17 +143,24 @@ class Manager: NSObject, ObservableObject {
                 bottomRight.longitude = max(bottomRight.longitude, building.longitude)
             }
             
+            for pin in pins {
+                topLeft.latitude = max(topLeft.latitude, pin.coordinate.latitude)
+                topLeft.longitude = min(topLeft.longitude, pin.coordinate.longitude)
+                bottomRight.latitude = min(bottomRight.latitude, pin.coordinate.latitude)
+                bottomRight.longitude = max(bottomRight.longitude, pin.coordinate.longitude)
+            }
+            
             if(topLeft == bottomRight) {
                 if(tracking == .none) {
                     region.center = topLeft
                 }
-                region.span = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+                region.span = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
             } else {
                 if(tracking == .none) {
                     region.center.latitude = (topLeft.latitude + bottomRight.latitude) / 2
                     region.center.longitude = (topLeft.longitude + bottomRight.longitude) / 2
                 }
-                region.span = MKCoordinateSpan.init(latitudeDelta: abs(topLeft.latitude - bottomRight.latitude) * 1.2, longitudeDelta: abs(bottomRight.longitude - topLeft.longitude) * 1.2)
+                region.span = MKCoordinateSpan.init(latitudeDelta: abs(topLeft.latitude - bottomRight.latitude) * 1.5, longitudeDelta: abs(bottomRight.longitude - topLeft.longitude) * 1.5)
             }
         }
     }
@@ -130,13 +168,28 @@ class Manager: NSObject, ObservableObject {
     func toggleFavorite() {
         guard let index = model.buildings.firstIndex(of: selectedBuilding!) else {return}
         model.buildings[index].isFavorite!.toggle()
-        selectedBuilding!.isFavorite!.toggle()
+        selectedBuilding = model.buildings[index]
     }
     
-    func hideAll() {
+    func hideAllBuildings() {
         for i in model.buildings.indices {
             model.buildings[i].isShown = false
         }
+        selectedBuilding = nil
+        if(routedBuilding != nil) {
+            route = nil
+        }
+        routedBuilding = nil
+        adjustRegion()
+    }
+    
+    func hideAllPins() {
+        pins.removeAll()
+        selectedPin = nil
+        if(routedPin != nil) {
+            route = nil
+        }
+        routedPin = nil
         adjustRegion()
     }
     
@@ -158,20 +211,29 @@ class Manager: NSObject, ObservableObject {
         adjustRegion()
     }
     
+    func deletePin() {
+        guard let index = pins.firstIndex(of: selectedPin!) else {return}
+        pins.remove(at: index)
+        selectedPin = nil
+        adjustRegion()
+    }
+    
+    func toggleTracking() {
+        if(tracking == .follow) {
+            tracking = .none
+        } else {
+            tracking = .follow
+        }
+    }
+    
     func save() {
         model.save()
     }
 }
 
 enum ActiveSheet: String, Identifiable {
-    case details, buildingList
+    case building, pin, buildingList
     var id: RawValue { rawValue }
-}
-
-extension Building {
-    var cll2d : CLLocationCoordinate2D {
-        CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longitude)
-    }
 }
 
 extension CLLocationCoordinate2D: Equatable {

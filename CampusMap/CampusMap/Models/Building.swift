@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import MapKit
 
-struct Building: Codable, Identifiable, Equatable {
+class Building: NSObject, Codable, Identifiable, MKAnnotation {
     // Present in starting JSON.
     let latitude: Double
     let longitude: Double
@@ -20,4 +21,6 @@ struct Building: Codable, Identifiable, Equatable {
     var isShown: Bool?
     var isFavorite: Bool?
     var id: String { name }
+    var title : String? { name }
+    var coordinate: CLLocationCoordinate2D { CLLocationCoordinate2D(latitude: latitude, longitude: longitude) }
 }

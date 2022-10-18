@@ -1,13 +1,13 @@
 //
-//  BuildingDetailsView.swift
+//  PinSheet.swift
 //  CampusMap
 //
-//  Created by Stebbins, Daniel Ross on 10/3/22.
+//  Created by Stebbins, Daniel Ross on 10/18/22.
 //
 
 import SwiftUI
 
-struct BuildingDetailsSheet: View {
+struct PinSheet: View {
     @EnvironmentObject var manager: Manager
     @Environment (\.dismiss) private var dismiss
     
@@ -20,26 +20,15 @@ struct BuildingDetailsSheet: View {
         
         NavigationStack {
             VStack {
-                Image(manager.selectedBuilding!.photo ?? "imageNotFound")
-                    .resizable()
-                    .scaledToFit()
-                HStack {
-                    Text(manager.selectedBuilding!.name)
-                        .font(.system(size:30))
-                    Button(action: manager.toggleFavorite) {
-                        Image(systemName: manager.selectedBuilding!.isFavorite! ? "star.fill" : "star")
-                            .foregroundColor(manager.selectedBuilding!.isFavorite! ? .yellow : .blue)
-                            .font(.system(size:40))
-                            .padding()
-                    }
-                }
+                Image(systemName: "pin")
+                    .font(.system(size: 100))
                 HStack {
                     Text("Walking Time: \(manager.walkingTime)")
                     Image(systemName: "arrow.right")
                         .foregroundColor(.blue)
-                        .rotationEffect(manager.heading(to: manager.selectedBuilding!.coordinate))
+                        .rotationEffect(manager.heading(to: manager.selectedPin!.coordinate))
                 }
-                if(manager.routedBuilding == manager.selectedBuilding) {
+                if(manager.routedPin == manager.selectedPin) {
                     ScrollView {
                         ForEach(manager.route!.steps, id: \.self) { step in
                             Text(step.instructions)
@@ -47,7 +36,7 @@ struct BuildingDetailsSheet: View {
                     }
                 } else {
                     Button("Directions") {
-                        manager.routeTo(manager.selectedBuilding!.coordinate)
+                        manager.routeTo(manager.selectedPin!.coordinate)
                     }
                     .padding(5)
                     .buttonStyle(.borderedProminent)
