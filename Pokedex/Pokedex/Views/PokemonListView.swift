@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct PokemonList: View {
+struct PokemonListView: View {
     @EnvironmentObject var manager: Manager
     var body: some View {
         NavigationStack {
             List {
                 ForEach(manager.model.pokemon) { pokemon in
-                    NavigationLink(destination: { PokemonDetails(pokemon: pokemon) }) {
-                        PokemonRow(pokemon: pokemon)
+                    NavigationLink(destination: { PokemonDetailsView(pokemon: pokemon) }) {
+                        PokemonRowView(pokemon: pokemon)
                     }
                 }
             }

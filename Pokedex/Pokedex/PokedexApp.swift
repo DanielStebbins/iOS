@@ -12,7 +12,7 @@ struct PokedexApp: App {
     @StateObject var manager = Manager()
     var body: some Scene {
         WindowGroup {
-            PokemonList()
+            PokemonListView()
                 .environmentObject(manager)
         }
     }

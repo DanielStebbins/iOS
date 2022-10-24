@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PokemonRow: View {
+struct PokemonRowView: View {
     let pokemon: Pokemon
     var body: some View {
         HStack {
@@ -17,7 +17,7 @@ struct PokemonRow: View {
             Text(pokemon.name)
                 .font(.title2)
             Spacer()
-            PokemonImage(pokemon: pokemon, size: CGSize(width: 75, height: 75))
+            PokemonImageView(pokemon: pokemon, size: 75, round: 20)
                 .padding(.trailing, 10)
         }
     }

@@ -16,8 +16,4 @@ struct Pokemon: Codable, Identifiable {
     let weaknesses: [PokemonType]
     let prevEvolution: [Int]?
     let nextEvolution: [Int]?
-    
-    var leadingZeroID: String {
-        String(format: "%03d", id)
-    }
 }
