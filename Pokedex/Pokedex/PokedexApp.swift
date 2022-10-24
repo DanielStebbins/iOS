@@ -12,7 +12,7 @@ struct PokedexApp: App {
     @StateObject var manager = Manager()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PokemonRow(pokemon: manager.model.pokemon.first!)
                 .environmentObject(manager)
         }
     }

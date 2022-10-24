@@ -18,6 +18,7 @@ class StorageManager {
         do {
             let data = try Data.init(contentsOf: url!)
             let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
             return try decoder.decode(T.self, from: data)
         }
         catch {
