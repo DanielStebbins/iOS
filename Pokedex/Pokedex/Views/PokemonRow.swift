@@ -13,12 +13,12 @@ struct PokemonRow: View {
         HStack {
             Text("\(pokemon.id)")
                 .foregroundColor(.gray)
-                .padding(.leading, 30)
+                .padding(.leading, 10)
             Text(pokemon.name)
                 .font(.title2)
             Spacer()
             PokemonImage(pokemon: pokemon, size: CGSize(width: 75, height: 75))
-                .padding(.trailing, 30)
+                .padding(.trailing, 10)
         }
     }
 }
