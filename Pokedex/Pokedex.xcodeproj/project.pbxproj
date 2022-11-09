@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BA8C196729074D5100AF0B87 /* StatViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8C196629074D5100AF0B87 /* StatViewView.swift */; };
+		BA8C196729074D5100AF0B87 /* StatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8C196629074D5100AF0B87 /* StatView.swift */; };
 		BA8C19692907515400AF0B87 /* IDOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8C19682907515400AF0B87 /* IDOverlayView.swift */; };
 		BA8C196B2907518800AF0B87 /* TypeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8C196A2907518800AF0B87 /* TypeListView.swift */; };
 		BA8C196E290759C700AF0B87 /* PokemonDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8C196C290759C700AF0B87 /* PokemonDetailsView.swift */; };
@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BA8C196629074D5100AF0B87 /* StatViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatViewView.swift; sourceTree = "<group>"; };
+		BA8C196629074D5100AF0B87 /* StatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatView.swift; sourceTree = "<group>"; };
 		BA8C19682907515400AF0B87 /* IDOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDOverlayView.swift; sourceTree = "<group>"; };
 		BA8C196A2907518800AF0B87 /* TypeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeListView.swift; sourceTree = "<group>"; };
 		BA8C196C290759C700AF0B87 /* PokemonDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PokemonDetailsView.swift; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				BAEA5AF9290701A50001B0F0 /* PokemonImageView.swift */,
 				BAEA5AFB2907076D0001B0F0 /* PokemonListView.swift */,
 				BAEA5AFD290709EC0001B0F0 /* PokemonDetailsView.swift */,
-				BA8C196629074D5100AF0B87 /* StatViewView.swift */,
+				BA8C196629074D5100AF0B87 /* StatView.swift */,
 				BA8C19682907515400AF0B87 /* IDOverlayView.swift */,
 				BA8C196A2907518800AF0B87 /* TypeListView.swift */,
 			);
@@ -337,7 +337,7 @@
 				BA8C196B2907518800AF0B87 /* TypeListView.swift in Sources */,
 				BAEA5AEA2906F7CE0001B0F0 /* Color+PokemonType.swift in Sources */,
 				BAEA5ABF2906F77C0001B0F0 /* PokemonRowView.swift in Sources */,
-				BA8C196729074D5100AF0B87 /* StatViewView.swift in Sources */,
+				BA8C196729074D5100AF0B87 /* StatView.swift in Sources */,
 				BA8C19692907515400AF0B87 /* IDOverlayView.swift in Sources */,
 				BAEA5AF62906FBA60001B0F0 /* Manager.swift in Sources */,
 				BAEA5AF42906FACB0001B0F0 /* StorageManager.swift in Sources */,
