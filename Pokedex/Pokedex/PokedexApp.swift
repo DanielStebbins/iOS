@@ -10,10 +10,24 @@ import SwiftUI
 @main
 struct PokedexApp: App {
     @StateObject var manager = Manager()
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
-            PokemonListView()
+            RootView()
                 .environmentObject(manager)
+        }
+        .onChange(of: scenePhase) { phase in
+            switch phase {
+            case .background:
+                break
+            case .active:
+                break
+            case .inactive:
+                manager.save()
+            @unknown default:
+                assert(false, "Unknown Scene Phase")
+            }
         }
     }
 }
