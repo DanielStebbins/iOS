@@ -10,16 +10,36 @@ import Foundation
 class Manager: ObservableObject {
     @Published var pokemon: [Pokemon]
     @Published var selectedType: PokemonType?
+    @Published var captured: [Int]
     
     private var storageManager: StorageManager<[Pokemon]>
     
     init() {
         storageManager = StorageManager<[Pokemon]>(name: "pokedex")
-        pokemon = storageManager.modelData ?? []
-        for i in pokemon.indices {
-            if(pokemon[i].captured == nil) {
-                pokemon[i].captured = false
+        var _pokemon = storageManager.modelData ?? []
+        var _captured: [Int] = []
+        for i in _pokemon.indices {
+            if(_pokemon[i].captured == nil) {
+                _pokemon[i].captured = false
             }
+            else if(_pokemon[i].captured!) {
+                _captured.append(i)
+            }
+        }
+        pokemon = _pokemon
+        captured = _captured
+    }
+    
+    func captureRelease(_ p: Pokemon) {
+        let index = pokemon.firstIndex(where: { $0.id == p.id })!
+        if(p.captured!) {
+            captured.append(index)
+            captured.sort(by: { a, b in
+                pokemon[a].id < pokemon[b].id
+            })
+        }
+        else {
+            captured.remove(at: captured.firstIndex(of: index)!)
         }
     }
     

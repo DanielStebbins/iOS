@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var manager: Manager
     var body: some View {
         NavigationStack {
             ScrollView {
+                if(!manager.captured.isEmpty) {
+                    CardRowView(title: "Captured", indices: manager.captured)
+                }
                 ForEach(PokemonType.allCases) { type in
                     TypeRowView(type: type)
                 }
