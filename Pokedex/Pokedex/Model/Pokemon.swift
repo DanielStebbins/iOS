@@ -16,4 +16,5 @@ struct Pokemon: Codable, Identifiable {
     let weaknesses: [PokemonType]
     let prevEvolution: [Int]?
     let nextEvolution: [Int]?
+    var captured: Bool?
 }

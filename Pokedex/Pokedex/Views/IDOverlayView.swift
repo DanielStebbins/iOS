@@ -10,10 +10,11 @@ import SwiftUI
 struct IDOverlayView: View {
     @EnvironmentObject var manager: Manager
     let pokemon: Pokemon
+    let size: CGFloat
     var body: some View {
         Text(manager.leadingZeroID(of: pokemon))
-            .font(.system(size: 20, weight: .bold, design: .monospaced))
-            .padding(.trailing, 15)
-            .padding(.bottom, 10)
+            .font(.system(size: size, weight: .bold, design: .monospaced))
+            .padding(.trailing, size)
+            .padding(.bottom, size)
     }
 }
