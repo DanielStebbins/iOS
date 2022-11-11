@@ -1,0 +1,630 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3A6291EBEE2004B65EC /* ScryApp.swift */; };
+		BACCB3AB291EBEE3004B65EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AA291EBEE3004B65EC /* Assets.xcassets */; };
+		BACCB3AE291EBEE3004B65EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */; };
+		BACCB3B8291EBEE4004B65EC /* ScryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3B7291EBEE4004B65EC /* ScryTests.swift */; };
+		BACCB3C2291EBEE4004B65EC /* ScryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */; };
+		BACCB3C4291EBEE4004B65EC /* ScryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */; };
+		BACCB3D2291EBF68004B65EC /* BubbleCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */; };
+		BACCB3D4291EC0E8004B65EC /* BubbleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D3291EC0E8004B65EC /* BubbleDetails.swift */; };
+		BACCB3D7291EC119004B65EC /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D6291EC119004B65EC /* Bubble.swift */; };
+		BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */; };
+		BACCB3DC291EC693004B65EC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DB291EC693004B65EC /* Manager.swift */; };
+		BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DD291ECB41004B65EC /* Color+Random.swift */; };
+		BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BACCB3B4291EBEE4004B65EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BACCB39B291EBEE2004B65EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BACCB3A2291EBEE2004B65EC;
+			remoteInfo = Scry;
+		};
+		BACCB3BE291EBEE4004B65EC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BACCB39B291EBEE2004B65EC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BACCB3A2291EBEE2004B65EC;
+			remoteInfo = Scry;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BACCB3A3291EBEE2004B65EC /* Scry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scry.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BACCB3A6291EBEE2004B65EC /* ScryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryApp.swift; sourceTree = "<group>"; };
+		BACCB3AA291EBEE3004B65EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BACCB3B3291EBEE4004B65EC /* ScryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BACCB3B7291EBEE4004B65EC /* ScryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryTests.swift; sourceTree = "<group>"; };
+		BACCB3BD291EBEE4004B65EC /* ScryUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScryUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryUITests.swift; sourceTree = "<group>"; };
+		BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCapsule.swift; sourceTree = "<group>"; };
+		BACCB3D3291EC0E8004B65EC /* BubbleDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDetails.swift; sourceTree = "<group>"; };
+		BACCB3D6291EC119004B65EC /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
+		BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextInput.swift; sourceTree = "<group>"; };
+		BACCB3DB291EC693004B65EC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		BACCB3DD291ECB41004B65EC /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
+		BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleRow.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BACCB3A0291EBEE2004B65EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BACCB3B0291EBEE4004B65EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BACCB3BA291EBEE4004B65EC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BACCB39A291EBEE2004B65EC = {
+			isa = PBXGroup;
+			children = (
+				BACCB3A5291EBEE2004B65EC /* Scry */,
+				BACCB3B6291EBEE4004B65EC /* ScryTests */,
+				BACCB3C0291EBEE4004B65EC /* ScryUITests */,
+				BACCB3A4291EBEE2004B65EC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BACCB3A4291EBEE2004B65EC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3A3291EBEE2004B65EC /* Scry.app */,
+				BACCB3B3291EBEE4004B65EC /* ScryTests.xctest */,
+				BACCB3BD291EBEE4004B65EC /* ScryUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BACCB3A5291EBEE2004B65EC /* Scry */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3D5291EC106004B65EC /* Model */,
+				BACCB3DA291EC67A004B65EC /* ViewModel */,
+				BACCB3D0291EBF4A004B65EC /* Views */,
+				BACCB3A6291EBEE2004B65EC /* ScryApp.swift */,
+				BACCB3AA291EBEE3004B65EC /* Assets.xcassets */,
+				BACCB3AC291EBEE3004B65EC /* Preview Content */,
+			);
+			path = Scry;
+			sourceTree = "<group>";
+		};
+		BACCB3AC291EBEE3004B65EC /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BACCB3B6291EBEE4004B65EC /* ScryTests */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3B7291EBEE4004B65EC /* ScryTests.swift */,
+			);
+			path = ScryTests;
+			sourceTree = "<group>";
+		};
+		BACCB3C0291EBEE4004B65EC /* ScryUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */,
+				BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */,
+			);
+			path = ScryUITests;
+			sourceTree = "<group>";
+		};
+		BACCB3D0291EBF4A004B65EC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */,
+				BACCB3D3291EC0E8004B65EC /* BubbleDetails.swift */,
+				BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */,
+				BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BACCB3D5291EC106004B65EC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3D6291EC119004B65EC /* Bubble.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		BACCB3DA291EC67A004B65EC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3DB291EC693004B65EC /* Manager.swift */,
+				BACCB3DD291ECB41004B65EC /* Color+Random.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BACCB3A2291EBEE2004B65EC /* Scry */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BACCB3C7291EBEE4004B65EC /* Build configuration list for PBXNativeTarget "Scry" */;
+			buildPhases = (
+				BACCB39F291EBEE2004B65EC /* Sources */,
+				BACCB3A0291EBEE2004B65EC /* Frameworks */,
+				BACCB3A1291EBEE2004B65EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Scry;
+			productName = Scry;
+			productReference = BACCB3A3291EBEE2004B65EC /* Scry.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BACCB3B2291EBEE4004B65EC /* ScryTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BACCB3CA291EBEE4004B65EC /* Build configuration list for PBXNativeTarget "ScryTests" */;
+			buildPhases = (
+				BACCB3AF291EBEE4004B65EC /* Sources */,
+				BACCB3B0291EBEE4004B65EC /* Frameworks */,
+				BACCB3B1291EBEE4004B65EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BACCB3B5291EBEE4004B65EC /* PBXTargetDependency */,
+			);
+			name = ScryTests;
+			productName = ScryTests;
+			productReference = BACCB3B3291EBEE4004B65EC /* ScryTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BACCB3BC291EBEE4004B65EC /* ScryUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BACCB3CD291EBEE4004B65EC /* Build configuration list for PBXNativeTarget "ScryUITests" */;
+			buildPhases = (
+				BACCB3B9291EBEE4004B65EC /* Sources */,
+				BACCB3BA291EBEE4004B65EC /* Frameworks */,
+				BACCB3BB291EBEE4004B65EC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BACCB3BF291EBEE4004B65EC /* PBXTargetDependency */,
+			);
+			name = ScryUITests;
+			productName = ScryUITests;
+			productReference = BACCB3BD291EBEE4004B65EC /* ScryUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BACCB39B291EBEE2004B65EC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					BACCB3A2291EBEE2004B65EC = {
+						CreatedOnToolsVersion = 14.0;
+					};
+					BACCB3B2291EBEE4004B65EC = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = BACCB3A2291EBEE2004B65EC;
+					};
+					BACCB3BC291EBEE4004B65EC = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = BACCB3A2291EBEE2004B65EC;
+					};
+				};
+			};
+			buildConfigurationList = BACCB39E291EBEE2004B65EC /* Build configuration list for PBXProject "Scry" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BACCB39A291EBEE2004B65EC;
+			productRefGroup = BACCB3A4291EBEE2004B65EC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BACCB3A2291EBEE2004B65EC /* Scry */,
+				BACCB3B2291EBEE4004B65EC /* ScryTests */,
+				BACCB3BC291EBEE4004B65EC /* ScryUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BACCB3A1291EBEE2004B65EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BACCB3AE291EBEE3004B65EC /* Preview Assets.xcassets in Resources */,
+				BACCB3AB291EBEE3004B65EC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BACCB3B1291EBEE4004B65EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BACCB3BB291EBEE4004B65EC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BACCB39F291EBEE2004B65EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */,
+				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
+				BACCB3D4291EC0E8004B65EC /* BubbleDetails.swift in Sources */,
+				BACCB3DC291EC693004B65EC /* Manager.swift in Sources */,
+				BACCB3D2291EBF68004B65EC /* BubbleCapsule.swift in Sources */,
+				BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */,
+				BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */,
+				BACCB3D7291EC119004B65EC /* Bubble.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BACCB3AF291EBEE4004B65EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BACCB3B8291EBEE4004B65EC /* ScryTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BACCB3B9291EBEE4004B65EC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BACCB3C2291EBEE4004B65EC /* ScryUITests.swift in Sources */,
+				BACCB3C4291EBEE4004B65EC /* ScryUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BACCB3B5291EBEE4004B65EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BACCB3A2291EBEE2004B65EC /* Scry */;
+			targetProxy = BACCB3B4291EBEE4004B65EC /* PBXContainerItemProxy */;
+		};
+		BACCB3BF291EBEE4004B65EC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BACCB3A2291EBEE2004B65EC /* Scry */;
+			targetProxy = BACCB3BE291EBEE4004B65EC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BACCB3C5291EBEE4004B65EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BACCB3C6291EBEE4004B65EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BACCB3C8291EBEE4004B65EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Scry/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.psu.drs5972.Scry;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BACCB3C9291EBEE4004B65EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Scry/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.psu.drs5972.Scry;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BACCB3CB291EBEE4004B65EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.psu.drs5972.ScryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Scry";
+			};
+			name = Debug;
+		};
+		BACCB3CC291EBEE4004B65EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.psu.drs5972.ScryTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Scry.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Scry";
+			};
+			name = Release;
+		};
+		BACCB3CE291EBEE4004B65EC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.psu.drs5972.ScryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Scry;
+			};
+			name = Debug;
+		};
+		BACCB3CF291EBEE4004B65EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.psu.drs5972.ScryUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Scry;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BACCB39E291EBEE2004B65EC /* Build configuration list for PBXProject "Scry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BACCB3C5291EBEE4004B65EC /* Debug */,
+				BACCB3C6291EBEE4004B65EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BACCB3C7291EBEE4004B65EC /* Build configuration list for PBXNativeTarget "Scry" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BACCB3C8291EBEE4004B65EC /* Debug */,
+				BACCB3C9291EBEE4004B65EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BACCB3CA291EBEE4004B65EC /* Build configuration list for PBXNativeTarget "ScryTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BACCB3CB291EBEE4004B65EC /* Debug */,
+				BACCB3CC291EBEE4004B65EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BACCB3CD291EBEE4004B65EC /* Build configuration list for PBXNativeTarget "ScryUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BACCB3CE291EBEE4004B65EC /* Debug */,
+				BACCB3CF291EBEE4004B65EC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BACCB39B291EBEE2004B65EC /* Project object */;
+}
