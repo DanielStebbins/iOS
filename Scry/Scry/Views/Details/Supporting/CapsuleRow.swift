@@ -16,7 +16,7 @@ struct CapsuleRow: View {
             ScrollView(.horizontal) {
                 HStack {
                     ForEach(bubbles) { bubble in
-                        BubbleCapsule(text: bubble.title, color: bubble.color)
+                        BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
                     }
                 }
             }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Bubble" representedClassName="Bubble" syncable="YES" codeGenerationType="class">
+        <attribute name="blue" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="green" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="notes" optional="YES" attributeType="String"/>
+        <attribute name="red" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="holds" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="heldBy" inverseEntity="Item"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="citizens" inverseEntity="Location"/>
+    </entity>
+    <entity name="Character" representedClassName="Character" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
+        <relationship name="memberOf" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="members" inverseEntity="Faction"/>
+    </entity>
+    <entity name="Faction" representedClassName="Faction" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="memberOf" inverseEntity="Character"/>
+        <relationship name="subfactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="superfaction" inverseEntity="Faction"/>
+        <relationship name="superfaction" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Faction" inverseName="subfactions" inverseEntity="Faction"/>
+    </entity>
+    <entity name="Item" representedClassName="Item" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
+        <relationship name="heldBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="holds" inverseEntity="Bubble"/>
+    </entity>
+    <entity name="Location" representedClassName="Location" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
+        <relationship name="citizens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bubble" inverseName="location" inverseEntity="Bubble"/>
+    </entity>
+</model>

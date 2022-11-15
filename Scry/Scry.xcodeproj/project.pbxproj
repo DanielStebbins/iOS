@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA1D4BE2292447DC0017C9C9 /* Bubbles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE0292447DC0017C9C9 /* Bubbles.xcdatamodeld */; };
+		BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE329244A340017C9C9 /* BubbleList.swift */; };
+		BA1D4BE629244D6F0017C9C9 /* EditField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE529244D6F0017C9C9 /* EditField.swift */; };
+		BA1D4BE9292452AE0017C9C9 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE8292452AE0017C9C9 /* TitleView.swift */; };
+		BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BEB292453110017C9C9 /* CharacterView.swift */; };
+		BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BED292453FF0017C9C9 /* FactionView.swift */; };
+		BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BEF292454430017C9C9 /* ItemView.swift */; };
+		BA1D4BF2292454630017C9C9 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BF1292454630017C9C9 /* LocationView.swift */; };
+		BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BF52924566F0017C9C9 /* Color+Bubble.swift */; };
 		BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3A6291EBEE2004B65EC /* ScryApp.swift */; };
 		BACCB3AB291EBEE3004B65EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AA291EBEE3004B65EC /* Assets.xcassets */; };
 		BACCB3AE291EBEE3004B65EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */; };
@@ -14,8 +23,6 @@
 		BACCB3C2291EBEE4004B65EC /* ScryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */; };
 		BACCB3C4291EBEE4004B65EC /* ScryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */; };
 		BACCB3D2291EBF68004B65EC /* BubbleCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */; };
-		BACCB3D4291EC0E8004B65EC /* BubbleDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D3291EC0E8004B65EC /* BubbleDetails.swift */; };
-		BACCB3D7291EC119004B65EC /* Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D6291EC119004B65EC /* Bubble.swift */; };
 		BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */; };
 		BACCB3DC291EC693004B65EC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DB291EC693004B65EC /* Manager.swift */; };
 		BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DD291ECB41004B65EC /* Color+Random.swift */; };
@@ -40,6 +47,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA1D4BE1292447DC0017C9C9 /* Bubbles.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bubbles.xcdatamodel; sourceTree = "<group>"; };
+		BA1D4BE329244A340017C9C9 /* BubbleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
+		BA1D4BE529244D6F0017C9C9 /* EditField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditField.swift; sourceTree = "<group>"; };
+		BA1D4BE8292452AE0017C9C9 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		BA1D4BEB292453110017C9C9 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		BA1D4BED292453FF0017C9C9 /* FactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactionView.swift; sourceTree = "<group>"; };
+		BA1D4BEF292454430017C9C9 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		BA1D4BF1292454630017C9C9 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
+		BA1D4BF52924566F0017C9C9 /* Color+Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Bubble.swift"; sourceTree = "<group>"; };
 		BACCB3A3291EBEE2004B65EC /* Scry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACCB3A6291EBEE2004B65EC /* ScryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryApp.swift; sourceTree = "<group>"; };
 		BACCB3AA291EBEE3004B65EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -50,8 +66,6 @@
 		BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryUITests.swift; sourceTree = "<group>"; };
 		BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCapsule.swift; sourceTree = "<group>"; };
-		BACCB3D3291EC0E8004B65EC /* BubbleDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleDetails.swift; sourceTree = "<group>"; };
-		BACCB3D6291EC119004B65EC /* Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bubble.swift; sourceTree = "<group>"; };
 		BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextInput.swift; sourceTree = "<group>"; };
 		BACCB3DB291EC693004B65EC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		BACCB3DD291ECB41004B65EC /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
@@ -83,6 +97,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA1D4BE7292452810017C9C9 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				BA1D4BEA292452E10017C9C9 /* Supporting */,
+				BA1D4BEB292453110017C9C9 /* CharacterView.swift */,
+				BA1D4BED292453FF0017C9C9 /* FactionView.swift */,
+				BA1D4BEF292454430017C9C9 /* ItemView.swift */,
+				BA1D4BF1292454630017C9C9 /* LocationView.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		BA1D4BEA292452E10017C9C9 /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */,
+				BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */,
+				BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */,
+				BA1D4BE8292452AE0017C9C9 /* TitleView.swift */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
 		BACCB39A291EBEE2004B65EC = {
 			isa = PBXGroup;
 			children = (
@@ -144,10 +181,9 @@
 		BACCB3D0291EBF4A004B65EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BACCB3D1291EBF68004B65EC /* BubbleCapsule.swift */,
-				BACCB3D3291EC0E8004B65EC /* BubbleDetails.swift */,
-				BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */,
-				BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */,
+				BA1D4BE7292452810017C9C9 /* Details */,
+				BA1D4BE329244A340017C9C9 /* BubbleList.swift */,
+				BA1D4BE529244D6F0017C9C9 /* EditField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,7 +191,7 @@
 		BACCB3D5291EC106004B65EC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BACCB3D6291EC119004B65EC /* Bubble.swift */,
+				BA1D4BE0292447DC0017C9C9 /* Bubbles.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -165,6 +201,7 @@
 			children = (
 				BACCB3DB291EC693004B65EC /* Manager.swift */,
 				BACCB3DD291ECB41004B65EC /* Color+Random.swift */,
+				BA1D4BF52924566F0017C9C9 /* Color+Bubble.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -301,12 +338,19 @@
 			files = (
 				BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */,
 				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
-				BACCB3D4291EC0E8004B65EC /* BubbleDetails.swift in Sources */,
+				BA1D4BE629244D6F0017C9C9 /* EditField.swift in Sources */,
+				BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */,
+				BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */,
 				BACCB3DC291EC693004B65EC /* Manager.swift in Sources */,
 				BACCB3D2291EBF68004B65EC /* BubbleCapsule.swift in Sources */,
+				BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */,
+				BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */,
 				BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */,
+				BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */,
 				BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */,
-				BACCB3D7291EC119004B65EC /* Bubble.swift in Sources */,
+				BA1D4BF2292454630017C9C9 /* LocationView.swift in Sources */,
+				BA1D4BE2292447DC0017C9C9 /* Bubbles.xcdatamodeld in Sources */,
+				BA1D4BE9292452AE0017C9C9 /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,6 +669,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BA1D4BE0292447DC0017C9C9 /* Bubbles.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BA1D4BE1292447DC0017C9C9 /* Bubbles.xcdatamodel */,
+			);
+			currentVersion = BA1D4BE1292447DC0017C9C9 /* Bubbles.xcdatamodel */;
+			path = Bubbles.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BACCB39B291EBEE2004B65EC /* Project object */;
 }
