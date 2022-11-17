@@ -6,21 +6,27 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="heldBy" inverseEntity="Item"/>
-        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="citizens" inverseEntity="Location"/>
     </entity>
-    <entity name="Character" representedClassName="Character" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <relationship name="memberOf" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="members" inverseEntity="Faction"/>
+    <entity name="Character" representedClassName="Character" parentEntity="HoldsItems" syncable="YES" codeGenerationType="class">
+        <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="members" inverseEntity="Faction"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="characters" inverseEntity="Location"/>
     </entity>
-    <entity name="Faction" representedClassName="Faction" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="memberOf" inverseEntity="Character"/>
+    <entity name="Faction" representedClassName="Faction" parentEntity="HoldsItems" syncable="YES" codeGenerationType="class">
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="factions" inverseEntity="Location"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="factions" inverseEntity="Character"/>
         <relationship name="subfactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="superfactions" inverseEntity="Faction"/>
         <relationship name="superfactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="subfactions" inverseEntity="Faction"/>
     </entity>
+    <entity name="HoldsItems" representedClassName="HoldsItems" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="heldBy" inverseEntity="Item"/>
+    </entity>
     <entity name="Item" representedClassName="Item" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <relationship name="heldBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bubble" inverseName="items" inverseEntity="Bubble"/>
+        <relationship name="heldBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HoldsItems" inverseName="items" inverseEntity="HoldsItems"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="items" inverseEntity="Location"/>
     </entity>
     <entity name="Location" representedClassName="Location" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <relationship name="citizens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Bubble" inverseName="locations" inverseEntity="Bubble"/>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="locations" inverseEntity="Character"/>
+        <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="locations" inverseEntity="Faction"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="locations" inverseEntity="Item"/>
     </entity>
 </model>

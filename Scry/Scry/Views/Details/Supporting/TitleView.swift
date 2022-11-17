@@ -17,7 +17,7 @@ struct TitleView: View {
     var body: some View {
         HStack {
             Spacer()
-            BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble), font: .title)
+            BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble), font: .headline)
             Spacer()
             Button(role: .destructive,
                    action: {
@@ -26,6 +26,6 @@ struct TitleView: View {
                 dismiss()
             },
                    label: {Image(systemName: "trash").imageScale(.large)})
-        }.padding()
+        }
     }
 }

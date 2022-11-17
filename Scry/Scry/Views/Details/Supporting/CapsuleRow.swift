@@ -7,16 +7,31 @@
 
 import SwiftUI
 
+// T is the type of bubbles in the row, needed for the adding function.
 struct CapsuleRow<T>: View {
+    @ObservedObject var bubble: Bubble
     let title: String
-    let bubbles: NSSet
+    var bubbles: NSSet
     let addFunction: (T) -> Void
+    
+    // Is there a way to stop text wrapping?
+//    private let columns = [GridItem(.adaptive(minimum: 80))]
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text(title)
+            HStack {
+                Text(title)
+                BubbleAdder<T>(bubble: bubble, bubbles: bubbles, addFunction: addFunction)
+            }
+//            ScrollView(.vertical) {
+//                LazyVGrid(columns: columns) {
+//                    ForEach(bubbles.allObjects as! [Bubble]) { bubble in
+//                        BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
+//                    }
+//                }
+//            }
             ScrollView(.horizontal) {
-                HStack {
+                HStack{
                     ForEach(bubbles.allObjects as! [Bubble]) { bubble in
                         BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
                     }
@@ -28,14 +43,16 @@ struct CapsuleRow<T>: View {
 }
 
 struct BubbleAdder<T>: View {
-    var bubble: Bubble
+    @ObservedObject var bubble: Bubble
+    var bubbles: NSSet
     let addFunction: (T) -> Void
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<Bubble>
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var menuBubbles: FetchedResults<Bubble>
     
     var body : some View {
         Menu {
-            ForEach(bubbles) { b in
-                if let typedB = b as? T {
+            ForEach(menuBubbles) { b in
+                if !b.isEqual(bubble) && !bubbles.contains(b),
+                   let typedB = b as? T {
                     Button(action: { addFunction(typedB) }) {
                         Text(b.name!)
                     }
