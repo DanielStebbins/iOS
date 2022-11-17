@@ -25,41 +25,50 @@ struct BubbleList: View {
         NavigationStack {
             List {
                 Section {
-                    EditField(isEditing: $isAddingCharacter, template: "Enter Name", adding: { name in addCharacter(name) })
+                    SingleLineTextInput(isEditing: $isAddingCharacter, template: "Enter Name", adding: { name in addCharacter(name) })
                     ForEach(characters) { c in
-                        NavigationLink(destination: CharacterView(character: c), label: { Text(c.name ?? "No Name") })
+                        NavigationLink(destination: CharacterView(character: c)) {
+                            BubbleCapsule(text: c.name!, color: Color(bubble: c))
+                        }
                     }
                 } header: {
                     HeaderView(title: "Characters", toggle: $isAddingCharacter)
                 }
                 
                 Section {
-                    EditField(isEditing: $isAddingFaction, template: "Enter Name", adding: { name in addFaction(name) })
+                    SingleLineTextInput(isEditing: $isAddingFaction, template: "Enter Name", adding: { name in addFaction(name) })
                     ForEach(factions) { f in
-                        NavigationLink(destination: FactionView(faction: f), label: { Text(f.name ?? "No Name") })
+                        NavigationLink(destination: FactionView(faction: f)) {
+                            BubbleCapsule(text: f.name!, color: Color(bubble: f))
+                        }
                     }
                 } header: {
                     HeaderView(title: "Factions", toggle: $isAddingFaction)
                 }
                 
                 Section {
-                    EditField(isEditing: $isAddingItem, template: "Enter Name", adding: { name in addItem(name) })
+                    SingleLineTextInput(isEditing: $isAddingItem, template: "Enter Name", adding: { name in addItem(name) })
                     ForEach(items) { i in
-                        NavigationLink(destination: ItemView(item: i), label: { Text(i.name ?? "No Name")})
+                        NavigationLink(destination: ItemView(item: i)) {
+                            BubbleCapsule(text: i.name!, color: Color(bubble: i))
+                        }
                     }
                 } header: {
                     HeaderView(title: "Items", toggle: $isAddingItem)
                 }
                 
                 Section {
-                    EditField(isEditing: $isAddingLocation, template: "Enter Name", adding: { name in addLocation(name) })
+                    SingleLineTextInput(isEditing: $isAddingLocation, template: "Enter Name", adding: { name in addLocation(name) })
                     ForEach(locations) { l in
-                        NavigationLink(destination: LocationView(location: l), label: { Text(l.name ?? "No Name")})
+                        NavigationLink(destination: LocationView(location: l)) {
+                            BubbleCapsule(text: l.name!, color: Color(bubble: l))
+                        }
                     }
                 } header: {
                     HeaderView(title: "Locations", toggle: $isAddingLocation)
                 }
             }
+            .listStyle(.plain)
             .padding()
             .navigationTitle("Bubble List")
         }
@@ -67,22 +76,30 @@ struct BubbleList: View {
     
     func addCharacter(_ name: String) {
         let character = Character(context: context)
-        character.name = name
+        setValues(bubble: character, name: name)
     }
     
     func addFaction(_ name: String) {
         let faction = Faction(context: context)
-        faction.name = name
+        setValues(bubble: faction, name: name)
     }
     
     func addItem(_ name: String) {
         let item = Item(context: context)
-        item.name = name
+        setValues(bubble: item, name: name)
     }
     
     func addLocation(_ name: String) {
         let location = Location(context: context)
-        location.name = name
+        setValues(bubble: location, name: name)
+    }
+    
+    func setValues(bubble: Bubble, name: String) {
+        bubble.name = name
+        bubble.red = Color.random
+        bubble.green = Color.random
+        bubble.blue = Color.random
+        bubble.notes = ""
     }
 }
 

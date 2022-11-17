@@ -11,21 +11,7 @@ struct LocationView: View {
     var location: Location
     var body: some View {
         VStack {
-            TitleView(bubble: location)
-            Divider()
-            Text("Instructor: Name here")
-            Divider()
-            List {
-                Section {
-
-                } header: {
-                 
-                    HStack {
-                        
-                        Spacer()
-                    }
-                }
-            }
+            BubbleView(bubble: location)
         }
     }
 }

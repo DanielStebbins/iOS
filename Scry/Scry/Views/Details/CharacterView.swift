@@ -11,21 +11,7 @@ struct CharacterView: View {
     var character: Character
     var body: some View {
         VStack {
-            TitleView(bubble: character)
-            Divider()
-            Text("Instructor: Name here")
-            Divider()
-            List {
-                Section {
-
-                } header: {
-                 
-                    HStack {
-                        
-                        Spacer()
-                    }
-                }
-            }
+            BubbleView(bubble: character)
         }
     }
 }

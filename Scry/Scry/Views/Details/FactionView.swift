@@ -11,21 +11,7 @@ struct FactionView: View {
     var faction: Faction
     var body: some View {
         VStack {
-            TitleView(bubble: faction)
-            Divider()
-            Text("Instructor: Name here")
-            Divider()
-            List {
-                Section {
-
-                } header: {
-                 
-                    HStack {
-                        
-                        Spacer()
-                    }
-                }
-            }
+            BubbleView(bubble: faction)
         }
     }
 }

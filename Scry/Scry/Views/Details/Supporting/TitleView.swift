@@ -17,9 +17,7 @@ struct TitleView: View {
     var body: some View {
         HStack {
             Spacer()
-            Text(bubble.name ?? "No Name")
-                .bold()
-                .font(.title)
+            BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble), font: .title)
             Spacer()
             Button(role: .destructive,
                    action: {
