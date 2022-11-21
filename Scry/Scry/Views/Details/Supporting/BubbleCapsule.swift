@@ -13,6 +13,7 @@ struct BubbleCapsule: View {
     var font: Font?
     var body: some View {
         Text(text)
+            .lineLimit(1)
             .font(font ?? .body)
             .padding([.leading, .trailing], 7)
             .padding([.top, .bottom], 5)

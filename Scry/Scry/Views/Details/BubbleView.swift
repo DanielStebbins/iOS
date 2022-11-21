@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct BubbleView: View {
-    var bubble: Bubble
+    @ObservedObject var bubble: Bubble
+    @Binding var isEditing: Bool
+    
     var body: some View {
-        // Long winded, but both "$bubble.notes" and "Binding(bubble.notes)!" fail.
-        MultilineTextInput(title: "Notes", text: Binding(get: { bubble.notes! }, set: { n in bubble.notes = n }))
+        MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                TitleView(bubble: bubble)
+                TitleView(bubble: bubble, isEditing: $isEditing)
             }
         }
         .onTapGesture {

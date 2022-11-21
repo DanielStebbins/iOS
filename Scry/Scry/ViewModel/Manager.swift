@@ -17,6 +17,5 @@ class Manager: ObservableObject {
                 print("Error: \(error.localizedDescription)")
             }
         }
-//        bubbles = [Bubble(title: "Test", color: .cyan, description: "Super Duper Test", notes: "Probably has a tragic backstory", members: [Bubble(title: "Test Member 1"), Bubble(title: "Test Member 2")])]
     }
 }

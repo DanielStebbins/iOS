@@ -14,8 +14,11 @@ struct CapsuleRow<T>: View {
     var bubbles: NSSet
     let addFunction: (T) -> Void
     
-    // Is there a way to stop text wrapping?
-//    private let columns = [GridItem(.adaptive(minimum: 80))]
+//    private let columns = [GridItem(.adaptive(minimum: 70))]
+    private let columns = [GridItem(.flexible(minimum: 30)), GridItem(.flexible(minimum: 30)), GridItem(.flexible(minimum: 30))]
+    
+    var bubbleList: [Bubble] { bubbles.allObjects as! [Bubble] }
+    var sortedBubbles: [Bubble] { bubbleList.sorted(by: { $0.name! < $1.name! }) }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -23,16 +26,9 @@ struct CapsuleRow<T>: View {
                 Text(title)
                 BubbleAdder<T>(bubble: bubble, bubbles: bubbles, addFunction: addFunction)
             }
-//            ScrollView(.vertical) {
-//                LazyVGrid(columns: columns) {
-//                    ForEach(bubbles.allObjects as! [Bubble]) { bubble in
-//                        BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
-//                    }
-//                }
-//            }
-            ScrollView(.horizontal) {
-                HStack{
-                    ForEach(bubbles.allObjects as! [Bubble]) { bubble in
+            ScrollView(.vertical) {
+                LazyVGrid(columns: columns) {
+                    ForEach(sortedBubbles) { bubble in
                         BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
                     }
                 }

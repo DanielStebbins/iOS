@@ -9,9 +9,11 @@ import SwiftUI
 
 struct ItemView: View {
     var item: Item
+    @State var isEditing = false
+    
     var body: some View {
         ScrollView {
-            BubbleView(bubble: item)
+            BubbleView(bubble: item, isEditing: $isEditing)
             CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
             CapsuleRow<HoldsItems>(bubble: item, title: "Held By", bubbles: item.heldBy!, addFunction: item.addToHeldBy)
             Spacer()

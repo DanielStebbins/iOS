@@ -9,9 +9,11 @@ import SwiftUI
 
 struct LocationView: View {
     var location: Location
+    @State var isEditing = false
+    
     var body: some View {
         ScrollView {
-            BubbleView(bubble: location)
+            BubbleView(bubble: location, isEditing: $isEditing)
             CapsuleRow<Faction>(bubble: location, title: "Factions", bubbles: location.factions!, addFunction: location.addToFactions)
             CapsuleRow<Character>(bubble: location, title: "Characters", bubbles: location.characters!, addFunction: location.addToCharacters)
             CapsuleRow<Item>(bubble: location, title: "Items", bubbles: location.items!, addFunction: location.addToItems)
