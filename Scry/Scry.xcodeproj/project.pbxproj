@@ -10,8 +10,8 @@
 		25CE8ACD292AF3CF0041394F /* BubbleEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */; };
 		25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8ACE292AF85F0041394F /* Color+Components.swift */; };
 		25CE8AD3292AFBA50041394F /* CharacterEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */; };
-		25CE8AD5292AFF9E0041394F /* DisplayRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8AD4292AFF9E0041394F /* DisplayRowButton.swift */; };
-		BA1D4BE2292447DC0017C9C9 /* Bubbles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE0292447DC0017C9C9 /* Bubbles.xcdatamodeld */; };
+		25CE8AD5292AFF9E0041394F /* DisplayElementButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8AD4292AFF9E0041394F /* DisplayElementButton.swift */; };
+		25CE8AD8292B2F1B0041394F /* Bubbles.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8AD6292B2F1A0041394F /* Bubbles.xcdatamodeld */; };
 		BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE329244A340017C9C9 /* BubbleList.swift */; };
 		BA1D4BE9292452AE0017C9C9 /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE8292452AE0017C9C9 /* TitleView.swift */; };
 		BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BEB292453110017C9C9 /* CharacterView.swift */; };
@@ -55,8 +55,8 @@
 		25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleEditSheet.swift; sourceTree = "<group>"; };
 		25CE8ACE292AF85F0041394F /* Color+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Components.swift"; sourceTree = "<group>"; };
 		25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterEditSheet.swift; sourceTree = "<group>"; };
-		25CE8AD4292AFF9E0041394F /* DisplayRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRowButton.swift; sourceTree = "<group>"; };
-		BA1D4BE1292447DC0017C9C9 /* Bubbles.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bubbles.xcdatamodel; sourceTree = "<group>"; };
+		25CE8AD4292AFF9E0041394F /* DisplayElementButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayElementButton.swift; sourceTree = "<group>"; };
+		25CE8AD7292B2F1A0041394F /* Bubbles.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bubbles.xcdatamodel; sourceTree = "<group>"; };
 		BA1D4BE329244A340017C9C9 /* BubbleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		BA1D4BE8292452AE0017C9C9 /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		BA1D4BEB292453110017C9C9 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 			children = (
 				25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */,
 				25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */,
-				25CE8AD4292AFF9E0041394F /* DisplayRowButton.swift */,
+				25CE8AD4292AFF9E0041394F /* DisplayElementButton.swift */,
 			);
 			path = EditSheets;
 			sourceTree = "<group>";
@@ -213,7 +213,7 @@
 		BACCB3D5291EC106004B65EC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				BA1D4BE0292447DC0017C9C9 /* Bubbles.xcdatamodeld */,
+				25CE8AD6292B2F1A0041394F /* Bubbles.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,6 +362,7 @@
 				BAF76FDD2925B9A600F4A641 /* SingleLineTextInput.swift in Sources */,
 				BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */,
 				BAF76FDF2925BF2C00F4A641 /* BubbleView.swift in Sources */,
+				25CE8AD8292B2F1B0041394F /* Bubbles.xcdatamodeld in Sources */,
 				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
 				BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */,
 				BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */,
@@ -370,14 +371,13 @@
 				25CE8ACD292AF3CF0041394F /* BubbleEditSheet.swift in Sources */,
 				BACCB3D2291EBF68004B65EC /* BubbleCapsule.swift in Sources */,
 				25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */,
-				25CE8AD5292AFF9E0041394F /* DisplayRowButton.swift in Sources */,
+				25CE8AD5292AFF9E0041394F /* DisplayElementButton.swift in Sources */,
 				BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */,
 				BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */,
 				BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */,
 				BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */,
 				BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */,
 				BA1D4BF2292454630017C9C9 /* LocationView.swift in Sources */,
-				BA1D4BE2292447DC0017C9C9 /* Bubbles.xcdatamodeld in Sources */,
 				BA1D4BE9292452AE0017C9C9 /* TitleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -699,12 +699,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		BA1D4BE0292447DC0017C9C9 /* Bubbles.xcdatamodeld */ = {
+		25CE8AD6292B2F1A0041394F /* Bubbles.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				BA1D4BE1292447DC0017C9C9 /* Bubbles.xcdatamodel */,
+				25CE8AD7292B2F1A0041394F /* Bubbles.xcdatamodel */,
 			);
-			currentVersion = BA1D4BE1292447DC0017C9C9 /* Bubbles.xcdatamodel */;
+			currentVersion = 25CE8AD7292B2F1A0041394F /* Bubbles.xcdatamodel */;
 			path = Bubbles.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -22,7 +22,9 @@ struct CharacterView: View {
                 CapsuleRow<Location>(bubble: character, title: "Locations", bubbles: character.locations!, addFunction: character.addToLocations)
             }
 
-            CapsuleRow<Item>(bubble: character, title: "Items", bubbles: character.items!, addFunction: character.addToItems)
+            if character.displayItems {
+                CapsuleRow<Item>(bubble: character, title: "Items", bubbles: character.items!, addFunction: character.addToItems)
+            }
             Spacer()
         }
         .onTapGesture {
@@ -30,7 +32,7 @@ struct CharacterView: View {
         }
         .sheet(isPresented: $isEditing) {
             CharacterEditSheet(character: character)
-                .presentationDetents([.fraction(0.3)])
+                .presentationDetents([.fraction(0.4)])
         }
     }
 }

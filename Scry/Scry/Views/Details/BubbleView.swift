@@ -12,15 +12,29 @@ struct BubbleView: View {
     @Binding var isEditing: Bool
     
     var body: some View {
-        MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                TitleView(bubble: bubble, isEditing: $isEditing)
-            }
+        if bubble.displayNotes {
+            MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        TitleView(bubble: bubble, isEditing: $isEditing)
+                    }
+                }
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
         }
-        .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        else {
+            Text("")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        TitleView(bubble: bubble, isEditing: $isEditing)
+                    }
+                }
+                .onTapGesture {
+                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                }
         }
     }
 }

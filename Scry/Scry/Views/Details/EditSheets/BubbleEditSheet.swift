@@ -29,6 +29,7 @@ struct BubbleEditSheet: View {
             bubble.blue = Int16(components.blue * 255)
             
         }), supportsOpacity: false)
+        DisplayElementButton(text: "Notes", display: $bubble.displayNotes)
     }
 }
 

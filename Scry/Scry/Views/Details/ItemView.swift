@@ -15,7 +15,8 @@ struct ItemView: View {
         ScrollView {
             BubbleView(bubble: item, isEditing: $isEditing)
             CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
-            CapsuleRow<HoldsItems>(bubble: item, title: "Held By", bubbles: item.heldBy!, addFunction: item.addToHeldBy)
+            CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters)
+            CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions)
             Spacer()
         }
         .onTapGesture {

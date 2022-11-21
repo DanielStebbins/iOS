@@ -20,6 +20,7 @@ struct ScryApp: App {
                     switch scenePhase {
                     case .inactive:
                         try? manager.container.viewContext.save()
+                        break
                     default:
                         break
                     }

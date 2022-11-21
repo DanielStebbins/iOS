@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DisplayRowButton: View {
+struct DisplayElementButton: View {
     let text: String
     @Binding var display: Bool
     

@@ -21,8 +21,9 @@ struct CharacterEditSheet: View {
         NavigationStack() {
             VStack {
                 BubbleEditSheet(bubble: character)
-                DisplayRowButton(text: "Factions", display: $character.displayFactions)
-                DisplayRowButton(text: "Locations", display: $character.displayLocations)
+                DisplayElementButton(text: "Factions", display: $character.displayFactions)
+                DisplayElementButton(text: "Locations", display: $character.displayLocations)
+                DisplayElementButton(text: "Items", display: $character.displayItems)
                 Spacer()
             }
             .padding()

@@ -2,28 +2,30 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G115" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bubble" representedClassName="Bubble" syncable="YES" codeGenerationType="class">
         <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="displayNotes" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
-    <entity name="Character" representedClassName="Character" parentEntity="HoldsItems" syncable="YES" codeGenerationType="class">
+    <entity name="Character" representedClassName="Character" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
         <attribute name="displayFactions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="displayItems" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="displayLocations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="members" inverseEntity="Faction"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="characters" inverseEntity="Item"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="characters" inverseEntity="Location"/>
     </entity>
-    <entity name="Faction" representedClassName="Faction" parentEntity="HoldsItems" syncable="YES" codeGenerationType="class">
+    <entity name="Faction" representedClassName="Faction" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="factions" inverseEntity="Item"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="factions" inverseEntity="Location"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="factions" inverseEntity="Character"/>
         <relationship name="subfactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="superfactions" inverseEntity="Faction"/>
         <relationship name="superfactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="subfactions" inverseEntity="Faction"/>
     </entity>
-    <entity name="HoldsItems" representedClassName="HoldsItems" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="heldBy" inverseEntity="Item"/>
-    </entity>
     <entity name="Item" representedClassName="Item" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <relationship name="heldBy" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HoldsItems" inverseName="items" inverseEntity="HoldsItems"/>
+        <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="items" inverseEntity="Character"/>
+        <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="items" inverseEntity="Faction"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="items" inverseEntity="Location"/>
     </entity>
     <entity name="Location" representedClassName="Location" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
