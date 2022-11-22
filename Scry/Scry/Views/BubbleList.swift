@@ -39,6 +39,7 @@ struct BubbleList: View {
 
 struct ListSection<T>: View where T: Bubble {
     @Environment(\.managedObjectContext) var context
+    @Environment(\.colorScheme) var colorScheme
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
     @State var isAdding: Bool = false
     
@@ -47,9 +48,16 @@ struct ListSection<T>: View where T: Bubble {
             SingleLineTextInput(isEditing: $isAdding, template: "Enter Name") {name in
                 let bubble = T(context: context)
                 bubble.name = name
-                bubble.red = Color.random
-                bubble.green = Color.random
-                bubble.blue = Color.random
+                if colorScheme == .dark {
+                    bubble.red = Color.randomDark
+                    bubble.green = Color.randomDark
+                    bubble.blue = Color.randomDark
+                }
+                else {
+                    bubble.red = Color.randomLight
+                    bubble.green = Color.randomLight
+                    bubble.blue = Color.randomLight
+                }
                 bubble.notes = ""
             }
             ForEach(bubbles) {b in

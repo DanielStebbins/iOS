@@ -22,13 +22,15 @@ struct BubbleEditSheet: View {
                 Capsule()
                     .fill(Color(bubble: bubble))
             }
-        ColorPicker("Bubble Color", selection: Binding(get: { Color(bubble: bubble) }, set: { newColor in
+        ColorPicker("Choose Color", selection: Binding(get: { Color(bubble: bubble) }, set: {newColor in
             let components = newColor.components
             bubble.red = Int16(components.red * 255)
             bubble.green = Int16(components.green * 255)
             bubble.blue = Int16(components.blue * 255)
-            
         }), supportsOpacity: false)
+        PhotoPickerView(selection: $bubble.image)
+        
+        DisplayElementButton(text: "Image", display: $bubble.displayImage)
         DisplayElementButton(text: "Notes", display: $bubble.displayNotes)
     }
 }

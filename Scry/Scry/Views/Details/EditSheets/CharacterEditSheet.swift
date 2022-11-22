@@ -18,6 +18,12 @@ struct CharacterEditSheet: View {
             }
         }
         
+//        Button(role: .destructive, action: {
+//            context.delete(bubble)
+//            dismiss()
+//        },
+//               label: {Image(systemName: "trash").imageScale(.large)})
+        
         NavigationStack() {
             VStack {
                 BubbleEditSheet(bubble: character)

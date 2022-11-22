@@ -12,29 +12,35 @@ struct BubbleView: View {
     @Binding var isEditing: Bool
     
     var body: some View {
-        if bubble.displayNotes {
-            MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        TitleView(bubble: bubble, isEditing: $isEditing)
-                    }
+        VStack {
+            if bubble.displayImage {
+                if let image = bubble.image {
+                    Image(uiImage: UIImage(data: image)!)
+                        .resizable()
+                        .scaledToFit()
+                        .border(Color(bubble: bubble), width: 2)
+                        .padding()
                 }
-                .onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+                else {
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                        .padding()
                 }
+            }
+            
+            if bubble.displayNotes {
+                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
+            }
         }
-        else {
-            Text("")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        TitleView(bubble: bubble, isEditing: $isEditing)
-                    }
-                }
-                .onTapGesture {
-                    UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-                }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                TitleView(bubble: bubble, isEditing: $isEditing)
+            }
+        }
+        .onTapGesture {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
     }
 }

@@ -13,7 +13,6 @@ struct TitleView: View {
     @Binding var isEditing: Bool
     
     @FocusState var titleEdit
-    @Environment(\.dismiss) var dismiss
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
@@ -27,12 +26,6 @@ struct TitleView: View {
             }) {
                 Image(systemName: "pencil").imageScale(.large)
             }
-            Button(role: .destructive, action: {
-                context.delete(bubble)
-                dismiss()
-            },
-                   label: {Image(systemName: "trash").imageScale(.large)})
         }
-        .padding()
     }
 }
