@@ -27,9 +27,7 @@ struct BubbleList: View {
                 Section {
                     SingleLineTextInput(isEditing: $isAddingCharacter, template: "Enter Name", adding: { name in addCharacter(name) })
                     ForEach(characters) { c in
-                        NavigationLink(destination: CharacterView(character: c)) {
-                            BubbleCapsule(text: c.name!, color: Color(bubble: c))
-                        }
+                        BubbleCapsule(bubble: c)
                     }
                 } header: {
                     HeaderView(title: "Characters", toggle: $isAddingCharacter)
@@ -38,9 +36,7 @@ struct BubbleList: View {
                 Section {
                     SingleLineTextInput(isEditing: $isAddingFaction, template: "Enter Name", adding: { name in addFaction(name) })
                     ForEach(factions) { f in
-                        NavigationLink(destination: FactionView(faction: f)) {
-                            BubbleCapsule(text: f.name!, color: Color(bubble: f))
-                        }
+                        BubbleCapsule(bubble: f)
                     }
                 } header: {
                     HeaderView(title: "Factions", toggle: $isAddingFaction)
@@ -49,9 +45,7 @@ struct BubbleList: View {
                 Section {
                     SingleLineTextInput(isEditing: $isAddingItem, template: "Enter Name", adding: { name in addItem(name) })
                     ForEach(items) { i in
-                        NavigationLink(destination: ItemView(item: i)) {
-                            BubbleCapsule(text: i.name!, color: Color(bubble: i))
-                        }
+                        BubbleCapsule(bubble: i)
                     }
                 } header: {
                     HeaderView(title: "Items", toggle: $isAddingItem)
@@ -60,9 +54,7 @@ struct BubbleList: View {
                 Section {
                     SingleLineTextInput(isEditing: $isAddingLocation, template: "Enter Name", adding: { name in addLocation(name) })
                     ForEach(locations) { l in
-                        NavigationLink(destination: LocationView(location: l)) {
-                            BubbleCapsule(text: l.name!, color: Color(bubble: l))
-                        }
+                        BubbleCapsule(bubble: l)
                     }
                 } header: {
                     HeaderView(title: "Locations", toggle: $isAddingLocation)
@@ -116,3 +108,21 @@ struct HeaderView : View {
         }
     }
 }
+
+//struct ListElement: View {
+//    var title: String
+//    @Binding var isAdding: Bool
+//    
+//    var body: some View {
+//        Section {
+//            SingleLineTextInput(isEditing: $isAdding, template: "Enter Name", adding: { name in addCharacter(name) })
+//            ForEach(characters) { c in
+//                NavigationLink(destination: CharacterView(character: c)) {
+//                    BubbleCapsule(text: c.name!, color: Color(bubble: c))
+//                }
+//            }
+//        } header: {
+//            HeaderView(title: title, toggle: $isAdding)
+//        }
+//    }
+//}

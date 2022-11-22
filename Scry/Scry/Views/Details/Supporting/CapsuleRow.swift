@@ -29,7 +29,7 @@ struct CapsuleRow<T>: View {
             ScrollView(.vertical) {
                 LazyVGrid(columns: columns) {
                     ForEach(sortedBubbles) { bubble in
-                        BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
+                        BubbleCapsule(bubble: bubble)
                     }
                 }
             }

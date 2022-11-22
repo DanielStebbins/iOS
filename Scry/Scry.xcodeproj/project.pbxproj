@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		257297D9292C501700E6FF05 /* FactionEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297D8292C501700E6FF05 /* FactionEditSheet.swift */; };
+		257297DB292C523D00E6FF05 /* ItemEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297DA292C523D00E6FF05 /* ItemEditSheet.swift */; };
+		257297DD292C572600E6FF05 /* LocationEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297DC292C572600E6FF05 /* LocationEditSheet.swift */; };
 		25CE8ACD292AF3CF0041394F /* BubbleEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */; };
 		25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8ACE292AF85F0041394F /* Color+Components.swift */; };
 		25CE8AD3292AFBA50041394F /* CharacterEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		257297D8292C501700E6FF05 /* FactionEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactionEditSheet.swift; sourceTree = "<group>"; };
+		257297DA292C523D00E6FF05 /* ItemEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEditSheet.swift; sourceTree = "<group>"; };
+		257297DC292C572600E6FF05 /* LocationEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEditSheet.swift; sourceTree = "<group>"; };
 		25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleEditSheet.swift; sourceTree = "<group>"; };
 		25CE8ACE292AF85F0041394F /* Color+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Components.swift"; sourceTree = "<group>"; };
 		25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterEditSheet.swift; sourceTree = "<group>"; };
@@ -111,8 +117,11 @@
 			isa = PBXGroup;
 			children = (
 				25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */,
-				25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */,
 				25CE8AD4292AFF9E0041394F /* DisplayElementButton.swift */,
+				25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */,
+				257297D8292C501700E6FF05 /* FactionEditSheet.swift */,
+				257297DA292C523D00E6FF05 /* ItemEditSheet.swift */,
+				257297DC292C572600E6FF05 /* LocationEditSheet.swift */,
 			);
 			path = EditSheets;
 			sourceTree = "<group>";
@@ -359,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				257297DB292C523D00E6FF05 /* ItemEditSheet.swift in Sources */,
 				BAF76FDD2925B9A600F4A641 /* SingleLineTextInput.swift in Sources */,
 				BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */,
 				BAF76FDF2925BF2C00F4A641 /* BubbleView.swift in Sources */,
@@ -372,7 +382,9 @@
 				BACCB3D2291EBF68004B65EC /* BubbleCapsule.swift in Sources */,
 				25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */,
 				25CE8AD5292AFF9E0041394F /* DisplayElementButton.swift in Sources */,
+				257297DD292C572600E6FF05 /* LocationEditSheet.swift in Sources */,
 				BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */,
+				257297D9292C501700E6FF05 /* FactionEditSheet.swift in Sources */,
 				BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */,
 				BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */,
 				BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */,
