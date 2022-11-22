@@ -12,10 +12,10 @@ class Manager: ObservableObject {
     
     init() {
         container = NSPersistentContainer(name: "Bubbles")
-//        container.loadPersistentStores { description, error in
-//            if let error {
-//                print("Error: \(error.localizedDescription)")
-//            }
-//        }
+        container.loadPersistentStores { description, error in
+            if let error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
     }
 }
