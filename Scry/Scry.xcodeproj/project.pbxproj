@@ -12,6 +12,7 @@
 		257297DD292C572600E6FF05 /* LocationEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297DC292C572600E6FF05 /* LocationEditSheet.swift */; };
 		257297DF292D6D2D00E6FF05 /* BubbleCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297DE292D6D2D00E6FF05 /* BubbleCapsule.swift */; };
 		257297E1292D7E6000E6FF05 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297E0292D7E6000E6FF05 /* PhotoPickerView.swift */; };
+		257297E8292E8FFF00E6FF05 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257297E7292E8FFF00E6FF05 /* MapView.swift */; };
 		25CE8ACD292AF3CF0041394F /* BubbleEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */; };
 		25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8ACE292AF85F0041394F /* Color+Components.swift */; };
 		25CE8AD3292AFBA50041394F /* CharacterEditSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */; };
@@ -61,6 +62,7 @@
 		257297DC292C572600E6FF05 /* LocationEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEditSheet.swift; sourceTree = "<group>"; };
 		257297DE292D6D2D00E6FF05 /* BubbleCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleCapsule.swift; sourceTree = "<group>"; };
 		257297E0292D7E6000E6FF05 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
+		257297E7292E8FFF00E6FF05 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleEditSheet.swift; sourceTree = "<group>"; };
 		25CE8ACE292AF85F0041394F /* Color+Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Components.swift"; sourceTree = "<group>"; };
 		25CE8AD2292AFBA50041394F /* CharacterEditSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterEditSheet.swift; sourceTree = "<group>"; };
@@ -115,6 +117,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		257297E4292E8F9F00E6FF05 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				BAF76FDE2925BF2C00F4A641 /* BubbleView.swift */,
+				BA1D4BEB292453110017C9C9 /* CharacterView.swift */,
+				BA1D4BED292453FF0017C9C9 /* FactionView.swift */,
+				BA1D4BEF292454430017C9C9 /* ItemView.swift */,
+				BA1D4BF1292454630017C9C9 /* LocationView.swift */,
+			);
+			path = Details;
+			sourceTree = "<group>";
+		};
+		257297E5292E8FE300E6FF05 /* Maps */ = {
+			isa = PBXGroup;
+			children = (
+				257297E7292E8FFF00E6FF05 /* MapView.swift */,
+			);
+			path = Maps;
+			sourceTree = "<group>";
+		};
 		25CE8ACB292AF3B80041394F /* EditSheets */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,18 +150,14 @@
 			path = EditSheets;
 			sourceTree = "<group>";
 		};
-		BA1D4BE7292452810017C9C9 /* Details */ = {
+		BA1D4BE7292452810017C9C9 /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
 				25CE8ACB292AF3B80041394F /* EditSheets */,
 				BA1D4BEA292452E10017C9C9 /* Supporting */,
-				BAF76FDE2925BF2C00F4A641 /* BubbleView.swift */,
-				BA1D4BEB292453110017C9C9 /* CharacterView.swift */,
-				BA1D4BED292453FF0017C9C9 /* FactionView.swift */,
-				BA1D4BEF292454430017C9C9 /* ItemView.swift */,
-				BA1D4BF1292454630017C9C9 /* LocationView.swift */,
+				257297E4292E8F9F00E6FF05 /* Details */,
 			);
-			path = Details;
+			path = Bubbles;
 			sourceTree = "<group>";
 		};
 		BA1D4BEA292452E10017C9C9 /* Supporting */ = {
@@ -216,7 +234,8 @@
 		BACCB3D0291EBF4A004B65EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BA1D4BE7292452810017C9C9 /* Details */,
+				BA1D4BE7292452810017C9C9 /* Bubbles */,
+				257297E5292E8FE300E6FF05 /* Maps */,
 				BA1D4BE329244A340017C9C9 /* BubbleList.swift */,
 			);
 			path = Views;
@@ -383,6 +402,7 @@
 				25CE8AD3292AFBA50041394F /* CharacterEditSheet.swift in Sources */,
 				25CE8ACD292AF3CF0041394F /* BubbleEditSheet.swift in Sources */,
 				BACCB3D2291EBF68004B65EC /* LinkedBubbleCapsule.swift in Sources */,
+				257297E8292E8FFF00E6FF05 /* MapView.swift in Sources */,
 				25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */,
 				25CE8AD5292AFF9E0041394F /* DisplayElementButton.swift in Sources */,
 				257297DD292C572600E6FF05 /* LocationEditSheet.swift in Sources */,
