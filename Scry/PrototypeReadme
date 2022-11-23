@@ -1,3 +1,7 @@
 My prototype submission shows the Core Data model for my project, a list view for my Bubble Objects, and detail views for each bubble.
 The Character detail view is the only one customization is fully functional for, but adding customization to the other detail views will be easy.
 The Core Data model is in the Model folder.
+
+Update 11/23/2022:
+I'm working on the scrollable/zoomable map images right now, so running the app will show a grid image.
+To see a bubble list, in ScryApp.swift change "MapView(map: Map(context: manager.container.viewContext))" to "BubbleList()"
