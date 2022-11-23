@@ -8,17 +8,16 @@
 import SwiftUI
 
 // T is the type of bubbles in the row, needed for the adding function.
-struct CapsuleRow<T>: View {
+struct CapsuleRow<T>: View where T: Bubble {
     @ObservedObject var bubble: Bubble
     let title: String
     var bubbles: NSSet
     let addFunction: (T) -> Void
     
-//    private let columns = [GridItem(.adaptive(minimum: 70))]
-    private let columns = [GridItem(.flexible(minimum: 30)), GridItem(.flexible(minimum: 30)), GridItem(.flexible(minimum: 30))]
+    private let columns = [GridItem(.adaptive(minimum: 100))]
     
-    var bubbleList: [Bubble] { bubbles.allObjects as! [Bubble] }
-    var sortedBubbles: [Bubble] { bubbleList.sorted(by: { $0.name! < $1.name! }) }
+    var bubbleList: [T] { bubbles.allObjects as! [T] }
+    var sortedBubbles: [T] { bubbleList.sorted(by: { $0.name! < $1.name! }) }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -28,8 +27,8 @@ struct CapsuleRow<T>: View {
             }
             ScrollView(.vertical) {
                 LazyVGrid(columns: columns) {
-                    ForEach(sortedBubbles) { bubble in
-                        BubbleCapsule(text: bubble.name!, color: Color(bubble: bubble))
+                    ForEach(sortedBubbles) { b in
+                        LinkedBubbleCapsule<T>(bubble: b)
                     }
                 }
             }

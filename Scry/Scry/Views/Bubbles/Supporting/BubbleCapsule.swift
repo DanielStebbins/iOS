@@ -2,24 +2,25 @@
 //  BubbleCapsule.swift
 //  Scry
 //
-//  Created by Stebbins, Daniel Ross on 11/11/22.
+//  Created by Thomas Stebbins on 11/22/22.
 //
 
 import SwiftUI
 
 struct BubbleCapsule: View {
-    let text: String
-    let color: Color
-    var font: Font?
+    @ObservedObject var bubble: Bubble
+    var font: Font? = .body
+    
     var body: some View {
-        Text(text)
+        Text(bubble.name!)
             .lineLimit(1)
-            .font(font ?? .body)
+            .font(font)
             .padding([.leading, .trailing], 7)
             .padding([.top, .bottom], 5)
             .background {
                 Capsule()
-                    .fill(color)
+                    .fill(Color(bubble: bubble))
             }
+            .foregroundColor(Color(UIColor.label))
     }
 }

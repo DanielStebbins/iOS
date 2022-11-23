@@ -13,7 +13,7 @@ struct ScryApp: App {
     @Environment(\.scenePhase) var scenePhase
     var body: some Scene {
         WindowGroup {
-            BubbleList()
+            MapView(map: Map(context: manager.container.viewContext))
                 .environmentObject(manager)
                 .environment(\.managedObjectContext, manager.container.viewContext)
                 .onChange(of: scenePhase) { newValue in
