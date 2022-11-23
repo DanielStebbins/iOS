@@ -156,6 +156,7 @@
 				25CE8ACB292AF3B80041394F /* EditSheets */,
 				BA1D4BEA292452E10017C9C9 /* Supporting */,
 				257297E4292E8F9F00E6FF05 /* Details */,
+				BA1D4BE329244A340017C9C9 /* BubbleList.swift */,
 			);
 			path = Bubbles;
 			sourceTree = "<group>";
@@ -236,7 +237,6 @@
 			children = (
 				BA1D4BE7292452810017C9C9 /* Bubbles */,
 				257297E5292E8FE300E6FF05 /* Maps */,
-				BA1D4BE329244A340017C9C9 /* BubbleList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
