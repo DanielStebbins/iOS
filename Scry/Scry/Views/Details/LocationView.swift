@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LocationView: View {
     @ObservedObject var location: Location
+    @Environment (\.dismiss) private var dismiss
     @State var isEditing = false
     
     var body: some View {
@@ -29,8 +30,8 @@ struct LocationView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            LocationEditSheet(location: location)
-                .presentationDetents([.fraction(0.4)])
+            LocationEditSheet(location: location, dismissDetailView: dismiss)
+                .presentationDetents([.fraction(0.6)])
         }
     }
 }

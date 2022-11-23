@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ItemView: View {
     @ObservedObject var item: Item
+    @Environment (\.dismiss) private var dismiss
     @State var isEditing = false
     
     var body: some View {
@@ -29,8 +30,8 @@ struct ItemView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            ItemEditSheet(item: item)
-                .presentationDetents([.fraction(0.4)])
+            ItemEditSheet(item: item, dismissDetailView: dismiss)
+                .presentationDetents([.fraction(0.6)])
         }
     }
 }

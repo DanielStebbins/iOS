@@ -9,12 +9,20 @@ import SwiftUI
 
 struct LocationEditSheet: View {
     @ObservedObject var location: Location
+    var dismissDetailView: DismissAction
     @Environment (\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button("Dismiss") {
                 dismiss()
+            }
+        }
+        
+        let deleteButton = ToolbarItem(placement: .navigationBarLeading) {
+            Button(role: .destructive, action: { dismiss(); context.delete(location); dismissDetailView() }) {
+                Image(systemName: "trash")
             }
         }
         
@@ -28,6 +36,7 @@ struct LocationEditSheet: View {
             }
             .padding()
             .toolbar { dismissButton }
+            .toolbar { deleteButton }
         }
     }
 }

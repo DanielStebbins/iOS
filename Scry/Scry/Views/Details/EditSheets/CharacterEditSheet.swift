@@ -9,7 +9,9 @@ import SwiftUI
 
 struct CharacterEditSheet: View {
     @ObservedObject var character: Character
+    var dismissDetailView: DismissAction
     @Environment (\.dismiss) private var dismiss
+    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
@@ -18,11 +20,11 @@ struct CharacterEditSheet: View {
             }
         }
         
-//        Button(role: .destructive, action: {
-//            context.delete(bubble)
-//            dismiss()
-//        },
-//               label: {Image(systemName: "trash").imageScale(.large)})
+        let deleteButton = ToolbarItem(placement: .navigationBarLeading) {
+            Button(role: .destructive, action: { dismiss(); context.delete(character); dismissDetailView() }) {
+                Image(systemName: "trash")
+            }
+        }
         
         NavigationStack() {
             VStack {
@@ -34,6 +36,7 @@ struct CharacterEditSheet: View {
             }
             .padding()
             .toolbar { dismissButton }
+            .toolbar { deleteButton }
         }
     }
 }

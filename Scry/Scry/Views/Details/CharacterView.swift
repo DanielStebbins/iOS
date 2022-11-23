@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CharacterView: View {
     @ObservedObject var character: Character
+    @Environment (\.dismiss) private var dismiss
     @State var isEditing = false
     
     var body: some View {
@@ -29,7 +30,7 @@ struct CharacterView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            CharacterEditSheet(character: character)
+            CharacterEditSheet(character: character, dismissDetailView: dismiss)
                 .presentationDetents([.fraction(0.6)])
         }
     }

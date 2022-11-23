@@ -11,9 +11,7 @@ import CoreData
 struct TitleView: View {
     @ObservedObject var bubble: Bubble
     @Binding var isEditing: Bool
-    
     @FocusState var titleEdit
-    @Environment(\.managedObjectContext) var context
     
     var body: some View {
         HStack {

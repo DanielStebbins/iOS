@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FactionView: View {
     @ObservedObject var faction: Faction
+    @Environment (\.dismiss) private var dismiss
     @State var isEditing = false
     
     var body: some View {
@@ -36,8 +37,8 @@ struct FactionView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            FactionEditSheet(faction: faction)
-                .presentationDetents([.fraction(0.6)])
+            FactionEditSheet(faction: faction, dismissDetailView: dismiss)
+                .presentationDetents([.fraction(0.7)])
         }
     }
 }
