@@ -11,9 +11,11 @@ import SwiftUI
 struct ScryApp: App {
     @StateObject var manager = Manager()
     @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
-            MapView(map: Map(context: manager.container.viewContext))
+            let map = Map(context: manager.container.viewContext)
+            MapView(map: map)
                 .environmentObject(manager)
                 .environment(\.managedObjectContext, manager.container.viewContext)
                 .onChange(of: scenePhase) { newValue in
@@ -24,6 +26,17 @@ struct ScryApp: App {
                     default:
                         break
                     }
+                }
+                .onAppear {
+                    let character = Character(context: manager.container.viewContext)
+                    character.name = "Test"
+                    character.red = 100
+                    character.green = 100
+                    character.blue = 100
+                    let mappedBubble = MappedBubble(context: manager.container.viewContext)
+                    mappedBubble.bubble = character
+                    mappedBubble.map = map
+                    map.addToMappedBubbles(mappedBubble)
                 }
         }
     }
