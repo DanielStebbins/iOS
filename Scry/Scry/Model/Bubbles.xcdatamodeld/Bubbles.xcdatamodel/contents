@@ -49,7 +49,7 @@
     </entity>
     <entity name="Map" representedClassName="Map" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary"/>
-        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MappedBubble" inverseName="map" inverseEntity="MappedBubble"/>
     </entity>
     <entity name="MappedBubble" representedClassName="MappedBubble" syncable="YES" codeGenerationType="class">

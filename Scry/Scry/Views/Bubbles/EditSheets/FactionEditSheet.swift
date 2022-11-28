@@ -14,18 +14,6 @@ struct FactionEditSheet: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button("Dismiss") {
-                dismiss()
-            }
-        }
-        
-        let deleteButton = ToolbarItem(placement: .navigationBarLeading) {
-            Button(role: .destructive, action: { dismiss(); context.delete(faction); dismissDetailView() }) {
-                Image(systemName: "trash")
-            }
-        }
-        
         NavigationStack {
             VStack {
                 BubbleEditSheet(bubble: faction)
@@ -37,8 +25,8 @@ struct FactionEditSheet: View {
                 Spacer()
             }
             .padding()
-            .toolbar { dismissButton }
-            .toolbar { deleteButton }
+            .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
+            .toolbar { DeleteButton(dismiss: dismiss, dismissParent: dismissDetailView, deleteAction: { context.delete(faction) }).toolbarItem }
         }
     }
 }

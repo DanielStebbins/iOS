@@ -11,7 +11,6 @@ struct BubbleEditSheet: View {
     @ObservedObject var bubble: Bubble
     
     var body: some View {
-        
         VStack {
             TextField("Name", text: Binding($bubble.name)!)
                 .multilineTextAlignment(.center)

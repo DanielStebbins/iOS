@@ -28,17 +28,15 @@ struct MapView: View {
                 map.addToMappedBubbles(mappedBubble)
             }
         
-        ZStack(alignment: .topLeading) {
-            ZoomingScrollView {
-                ZStack(alignment: .topLeading) {
-                    Image(uiImage: UIImage(imageLiteralResourceName: "square-grid"))
-                        .resizable()
-                        .scaledToFit()
-                        .gesture(addBubble)
-                    ForEach(mappedBubbles) {mappedBubble in
-                        BubbleCapsule(bubble: mappedBubble.bubble!)
-                            .offset(CGSize(width: mappedBubble.x, height: mappedBubble.y))
-                    }
+        ZoomingScrollView {
+            ZStack(alignment: .topLeading) {
+                Image(uiImage: UIImage(imageLiteralResourceName: "square-grid"))
+                    .resizable()
+                    .scaledToFit()
+                    .gesture(addBubble)
+                ForEach(mappedBubbles) {mappedBubble in
+                    BubbleCapsule(bubble: mappedBubble.bubble!)
+                        .offset(CGSize(width: mappedBubble.x, height: mappedBubble.y))
                 }
             }
         }
