@@ -26,7 +26,7 @@ struct CharacterEditSheet: View {
             }
         }
         
-        NavigationStack() {
+        NavigationStack {
             VStack {
                 BubbleEditSheet(bubble: character)
                 DisplayElementButton(text: "Factions", display: $character.displayFactions)

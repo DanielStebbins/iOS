@@ -76,7 +76,7 @@ struct HeaderView : View {
         HStack {
             Text(title)
             Spacer()
-            Button(action:{toggle.toggle()}) {
+            Button(action: { toggle.toggle() }) {
                 Image(systemName: "plus")
             }
         }

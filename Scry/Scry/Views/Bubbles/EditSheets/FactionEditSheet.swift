@@ -26,7 +26,7 @@ struct FactionEditSheet: View {
             }
         }
         
-        NavigationStack() {
+        NavigationStack {
             VStack {
                 BubbleEditSheet(bubble: faction)
                 DisplayElementButton(text: "Members", display: $faction.displayMembers)

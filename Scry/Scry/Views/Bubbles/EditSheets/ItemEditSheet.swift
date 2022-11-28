@@ -26,7 +26,7 @@ struct ItemEditSheet: View {
             }
         }
         
-        NavigationStack() {
+        NavigationStack {
             VStack {
                 BubbleEditSheet(bubble: item)
                 DisplayElementButton(text: "Locations", display: $item.displayLocations)
