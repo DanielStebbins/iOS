@@ -9,11 +9,14 @@ import SwiftUI
 import PDFKit
 
 struct MapView: View {
-    @Environment(\.managedObjectContext) var context
     @ObservedObject var map: Map
-    var mappedBubbles: [MappedBubble] { map.mappedBubbles!.allObjects as! [MappedBubble] }
+    var width: CGFloat
+    
+    @Environment(\.managedObjectContext) var context
     
     var body: some View {
+        let mappedBubbles: [MappedBubble] = map.mappedBubbles!.allObjects as! [MappedBubble]
+        
         let addBubble = SpatialTapGesture()
             .onEnded { value in
                 let bubble = Character(context: context)
@@ -35,13 +38,13 @@ struct MapView: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFit()
-                    .gesture(addBubble)
                 ForEach(mappedBubbles) {mappedBubble in
                     BubbleCapsule(bubble: mappedBubble.bubble!)
                         .position(x: mappedBubble.x, y: mappedBubble.y)
                 }
             }
         }
+        .gesture(addBubble)
     }
 }
 

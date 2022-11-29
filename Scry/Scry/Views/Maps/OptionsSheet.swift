@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OptionsSheet: View {
-    @Binding var map: Map
+    @ObservedObject var map: Map
     
     @EnvironmentObject var manager: Manager
     @Environment(\.managedObjectContext) var context

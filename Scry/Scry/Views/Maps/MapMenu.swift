@@ -24,7 +24,7 @@ struct MapMenu: View {
                 Button(action: { manager.selectedMap = map }) {
                     Text(map.name!)
                 }
-                .background(.red)
+                .buttonStyle(.borderedProminent)
             }
         }
         .frame(width: width)

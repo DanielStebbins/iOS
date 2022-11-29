@@ -30,7 +30,6 @@ struct MainView: View {
             }
         }
         
-        
         let drag = DragGesture()
             .onEnded {
                 if $0.translation.width < -30 {
@@ -44,8 +43,8 @@ struct MainView: View {
             NavigationStack {
                 ZStack(alignment: .leading) {
                     Color.clear
-                    if let map = manager.selectedMap {
-                        MapView(map: map)
+                    if manager.selectedMap != nil {
+                        MapView(map: manager.selectedMap!, width: geometry.size.width)
                             .disabled(showMenu)
                     }
                     else {
@@ -63,7 +62,7 @@ struct MainView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .sheet(item: $sheet) {item in
                     switch item {
-                    case .options: OptionsSheet(map: Binding($manager.selectedMap)!)
+                    case .options: OptionsSheet(map: manager.selectedMap!)
                     }
                 }
                 .toolbar { menuButton }
