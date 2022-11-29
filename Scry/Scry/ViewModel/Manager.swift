@@ -8,7 +8,8 @@
 import CoreData
 
 class Manager: ObservableObject {
-    let container : NSPersistentContainer
+    let container: NSPersistentContainer
+    @Published var selectedMap: Map?
     
     init() {
         container = NSPersistentContainer(name: "Bubbles")
@@ -17,5 +18,8 @@ class Manager: ObservableObject {
                 print("Error: \(error.localizedDescription)")
             }
         }
+        let maps = try! container.viewContext.fetch(NSFetchRequest(entityName: "Map"))
+        guard !maps.isEmpty else { return }
+        selectedMap = maps[0] as? Map
     }
 }

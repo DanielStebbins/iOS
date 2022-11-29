@@ -11,9 +11,10 @@ import SwiftUI
 struct ScryApp: App {
     @StateObject var manager = Manager()
     @Environment(\.scenePhase) var scenePhase
+    
     var body: some Scene {
         WindowGroup {
-            MapView(map: Map(context: manager.container.viewContext))
+            MainView()
                 .environmentObject(manager)
                 .environment(\.managedObjectContext, manager.container.viewContext)
                 .onChange(of: scenePhase) { newValue in

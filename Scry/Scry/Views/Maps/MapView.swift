@@ -5,32 +5,46 @@
 //  Created by Thomas Stebbins on 11/23/22.
 //
 
-// If the PDF view doesn't work for some reason in the future, try this UIKit solution:
-// https://stackoverflow.com/questions/58341820/isnt-there-an-easy-way-to-pinch-to-zoom-in-an-image-in-swiftui
-
 import SwiftUI
 import PDFKit
 
 struct MapView: View {
     @ObservedObject var map: Map
+    var width: CGFloat
+    
+    @Environment(\.managedObjectContext) var context
+    
     var body: some View {
-        PhotoDetailView(image: map.image != nil ? UIImage(data: map.image!)! : UIImage(imageLiteralResourceName: "square-grid"))
+        let mappedBubbles: [MappedBubble] = map.mappedBubbles!.allObjects as! [MappedBubble]
+        
+        let addBubble = SpatialTapGesture()
+            .onEnded { value in
+                let bubble = Character(context: context)
+                bubble.name = "Test"
+                bubble.red = Color.randomDark
+                bubble.green = Color.randomDark
+                bubble.blue = Color.randomDark
+                let mappedBubble = MappedBubble(context: context)
+                mappedBubble.bubble = bubble
+                mappedBubble.x = value.location.x
+                mappedBubble.y = value.location.y
+                map.addToMappedBubbles(mappedBubble)
+            }
+        
+        let uiImage = map.image == nil ? UIImage(imageLiteralResourceName: "square-grid") : UIImage(data: map.image!)!
+        
+        ZoomingScrollView {
+            ZStack(alignment: .leading) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .scaledToFit()
+                ForEach(mappedBubbles) {mappedBubble in
+                    BubbleCapsule(bubble: mappedBubble.bubble!)
+                        .position(x: mappedBubble.x, y: mappedBubble.y)
+                }
+            }
+        }
+        .gesture(addBubble)
     }
 }
 
-struct PhotoDetailView: UIViewRepresentable {
-    let image: UIImage
-
-    func makeUIView(context: Context) -> PDFView {
-        let view = PDFView()
-        view.document = PDFDocument()
-        guard let page = PDFPage(image: image) else { return view }
-        view.document?.insert(page, at: 0)
-        view.autoScales = true
-        return view
-    }
-
-    func updateUIView(_ uiView: PDFView, context: Context) {
-        // empty
-    }
-}
