@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct AddMapSheet: View {
+    @EnvironmentObject var manager: Manager
     @Environment(\.managedObjectContext) var context
     @Environment (\.dismiss) private var dismiss
+    
     @State var name: String = ""
     @State var image: Data?
     
@@ -26,6 +28,7 @@ struct AddMapSheet: View {
                     let map = Map(context: context)
                     map.name = name
                     map.image = image
+                    manager.selectedMap = map
                     dismiss()
                 }
             }

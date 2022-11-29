@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct MapMenu: View {
+    var width: CGFloat
+    
+    @EnvironmentObject var manager: Manager
     @Environment(\.managedObjectContext) var context
     @State var showAddMapSheet: Bool = false
-    
+
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var maps: FetchedResults<Map>
     
     var body: some View {
@@ -18,12 +21,14 @@ struct MapMenu: View {
             HeaderView(title: "Maps", toggle: $showAddMapSheet)
                 .padding()
             ForEach(maps) {map in
-                Text(map.name!)
-                    .background(.red)
+                Button(action: { manager.selectedMap = map }) {
+                    Text(map.name!)
+                }
+                .background(.red)
             }
         }
-        .frame(width: 200)
-        .background(.gray)
+        .frame(width: width)
+        .background(.gray, ignoresSafeAreaEdges: [])
         .sheet(isPresented: $showAddMapSheet) {
             AddMapSheet()
         }

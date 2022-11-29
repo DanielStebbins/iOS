@@ -8,7 +8,24 @@
 import SwiftUI
 
 struct OptionsSheet: View {
+    @Binding var map: Map
+    
+    @EnvironmentObject var manager: Manager
+    @Environment(\.managedObjectContext) var context
+    @Environment (\.dismiss) private var dismiss
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            VStack {
+                TextField("Name", text: Binding($map.name)!)
+                    .multilineTextAlignment(.center)
+                    .bold()
+                    .italic()
+                    .font(.headline)
+                PhotoPickerView(selection: $map.image)
+            }
+            .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
+            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: { context.delete(map); manager.selectedMap = nil }).toolbarItem }
+        }
     }
 }
