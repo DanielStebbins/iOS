@@ -15,7 +15,8 @@ struct MapView: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let mappedBubbles: [MappedBubble] = map.mappedBubbles!.allObjects as! [MappedBubble]
+        let bubbleSet: NSSet = map.mappedBubbles ?? NSSet()
+        let mappedBubbles: [MappedBubble] = bubbleSet.allObjects as! [MappedBubble]
         
         let addBubble = SpatialTapGesture()
             .onEnded { value in

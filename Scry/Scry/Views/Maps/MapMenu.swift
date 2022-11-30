@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct MapMenu: View {
+    @ObservedObject var story: Story
     var width: CGFloat
-    
-    @EnvironmentObject var manager: Manager
     @Environment(\.managedObjectContext) var context
     @State var showAddMapSheet: Bool = false
-
-    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var maps: FetchedResults<Map>
     
     var body: some View {
+        let maps = story.maps!.allObjects as! [Map]
+        let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
+        
         ScrollView {
             HeaderView(title: "Maps", toggle: $showAddMapSheet)
                 .padding()
-            ForEach(maps) {map in
-                Button(action: { manager.selectedMap = map }) {
+            ForEach(sortedMaps) {map in
+                Button(action: { story.displayedMap = map }) {
                     Text(map.name!)
                 }
                 .buttonStyle(.borderedProminent)
@@ -30,7 +30,7 @@ struct MapMenu: View {
         .frame(width: width)
         .background(.gray, ignoresSafeAreaEdges: [])
         .sheet(isPresented: $showAddMapSheet) {
-            AddMapSheet()
+            AddMapSheet(story: story)
         }
     }
 }

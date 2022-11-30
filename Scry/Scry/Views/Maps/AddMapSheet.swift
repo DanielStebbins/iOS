@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddMapSheet: View {
-    @EnvironmentObject var manager: Manager
+    var story: Story
     @Environment(\.managedObjectContext) var context
     @Environment (\.dismiss) private var dismiss
     
@@ -28,7 +28,8 @@ struct AddMapSheet: View {
                     let map = Map(context: context)
                     map.name = name
                     map.image = image
-                    manager.selectedMap = map
+                    story.addToMaps(map)
+                    story.displayedMap = map
                     dismiss()
                 }
             }

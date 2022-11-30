@@ -14,7 +14,7 @@ struct ScryApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView(story: manager.story)
                 .environmentObject(manager)
                 .environment(\.managedObjectContext, manager.container.viewContext)
                 .onChange(of: scenePhase) { newValue in
