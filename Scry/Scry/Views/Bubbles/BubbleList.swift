@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct BubbleList: View {
-    @EnvironmentObject var manager: Manager
-    
     var body: some View {
         NavigationStack {
             List {
@@ -18,7 +16,8 @@ struct BubbleList: View {
                 ListSection<Item>()
                 ListSection<Location>()
             }
-            .listStyle(.plain)
+            .background(Color.red, ignoresSafeAreaEdges: .all)
+//            .listStyle(.plain)
             .padding()
             .navigationTitle("Bubble List")
             .navigationDestination(for: Character.self) {value in
@@ -34,6 +33,7 @@ struct BubbleList: View {
                 LocationView(location: value)
             }
         }
+        .background(Color.red, ignoresSafeAreaEdges: .all)
     }
 }
 
@@ -66,6 +66,7 @@ struct ListSection<T>: View where T: Bubble {
         } header: {
             HeaderView(title: String(describing: T.self), toggle: $isAdding)
         }
+        .listRowBackground(Color.background)
     }
 }
 

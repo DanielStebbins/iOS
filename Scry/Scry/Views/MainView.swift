@@ -51,9 +51,8 @@ struct MainView: View {
         GeometryReader { geometry in
             NavigationStack {
                 ZStack(alignment: .leading) {
-                    Color.clear
                     if story.displayedMap != nil {
-                        MapView(map: story.displayedMap!, width: geometry.size.width)
+                        ScrollingMapView(map: story.displayedMap!)
                             .disabled(showMapMenu)
                     }
                     else {
@@ -67,8 +66,8 @@ struct MainView: View {
                             .gesture(drag)
                             .zIndex(1)
                     }
-                    
                 }
+                .background(Color.background)
                 .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
                     switch item {
                     case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap)

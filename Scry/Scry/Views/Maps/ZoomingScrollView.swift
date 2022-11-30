@@ -24,11 +24,13 @@ struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
         scrollView.minimumZoomScale = 1
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.backgroundColor = UIColor(Color.mapBackground)
 
         let hostedView = context.coordinator.hostingController.view!
         hostedView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         hostedView.frame = scrollView.bounds
         scrollView.addSubview(hostedView)
+        hostedView.backgroundColor = UIColor(Color.mapBackground)
         return scrollView
     }
 
