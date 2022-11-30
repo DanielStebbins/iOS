@@ -13,21 +13,18 @@ struct ItemView: View {
     @State var isEditing = false
     
     var body: some View {
-        ScrollView {
-            BubbleView(bubble: item, isEditing: $isEditing)
-            if item.displayLocations {
-                CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
+        BubbleView(bubble: item, isEditing: $isEditing) {
+            VStack {
+                if item.displayLocations {
+                    CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
+                }
+                if item.displayCharacters {
+                    CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters)
+                }
+                if item.displayFactions {
+                    CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions)
+                }
             }
-            if item.displayCharacters {
-                CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters)
-            }
-            if item.displayFactions {
-                CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions)
-            }
-            Spacer()
-        }
-        .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
             ItemEditSheet(item: item, dismissParent: dismiss)
@@ -35,4 +32,4 @@ struct ItemView: View {
         }
     }
 }
-
+    

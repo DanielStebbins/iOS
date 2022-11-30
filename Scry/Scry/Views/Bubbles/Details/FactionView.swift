@@ -13,28 +13,24 @@ struct FactionView: View {
     @State var isEditing: Bool = false
     
     var body: some View {
-        ScrollView {
-            BubbleView(bubble: faction, isEditing: $isEditing)
-            
-            if faction.displayMembers {
-                CapsuleRow<Character>(bubble: faction, title: "Members", bubbles: faction.members!, addFunction: faction.addToMembers)
+        BubbleView(bubble: faction, isEditing: $isEditing) {
+            VStack {
+                if faction.displayMembers {
+                    CapsuleRow<Character>(bubble: faction, title: "Members", bubbles: faction.members!, addFunction: faction.addToMembers)
+                }
+                if faction.displayLocations {
+                    CapsuleRow<Location>(bubble: faction, title: "Locations", bubbles: faction.locations!, addFunction: faction.addToLocations)
+                }
+                if faction.displayItems {
+                    CapsuleRow<Item>(bubble: faction, title: "Items", bubbles: faction.items!, addFunction: faction.addToItems)
+                }
+                if faction.displaySuperfactions {
+                    CapsuleRow<Faction>(bubble: faction, title: "Superfactions", bubbles: faction.superfactions!, addFunction: faction.addToSuperfactions)
+                }
+                if faction.displaySubfactions {
+                    CapsuleRow<Faction>(bubble: faction, title: "Subfactions", bubbles: faction.subfactions!, addFunction: faction.addToSubfactions)
+                }
             }
-            if faction.displayLocations {
-                CapsuleRow<Location>(bubble: faction, title: "Locations", bubbles: faction.locations!, addFunction: faction.addToLocations)
-            }
-            if faction.displayItems {
-                CapsuleRow<Item>(bubble: faction, title: "Items", bubbles: faction.items!, addFunction: faction.addToItems)
-            }
-            if faction.displaySuperfactions {
-                CapsuleRow<Faction>(bubble: faction, title: "Superfactions", bubbles: faction.superfactions!, addFunction: faction.addToSuperfactions)
-            }
-            if faction.displaySubfactions {
-                CapsuleRow<Faction>(bubble: faction, title: "Subfactions", bubbles: faction.subfactions!, addFunction: faction.addToSubfactions)
-            }
-            Spacer()
-        }
-        .onTapGesture {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
             FactionEditSheet(faction: faction, dismissParent: dismiss)
