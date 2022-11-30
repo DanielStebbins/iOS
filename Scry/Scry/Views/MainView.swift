@@ -13,6 +13,7 @@ struct MainView: View {
     @Environment(\.managedObjectContext) var context
     @State var showMenu: Bool = false
     @State var sheet: ShownSheet?
+    @State var newDisplayedMap: Bool = false
     
     var body: some View {
         let menuButton = ToolbarItem(placement: .navigationBarLeading) {
@@ -60,14 +61,23 @@ struct MainView: View {
                 }
                 .navigationTitle(story.displayedMap == nil ? "Select a Map" : story.displayedMap!.name!)
                 .navigationBarTitleDisplayMode(.inline)
-                .sheet(item: $sheet, onDismiss: { story.displayedMap = nil }) {item in
+                .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
                     switch item {
-                    case .options: OptionsSheet(map: story.displayedMap!)
+                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap)
                     }
                 }
                 .toolbar { menuButton }
                 .toolbar { optionsButton }
             }
+        }
+    }
+    
+    func sheetDismiss() {
+        if newDisplayedMap {
+            context.delete(story.displayedMap!)
+            let array = story.maps!.allObjects as! [Map]
+            story.displayedMap = array.min(by: { $0.name! < $1.name! })
+            newDisplayedMap = false
         }
     }
 }

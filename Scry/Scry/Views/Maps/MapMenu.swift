@@ -14,10 +14,13 @@ struct MapMenu: View {
     @State var showAddMapSheet: Bool = false
     
     var body: some View {
+        let maps = story.maps!.allObjects as! [Map]
+        let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
+        
         ScrollView {
             HeaderView(title: "Maps", toggle: $showAddMapSheet)
                 .padding()
-            ForEach(story.maps!.allObjects as! [Map]) {map in
+            ForEach(sortedMaps) {map in
                 Button(action: { story.displayedMap = map }) {
                     Text(map.name!)
                 }

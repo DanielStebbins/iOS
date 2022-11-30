@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OptionsSheet: View {
     @ObservedObject var map: Map
+    @Binding var newMap: Bool
     
     @EnvironmentObject var manager: Manager
     @Environment(\.managedObjectContext) var context
@@ -17,7 +18,7 @@ struct OptionsSheet: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Name", text: Binding($map.name)!)
+                TextField("Name", text: Binding($map.name) ?? Binding.constant("To Stop Crashes on Map Delete"))
                     .multilineTextAlignment(.center)
                     .bold()
                     .italic()
@@ -25,7 +26,7 @@ struct OptionsSheet: View {
                 PhotoPickerView(selection: $map.image)
             }
             .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
-            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: {}).toolbarItem }
+            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: { newMap = true }).toolbarItem }
         }
     }
 }

@@ -28,5 +28,4 @@ class Manager: ObservableObject {
             story = stories[0]
         }
     }
-    
 }
