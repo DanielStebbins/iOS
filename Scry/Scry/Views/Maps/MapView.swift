@@ -46,6 +46,8 @@ struct MapView: View {
             }
         }
         .gesture(addBubble)
+        .navigationTitle(map.name ?? "")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

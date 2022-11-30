@@ -29,9 +29,9 @@ struct BubbleView: View {
                 }
             }
             
-            if bubble.displayNotes {
-                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
-            }
+//            if bubble.displayNotes {
+//                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
+//            }
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

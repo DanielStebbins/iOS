@@ -31,6 +31,14 @@ struct MainView: View {
             .disabled(story.displayedMap == nil)
         }
         
+        let bubbleListButton = ToolbarItem(placement: .navigationBarTrailing) {
+            Button(action: { withAnimation { sheet = .bubbleList } }) {
+                Image(systemName: "list.bullet")
+                    .imageScale(.large)
+            }
+            .disabled(story.displayedMap == nil)
+        }
+        
         let drag = DragGesture()
             .onEnded {
                 if $0.translation.width < -30 {
@@ -49,7 +57,9 @@ struct MainView: View {
                             .disabled(showMenu)
                     }
                     else {
-                        Text("The fighter after the lich casts disintegrate:")
+                        Text("Use the menu at the upper left to add a map!")
+                            .navigationTitle("Add a Map")
+                            .navigationBarTitleDisplayMode(.inline)
                     }
                     if showMenu {
                         MapMenu(story: story, width: geometry.size.width * 0.8)
@@ -59,30 +69,31 @@ struct MainView: View {
                     }
                     
                 }
-                .navigationTitle(story.displayedMap == nil ? "Select a Map" : story.displayedMap!.name!)
-                .navigationBarTitleDisplayMode(.inline)
                 .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
                     switch item {
                     case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap)
+                    case .bubbleList: BubbleList()
                     }
                 }
                 .toolbar { menuButton }
                 .toolbar { optionsButton }
+                .toolbar { bubbleListButton }
             }
         }
     }
     
     func sheetDismiss() {
         if newDisplayedMap {
-            context.delete(story.displayedMap!)
             let array = story.maps!.allObjects as! [Map]
             story.displayedMap = array.min(by: { $0.name! < $1.name! })
             newDisplayedMap = false
+            try? context.save()
         }
     }
 }
 
 enum ShownSheet: String, Identifiable {
     case options
+    case bubbleList
     var id: RawValue { rawValue }
 }

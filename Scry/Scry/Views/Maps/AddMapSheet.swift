@@ -30,6 +30,7 @@ struct AddMapSheet: View {
                     map.image = image
                     story.addToMaps(map)
                     story.displayedMap = map
+                    try? context.save()
                     dismiss()
                 }
             }

@@ -18,7 +18,7 @@ struct OptionsSheet: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Name", text: Binding($map.name) ?? Binding.constant("To Stop Crashes on Map Delete"))
+                TextField("Name", text: Binding($map.name) ?? Binding.constant(""))
                     .multilineTextAlignment(.center)
                     .bold()
                     .italic()
@@ -26,7 +26,7 @@ struct OptionsSheet: View {
                 PhotoPickerView(selection: $map.image)
             }
             .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
-            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: { newMap = true }).toolbarItem }
+            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: { context.delete(map); newMap = true }).toolbarItem }
         }
     }
 }
