@@ -25,7 +25,7 @@ struct OptionsSheet: View {
                 PhotoPickerView(selection: $map.image)
             }
             .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
-            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: { context.delete(map); manager.selectedMap = nil }).toolbarItem }
+            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: {}).toolbarItem }
         }
     }
 }

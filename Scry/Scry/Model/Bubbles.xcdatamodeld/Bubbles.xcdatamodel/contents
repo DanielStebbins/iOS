@@ -50,6 +50,7 @@
     <entity name="Map" representedClassName="Map" syncable="YES" codeGenerationType="class">
         <attribute name="image" optional="YES" attributeType="Binary"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="maps" inverseEntity="Story"/>
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="MappedBubble" inverseName="map" inverseEntity="MappedBubble"/>
     </entity>
     <entity name="MappedBubble" representedClassName="MappedBubble" syncable="YES" codeGenerationType="class">
@@ -57,5 +58,9 @@
         <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="mappedBubbles" inverseEntity="Bubble"/>
         <relationship name="map" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="mappedBubbles" inverseEntity="Map"/>
+    </entity>
+    <entity name="Story" representedClassName="Story" syncable="YES" codeGenerationType="class">
+        <relationship name="displayedMap" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map"/>
+        <relationship name="maps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Map" inverseName="game" inverseEntity="Map"/>
     </entity>
 </model>

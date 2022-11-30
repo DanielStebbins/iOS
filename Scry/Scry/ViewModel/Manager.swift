@@ -9,7 +9,7 @@ import CoreData
 
 class Manager: ObservableObject {
     let container: NSPersistentContainer
-    @Published var selectedMap: Map?
+    let story: Story
     
     init() {
         container = NSPersistentContainer(name: "Bubbles")
@@ -18,8 +18,15 @@ class Manager: ObservableObject {
                 print("Error: \(error.localizedDescription)")
             }
         }
-        let maps = try! container.viewContext.fetch(NSFetchRequest(entityName: "Map"))
-        guard !maps.isEmpty else { return }
-        selectedMap = maps[0] as? Map
+        let fistStoryRequest = NSFetchRequest<Story>(entityName: "Story")
+        fistStoryRequest.fetchLimit = 1
+        let stories = try! container.viewContext.fetch(fistStoryRequest)
+        if stories.isEmpty {
+            story = Story(context: container.viewContext)
+        }
+        else {
+            story = stories[0]
+        }
     }
+    
 }
