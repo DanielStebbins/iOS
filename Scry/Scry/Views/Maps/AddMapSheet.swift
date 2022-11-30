@@ -18,6 +18,12 @@ struct AddMapSheet: View {
     @State var image: Data?
     
     var body: some View {
+        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Dismiss") {
+                    dismiss()
+                }
+            }
+        
         NavigationStack {
             VStack {
                 TextField("Name", text: $name)
@@ -37,7 +43,7 @@ struct AddMapSheet: View {
                     dismiss()
                 }
             }
-            .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
+            .toolbar { dismissButton }
         }
     }
 }

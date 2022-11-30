@@ -10,7 +10,8 @@ import SwiftUI
 struct LocationView: View {
     @ObservedObject var location: Location
     @Environment (\.dismiss) private var dismiss
-    @State var isEditing = false
+    @State var isEditing: Bool = false
+    @State var isDeleted: Bool = false
     
     var body: some View {
         ScrollView {
@@ -30,7 +31,7 @@ struct LocationView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            LocationEditSheet(location: location, dismissDetailView: dismiss)
+            LocationEditSheet(location: location, dismissParent: dismiss)
                 .presentationDetents([.fraction(0.6)])
         }
     }

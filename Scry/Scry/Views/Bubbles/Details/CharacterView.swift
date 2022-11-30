@@ -10,7 +10,7 @@ import SwiftUI
 struct CharacterView: View {
     @ObservedObject var character: Character
     @Environment (\.dismiss) private var dismiss
-    @State var isEditing = false
+    @State var isEditing: Bool = false
     
     var body: some View {
         ScrollView {
@@ -30,7 +30,7 @@ struct CharacterView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            CharacterEditSheet(character: character, dismissDetailView: dismiss)
+            CharacterEditSheet(character: character, dismissParent: dismiss)
                 .presentationDetents([.fraction(0.6)])
         }
     }

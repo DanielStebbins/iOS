@@ -29,6 +29,7 @@ struct BubbleView: View {
                 }
             }
             
+            // Commented because the test bubbles have nil Notes.
 //            if bubble.displayNotes {
 //                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
 //            }

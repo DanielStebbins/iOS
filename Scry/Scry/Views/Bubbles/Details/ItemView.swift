@@ -30,7 +30,7 @@ struct ItemView: View {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
         .sheet(isPresented: $isEditing) {
-            ItemEditSheet(item: item, dismissDetailView: dismiss)
+            ItemEditSheet(item: item, dismissParent: dismiss)
                 .presentationDetents([.fraction(0.6)])
         }
     }

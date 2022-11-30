@@ -30,8 +30,6 @@
 		BA3CF0A6293525FD005753BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A5293525FD005753BE /* MainView.swift */; };
 		BA3CF0AA293529DC005753BE /* AddMapSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A9293529DC005753BE /* AddMapSheet.swift */; };
 		BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AB29353088005753BE /* OptionsSheet.swift */; };
-		BA3CF0AE293531A1005753BE /* DismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AD293531A1005753BE /* DismissButton.swift */; };
-		BA3CF0B029353376005753BE /* DeleteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AF29353376005753BE /* DeleteButton.swift */; };
 		BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3A6291EBEE2004B65EC /* ScryApp.swift */; };
 		BACCB3AB291EBEE3004B65EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AA291EBEE3004B65EC /* Assets.xcassets */; };
 		BACCB3AE291EBEE3004B65EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */; };
@@ -87,8 +85,6 @@
 		BA3CF0A5293525FD005753BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BA3CF0A9293529DC005753BE /* AddMapSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapSheet.swift; sourceTree = "<group>"; };
 		BA3CF0AB29353088005753BE /* OptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSheet.swift; sourceTree = "<group>"; };
-		BA3CF0AD293531A1005753BE /* DismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissButton.swift; sourceTree = "<group>"; };
-		BA3CF0AF29353376005753BE /* DeleteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteButton.swift; sourceTree = "<group>"; };
 		BACCB3A3291EBEE2004B65EC /* Scry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACCB3A6291EBEE2004B65EC /* ScryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryApp.swift; sourceTree = "<group>"; };
 		BACCB3AA291EBEE3004B65EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,8 +184,6 @@
 				BA1D4BE8292452AE0017C9C9 /* TitleView.swift */,
 				257297DE292D6D2D00E6FF05 /* BubbleCapsule.swift */,
 				257297E0292D7E6000E6FF05 /* PhotoPickerView.swift */,
-				BA3CF0AD293531A1005753BE /* DismissButton.swift */,
-				BA3CF0AF29353376005753BE /* DeleteButton.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -435,11 +429,9 @@
 				257297D9292C501700E6FF05 /* FactionEditSheet.swift in Sources */,
 				BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */,
 				BA3CF0A6293525FD005753BE /* MainView.swift in Sources */,
-				BA3CF0AE293531A1005753BE /* DismissButton.swift in Sources */,
 				BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */,
 				BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */,
 				BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */,
-				BA3CF0B029353376005753BE /* DeleteButton.swift in Sources */,
 				BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */,
 				BA1D4BF2292454630017C9C9 /* LocationView.swift in Sources */,
 				BA1D4BE9292452AE0017C9C9 /* TitleView.swift in Sources */,

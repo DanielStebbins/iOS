@@ -16,6 +16,19 @@ struct OptionsSheet: View {
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
+        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Dismiss") {
+                    dismiss()
+                }
+            }
+        
+        let deleteButton = ToolbarItem(placement: .navigationBarLeading) {
+            Button(action: { dismiss(); context.delete(map); newMap = true }) {
+                Image(systemName: "trash")
+                    .imageScale(.large)
+            }
+        }
+        
         NavigationStack {
             VStack {
                 TextField("Name", text: Binding($map.name)!)
@@ -25,8 +38,8 @@ struct OptionsSheet: View {
                     .font(.headline)
                 PhotoPickerView(selection: $map.image)
             }
-            .toolbar { DismissButton(dismiss: dismiss).toolbarItem }
-            .toolbar { DeleteButton(dismiss: dismiss, deleteAction: { context.delete(map); newMap = true }).toolbarItem }
+            .toolbar { dismissButton }
+            .toolbar { deleteButton}
         }
     }
 }
