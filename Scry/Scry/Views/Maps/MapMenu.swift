@@ -10,6 +10,8 @@ import SwiftUI
 struct MapMenu: View {
     @ObservedObject var story: Story
     var width: CGFloat
+    @Binding var shown: Bool
+    
     @Environment(\.managedObjectContext) var context
     @State var showAddMapSheet: Bool = false
     
@@ -21,7 +23,7 @@ struct MapMenu: View {
             HeaderView(title: "Maps", toggle: $showAddMapSheet)
                 .padding()
             ForEach(sortedMaps) {map in
-                Button(action: { story.displayedMap = map }) {
+                Button(action: { withAnimation { shown = false }; story.displayedMap = map }) {
                     Text(map.name!)
                 }
                 .buttonStyle(.borderedProminent)
@@ -30,7 +32,7 @@ struct MapMenu: View {
         .frame(width: width)
         .background(.gray, ignoresSafeAreaEdges: [])
         .sheet(isPresented: $showAddMapSheet) {
-            AddMapSheet(story: story)
+            AddMapSheet(story: story, showMapMenu: $shown)
         }
     }
 }

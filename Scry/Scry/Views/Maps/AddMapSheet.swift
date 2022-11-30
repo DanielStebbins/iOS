@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AddMapSheet: View {
     var story: Story
+    @Binding var showMapMenu: Bool
+    
     @Environment(\.managedObjectContext) var context
     @Environment (\.dismiss) private var dismiss
     
@@ -31,6 +33,7 @@ struct AddMapSheet: View {
                     story.addToMaps(map)
                     story.displayedMap = map
                     try? context.save()
+                    showMapMenu = false
                     dismiss()
                 }
             }

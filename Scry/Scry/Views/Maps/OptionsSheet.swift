@@ -18,7 +18,7 @@ struct OptionsSheet: View {
     var body: some View {
         NavigationStack {
             VStack {
-                TextField("Name", text: Binding($map.name) ?? Binding.constant(""))
+                TextField("Name", text: Binding($map.name)!)
                     .multilineTextAlignment(.center)
                     .bold()
                     .italic()

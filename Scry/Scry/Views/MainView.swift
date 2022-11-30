@@ -11,13 +11,13 @@ struct MainView: View {
     @ObservedObject var story: Story
     
     @Environment(\.managedObjectContext) var context
-    @State var showMenu: Bool = false
+    @State var showMapMenu: Bool = false
     @State var sheet: ShownSheet?
     @State var newDisplayedMap: Bool = false
     
     var body: some View {
         let menuButton = ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: { withAnimation { showMenu.toggle() } }) {
+            Button(action: { withAnimation { showMapMenu.toggle() } }) {
                 Image(systemName: "line.horizontal.3")
                     .imageScale(.large)
             }
@@ -43,7 +43,7 @@ struct MainView: View {
             .onEnded {
                 if $0.translation.width < -30 {
                     withAnimation {
-                        self.showMenu = false
+                        self.showMapMenu = false
                     }
                 }
             }
@@ -54,15 +54,15 @@ struct MainView: View {
                     Color.clear
                     if story.displayedMap != nil {
                         MapView(map: story.displayedMap!, width: geometry.size.width)
-                            .disabled(showMenu)
+                            .disabled(showMapMenu)
                     }
                     else {
                         Text("Use the menu at the upper left to add a map!")
                             .navigationTitle("Add a Map")
                             .navigationBarTitleDisplayMode(.inline)
                     }
-                    if showMenu {
-                        MapMenu(story: story, width: geometry.size.width * 0.8)
+                    if showMapMenu {
+                        MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu)
                             .transition(.move(edge: .leading))
                             .gesture(drag)
                             .zIndex(1)
