@@ -5,7 +5,7 @@
         <attribute name="displayImage" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="displayNotes" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
@@ -48,7 +48,7 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="locations" inverseEntity="Item"/>
     </entity>
     <entity name="Map" representedClassName="Map" syncable="YES" codeGenerationType="class">
-        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="displayedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="displayedMap" inverseEntity="Story"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="maps" inverseEntity="Story"/>

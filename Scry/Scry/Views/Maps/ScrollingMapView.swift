@@ -9,22 +9,28 @@ import SwiftUI
 
 struct ScrollingMapView: View {
     @ObservedObject var map: Map
+    @Binding var showMapMenu: Bool
     
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
         let addBubble = SpatialTapGesture()
             .onEnded { value in
-                let bubble = Character(context: context)
-                bubble.name = "Test"
-                bubble.red = Color.randomDark
-                bubble.green = Color.randomDark
-                bubble.blue = Color.randomDark
-                let mappedBubble = MappedBubble(context: context)
-                mappedBubble.bubble = bubble
-                mappedBubble.x = value.location.x
-                mappedBubble.y = value.location.y
-                map.addToMappedBubbles(mappedBubble)
+                if !showMapMenu {
+                    let bubble = Character(context: context)
+                    bubble.name = "Test"
+                    bubble.red = Color.randomDark
+                    bubble.green = Color.randomDark
+                    bubble.blue = Color.randomDark
+                    let mappedBubble = MappedBubble(context: context)
+                    mappedBubble.bubble = bubble
+                    mappedBubble.x = value.location.x
+                    mappedBubble.y = value.location.y
+                    map.addToMappedBubbles(mappedBubble)
+                }
+                else {
+                    withAnimation { showMapMenu = false }
+                }
             }
         
         ZoomingScrollView {

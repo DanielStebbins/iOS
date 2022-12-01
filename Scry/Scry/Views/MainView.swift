@@ -24,7 +24,7 @@ struct MainView: View {
         }
         
         let optionsButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: { withAnimation { sheet = .options } }) {
+            Button(action: { withAnimation { showMapMenu = false; sheet = .options } }) {
                 Image(systemName: "gearshape")
                     .imageScale(.large)
             }
@@ -32,7 +32,7 @@ struct MainView: View {
         }
         
         let bubbleListButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: { withAnimation { sheet = .bubbleList } }) {
+            Button(action: { withAnimation { showMapMenu = false; sheet = .bubbleList } }) {
                 Image(systemName: "list.bullet")
                     .imageScale(.large)
             }
@@ -52,32 +52,34 @@ struct MainView: View {
             NavigationStack {
                 ZStack(alignment: .leading) {
                     if story.displayedMap != nil {
-                        ScrollingMapView(map: story.displayedMap!)
-                            .disabled(showMapMenu)
+                        ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu)
                     }
                     else {
+                        Color.mapBackground
                         Text("Use the menu at the upper left to add a map!")
+                            .onTapGesture { showMapMenu = false }
                             .navigationTitle("Add a Map")
                             .navigationBarTitleDisplayMode(.inline)
                     }
                     if showMapMenu {
-                        MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu)
+                        MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu, sheet: $sheet)
                             .transition(.move(edge: .leading))
-                            .gesture(drag)
                             .zIndex(1)
                     }
                 }
                 .background(Color.background)
                 .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
                     switch item {
-                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap)
+                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.2)])
                     case .bubbleList: BubbleList()
+                    case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.3)])
                     }
                 }
                 .toolbar { menuButton }
                 .toolbar { optionsButton }
                 .toolbar { bubbleListButton }
             }
+            .gesture(drag)
         }
     }
     
@@ -92,7 +94,6 @@ struct MainView: View {
 }
 
 enum ShownSheet: String, Identifiable {
-    case options
-    case bubbleList
+    case options, bubbleList, addMap
     var id: RawValue { rawValue }
 }

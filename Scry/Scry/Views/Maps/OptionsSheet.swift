@@ -37,6 +37,7 @@ struct OptionsSheet: View {
                     .italic()
                     .font(.headline)
                 PhotoPickerView(selection: $map.image)
+                    .padding()
             }
             .toolbar { dismissButton }
             .toolbar { deleteButton}

@@ -32,6 +32,7 @@ struct AddMapSheet: View {
                     .italic()
                     .font(.headline)
                 PhotoPickerView(selection: $image)
+                    .padding()
                 Button("Submit") {
                     let map = Map(context: context)
                     map.name = name
