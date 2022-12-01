@@ -49,14 +49,14 @@ struct ListSection<T>: View where T: Bubble {
                 let bubble = T(context: context)
                 bubble.name = name
                 if colorScheme == .dark {
-                    bubble.red = Color.randomDark
-                    bubble.green = Color.randomDark
-                    bubble.blue = Color.randomDark
+                    bubble.red = Color.randomDarkComponent
+                    bubble.green = Color.randomDarkComponent
+                    bubble.blue = Color.randomDarkComponent
                 }
                 else {
-                    bubble.red = Color.randomLight
-                    bubble.green = Color.randomLight
-                    bubble.blue = Color.randomLight
+                    bubble.red = Color.randomLightComponent
+                    bubble.green = Color.randomLightComponent
+                    bubble.blue = Color.randomLightComponent
                 }
                 bubble.notes = ""
             }

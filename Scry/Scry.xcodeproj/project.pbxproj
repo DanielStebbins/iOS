@@ -30,6 +30,7 @@
 		BA3CF0A6293525FD005753BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A5293525FD005753BE /* MainView.swift */; };
 		BA3CF0AA293529DC005753BE /* AddMapSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A9293529DC005753BE /* AddMapSheet.swift */; };
 		BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AB29353088005753BE /* OptionsSheet.swift */; };
+		BA49669D29384B7600CB2E44 /* AddBubbleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */; };
 		BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876D2937F89A003A8F9B /* Color+Standards.swift */; };
 		BA6A877029380886003A8F9B /* ScrollingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876F29380886003A8F9B /* ScrollingMapView.swift */; };
 		BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3A6291EBEE2004B65EC /* ScryApp.swift */; };
@@ -87,6 +88,7 @@
 		BA3CF0A5293525FD005753BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BA3CF0A9293529DC005753BE /* AddMapSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapSheet.swift; sourceTree = "<group>"; };
 		BA3CF0AB29353088005753BE /* OptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSheet.swift; sourceTree = "<group>"; };
+		BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBubbleSheet.swift; sourceTree = "<group>"; };
 		BA6A876D2937F89A003A8F9B /* Color+Standards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Standards.swift"; sourceTree = "<group>"; };
 		BA6A876F29380886003A8F9B /* ScrollingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMapView.swift; sourceTree = "<group>"; };
 		BACCB3A3291EBEE2004B65EC /* Scry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scry.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,11 +149,12 @@
 			isa = PBXGroup;
 			children = (
 				257297E7292E8FFF00E6FF05 /* MapView.swift */,
+				BA6A876F29380886003A8F9B /* ScrollingMapView.swift */,
 				BA06BDC1293504BB00A1F497 /* ZoomingScrollView.swift */,
 				BA06BDC329351A1200A1F497 /* MapMenu.swift */,
 				BA3CF0A9293529DC005753BE /* AddMapSheet.swift */,
 				BA3CF0AB29353088005753BE /* OptionsSheet.swift */,
-				BA6A876F29380886003A8F9B /* ScrollingMapView.swift */,
+				BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				25CE8AD8292B2F1B0041394F /* Bubbles.xcdatamodeld in Sources */,
 				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
 				BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */,
+				BA49669D29384B7600CB2E44 /* AddBubbleSheet.swift in Sources */,
 				BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */,
 				BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */,
 				257297E1292D7E6000E6FF05 /* PhotoPickerView.swift in Sources */,
