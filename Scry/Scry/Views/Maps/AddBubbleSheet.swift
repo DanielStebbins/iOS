@@ -9,8 +9,10 @@ import SwiftUI
 
 struct AddBubbleSheet: View {
     let map: Map
-    let x: Double
-    let y: Double
+    
+    // These are bindings to avoid the "sheet variables not getting assigned a value" bug.
+    @Binding var x: Double
+    @Binding var y: Double
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context

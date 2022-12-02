@@ -33,6 +33,7 @@
 		BA49669D29384B7600CB2E44 /* AddBubbleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */; };
 		BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876D2937F89A003A8F9B /* Color+Standards.swift */; };
 		BA6A877029380886003A8F9B /* ScrollingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876F29380886003A8F9B /* ScrollingMapView.swift */; };
+		BA6C0C74293A782600756894 /* Bubble+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6C0C73293A782600756894 /* Bubble+Validate.swift */; };
 		BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3A6291EBEE2004B65EC /* ScryApp.swift */; };
 		BACCB3AB291EBEE3004B65EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AA291EBEE3004B65EC /* Assets.xcassets */; };
 		BACCB3AE291EBEE3004B65EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */; };
@@ -91,6 +92,7 @@
 		BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBubbleSheet.swift; sourceTree = "<group>"; };
 		BA6A876D2937F89A003A8F9B /* Color+Standards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Standards.swift"; sourceTree = "<group>"; };
 		BA6A876F29380886003A8F9B /* ScrollingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMapView.swift; sourceTree = "<group>"; };
+		BA6C0C73293A782600756894 /* Bubble+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bubble+Validate.swift"; sourceTree = "<group>"; };
 		BACCB3A3291EBEE2004B65EC /* Scry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACCB3A6291EBEE2004B65EC /* ScryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryApp.swift; sourceTree = "<group>"; };
 		BACCB3AA291EBEE3004B65EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				25CE8AD6292B2F1A0041394F /* Bubbles.xcdatamodeld */,
+				BA6C0C73293A782600756894 /* Bubble+Validate.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				25CE8AD8292B2F1B0041394F /* Bubbles.xcdatamodeld in Sources */,
 				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
 				BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */,
+				BA6C0C74293A782600756894 /* Bubble+Validate.swift in Sources */,
 				BA49669D29384B7600CB2E44 /* AddBubbleSheet.swift in Sources */,
 				BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */,
 				BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */,

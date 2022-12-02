@@ -37,7 +37,7 @@ struct ScrollingMapView: View {
         .navigationTitle(map.name!)
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showSheet) {
-            AddBubbleSheet(map: map, x: x, y: y)
+            AddBubbleSheet(map: map, x: $x, y: $y)
         }
     }
 }

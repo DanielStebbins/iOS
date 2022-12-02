@@ -36,7 +36,6 @@ struct MainView: View {
                 Image(systemName: "list.bullet")
                     .imageScale(.large)
             }
-            .disabled(story.displayedMap == nil)
         }
         
         let drag = DragGesture()
