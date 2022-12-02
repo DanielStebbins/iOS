@@ -26,6 +26,7 @@ struct MapMenu: View {
                 Spacer()
                 Button(action: { sheet = .addMap; withAnimation { shown = false } }) {
                     Image(systemName: "plus")
+                        .imageScale(.large)
                 }
             }
             .padding()

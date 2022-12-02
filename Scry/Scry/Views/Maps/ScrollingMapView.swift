@@ -22,9 +22,11 @@ struct ScrollingMapView: View {
             Spacer()
             Picker("Tool", selection: $tool) {
                 ForEach(Tool.allCases) {
-                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
+                    Label($0.rawValue, systemImage: $0.imageName).tag($0).imageScale(.large)
                 }
-            }.pickerStyle(.menu)
+            }
+            .pickerStyle(.menu)
+            .disabled(showMapMenu)
             Spacer()
         }
         
