@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct BubbleList: View {
+    @State var search: String = ""
     var body: some View {
         NavigationStack {
             List {
-                ListSection<Character>()
-                ListSection<Faction>()
-                ListSection<Item>()
-                ListSection<Location>()
+                ListSection<Character>(search: $search)
+                ListSection<Faction>(search: $search)
+                ListSection<Item>(search: $search)
+                ListSection<Location>(search: $search)
             }
+            .searchable(text: $search)
             .background(Color.red, ignoresSafeAreaEdges: .all)
-//            .listStyle(.plain)
             .padding()
             .navigationTitle("Bubble List")
             .navigationDestination(for: Character.self) {value in
@@ -38,6 +39,8 @@ struct BubbleList: View {
 }
 
 struct ListSection<T>: View where T: Bubble {
+    @Binding var search: String
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
@@ -61,7 +64,9 @@ struct ListSection<T>: View where T: Bubble {
                 bubble.notes = ""
             }
             ForEach(bubbles) {b in
-                LinkedBubbleCapsule<T>(bubble: b)
+                if search.isEmpty || b.name!.lowercased().contains(search.lowercased()) {
+                    LinkedBubbleCapsule<T>(bubble: b)
+                }
             }
         } header: {
             HeaderView(title: String(describing: T.self), toggle: $isAdding)

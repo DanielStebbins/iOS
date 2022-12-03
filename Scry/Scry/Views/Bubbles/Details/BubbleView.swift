@@ -30,10 +30,9 @@ struct BubbleView<Content>: View where Content: View {
                 }
             }
             
-            // Commented because the test bubbles have nil Notes.
-//            if bubble.displayNotes {
-//                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
-//            }
+            if bubble.displayNotes {
+                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
+            }
             
             content()
             Spacer()
