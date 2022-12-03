@@ -20,6 +20,7 @@ struct MainView: View {
             Button(action: { withAnimation { showMapMenu.toggle() } }) {
                 Image(systemName: "line.horizontal.3")
                     .imageScale(.large)
+                    .padding([.top, .bottom, .trailing])
             }
         }
         
@@ -36,6 +37,7 @@ struct MainView: View {
                 Image(systemName: "list.bullet")
                     .imageScale(.large)
             }
+            .disabled(story.displayedMap == nil)
         }
         
         let drag = DragGesture()
@@ -50,15 +52,17 @@ struct MainView: View {
         GeometryReader { geometry in
             NavigationStack {
                 ZStack(alignment: .leading) {
-                    if story.displayedMap != nil {
-                        ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu)
-                    }
-                    else {
-                        Color.mapBackground
-                        Text("Use the menu at the upper left to add a map!")
-                            .onTapGesture { showMapMenu = false }
-                            .navigationTitle("Add a Map")
-                            .navigationBarTitleDisplayMode(.inline)
+                    ZStack(alignment: .center) {
+                        if story.displayedMap != nil {
+                            ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu)
+                        }
+                        else {
+                            Color.mapBackground
+                            Text("Use the menu at the upper left to add a map!")
+                                .onTapGesture { showMapMenu = false }
+                                .navigationTitle("Add a Map")
+                                .navigationBarTitleDisplayMode(.inline)
+                        }
                     }
                     if showMapMenu {
                         MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu, sheet: $sheet)
@@ -71,7 +75,7 @@ struct MainView: View {
                     switch item {
                     case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.2)])
                     case .bubbleList: BubbleList()
-                    case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.3)])
+                    case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
                     }
                 }
                 .toolbar { menuButton }

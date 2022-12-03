@@ -9,12 +9,9 @@ import SwiftUI
 
 struct BubbleCapsule: View {
     @ObservedObject var bubble: Bubble
-    var font: Font? = .body
     
     var body: some View {
-        Text(bubble.name ?? "No Name")
-            .lineLimit(1)
-            .font(font)
+        Label(bubble.name!, systemImage: bubble.systemImageName!)
             .padding([.leading, .trailing], 7)
             .padding([.top, .bottom], 5)
             .background {

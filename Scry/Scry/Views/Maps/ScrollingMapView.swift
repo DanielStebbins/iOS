@@ -53,6 +53,7 @@ struct ScrollingMapView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showSheet) {
             AddBubbleSheet(map: map, x: $x, y: $y)
+                .presentationDetents([.fraction(0.3)])
         }
         .toolbar { toolbar }
     }

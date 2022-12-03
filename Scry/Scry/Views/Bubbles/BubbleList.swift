@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct BubbleList: View {
+    @Environment (\.dismiss) private var dismiss
+    
     @State var search: String = ""
+    
     var body: some View {
+        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Dismiss") {
+                    dismiss()
+                }
+            }
+        
         NavigationStack {
             List {
                 ListSection<Character>(search: $search)
@@ -21,6 +30,7 @@ struct BubbleList: View {
             .background(Color.red, ignoresSafeAreaEdges: .all)
             .padding()
             .navigationTitle("Bubble List")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Character.self) {value in
                 CharacterView(character: value)
             }
@@ -33,6 +43,7 @@ struct BubbleList: View {
             .navigationDestination(for: Location.self) {value in
                 LocationView(location: value)
             }
+            .toolbar { dismissButton }
         }
         .background(Color.red, ignoresSafeAreaEdges: .all)
     }
@@ -45,6 +56,10 @@ struct ListSection<T>: View where T: Bubble {
     @Environment(\.colorScheme) var colorScheme
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
     @State var isAdding: Bool = false
+    
+    var searchResults: [T] {
+        bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
+    }
     
     var body: some View {
         Section {
@@ -63,29 +78,14 @@ struct ListSection<T>: View where T: Bubble {
                 }
                 bubble.notes = ""
             }
-            ForEach(bubbles) {b in
-                if search.isEmpty || b.name!.lowercased().contains(search.lowercased()) {
-                    LinkedBubbleCapsule<T>(bubble: b)
-                }
+            ForEach(searchResults) {b in
+                LinkedBubbleCapsule<T>(bubble: b)
+                    .labelStyle(.titleOnly)
             }
         } header: {
-            HeaderView(title: String(describing: T.self), toggle: $isAdding)
+            Text(String(describing: T.self))
         }
         .listRowBackground(Color.background)
-    }
-}
-
-struct HeaderView : View {
-    var title : String
-    @Binding var toggle : Bool
-    var body : some View {
-        HStack {
-            Text(title)
-            Spacer()
-            Button(action: { toggle.toggle() }) {
-                Image(systemName: "plus")
-            }
-        }
     }
 }
 

@@ -16,7 +16,9 @@ struct TitleView: View {
     var body: some View {
         HStack {
             Spacer()
-            BubbleCapsule(bubble: bubble, font: .headline)
+            BubbleCapsule(bubble: bubble)
+                .font(.headline)
+                .labelStyle(.titleAndIcon)
             Spacer()
             Button(action:{
                 isEditing.toggle()

@@ -18,11 +18,24 @@ struct AddMapSheet: View {
     @State var image: Data?
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
+        let dismissButton = ToolbarItem(placement: .navigationBarLeading) {
                 Button("Dismiss") {
                     dismiss()
                 }
             }
+        
+        let submitButton = ToolbarItem(placement: .navigationBarTrailing) {
+            Button("Submit") {
+                let map = Map(context: context)
+                map.name = name
+                map.image = image
+                story.addToMaps(map)
+                story.displayedMap = map
+                try? context.save()
+                showMapMenu = false
+                dismiss()
+            }
+        }
         
         NavigationStack {
             VStack {
@@ -31,20 +44,20 @@ struct AddMapSheet: View {
                     .bold()
                     .italic()
                     .font(.headline)
+                    .padding([.leading, .trailing], 7)
+                    .padding([.top, .bottom], 5)
+                    .background {
+                        Capsule()
+                            .fill(Color.accentColor)
+                    }
+                    .padding([.leading, .trailing, .top])
                 PhotoPickerView(selection: $image)
-                    .padding()
-                Button("Submit") {
-                    let map = Map(context: context)
-                    map.name = name
-                    map.image = image
-                    story.addToMaps(map)
-                    story.displayedMap = map
-                    try? context.save()
-                    showMapMenu = false
-                    dismiss()
-                }
+                    .padding([.leading, .trailing, .bottom])
             }
+            .navigationTitle("Create a Map")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar { dismissButton }
+            .toolbar { submitButton }
         }
     }
 }
