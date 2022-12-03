@@ -8,19 +8,29 @@
 import SwiftUI
 
 struct BubbleList: View {
-    @EnvironmentObject var manager: Manager
+    @Environment (\.dismiss) private var dismiss
+    
+    @State var search: String = ""
     
     var body: some View {
+        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Dismiss") {
+                    dismiss()
+                }
+            }
+        
         NavigationStack {
             List {
-                ListSection<Character>()
-                ListSection<Faction>()
-                ListSection<Item>()
-                ListSection<Location>()
+                ListSection<Character>(search: $search)
+                ListSection<Faction>(search: $search)
+                ListSection<Item>(search: $search)
+                ListSection<Location>(search: $search)
             }
-            .listStyle(.plain)
+            .searchable(text: $search)
+            .background(Color.red, ignoresSafeAreaEdges: .all)
             .padding()
             .navigationTitle("Bubble List")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: Character.self) {value in
                 CharacterView(character: value)
             }
@@ -33,15 +43,23 @@ struct BubbleList: View {
             .navigationDestination(for: Location.self) {value in
                 LocationView(location: value)
             }
+            .toolbar { dismissButton }
         }
+        .background(Color.red, ignoresSafeAreaEdges: .all)
     }
 }
 
 struct ListSection<T>: View where T: Bubble {
+    @Binding var search: String
+    
     @Environment(\.managedObjectContext) var context
     @Environment(\.colorScheme) var colorScheme
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
     @State var isAdding: Bool = false
+    
+    var searchResults: [T] {
+        bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
+    }
     
     var body: some View {
         Section {
@@ -49,37 +67,25 @@ struct ListSection<T>: View where T: Bubble {
                 let bubble = T(context: context)
                 bubble.name = name
                 if colorScheme == .dark {
-                    bubble.red = Color.randomDark
-                    bubble.green = Color.randomDark
-                    bubble.blue = Color.randomDark
+                    bubble.red = Color.randomDarkComponent
+                    bubble.green = Color.randomDarkComponent
+                    bubble.blue = Color.randomDarkComponent
                 }
                 else {
-                    bubble.red = Color.randomLight
-                    bubble.green = Color.randomLight
-                    bubble.blue = Color.randomLight
+                    bubble.red = Color.randomLightComponent
+                    bubble.green = Color.randomLightComponent
+                    bubble.blue = Color.randomLightComponent
                 }
                 bubble.notes = ""
             }
-            ForEach(bubbles) {b in
+            ForEach(searchResults) {b in
                 LinkedBubbleCapsule<T>(bubble: b)
+                    .labelStyle(.titleOnly)
             }
         } header: {
-            HeaderView(title: String(describing: T.self), toggle: $isAdding)
+            Text(String(describing: T.self))
         }
-    }
-}
-
-struct HeaderView : View {
-    var title : String
-    @Binding var toggle : Bool
-    var body : some View {
-        HStack {
-            Text(title)
-            Spacer()
-            Button(action: { toggle.toggle() }) {
-                Image(systemName: "plus")
-            }
-        }
+        .listRowBackground(Color.background)
     }
 }
 

@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct BubbleView: View {
+struct BubbleView<Content>: View where Content: View {
     @ObservedObject var bubble: Bubble
     @Binding var isEditing: Bool
+    let content: () -> Content
     
     var body: some View {
-        VStack {
+        ScrollView {
             if bubble.displayImage {
                 if let image = bubble.image {
                     Image(uiImage: UIImage(data: image)!)
@@ -32,6 +33,9 @@ struct BubbleView: View {
             if bubble.displayNotes {
                 MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
             }
+            
+            content()
+            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

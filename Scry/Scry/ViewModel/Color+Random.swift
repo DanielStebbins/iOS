@@ -8,10 +8,16 @@
 import SwiftUI
 
 extension Color {
-    static var randomLight: Int16 {
+    static var randomLightComponent: Int16 {
         Int16(.random(in: 0.5...1) * 255)
     }
-    static var randomDark: Int16 {
+    static var randomDarkComponent: Int16 {
         Int16(.random(in: 0...0.5) * 255)
+    }
+    static var randomLightColor: Color {
+        Color(red: randomLightComponent, green: randomLightComponent, blue: randomLightComponent)
+    }
+    static var randomDarkColor: Color {
+        Color(red: randomDarkComponent, green: randomDarkComponent, blue: randomDarkComponent)
     }
 }
