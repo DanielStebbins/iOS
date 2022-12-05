@@ -12,6 +12,7 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) var context
     @State var showMapMenu: Bool = false
+    @State var mapMenuPosition: CGFloat = 0.0
     @State var sheet: ShownSheet?
     @State var newDisplayedMap: Bool = false
     
@@ -40,16 +41,25 @@ struct MainView: View {
             .disabled(story.displayedMap == nil)
         }
         
-        let drag = DragGesture()
-            .onEnded {
-                if $0.translation.width < -30 {
-                    withAnimation {
-                        self.showMapMenu = false
+        GeometryReader { geometry in
+            let drag = DragGesture()
+                .onChanged { value in
+//                    mapMenuPosition = min(0, value.location.x - geometry.size.width * 0.8)
+                    mapMenuPosition = min(0, value.translation.width)
+                }
+                .onEnded {
+                    if $0.translation.width < -50 {
+                        withAnimation {
+                            self.showMapMenu = false
+                            mapMenuPosition = 0.0
+                        }
+                    }
+                    else {
+                        withAnimation { self.mapMenuPosition = 0.0 }
                     }
                 }
-            }
         
-        GeometryReader { geometry in
+        
             NavigationStack {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {
@@ -67,6 +77,7 @@ struct MainView: View {
                     if showMapMenu {
                         MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu, sheet: $sheet)
                             .transition(.move(edge: .leading))
+                            .offset(x: mapMenuPosition, y: 0)
                             .zIndex(1)
                     }
                 }
