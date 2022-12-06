@@ -8,16 +8,13 @@
 import SwiftUI
 
 extension Color {
-    var components: (red: CGFloat, green: CGFloat, blue: CGFloat, opacity: CGFloat) {
-        var r: CGFloat = 0.0
-        var g: CGFloat = 0.0
-        var b: CGFloat = 0.0
-        var o: CGFloat = 0.0
-
-        guard UIColor(self).getRed(&r, green: &g, blue: &b, alpha: &o) else {
-            return (0, 0, 0, 0)
-        }
-        return (r, g, b, o)
+    var components: [CGFloat] {
+        UIColor(self).cgColor.components!
+    }
+    
+    var darkness: CGFloat {
+        let c = components
+        return (c[0] + c[1] + c[2]) / 3
     }
     
     init(red: Int16, green: Int16, blue: Int16) {

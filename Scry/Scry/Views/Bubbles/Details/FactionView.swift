@@ -15,19 +15,19 @@ struct FactionView: View {
     var body: some View {
         BubbleView(bubble: faction, isEditing: $isEditing) {
             VStack {
-                if faction.displayMembers {
+                if faction.members!.count != 0 {
                     CapsuleRow<Character>(bubble: faction, title: "Members", bubbles: faction.members!, addFunction: faction.addToMembers)
                 }
-                if faction.displayLocations {
+                if faction.locations!.count != 0 {
                     CapsuleRow<Location>(bubble: faction, title: "Locations", bubbles: faction.locations!, addFunction: faction.addToLocations)
                 }
-                if faction.displayItems {
+                if faction.items!.count != 0 {
                     CapsuleRow<Item>(bubble: faction, title: "Items", bubbles: faction.items!, addFunction: faction.addToItems)
                 }
-                if faction.displaySuperfactions {
+                if faction.superfactions!.count != 0 {
                     CapsuleRow<Faction>(bubble: faction, title: "Superfactions", bubbles: faction.superfactions!, addFunction: faction.addToSuperfactions)
                 }
-                if faction.displaySubfactions {
+                if faction.subfactions!.count != 0 {
                     CapsuleRow<Faction>(bubble: faction, title: "Subfactions", bubbles: faction.subfactions!, addFunction: faction.addToSubfactions)
                 }
             }

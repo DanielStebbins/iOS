@@ -14,25 +14,15 @@ struct BubbleView<Content>: View where Content: View {
     
     var body: some View {
         ScrollView {
-            if bubble.displayImage {
-                if let image = bubble.image {
-                    Image(uiImage: UIImage(data: image)!)
-                        .resizable()
-                        .scaledToFit()
-                        .border(Color(bubble: bubble), width: 2)
-                        .padding()
-                }
-                else {
-                    Image(systemName: "photo")
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
-                }
+            if let image = bubble.image {
+                Image(uiImage: UIImage(data: image)!)
+                    .resizable()
+                    .scaledToFit()
+                    .border(Color(bubble: bubble), width: 2)
+                    .padding()
             }
             
-            if bubble.displayNotes {
-                MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
-            }
+            MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
             
             content()
             Spacer()

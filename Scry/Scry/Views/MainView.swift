@@ -41,10 +41,9 @@ struct MainView: View {
             .disabled(story.displayedMap == nil)
         }
         
-        GeometryReader { geometry in
+
             let drag = DragGesture()
                 .onChanged { value in
-//                    mapMenuPosition = min(0, value.location.x - geometry.size.width * 0.8)
                     mapMenuPosition = min(0, value.translation.width)
                 }
                 .onEnded {
@@ -59,7 +58,7 @@ struct MainView: View {
                     }
                 }
         
-        
+        GeometryReader { geometry in
             NavigationStack {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {

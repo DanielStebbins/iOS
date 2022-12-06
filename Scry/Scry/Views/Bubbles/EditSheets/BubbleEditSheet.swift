@@ -44,9 +44,9 @@ struct BubbleEditSheet<Content>: View where Content: View {
                     }
                 ColorPicker("Choose Color", selection: Binding(get: { Color(bubble: bubble) }, set: {newColor in
                     let components = newColor.components
-                    bubble.red = Int16(components.red * 255)
-                    bubble.green = Int16(components.green * 255)
-                    bubble.blue = Int16(components.blue * 255)
+                    bubble.red = Int16(components[0] * 255)
+                    bubble.green = Int16(components[0] * 255)
+                    bubble.blue = Int16(components[0] * 255)
                 }), supportsOpacity: false)
                 PhotoPickerView(selection: $bubble.image)
                 

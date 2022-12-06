@@ -42,9 +42,9 @@ struct AddBubbleSheet: View {
                 
                 bubble.name = name
                 let components = color.components
-                bubble.red = Int16(components.red * 255)
-                bubble.green = Int16(components.green * 255)
-                bubble.blue = Int16(components.blue * 255)
+                bubble.red = Int16(components[0] * 255)
+                bubble.green = Int16(components[1] * 255)
+                bubble.blue = Int16(components[2] * 255)
                 bubble.image = image
                 bubble.systemImageName = bubbleType.imageName
                 
@@ -62,26 +62,31 @@ struct AddBubbleSheet: View {
         NavigationStack {
             VStack {
                 HStack {
-                    Picker("Bubble Type", selection: $bubbleType) {
-                        ForEach(BubbleType.allCases) {
-                            Label($0.rawValue, systemImage: $0.imageName).tag($0)
-                                .labelStyle(.iconOnly)
+                    HStack {
+                        Picker("Bubble Type", selection: $bubbleType) {
+                            ForEach(BubbleType.allCases) {
+                                Label($0.rawValue, systemImage: $0.imageName).tag($0)
+                                    .labelStyle(.iconOnly)
+                            }
                         }
+                        .tint(color)
+                        .pickerStyle(.menu)
+                        TextField("Name", text: $name)
+                            .bold()
+                            .italic()
+                            .font(.headline)
+                            .foregroundColor(color.darkness < 0.5 ? .white : .black)
                     }
-                    .pickerStyle(.menu)
-                    TextField("Name", text: $name)
-                        .bold()
-                        .italic()
-                        .font(.headline)
-                }
                     .padding([.leading, .trailing], 7)
                     .padding([.top, .bottom], 5)
                     .background {
                         Capsule()
                             .fill(color)
                     }
-                    .padding(.bottom)
-                ColorPicker("Choose Color", selection: $color, supportsOpacity: false)
+                    ColorPicker("", selection: $color, supportsOpacity: false)
+                        .labelsHidden()
+                }
+                .padding(.bottom)
                 PhotoPickerView(selection: $image)
                 Spacer()
             }

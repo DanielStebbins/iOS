@@ -15,13 +15,13 @@ struct ItemView: View {
     var body: some View {
         BubbleView(bubble: item, isEditing: $isEditing) {
             VStack {
-                if item.displayLocations {
+                if item.locations!.count != 0 {
                     CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
                 }
-                if item.displayCharacters {
+                if item.characters!.count != 0 {
                     CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters)
                 }
-                if item.displayFactions {
+                if item.factions!.count != 0 {
                     CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions)
                 }
             }

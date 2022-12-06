@@ -15,7 +15,7 @@ struct PhotoPickerView: View {
     var body: some View {
         PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
             HStack {
-                Text("Choose Image")
+                Text("Image")
                 Spacer()
                 if let image = selection {
                     Image(uiImage: UIImage(data: image)!)
