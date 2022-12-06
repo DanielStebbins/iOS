@@ -8,11 +8,8 @@
 import SwiftUI
 
 struct AddBubbleSheet: View {
-    let map: Map
-    
-    // These are bindings to avoid the "sheet variables not getting assigned a value" bug.
-    @Binding var x: Double
-    @Binding var y: Double
+    @Binding var selectedBubble: Bubble?
+    @Binding var added: Bool
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
@@ -48,11 +45,8 @@ struct AddBubbleSheet: View {
                 bubble.image = image
                 bubble.systemImageName = bubbleType.imageName
                 
-                let mappedBubble = MappedBubble(context: context)
-                mappedBubble.bubble = bubble
-                mappedBubble.x = x
-                mappedBubble.y = y
-                map.addToMappedBubbles(mappedBubble)
+                selectedBubble = bubble
+                added = true
                 
                 try? context.save()
                 dismiss()

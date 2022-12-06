@@ -64,18 +64,6 @@ struct MapMenuRow: View {
                     .foregroundColor(.accentColor)
             }
         }
-//        HStack {
-//            Text(map.name!)
-//                .fontWeight(.heavy)
-//                .foregroundColor(.accentColor)
-//            Spacer()
-//            Image(uiImage: uiImage)
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 50, height: 50)
-//                .clipped()
-//        }
-//        .padding([.leading, .trailing])
     }
 }
 

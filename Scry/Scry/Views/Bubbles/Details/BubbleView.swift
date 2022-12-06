@@ -38,3 +38,25 @@ struct BubbleView<Content>: View where Content: View {
         }
     }
 }
+
+struct TitleView: View {
+    @ObservedObject var bubble: Bubble
+    @Binding var isEditing: Bool
+    @FocusState var titleEdit
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            BubbleCapsule(bubble: bubble)
+                .font(.headline)
+                .labelStyle(.titleAndIcon)
+            Spacer()
+            Button(action:{
+                isEditing.toggle()
+                titleEdit = true
+            }) {
+                Image(systemName: "pencil").imageScale(.large)
+            }
+        }
+    }
+}

@@ -11,9 +11,12 @@ struct ScrollingMapView: View {
     @ObservedObject var map: Map
     @Binding var showMapMenu: Bool
     @State var tool: Tool = .select
-    @State var showSheet: Bool = false
+    @State var sheet: MapShownSheet?
     @State var x: Double = 0.0
     @State var y: Double = 0.0
+    @State var selectedBubble: Bubble?
+    @State var showConfirmation: Bool = false
+    @State var addMappedBubble: Bool = false
     
     @Environment(\.managedObjectContext) var context
     
@@ -36,26 +39,48 @@ struct ScrollingMapView: View {
                     withAnimation { showMapMenu = false }
                 }
                 else if tool == .newBubble {
-                    showSheet = true
+                    sheet = .addBubble
                     x = value.location.x
                     y = value.location.y
                 }
                 else if tool == .linkBubble {
-                    
+                    sheet = .bubbleList
+                    x = value.location.x
+                    y = value.location.y
                 }
+                // Select tool handled on individual bubbles in MapView.
             }
         
         ZoomingScrollView {
-            MapView(map: map)
+            MapView(map: map, selectedBubble: $selectedBubble, selecting: tool == .select, showConfirmation: $showConfirmation)
         }
         .gesture(tap)
         .navigationTitle(map.name!)
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showSheet) {
-            AddBubbleSheet(map: map, x: $x, y: $y)
-                .presentationDetents([.fraction(0.3)])
+        .sheet(item: $sheet, onDismiss: sheetDismiss) {item in
+            switch item {
+            case .addBubble: AddBubbleSheet(selectedBubble: $selectedBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
+            case .bubbleList: SelectionBubbleList(selection: $selectedBubble, selected: $addMappedBubble)
+            case .bubbleDetails: UnknownBubbleView(bubble: Binding($selectedBubble)!)
+            }
         }
         .toolbar { toolbar }
+        .confirmationDialog("", isPresented: $showConfirmation, presenting: selectedBubble) {detail in
+            Button(action: { sheet = .bubbleDetails }) {
+                Text("Show Details")
+            }
+        }
+    }
+    
+    func sheetDismiss() {
+        if addMappedBubble {
+            let mappedBubble = MappedBubble(context: context)
+            mappedBubble.bubble = selectedBubble
+            mappedBubble.x = x
+            mappedBubble.y = y
+            map.addToMappedBubbles(mappedBubble)
+            addMappedBubble = false
+        }
     }
 }
 
@@ -69,4 +94,9 @@ enum Tool: String, Identifiable, CaseIterable {
         case .linkBubble: return "link"
         }
     }
+}
+
+enum MapShownSheet: String, Identifiable {
+    case addBubble, bubbleList, bubbleDetails
+    var id: RawValue { rawValue }
 }

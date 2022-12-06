@@ -9,6 +9,9 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var map: Map
+    @Binding var selectedBubble: Bubble?
+    let selecting: Bool
+    @Binding var showConfirmation: Bool
     
     @Environment(\.managedObjectContext) var context
     
@@ -25,6 +28,12 @@ struct MapView: View {
             ForEach(mappedBubbles) {mappedBubble in
                 BubbleCapsule(bubble: mappedBubble.bubble!)
                     .position(x: mappedBubble.x, y: mappedBubble.y)
+                    .onTapGesture {
+                        if selecting {
+                            selectedBubble = mappedBubble.bubble!
+                            showConfirmation = true
+                        }
+                    }
             }
         }
     }

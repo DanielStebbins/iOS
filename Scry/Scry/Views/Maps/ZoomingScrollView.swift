@@ -5,9 +5,6 @@
 //  Created by Stebbins, Daniel Ross on 11/28/22.
 //
 
-// Referenced jtbandes post for the idea to use a UIScrollView for the map.
-// https://stackoverflow.com/questions/58341820/isnt-there-an-easy-way-to-pinch-to-zoom-in-an-image-in-swiftui
-
 import SwiftUI
 
 struct ZoomingScrollView<T>: UIViewRepresentable where T: View {

@@ -1,13 +1,16 @@
 //
-//  BubbleList.swift
+//  SelectionBubbleList.swift
 //  Scry
 //
-//  Created by Stebbins, Daniel Ross on 11/15/22.
+//  Created by Stebbins, Daniel Ross on 12/5/22.
 //
 
 import SwiftUI
 
-struct BubbleList: View {
+struct SelectionBubbleList: View {
+    @Binding var selection: Bubble?
+    @Binding var selected: Bool
+    
     @Environment (\.dismiss) private var dismiss
     
     @State var search: String = ""
@@ -21,35 +24,26 @@ struct BubbleList: View {
         
         NavigationStack {
             List {
-                ListSection<Character>(search: $search)
-                ListSection<Faction>(search: $search)
-                ListSection<Item>(search: $search)
-                ListSection<Location>(search: $search)
+                SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected)
+                SelectionListSection<Faction>(search: $search, selection: $selection, selected: $selected)
+                SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected)
+                SelectionListSection<Location>(search: $search, selection: $selection, selected: $selected)
             }
             .searchable(text: $search)
             .padding()
-            .navigationTitle("Bubble List")
+            .navigationTitle("Select a Bubble")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationDestination(for: Character.self) {value in
-                CharacterView(character: value)
-            }
-            .navigationDestination(for: Faction.self) {value in
-                FactionView(faction: value)
-            }
-            .navigationDestination(for: Item.self) {value in
-                ItemView(item: value)
-            }
-            .navigationDestination(for: Location.self) {value in
-                LocationView(location: value)
-            }
             .toolbar { dismissButton }
         }
     }
 }
 
-struct ListSection<T>: View where T: Bubble {
+struct SelectionListSection<T>: View where T: Bubble {
     @Binding var search: String
+    @Binding var selection: Bubble?
+    @Binding var selected: Bool
     
+    @Environment (\.dismiss) private var dismiss
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
     
     var searchResults: [T] {
@@ -59,8 +53,10 @@ struct ListSection<T>: View where T: Bubble {
     var body: some View {
         Section {
             ForEach(searchResults) {b in
-                LinkedBubbleCapsule<T>(bubble: b)
-                    .labelStyle(.titleOnly)
+                Button(action: { selection = b; selected = true; dismiss() }) {
+                    BubbleCapsule(bubble: b)
+                        .labelStyle(.titleOnly)
+                }
             }
         } header: {
             Text(String(describing: T.self))
@@ -68,3 +64,4 @@ struct ListSection<T>: View where T: Bubble {
         .listRowBackground(Color.background)
     }
 }
+
