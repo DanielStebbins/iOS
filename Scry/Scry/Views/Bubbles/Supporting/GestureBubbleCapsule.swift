@@ -34,10 +34,13 @@ struct GestureBubbleCapsule: View {
                 }
             }
         
-        BubbleCapsule(bubble: mappedBubble.bubble!)
-            .offset(offset)
-            .position(x: mappedBubble.x, y: mappedBubble.y)
-            .gesture(move)
-            .gesture(tap)
+        // Fixes timing problem on mappedBubble deletion.
+        if let bubble = mappedBubble.bubble {
+            BubbleCapsule(bubble: bubble)
+                .offset(offset)
+                .position(x: mappedBubble.x, y: mappedBubble.y)
+                .gesture(move)
+                .gesture(tap)
+        }
     }
 }

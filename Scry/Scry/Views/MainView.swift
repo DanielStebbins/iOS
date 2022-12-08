@@ -48,13 +48,13 @@ struct MainView: View {
             }
             .onEnded {
                 if $0.translation.width < -50 {
-                    withAnimation {
+                    withAnimation(.linear(duration: 0.25)) {
                         self.showMapMenu = false
                         mapMenuPosition = 0.0
                     }
                 }
                 else {
-                    withAnimation { self.mapMenuPosition = 0.0 }
+                    withAnimation(.linear(duration: 0.25)) { self.mapMenuPosition = 0.0 }
                 }
             }
         
