@@ -15,6 +15,8 @@ struct MapMenu: View {
     
     @Environment(\.managedObjectContext) var context
     
+    @State var searchText: String = ""
+    
     var body: some View {
         let maps = story.maps!.allObjects as! [Map]
         let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
@@ -34,6 +36,7 @@ struct MapMenu: View {
                 MapMenuRow(story: story, map: map, shown: $shown, width: width)
             }
         }
+        .searchable(text: $searchText)
         .frame(width: width)
         .background(Color.background, ignoresSafeAreaEdges: [])
     }
@@ -59,9 +62,14 @@ struct MapMenuRow: View {
                         RoundedRectangle(cornerRadius: width * 0.06)
                             .stroke(Color.accentColor, lineWidth: 2)
                     }
-                Text(map.name!)
-                    .fontWeight(.heavy)
-                    .foregroundColor(.accentColor)
+                if let linkedBubble = map.linkedBubble {
+                    BubbleCapsule(bubble: linkedBubble)
+                }
+                else {
+                    Text(map.name!)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.accentColor)
+                }
             }
         }
     }

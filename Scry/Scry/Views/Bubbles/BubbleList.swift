@@ -13,8 +13,8 @@ struct BubbleList: View {
     @State var search: String = ""
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
@@ -42,7 +42,7 @@ struct BubbleList: View {
             .navigationDestination(for: Location.self) {value in
                 LocationView(location: value)
             }
-            .toolbar { dismissButton }
+            .toolbar { closeButton }
         }
     }
 }

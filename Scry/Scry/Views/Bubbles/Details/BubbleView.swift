@@ -30,33 +30,20 @@ struct BubbleView<Content>: View where Content: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                TitleView(bubble: bubble, isEditing: $isEditing)
+                BubbleCapsule(bubble: bubble)
+                    .font(.headline)
+                    .labelStyle(.titleAndIcon)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { isEditing.toggle() }) {
+                    Image(systemName: "pencil").imageScale(.large)
+                }
             }
         }
         .onTapGesture {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        }
-    }
-}
-
-struct TitleView: View {
-    @ObservedObject var bubble: Bubble
-    @Binding var isEditing: Bool
-    @FocusState var titleEdit
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            BubbleCapsule(bubble: bubble)
-                .font(.headline)
-                .labelStyle(.titleAndIcon)
-            Spacer()
-            Button(action:{
-                isEditing.toggle()
-                titleEdit = true
-            }) {
-                Image(systemName: "pencil").imageScale(.large)
-            }
         }
     }
 }

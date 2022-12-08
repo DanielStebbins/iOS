@@ -32,7 +32,7 @@ struct MainView: View {
             }
             .disabled(story.displayedMap == nil)
         }
-        
+
         let bubbleListButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: { withAnimation { showMapMenu = false; sheet = .bubbleList } }) {
                 Image(systemName: "list.bullet")
@@ -42,21 +42,21 @@ struct MainView: View {
         }
         
 
-            let drag = DragGesture()
-                .onChanged { value in
-                    mapMenuPosition = min(0, value.translation.width)
-                }
-                .onEnded {
-                    if $0.translation.width < -50 {
-                        withAnimation {
-                            self.showMapMenu = false
-                            mapMenuPosition = 0.0
-                        }
-                    }
-                    else {
-                        withAnimation { self.mapMenuPosition = 0.0 }
+        let drag = DragGesture()
+            .onChanged { value in
+                mapMenuPosition = min(0, value.translation.width)
+            }
+            .onEnded {
+                if $0.translation.width < -50 {
+                    withAnimation {
+                        self.showMapMenu = false
+                        mapMenuPosition = 0.0
                     }
                 }
+                else {
+                    withAnimation { self.mapMenuPosition = 0.0 }
+                }
+            }
         
         GeometryReader { geometry in
             NavigationStack {
@@ -83,7 +83,7 @@ struct MainView: View {
                 .background(Color.background)
                 .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
                     switch item {
-                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.2)])
+                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.3)])
                     case .bubbleList: BubbleList()
                     case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
                     }

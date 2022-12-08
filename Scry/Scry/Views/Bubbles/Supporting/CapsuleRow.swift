@@ -14,26 +14,27 @@ struct CapsuleRow<T>: View where T: Bubble {
     var bubbles: NSSet
     let addFunction: (T) -> Void
     
-    private let columns = [GridItem(.adaptive(minimum: 100))]
-    
-    var bubbleList: [T] { bubbles.allObjects as! [T] }
-    var sortedBubbles: [T] { bubbleList.sorted(by: { $0.name! < $1.name! }) }
-    
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(title)
-                BubbleAdder<T>(bubble: bubble, bubbles: bubbles, addFunction: addFunction)
-            }
-            ScrollView(.vertical) {
-                LazyVGrid(columns: columns) {
-                    ForEach(sortedBubbles) { b in
-                        LinkedBubbleCapsule<T>(bubble: b)
+        if bubbles.count != 0 {
+            let columns = [GridItem(.adaptive(minimum: 100))]
+            let bubbleList: [T] = bubbles.allObjects as! [T]
+            let sortedBubbles: [T] = bubbleList.sorted(by: { $0.name! < $1.name! })
+            
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(title)
+                    BubbleAdder<T>(bubble: bubble, bubbles: bubbles, addFunction: addFunction)
+                }
+                ScrollView(.vertical) {
+                    LazyVGrid(columns: columns) {
+                        ForEach(sortedBubbles) { b in
+                            LinkedBubbleCapsule<T>(bubble: b)
+                        }
                     }
                 }
             }
+            .padding()
         }
-        .padding()
     }
 }
 

@@ -48,7 +48,7 @@ struct BubbleEditSheet<Content>: View where Content: View {
                     bubble.green = Int16(components[0] * 255)
                     bubble.blue = Int16(components[0] * 255)
                 }), supportsOpacity: false)
-                PhotoPickerView(selection: $bubble.image)
+                PhotoPickerView(title: "Bubble Image", selection: $bubble.image)
                 
                 DisplayElementButton(text: "Image", display: $bubble.displayImage)
                 DisplayElementButton(text: "Notes", display: $bubble.displayNotes)

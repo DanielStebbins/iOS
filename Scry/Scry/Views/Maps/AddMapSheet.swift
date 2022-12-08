@@ -18,8 +18,8 @@ struct AddMapSheet: View {
     @State var image: Data?
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
@@ -51,12 +51,12 @@ struct AddMapSheet: View {
                             .fill(Color.accentColor)
                     }
                     .padding([.leading, .trailing, .top])
-                PhotoPickerView(selection: $image)
+                PhotoPickerView(title: "Map Image", selection: $image)
                     .padding([.leading, .trailing, .bottom])
             }
             .navigationTitle("Create a Map")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { dismissButton }
+            .toolbar { closeButton }
             .toolbar { submitButton }
         }
     }

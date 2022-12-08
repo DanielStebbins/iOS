@@ -21,7 +21,7 @@ struct ScrollingMapView: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let toolbar = ToolbarItemGroup(placement: .bottomBar) {
+        let bottomToolbar = ToolbarItemGroup(placement: .bottomBar) {
             Spacer()
             Picker("Tool", selection: $tool) {
                 ForEach(Tool.allCases) {
@@ -48,15 +48,28 @@ struct ScrollingMapView: View {
                     x = value.location.x
                     y = value.location.y
                 }
-                // Select tool handled on individual bubbles in MapView.
+                // Select and move tools handled on individual bubbles in MapView.
             }
         
         ZoomingScrollView {
-            MapView(map: map, selectedBubble: $selectedBubble, selecting: tool == .select, showConfirmation: $showConfirmation)
+            MapView(map: map, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showConfirmation)
         }
         .gesture(tap)
-        .navigationTitle(map.name!)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbar { bottomToolbar }
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                if let linkedBubble = map.linkedBubble {
+                    Button(action: {selectedBubble = map.linkedBubble!; sheet = .bubbleDetails}) {
+                        BubbleCapsule(bubble: linkedBubble)
+                            .labelStyle(.titleAndIcon)
+                    }
+                }
+                else {
+                    Text(map.name!)
+                }
+            }
+        }
         .sheet(item: $sheet, onDismiss: sheetDismiss) {item in
             switch item {
             case .addBubble: AddBubbleSheet(selectedBubble: $selectedBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
@@ -64,7 +77,6 @@ struct ScrollingMapView: View {
             case .bubbleDetails: UnknownBubbleView(bubble: Binding($selectedBubble)!)
             }
         }
-        .toolbar { toolbar }
         .confirmationDialog("", isPresented: $showConfirmation, presenting: selectedBubble) {detail in
             Button(action: { sheet = .bubbleDetails }) {
                 Text("Show Details")
@@ -88,13 +100,15 @@ struct ScrollingMapView: View {
 }
 
 enum Tool: String, Identifiable, CaseIterable {
-    case select = "Select", newBubble = "New Bubble", linkBubble = "Existing Bubble"
+    case select = "Select", move = "Move Bubble", newBubble = "New Bubble", linkBubble = "Existing Bubble"
     var id: RawValue { rawValue }
     var imageName: String {
         switch self {
         case .select: return "cursorarrow"
-        case .newBubble: return "plus"
-        case .linkBubble: return "link"
+        case .move: return "dot.arrowtriangles.up.right.down.left.circle"
+        // case .move: return "arrow.up.and.down.and.arrow.left.and.right"
+        case .newBubble: return "plus.circle"
+        case .linkBubble: return "link.circle"
         }
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct MapView: View {
     @ObservedObject var map: Map
     @Binding var selectedBubble: Bubble?
-    let selecting: Bool
+    let tool: Tool
     @Binding var showConfirmation: Bool
     
     @Environment(\.managedObjectContext) var context
@@ -26,14 +26,7 @@ struct MapView: View {
                 .resizable()
                 .scaledToFit()
             ForEach(mappedBubbles) {mappedBubble in
-                BubbleCapsule(bubble: mappedBubble.bubble!)
-                    .position(x: mappedBubble.x, y: mappedBubble.y)
-                    .onTapGesture {
-                        if selecting {
-                            selectedBubble = mappedBubble.bubble!
-                            showConfirmation = true
-                        }
-                    }
+                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
         }
     }

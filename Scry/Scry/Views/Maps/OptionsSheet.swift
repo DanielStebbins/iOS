@@ -15,31 +15,55 @@ struct OptionsSheet: View {
     @Environment(\.managedObjectContext) var context
     @Environment (\.dismiss) private var dismiss
     
+    @State var showSheet: Bool = false
+    
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
         
-        let deleteButton = ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: { dismiss(); context.delete(map); newMap = true }) {
+        let deleteButton = ToolbarItem(placement: .navigationBarTrailing) {
+            Button(role: .destructive, action: { dismiss(); context.delete(map); newMap = true }) {
                 Image(systemName: "trash")
                     .imageScale(.large)
+                    .foregroundColor(.red)
             }
         }
         
         NavigationStack {
             VStack {
-                TextField("Name", text: Binding($map.name)!)
-                    .multilineTextAlignment(.center)
-                    .bold()
-                    .italic()
-                    .font(.headline)
-                PhotoPickerView(selection: $map.image)
-                    .padding()
+                HStack {
+                    Text("Name")
+                    Spacer()
+                    TextField("Name", text: Binding($map.name)!)
+                        .multilineTextAlignment(.trailing)
+                        .bold()
+                        .italic()
+                        .font(.headline)
+                }
+                PhotoPickerView(title: "Map Image", selection: $map.image)
+                HStack {
+                    Text("Linked Bubble")
+                    Spacer()
+                    Button(action: { showSheet = true }) {
+                        if let bubble = map.linkedBubble {
+                            BubbleCapsule(bubble: bubble)
+                        }
+                        else {
+                            Text("None")
+                        }
+                    }
+                }
+                .navigationTitle("Map Options")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .toolbar { dismissButton }
+            .padding()
+            .sheet(isPresented: $showSheet) {
+                SelectionBubbleList(selection: $map.linkedBubble, selected: Binding.constant(false), mappableOnly: true)
+            }
+            .toolbar { closeButton }
             .toolbar { deleteButton}
         }
     }

@@ -21,8 +21,8 @@ struct AddBubbleSheet: View {
     @State var image: Data?
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
@@ -63,7 +63,7 @@ struct AddBubbleSheet: View {
                                     .labelStyle(.iconOnly)
                             }
                         }
-                        .tint(color)
+                        .tint(.white)
                         .pickerStyle(.menu)
                         TextField("Name", text: $name)
                             .bold()
@@ -81,12 +81,12 @@ struct AddBubbleSheet: View {
                         .labelsHidden()
                 }
                 .padding(.bottom)
-                PhotoPickerView(selection: $image)
+                PhotoPickerView(title: "Bubble Image", selection: $image)
                 Spacer()
             }
             .navigationTitle("Create a Bubble")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { dismissButton }
+            .toolbar { closeButton }
             .toolbar { submitButton }
             .padding([.leading, .trailing])
         }

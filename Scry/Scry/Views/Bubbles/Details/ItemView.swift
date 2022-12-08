@@ -15,15 +15,9 @@ struct ItemView: View {
     var body: some View {
         BubbleView(bubble: item, isEditing: $isEditing) {
             VStack {
-                if item.locations!.count != 0 {
-                    CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
-                }
-                if item.characters!.count != 0 {
-                    CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters)
-                }
-                if item.factions!.count != 0 {
-                    CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions)
-                }
+                CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations)
+                CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters)
+                CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions)
             }
         }
         .sheet(isPresented: $isEditing) {

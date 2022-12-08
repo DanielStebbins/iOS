@@ -9,13 +9,15 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPickerView: View {
-    @State private var selectedItem: PhotosPickerItem? = nil
+    let title: String
     @Binding var selection: Data?
+    
+    @State private var selectedItem: PhotosPickerItem? = nil
     
     var body: some View {
         PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
             HStack {
-                Text("Image")
+                Text(title)
                 Spacer()
                 if let image = selection {
                     Image(uiImage: UIImage(data: image)!)

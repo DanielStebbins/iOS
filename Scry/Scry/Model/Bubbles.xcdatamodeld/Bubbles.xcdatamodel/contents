@@ -10,6 +10,7 @@
         <attribute name="notes" attributeType="String" defaultValueString=""/>
         <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="systemImageName" optional="YES" attributeType="String"/>
+        <relationship name="map" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="linkedBubble" inverseEntity="Map"/>
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedBubble" inverseName="bubble" inverseEntity="MappedBubble"/>
     </entity>
     <entity name="Character" representedClassName="Character" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
@@ -53,6 +54,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="displayedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="displayedMap" inverseEntity="Story"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="maps" inverseEntity="Story"/>
+        <relationship name="linkedBubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="map" inverseEntity="Bubble"/>
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedBubble" inverseName="map" inverseEntity="MappedBubble"/>
     </entity>
     <entity name="MappedBubble" representedClassName="MappedBubble" syncable="YES" codeGenerationType="class">

@@ -10,30 +10,40 @@ import SwiftUI
 struct SelectionBubbleList: View {
     @Binding var selection: Bubble?
     @Binding var selected: Bool
+    var mappableOnly: Bool = false
     
     @Environment (\.dismiss) private var dismiss
     
     @State var search: String = ""
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
         
         NavigationStack {
             List {
-                SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected)
+                if mappableOnly {
+                    Button(action: { selection = nil; selected = true; dismiss() }) {
+                        Text("None")
+                    }
+                }
+                if !mappableOnly {
+                    SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected)
+                }
                 SelectionListSection<Faction>(search: $search, selection: $selection, selected: $selected)
-                SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected)
+                if !mappableOnly {
+                    SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected)
+                }
                 SelectionListSection<Location>(search: $search, selection: $selection, selected: $selected)
             }
             .searchable(text: $search)
             .padding()
             .navigationTitle("Select a Bubble")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { dismissButton }
+            .toolbar { closeButton }
         }
     }
 }
