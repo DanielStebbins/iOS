@@ -69,6 +69,9 @@ struct ScrollingMapView: View {
             Button(action: { sheet = .bubbleDetails }) {
                 Text("Show Details")
             }
+            Button(role: .destructive, action: { context.delete(selectedBubble!) }) {
+                Text("Delete")
+            }
         }
     }
     
