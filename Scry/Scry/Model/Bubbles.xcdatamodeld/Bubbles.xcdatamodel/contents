@@ -21,6 +21,17 @@
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="characters" inverseEntity="Item"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="characters" inverseEntity="Location"/>
     </entity>
+    <entity name="DrawnCircle" representedClassName="DrawnCircle" syncable="YES" codeGenerationType="class">
+        <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="opacity" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="radius" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="map" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="drawnCircles" inverseEntity="Map"/>
+    </entity>
     <entity name="Faction" representedClassName="Faction" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
         <attribute name="displayItems" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="displayLocations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -53,6 +64,7 @@
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="displayedBy" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="displayedMap" inverseEntity="Story"/>
+        <relationship name="drawnCircles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DrawnCircle" inverseName="map" inverseEntity="DrawnCircle"/>
         <relationship name="game" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Story" inverseName="maps" inverseEntity="Story"/>
         <relationship name="linkedBubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="map" inverseEntity="Bubble"/>
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedBubble" inverseName="map" inverseEntity="MappedBubble"/>

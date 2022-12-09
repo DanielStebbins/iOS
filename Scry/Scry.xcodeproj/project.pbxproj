@@ -22,6 +22,8 @@
 		BA06BDC429351A1200A1F497 /* MapMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA06BDC329351A1200A1F497 /* MapMenu.swift */; };
 		BA15DAD4293ED46D006646F9 /* SelectionBubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA15DAD3293ED46D006646F9 /* SelectionBubbleList.swift */; };
 		BA15DAD6293EE3F5006646F9 /* UnknownBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA15DAD5293EE3F5006646F9 /* UnknownBubbleView.swift */; };
+		BA1A71F72942A9A900D44B2F /* DrawnCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1A71F62942A9A900D44B2F /* DrawnCircleView.swift */; };
+		BA1A71F92942AC7100D44B2F /* Map+Erase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1A71F82942AC7100D44B2F /* Map+Erase.swift */; };
 		BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BE329244A340017C9C9 /* BubbleList.swift */; };
 		BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BEB292453110017C9C9 /* CharacterView.swift */; };
 		BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BED292453FF0017C9C9 /* FactionView.swift */; };
@@ -83,6 +85,8 @@
 		BA06BDC329351A1200A1F497 /* MapMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapMenu.swift; sourceTree = "<group>"; };
 		BA15DAD3293ED46D006646F9 /* SelectionBubbleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionBubbleList.swift; sourceTree = "<group>"; };
 		BA15DAD5293EE3F5006646F9 /* UnknownBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnknownBubbleView.swift; sourceTree = "<group>"; };
+		BA1A71F62942A9A900D44B2F /* DrawnCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawnCircleView.swift; sourceTree = "<group>"; };
+		BA1A71F82942AC7100D44B2F /* Map+Erase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Map+Erase.swift"; sourceTree = "<group>"; };
 		BA1D4BE329244A340017C9C9 /* BubbleList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleList.swift; sourceTree = "<group>"; };
 		BA1D4BEB292453110017C9C9 /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
 		BA1D4BED292453FF0017C9C9 /* FactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactionView.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 		257297E5292E8FE300E6FF05 /* Maps */ = {
 			isa = PBXGroup;
 			children = (
+				BA1A71F62942A9A900D44B2F /* DrawnCircleView.swift */,
 				257297E7292E8FFF00E6FF05 /* MapView.swift */,
 				BA6A876F29380886003A8F9B /* ScrollingMapView.swift */,
 				BA06BDC1293504BB00A1F497 /* ZoomingScrollView.swift */,
@@ -277,6 +282,7 @@
 			children = (
 				25CE8AD6292B2F1A0041394F /* Bubbles.xcdatamodeld */,
 				BA6C0C73293A782600756894 /* Bubble+Validate.swift */,
+				BA1A71F82942AC7100D44B2F /* Map+Erase.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -444,7 +450,9 @@
 				BA3CF0AA293529DC005753BE /* AddMapSheet.swift in Sources */,
 				BACCB3D2291EBF68004B65EC /* LinkedBubbleCapsule.swift in Sources */,
 				257297E8292E8FFF00E6FF05 /* MapView.swift in Sources */,
+				BA1A71F72942A9A900D44B2F /* DrawnCircleView.swift in Sources */,
 				25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */,
+				BA1A71F92942AC7100D44B2F /* Map+Erase.swift in Sources */,
 				25CE8AD5292AFF9E0041394F /* DisplayElementButton.swift in Sources */,
 				257297DD292C572600E6FF05 /* LocationEditSheet.swift in Sources */,
 				257297DF292D6D2D00E6FF05 /* BubbleCapsule.swift in Sources */,

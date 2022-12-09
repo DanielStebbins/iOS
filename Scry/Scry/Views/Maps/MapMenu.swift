@@ -15,12 +15,11 @@ struct MapMenu: View {
     
     @Environment(\.managedObjectContext) var context
     
-    @State var searchText: String = ""
+//    @State var searchText: String = ""
     
     var body: some View {
         let maps = story.maps!.allObjects as! [Map]
         let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
-        
         ScrollView {
             HStack {
                 Text("Maps")
@@ -33,10 +32,12 @@ struct MapMenu: View {
             }
             .padding()
             ForEach(sortedMaps) {map in
-                MapMenuRow(story: story, map: map, shown: $shown, width: width)
+//                if searchText == "" || (map.linkedBubble != nil && map.linkedBubble!.name!.contains(searchText)) || (map.linkedBubble == nil && map.name!.contains(searchText)) {
+                    MapMenuRow(story: story, map: map, shown: $shown, width: width)
+//                }
             }
         }
-        .searchable(text: $searchText)
+//        .searchable(text: $searchText, placement: .toolbar)
         .frame(width: width)
         .background(Color.background, ignoresSafeAreaEdges: [])
     }
@@ -50,7 +51,7 @@ struct MapMenuRow: View {
     
     var body: some View {
         let uiImage = map.image == nil ? UIImage(imageLiteralResourceName: "square-grid") : UIImage(data: map.image!)!
-        Button(action: { story.displayedMap = map; withAnimation { shown = false } }) {
+        Button(action: { story.displayedMap = map; withAnimation(.linear(duration: 0.25)) { shown = false } }) {
             ZStack {
                 Image(uiImage: uiImage)
                     .resizable()

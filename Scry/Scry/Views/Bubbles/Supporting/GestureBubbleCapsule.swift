@@ -10,7 +10,7 @@ import SwiftUI
 struct GestureBubbleCapsule: View {
     @ObservedObject var mappedBubble: MappedBubble
     @Binding var selectedBubble: Bubble?
-    let tool: Tool
+    var tool: Tool
     @Binding var showConfirmation: Bool
     
     @State private var offset = CGSize.zero
@@ -18,12 +18,16 @@ struct GestureBubbleCapsule: View {
     var body: some View {
         let move = DragGesture()
             .onChanged {value in
-                offset = value.translation
+                if tool == .move {
+                    offset = value.translation
+                }
             }
             .onEnded { value in
-                mappedBubble.x += value.translation.width
-                mappedBubble.y += value.translation.height
-                offset = CGSize.zero
+                if tool == .move {
+                    mappedBubble.x += value.translation.width
+                    mappedBubble.y += value.translation.height
+                    offset = CGSize.zero
+                }
             }
         
         let tap = TapGesture()

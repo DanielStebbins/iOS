@@ -11,6 +11,8 @@ struct MainView: View {
     @ObservedObject var story: Story
     
     @Environment(\.managedObjectContext) var context
+    @Environment(\.dismissSearch) private var dismissSearch
+    
     @State var showMapMenu: Bool = false
     @State var mapMenuPosition: CGFloat = 0.0
     @State var sheet: ShownSheet?
@@ -18,7 +20,7 @@ struct MainView: View {
     
     var body: some View {
         let menuButton = ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: { withAnimation { showMapMenu.toggle() } }) {
+            Button(action: { mapMenuButtonAction() }) {
                 Image(systemName: "line.horizontal.3")
                     .imageScale(.large)
                     .padding([.top, .bottom, .trailing])
@@ -26,7 +28,7 @@ struct MainView: View {
         }
         
         let optionsButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: { withAnimation { showMapMenu = false; sheet = .options } }) {
+            Button(action: { closeMapMenu(); sheet = .options  }) {
                 Image(systemName: "gearshape")
                     .imageScale(.large)
             }
@@ -34,7 +36,7 @@ struct MainView: View {
         }
 
         let bubbleListButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: { withAnimation { showMapMenu = false; sheet = .bubbleList } }) {
+            Button(action: { closeMapMenu(); sheet = .bubbleList }) {
                 Image(systemName: "list.bullet")
                     .imageScale(.large)
             }
@@ -48,10 +50,7 @@ struct MainView: View {
             }
             .onEnded {
                 if $0.translation.width < -50 {
-                    withAnimation(.linear(duration: 0.25)) {
-                        self.showMapMenu = false
-                        mapMenuPosition = 0.0
-                    }
+                    closeMapMenu()
                 }
                 else {
                     withAnimation(.linear(duration: 0.25)) { self.mapMenuPosition = 0.0 }
@@ -93,6 +92,24 @@ struct MainView: View {
                 .toolbar { bubbleListButton }
             }
             .gesture(drag)
+        }
+    }
+    
+    func mapMenuButtonAction() {
+        if !showMapMenu {
+            withAnimation(.linear(duration: 0.25)) {
+                showMapMenu = true
+            }
+        }
+        else {
+            closeMapMenu()
+        }
+    }
+    
+    func closeMapMenu() {
+        withAnimation(.linear(duration: 0.25)) {
+            showMapMenu = false
+            mapMenuPosition = 0.0
         }
     }
     

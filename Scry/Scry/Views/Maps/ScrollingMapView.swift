@@ -18,10 +18,13 @@ struct ScrollingMapView: View {
     @State var showConfirmation: Bool = false
     @State var addMappedBubble: Bool = false
     
+    @State var drawColor: Color = Color.randomDarkColor
+    @State var drawSize: Size = .medium
+    
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let bottomToolbar = ToolbarItemGroup(placement: .bottomBar) {
+        let defaultToolbar = ToolbarItemGroup(placement: .bottomBar) {
             Spacer()
             Picker("Tool", selection: $tool) {
                 ForEach(Tool.allCases) {
@@ -33,10 +36,71 @@ struct ScrollingMapView: View {
             Spacer()
         }
         
+        let drawToolbar = ToolbarItemGroup(placement: .bottomBar) {
+            ColorPicker("", selection: $drawColor)
+                .labelsHidden()
+                .disabled(showMapMenu)
+            Spacer()
+            Picker("Tool", selection: $tool) {
+                ForEach(Tool.allCases) {
+                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
+                }
+            }
+            .pickerStyle(.menu)
+            .disabled(showMapMenu)
+            Spacer()
+            Menu {
+                ForEach(Size.allCases, id:\.self) { size in
+                    Button(action: { drawSize = size }) {
+                        HStack {
+                            Text(size.rawValue)
+                            if drawSize == size {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
+            } label: {
+                Image(systemName: "circle.fill")
+                    .imageScale(drawSize.imageScale)
+            }
+            .disabled(showMapMenu)
+        }
+        
+        let eraseToolbar = ToolbarItemGroup(placement: .bottomBar) {
+            Spacer()
+            Picker("Tool", selection: $tool) {
+                ForEach(Tool.allCases) {
+                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
+                }
+            }
+            .pickerStyle(.menu)
+            .disabled(showMapMenu)
+            Spacer()
+            Menu {
+                ForEach(Size.allCases, id:\.self) { size in
+                    Button(action: { drawSize = size }) {
+                        HStack {
+                            Text(size.rawValue)
+                            if drawSize == size {
+                                Image(systemName: "checkmark")
+                            }
+                        }
+                    }
+                    .buttonStyle(.bordered)
+                }
+            } label: {
+                Image(systemName: "circle.fill")
+                    .imageScale(drawSize.imageScale)
+            }
+            .disabled(showMapMenu)
+        }
+        
         let tap = SpatialTapGesture()
             .onEnded { value in
                 if showMapMenu {
-                    withAnimation { showMapMenu = false }
+                    withAnimation(.linear(duration: 0.25)) { showMapMenu = false }
                 }
                 else if tool == .newBubble {
                     sheet = .addBubble
@@ -51,12 +115,42 @@ struct ScrollingMapView: View {
                 // Select and move tools handled on individual bubbles in MapView.
             }
         
+        let drag = DragGesture()
+            .onChanged { value in
+                if tool == .draw {
+                    let circle = DrawnCircle(context: context)
+                    circle.x = value.location.x
+                    circle.y = value.location.y
+                    let components = drawColor.components
+                    circle.radius = drawSize.radius
+                    circle.red = Int16(components[0] * 255)
+                    circle.green = Int16(components[1] * 255)
+                    circle.blue = Int16(components[2] * 255)
+                    circle.opacity = components[3]
+                    circle.created = Date.now
+                    map.addToDrawnCircles(circle)
+                }
+                else if tool == .erase {
+                    map.erase(context: context, x: value.location.x, y: value.location.y, eraseRadius: 10)
+                }
+            }
+            .onEnded { value in
+
+            }
+        
         ZoomingScrollView {
             MapView(map: map, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showConfirmation)
+                .gesture(drag)
         }
         .gesture(tap)
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar { bottomToolbar }
+        .toolbar {
+            switch(tool) {
+            case .draw: drawToolbar
+            case .erase: eraseToolbar
+            default: defaultToolbar
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if let linkedBubble = map.linkedBubble {
@@ -100,15 +194,35 @@ struct ScrollingMapView: View {
 }
 
 enum Tool: String, Identifiable, CaseIterable {
-    case select = "Select", move = "Move Bubble", newBubble = "New Bubble", linkBubble = "Existing Bubble"
+    case select = "Select", move = "Move Bubble", newBubble = "New Bubble", linkBubble = "Existing Bubble", draw = "Draw", erase = "Erase"
     var id: RawValue { rawValue }
     var imageName: String {
         switch self {
         case .select: return "cursorarrow"
-        case .move: return "dot.arrowtriangles.up.right.down.left.circle"
-        // case .move: return "arrow.up.and.down.and.arrow.left.and.right"
+        case .move: return "arrow.up.and.down.and.arrow.left.and.right"
         case .newBubble: return "plus.circle"
         case .linkBubble: return "link.circle"
+        case .draw: return "scribble.variable"
+        case .erase: return "trash.square"
+        }
+    }
+}
+
+enum Size: String, Identifiable, CaseIterable {
+    case small = "Small", medium = "Medium", large = "Large"
+    var id: RawValue { rawValue }
+    var imageScale: Image.Scale {
+        switch self {
+        case .small: return Image.Scale.small
+        case .medium: return Image.Scale.medium
+        case .large: return Image.Scale.large
+        }
+    }
+    var radius: Double {
+        switch self {
+        case .small: return 5
+        case .medium: return 10
+        case .large: return 20
         }
     }
 }
