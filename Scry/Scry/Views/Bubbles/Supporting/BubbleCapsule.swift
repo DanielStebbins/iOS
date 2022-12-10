@@ -9,15 +9,30 @@ import SwiftUI
 
 struct BubbleCapsule: View {
     @ObservedObject var bubble: Bubble
-
+    var size: Double = 20
+    
     var body: some View {
-        Label(bubble.name!, systemImage: bubble.systemImageName!)
-            .padding([.leading, .trailing], 7)
-            .padding([.top, .bottom], 5)
-            .background {
-                Capsule()
-                    .fill(Color(bubble: bubble))
+        HStack {
+            if let image = bubble.image {
+                Image(uiImage: UIImage(data: image)!)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: size, height: size)
+                    .clipped()
+                    .cornerRadius(size / 2)
             }
-            .foregroundColor(Color(UIColor.label))
+            else {
+                Image(systemName: bubble.systemImageName!)
+            }
+            Text(bubble.name!)
+                .padding(.leading, -8 + size / 15)
+        }
+        .padding([.leading, .trailing], size / 2)
+        .padding([.top, .bottom], size / 4)
+        .background {
+            Capsule()
+                .fill(Color(bubble: bubble))
+        }
+        .foregroundColor(Color(UIColor.label))
     }
 }

@@ -46,7 +46,7 @@ struct ToolbarMapView: View {
             Spacer()
         }
         
-        GestureMapView(map: map, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() }, tool: tool, drawColor: drawColor, drawSize: drawSize)
+        GestureMapView(map: map, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() }, selectedMappedBubble: $selectedMappedBubble, tool: tool, drawColor: drawColor, drawSize: drawSize)
             .toolbar {
                 switch(tool) {
                 case .draw: drawToolbar
@@ -81,6 +81,7 @@ struct ToolPicker: View {
             }
         }
         .onChange(of: tool) { _ in
+            print("here")
             selectedMappedBubble = nil
         }
         .pickerStyle(.menu)

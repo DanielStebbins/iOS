@@ -64,7 +64,7 @@ struct MainView: View {
                         drag.translation.width < -50 ? closeMapMenu() : openMapMenu()
                     }
                     else {
-                        drag.translation.width > 50 ? openMapMenu() : closeMapMenu()
+                        drag.translation.width > 70 ? openMapMenu() : closeMapMenu()
                     }
                 }
             

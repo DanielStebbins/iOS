@@ -18,8 +18,8 @@ struct MapView: View {
     var body: some View {
         let uiImage = map.image == nil ? UIImage(imageLiteralResourceName: "square-grid") : UIImage(data: map.image!)!
         
-        let bubbleSet: NSSet = map.mappedBubbles!
-        let mappedBubbles: [MappedBubble] = bubbleSet.allObjects as! [MappedBubble]
+        let mappedBubbles: [MappedBubble] = map.mappedBubbles!.allObjects as! [MappedBubble]
+        let sortedBubbles: [MappedBubble] = mappedBubbles.sorted(by: { $0.lastChanged! < $1.lastChanged! })
         
         let drawnCircles: [DrawnCircle] = map.drawnCircles!.allObjects as! [DrawnCircle]
         let sortedCircles: [DrawnCircle] = drawnCircles.sorted(by: { $0.created! < $1.created! })
@@ -33,7 +33,9 @@ struct MapView: View {
             ForEach(sortedCircles) { circle in
                 DrawnCircleView(circle: circle)
             }
-            ForEach(mappedBubbles) { mappedBubble in
+            
+            // I separated out the selectedMappedBubble so it will be displayed on top.
+            ForEach(sortedBubbles) { mappedBubble in
                 GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
         }

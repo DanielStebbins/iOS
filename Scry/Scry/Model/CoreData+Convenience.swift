@@ -47,3 +47,13 @@ extension Location {
         self.setup(name: name, color: color, image: image, systemImageName: "location")
     }
 }
+
+extension MappedBubble {
+    convenience init(context: NSManagedObjectContext, bubble: Bubble, x: Double, y: Double) {
+        self.init(context: context)
+        self.bubble = bubble
+        self.x = x
+        self.y = y
+        self.lastChanged = Date.now
+    }
+}

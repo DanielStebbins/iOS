@@ -11,6 +11,7 @@ struct GestureMapView: View {
     @ObservedObject var map: Map
     let mapMenuFullyOpen: Bool
     let closeMapMenu: () -> Void
+    @Binding var selectedMappedBubble: MappedBubble?
     let tool: Tool
     let drawColor: Color
     let drawSize: Size
@@ -18,11 +19,11 @@ struct GestureMapView: View {
     @State var sheet: MapShownSheet?
     @State var x: Double = 0.0
     @State var y: Double = 0.0
-    @State var selectedMappedBubble: MappedBubble?
     @State var sheetBubble: Bubble?
     @State var showSelectConfirmation: Bool = false
     @State var addMappedBubble: Bool = false
     @State var showAddConfirmation: Bool = false
+    @State var previousResize: Double = -1.0
 
     @Environment(\.managedObjectContext) var context
     
@@ -62,8 +63,16 @@ struct GestureMapView: View {
         
         let resize = MagnificationGesture()
             .onChanged { change in
-                let new = selectedMappedBubble!.fontSize * pow(Double(change), 0.5)
+                var c = Double(change)
+                if previousResize != -1.0 {
+                    c /= previousResize
+                }
+                let new = selectedMappedBubble!.fontSize * c
                 selectedMappedBubble!.fontSize = min(max(new, 5), 40)
+                previousResize = Double(change)
+            }
+            .onEnded { _ in
+                previousResize = -1.0
             }
         
         
@@ -71,6 +80,7 @@ struct GestureMapView: View {
             MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
                 .gesture(tool == .select && selectedMappedBubble != nil ? resize : nil)
                 .gesture(tool == .draw || tool == .erase ? drag : nil)
+//                .gesture(tool == .select ? tap : nil)
                 .gesture(tap)
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -114,10 +124,7 @@ struct GestureMapView: View {
     
     func sheetDismiss() {
         if addMappedBubble {
-            let mappedBubble = MappedBubble(context: context)
-            mappedBubble.bubble = sheetBubble
-            mappedBubble.x = x
-            mappedBubble.y = y
+            let mappedBubble = MappedBubble(context: context, bubble: sheetBubble!, x: x, y: y)
             map.addToMappedBubbles(mappedBubble)
             addMappedBubble = false
         }

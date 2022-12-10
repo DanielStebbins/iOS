@@ -32,6 +32,7 @@ struct GestureBubbleCapsule: View {
             .onEnded {
                 if !selected {
                     selectedMappedBubble = mappedBubble
+                    mappedBubble.lastChanged = Date.now
                 }
                 else {
                     selectedMappedBubble = nil
@@ -40,14 +41,13 @@ struct GestureBubbleCapsule: View {
         
         let press = LongPressGesture(maximumDistance: 3)
             .onEnded { _ in
-                print("here")
                 showConfirmation = true
             }
         
         // If condition fixes timing problem on mappedBubble deletion.
         if let bubble = mappedBubble.bubble {
             // Never touch the order of these view modifiers. Will cause crashing.
-            BubbleCapsule(bubble: bubble)
+            BubbleCapsule(bubble: bubble, size: mappedBubble.fontSize)
                 .overlay {
                     if selected {
                         Capsule()
@@ -59,7 +59,7 @@ struct GestureBubbleCapsule: View {
                 .offset(offset)
                 .gesture(selected ? move : nil)
                 .gesture(tool == .select ? tap : nil)
-                .simultaneousGesture(press)
+                .simultaneousGesture(selected ? press : nil)
         }
     }
 }
