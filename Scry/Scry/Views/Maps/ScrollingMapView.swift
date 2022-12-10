@@ -10,6 +10,8 @@ import SwiftUI
 struct ScrollingMapView: View {
     @ObservedObject var map: Map
     @Binding var showMapMenu: Bool
+    var closeMapMenu: () -> Void
+    
     @State var tool: Tool = .select
     @State var sheet: MapShownSheet?
     @State var x: Double = 0.0
@@ -100,7 +102,7 @@ struct ScrollingMapView: View {
         let tap = SpatialTapGesture()
             .onEnded { value in
                 if showMapMenu {
-                    withAnimation(.linear(duration: 0.25)) { showMapMenu = false }
+                    closeMapMenu()
                 }
                 else if tool == .newBubble {
                     sheet = .addBubble
@@ -140,7 +142,7 @@ struct ScrollingMapView: View {
         
         ZoomingScrollView {
             MapView(map: map, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showConfirmation)
-                .gesture(drag)
+                .gesture(tool == .draw || tool == .erase ? drag : nil)
         }
         .gesture(tap)
         .navigationBarTitleDisplayMode(.inline)

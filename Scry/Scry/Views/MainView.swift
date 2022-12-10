@@ -14,6 +14,7 @@ struct MainView: View {
     @Environment(\.dismissSearch) private var dismissSearch
     
     @State var showMapMenu: Bool = false
+    @State var mapMenuFullyOpen: Bool = false
     @State var mapMenuPosition: CGFloat = 0.0
     @State var sheet: ShownSheet?
     @State var newDisplayedMap: Bool = false
@@ -42,27 +43,46 @@ struct MainView: View {
             }
             .disabled(story.displayedMap == nil)
         }
-        
 
-        let drag = DragGesture()
-            .onChanged { value in
-                mapMenuPosition = min(0, value.translation.width)
-            }
-            .onEnded {
-                if $0.translation.width < -50 {
-                    closeMapMenu()
-                }
-                else {
-                    withAnimation(.linear(duration: 0.25)) { self.mapMenuPosition = 0.0 }
-                }
-            }
-        
         GeometryReader { geometry in
+            let drag = DragGesture()
+                .onChanged { value in
+//                    if value.translation.width < 0 {
+//                        mapMenuPosition = min(0, value.translation.width)
+//                    }
+//                    else {
+//                        mapMenuPosition = max(-geometry.size.width, value.translation.width - geometry.size.width)
+//                    }
+                    if mapMenuFullyOpen{
+                        mapMenuPosition = min(0, value.translation.width)
+                    }
+                    else {
+                        mapMenuPosition = max(-geometry.size.width, value.translation.width - geometry.size.width)
+                    }
+                    
+                    if !showMapMenu {
+                        showMapMenu = true
+                        mapMenuPosition = -geometry.size.width
+                    }
+                }
+                .onEnded {
+                    if !mapMenuFullyOpen && $0.translation.width > 50 {
+//                        withAnimation(.linear(duration: 0.25)) { showMapMenu = true }
+                        openMapMenu()
+                    }
+                    if mapMenuFullyOpen && $0.translation.width < -50 {
+                        closeMapMenu()
+                    }
+//                    else {
+//                        openMapMenu()
+//                    }
+                }
+            
             NavigationStack {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {
                         if story.displayedMap != nil {
-                            ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu)
+                            ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu, closeMapMenu: { closeMapMenu() })
                         }
                         else {
                             Color.mapBackground
@@ -80,16 +100,16 @@ struct MainView: View {
                     }
                 }
                 .background(Color.background)
-                .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
-                    switch item {
-                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.3)])
-                    case .bubbleList: BubbleList()
-                    case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
-                    }
-                }
                 .toolbar { menuButton }
                 .toolbar { optionsButton }
                 .toolbar { bubbleListButton }
+            }
+            .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
+                switch item {
+                case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.3)])
+                case .bubbleList: BubbleList()
+                case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
+                }
             }
             .gesture(drag)
         }
@@ -97,13 +117,19 @@ struct MainView: View {
     
     func mapMenuButtonAction() {
         if !showMapMenu {
-            withAnimation(.linear(duration: 0.25)) {
-                showMapMenu = true
-            }
+            openMapMenu()
         }
         else {
             closeMapMenu()
         }
+    }
+    
+    func openMapMenu() {
+        withAnimation(.linear(duration: 0.25)) {
+            showMapMenu = true
+            mapMenuPosition = 0.0
+        }
+        mapMenuFullyOpen = true
     }
     
     func closeMapMenu() {
@@ -111,6 +137,7 @@ struct MainView: View {
             showMapMenu = false
             mapMenuPosition = 0.0
         }
+        mapMenuFullyOpen = false
     }
     
     func sheetDismiss() {

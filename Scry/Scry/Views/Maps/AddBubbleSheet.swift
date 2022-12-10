@@ -31,20 +31,11 @@ struct AddBubbleSheet: View {
             Button("Submit") {
                 var bubble: Bubble
                 switch(bubbleType) {
-                case .character: bubble = Character(context: context)
-                case .faction: bubble = Faction(context: context)
-                case .item: bubble = Item(context: context)
-                case .location: bubble = Location(context: context)
+                case .character: bubble = Character(context: context, name: name, color: color, image: image)
+                case .faction: bubble = Faction(context: context, name: name, color: color, image: image)
+                case .item: bubble = Item(context: context, name: name, color: color, image: image)
+                case .location: bubble = Location(context: context, name: name, color: color, image: image)
                 }
-                
-                bubble.name = name
-                let components = color.components
-                bubble.red = Int16(components[0] * 255)
-                bubble.green = Int16(components[1] * 255)
-                bubble.blue = Int16(components[2] * 255)
-                bubble.image = image
-                bubble.systemImageName = bubbleType.imageName
-                
                 selectedBubble = bubble
                 added = true
                 

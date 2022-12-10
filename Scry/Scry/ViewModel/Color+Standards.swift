@@ -8,6 +8,6 @@
 import SwiftUI
 
 extension Color {
-    static let background = Color("background")
+    static let background = Color("Background")
     static let mapBackground = Color("MapBackground")
 }

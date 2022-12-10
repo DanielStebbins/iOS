@@ -30,6 +30,7 @@
 		BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BEF292454430017C9C9 /* ItemView.swift */; };
 		BA1D4BF2292454630017C9C9 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BF1292454630017C9C9 /* LocationView.swift */; };
 		BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA1D4BF52924566F0017C9C9 /* Color+Bubble.swift */; };
+		BA20869E29440F3000178BA8 /* CoreData+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA20869D29440F3000178BA8 /* CoreData+Convenience.swift */; };
 		BA3CF0A6293525FD005753BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A5293525FD005753BE /* MainView.swift */; };
 		BA3CF0AA293529DC005753BE /* AddMapSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A9293529DC005753BE /* AddMapSheet.swift */; };
 		BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AB29353088005753BE /* OptionsSheet.swift */; };
@@ -93,6 +94,7 @@
 		BA1D4BEF292454430017C9C9 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		BA1D4BF1292454630017C9C9 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 		BA1D4BF52924566F0017C9C9 /* Color+Bubble.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Bubble.swift"; sourceTree = "<group>"; };
+		BA20869D29440F3000178BA8 /* CoreData+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreData+Convenience.swift"; sourceTree = "<group>"; };
 		BA3CF0A5293525FD005753BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BA3CF0A9293529DC005753BE /* AddMapSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapSheet.swift; sourceTree = "<group>"; };
 		BA3CF0AB29353088005753BE /* OptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSheet.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				25CE8AD6292B2F1A0041394F /* Bubbles.xcdatamodeld */,
 				BA6C0C73293A782600756894 /* Bubble+Validate.swift */,
 				BA1A71F82942AC7100D44B2F /* Map+Erase.swift */,
+				BA20869D29440F3000178BA8 /* CoreData+Convenience.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -451,6 +454,7 @@
 				BACCB3D2291EBF68004B65EC /* LinkedBubbleCapsule.swift in Sources */,
 				257297E8292E8FFF00E6FF05 /* MapView.swift in Sources */,
 				BA1A71F72942A9A900D44B2F /* DrawnCircleView.swift in Sources */,
+				BA20869E29440F3000178BA8 /* CoreData+Convenience.swift in Sources */,
 				25CE8ACF292AF85F0041394F /* Color+Components.swift in Sources */,
 				BA1A71F92942AC7100D44B2F /* Map+Erase.swift in Sources */,
 				25CE8AD5292AFF9E0041394F /* DisplayElementButton.swift in Sources */,

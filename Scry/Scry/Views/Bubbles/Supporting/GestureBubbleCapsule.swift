@@ -18,24 +18,18 @@ struct GestureBubbleCapsule: View {
     var body: some View {
         let move = DragGesture()
             .onChanged {value in
-                if tool == .move {
-                    offset = value.translation
-                }
+                offset = value.translation
             }
             .onEnded { value in
-                if tool == .move {
-                    mappedBubble.x += value.translation.width
-                    mappedBubble.y += value.translation.height
-                    offset = CGSize.zero
-                }
+                mappedBubble.x += value.translation.width
+                mappedBubble.y += value.translation.height
+                offset = CGSize.zero
             }
         
         let tap = TapGesture()
             .onEnded {
-                if tool == .select {
-                    selectedBubble = mappedBubble.bubble!
-                    showConfirmation = true
-                }
+                selectedBubble = mappedBubble.bubble!
+                showConfirmation = true
             }
         
         // Fixes timing problem on mappedBubble deletion.
@@ -43,8 +37,8 @@ struct GestureBubbleCapsule: View {
             BubbleCapsule(bubble: bubble)
                 .offset(offset)
                 .position(x: mappedBubble.x, y: mappedBubble.y)
-                .gesture(move)
-                .gesture(tap)
+                .gesture(tool == .move ? move : nil)
+                .gesture(tool == .select ? tap : nil)
         }
     }
 }

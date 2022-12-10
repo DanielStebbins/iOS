@@ -28,9 +28,11 @@ struct MapMenu: View {
                 Button(action: { sheet = .addMap; withAnimation { shown = false } }) {
                     Image(systemName: "plus")
                         .imageScale(.large)
+                        .padding(10)
                 }
+                .padding(.trailing, -10)
             }
-            .padding()
+            .padding([.top, .leading, .trailing])
             ForEach(sortedMaps) {map in
 //                if searchText == "" || (map.linkedBubble != nil && map.linkedBubble!.name!.contains(searchText)) || (map.linkedBubble == nil && map.name!.contains(searchText)) {
                     MapMenuRow(story: story, map: map, shown: $shown, width: width)
@@ -38,6 +40,7 @@ struct MapMenu: View {
             }
         }
 //        .searchable(text: $searchText, placement: .toolbar)
+        .padding([.leading, .trailing])
         .frame(width: width)
         .background(Color.background, ignoresSafeAreaEdges: [])
     }

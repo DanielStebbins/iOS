@@ -13,9 +13,10 @@ struct CapsuleRow<T>: View where T: Bubble {
     let title: String
     var bubbles: NSSet
     let addFunction: (T) -> Void
+    var shown: Bool = false
     
     var body: some View {
-        if bubbles.count != 0 {
+        if bubbles.count != 0 || shown {
             let columns = [GridItem(.adaptive(minimum: 100))]
             let bubbleList: [T] = bubbles.allObjects as! [T]
             let sortedBubbles: [T] = bubbleList.sorted(by: { $0.name! < $1.name! })

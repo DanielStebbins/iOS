@@ -15,9 +15,9 @@ struct LocationView: View {
     var body: some View {
         BubbleView(bubble: location, isEditing: $isEditing) {
             VStack {
-                CapsuleRow<Faction>(bubble: location, title: "Factions", bubbles: location.factions!, addFunction: location.addToFactions)
-                CapsuleRow<Character>(bubble: location, title: "Characters", bubbles: location.characters!, addFunction: location.addToCharacters)
-                CapsuleRow<Item>(bubble: location, title: "Items", bubbles: location.items!, addFunction: location.addToItems)
+                CapsuleRow<Faction>(bubble: location, title: "Factions", bubbles: location.factions!, addFunction: location.addToFactions, shown: location.displayFactions)
+                CapsuleRow<Character>(bubble: location, title: "Characters", bubbles: location.characters!, addFunction: location.addToCharacters, shown: location.displayCharacters)
+                CapsuleRow<Item>(bubble: location, title: "Items", bubbles: location.items!, addFunction: location.addToItems, shown: location.displayItems)
             }
         }
         .sheet(isPresented: $isEditing) {

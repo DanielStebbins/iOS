@@ -2,7 +2,6 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="21G217" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Bubble" representedClassName="Bubble" syncable="YES" codeGenerationType="class">
         <attribute name="blue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="displayImage" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="displayNotes" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
@@ -14,9 +13,9 @@
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedBubble" inverseName="bubble" inverseEntity="MappedBubble"/>
     </entity>
     <entity name="Character" representedClassName="Character" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <attribute name="displayFactions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayItems" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayLocations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="displayFactions" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayItems" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayLocations" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="members" inverseEntity="Faction"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="characters" inverseEntity="Item"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="characters" inverseEntity="Location"/>
@@ -33,11 +32,11 @@
         <relationship name="map" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="drawnCircles" inverseEntity="Map"/>
     </entity>
     <entity name="Faction" representedClassName="Faction" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <attribute name="displayItems" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayLocations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="displayItems" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayLocations" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="displayMembers" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="displaySubfactions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displaySuperfactions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="displaySubfactions" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displaySuperfactions" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="factions" inverseEntity="Item"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="factions" inverseEntity="Location"/>
         <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="factions" inverseEntity="Character"/>
@@ -45,17 +44,17 @@
         <relationship name="superfactions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="subfactions" inverseEntity="Faction"/>
     </entity>
     <entity name="Item" representedClassName="Item" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <attribute name="displayCharacters" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayFactions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayLocations" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="displayCharacters" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayFactions" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayLocations" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="items" inverseEntity="Character"/>
         <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="items" inverseEntity="Faction"/>
         <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="items" inverseEntity="Location"/>
     </entity>
     <entity name="Location" representedClassName="Location" parentEntity="Bubble" syncable="YES" codeGenerationType="class">
-        <attribute name="displayCharacters" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayFactions" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="displayItems" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="displayCharacters" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayFactions" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="displayItems" optional="YES" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <relationship name="characters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Character" inverseName="locations" inverseEntity="Character"/>
         <relationship name="factions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Faction" inverseName="locations" inverseEntity="Faction"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="locations" inverseEntity="Item"/>
@@ -72,7 +71,7 @@
     <entity name="MappedBubble" representedClassName="MappedBubble" syncable="YES" codeGenerationType="class">
         <attribute name="x" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="y" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Bubble" inverseName="mappedBubbles" inverseEntity="Bubble"/>
+        <relationship name="bubble" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bubble" inverseName="mappedBubbles" inverseEntity="Bubble"/>
         <relationship name="map" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="mappedBubbles" inverseEntity="Map"/>
     </entity>
     <entity name="Story" representedClassName="Story" syncable="YES" codeGenerationType="class">
