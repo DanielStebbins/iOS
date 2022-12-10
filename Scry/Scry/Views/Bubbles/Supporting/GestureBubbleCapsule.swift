@@ -28,16 +28,20 @@ struct GestureBubbleCapsule: View {
         
         let tap = TapGesture()
             .onEnded {
-                selectedBubble = mappedBubble.bubble!
-                showConfirmation = true
+                if selectedBubble != mappedBubble.bubble {
+                    selectedBubble = mappedBubble.bubble!
+                }
+                else {
+                    showConfirmation = true
+                }
             }
         
-        // Fixes timing problem on mappedBubble deletion.
+        // If condition fixes timing problem on mappedBubble deletion.
         if let bubble = mappedBubble.bubble {
             BubbleCapsule(bubble: bubble)
                 .offset(offset)
                 .position(x: mappedBubble.x, y: mappedBubble.y)
-                .gesture(tool == .move ? move : nil)
+                .gesture(selectedBubble == mappedBubble.bubble ? move : nil)
                 .gesture(tool == .select ? tap : nil)
         }
     }

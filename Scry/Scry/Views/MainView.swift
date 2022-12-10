@@ -47,12 +47,6 @@ struct MainView: View {
         GeometryReader { geometry in
             let drag = DragGesture()
                 .onChanged { value in
-//                    if value.translation.width < 0 {
-//                        mapMenuPosition = min(0, value.translation.width)
-//                    }
-//                    else {
-//                        mapMenuPosition = max(-geometry.size.width, value.translation.width - geometry.size.width)
-//                    }
                     if mapMenuFullyOpen{
                         mapMenuPosition = min(0, value.translation.width)
                     }
@@ -67,22 +61,18 @@ struct MainView: View {
                 }
                 .onEnded {
                     if !mapMenuFullyOpen && $0.translation.width > 50 {
-//                        withAnimation(.linear(duration: 0.25)) { showMapMenu = true }
                         openMapMenu()
                     }
                     if mapMenuFullyOpen && $0.translation.width < -50 {
                         closeMapMenu()
                     }
-//                    else {
-//                        openMapMenu()
-//                    }
                 }
             
             NavigationStack {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {
                         if story.displayedMap != nil {
-                            ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu, closeMapMenu: { closeMapMenu() })
+                            ScrollingMapView(map: story.displayedMap!, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() })
                         }
                         else {
                             Color.mapBackground

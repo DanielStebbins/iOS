@@ -30,10 +30,10 @@ struct MapView: View {
             Image(uiImage: uiImage)
                 .resizable()
                 .scaledToFit()
-            ForEach(sortedCircles) {circle in
+            ForEach(sortedCircles) { circle in
                 DrawnCircleView(circle: circle)
             }
-            ForEach(mappedBubbles) {mappedBubble in
+            ForEach(mappedBubbles) { mappedBubble in
                 GestureBubbleCapsule(mappedBubble: mappedBubble, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
         }
