@@ -34,8 +34,14 @@ struct GestureBubbleCapsule: View {
                     selectedMappedBubble = mappedBubble
                 }
                 else {
-                    showConfirmation = true
+                    selectedMappedBubble = nil
                 }
+            }
+        
+        let press = LongPressGesture(maximumDistance: 3)
+            .onEnded { _ in
+                print("here")
+                showConfirmation = true
             }
         
         // If condition fixes timing problem on mappedBubble deletion.
@@ -53,6 +59,7 @@ struct GestureBubbleCapsule: View {
                 .offset(offset)
                 .gesture(selected ? move : nil)
                 .gesture(tool == .select ? tap : nil)
+                .simultaneousGesture(press)
         }
     }
 }
