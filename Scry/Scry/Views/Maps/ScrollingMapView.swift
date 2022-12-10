@@ -91,11 +91,11 @@ struct ScrollingMapView: View {
         
         let resize = MagnificationGesture()
             .onChanged { change in
-                let new = selectedMappedBubble!.fontSize * Double(change)
-                selectedMappedBubble!.fontSize = min(max(new, 7), 30)
+                let new = selectedMappedBubble!.fontSize * pow(Double(change), 0.5)
+                selectedMappedBubble!.fontSize = min(max(new, 5), 40)
             }
         
-        ZoomingScrollView {
+        ZoomingScrollView(zoom: selectedMappedBubble == nil) {
             MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
                 .gesture(tool == .select && selectedMappedBubble != nil ? resize : nil)
                 .gesture(tool == .draw || tool == .erase ? drag : nil)
@@ -223,7 +223,6 @@ enum Tool: String, Identifiable, CaseIterable {
     var imageName: String {
         switch self {
         case .select: return "cursorarrow"
-//        case .move: return "arrow.up.and.down.and.arrow.left.and.right"
         case .addBubble: return "plus.circle"
         case .draw: return "scribble.variable"
         case .erase: return "trash.square"

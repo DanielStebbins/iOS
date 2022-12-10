@@ -7,10 +7,12 @@
 
 import SwiftUI
 
-struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
-    let content: T
+struct ZoomingScrollView<Content>: UIViewRepresentable where Content: View {
+    let content: Content
+    let zoom: Bool
 
-    init(@ViewBuilder content: () -> T) {
+    init(zoom: Bool, @ViewBuilder content: () -> Content) {
+        self.zoom = zoom
         self.content = content()
     }
 
@@ -30,8 +32,9 @@ struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
         hostedView.backgroundColor = UIColor(Color.mapBackground)
         return scrollView
     }
-    
+
     func updateUIView(_ uiScrollView: UIScrollView, context: Context) {
+        uiScrollView.pinchGestureRecognizer!.isEnabled = zoom
         context.coordinator.hostingController.rootView = self.content
         assert(context.coordinator.hostingController.view.superview == uiScrollView)
     }
@@ -41,9 +44,9 @@ struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
     }
 
     class Coordinator: NSObject, UIScrollViewDelegate {
-        var hostingController: UIHostingController<T>
+        var hostingController: UIHostingController<Content>
 
-        init(hostingController: UIHostingController<T>) {
+        init(hostingController: UIHostingController<Content>) {
             self.hostingController = hostingController
         }
 
