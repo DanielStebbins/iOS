@@ -9,13 +9,15 @@ import SwiftUI
 
 struct GestureBubbleCapsule: View {
     @ObservedObject var mappedBubble: MappedBubble
-    @Binding var selectedBubble: Bubble?
+    @Binding var selectedMappedBubble: MappedBubble?
     var tool: Tool
     @Binding var showConfirmation: Bool
     
     @State private var offset = CGSize.zero
     
     var body: some View {
+        let selected: Bool = selectedMappedBubble == mappedBubble
+        
         let move = DragGesture()
             .onChanged {value in
                 offset = value.translation
@@ -28,8 +30,8 @@ struct GestureBubbleCapsule: View {
         
         let tap = TapGesture()
             .onEnded {
-                if selectedBubble != mappedBubble.bubble {
-                    selectedBubble = mappedBubble.bubble!
+                if !selected {
+                    selectedMappedBubble = mappedBubble
                 }
                 else {
                     showConfirmation = true
@@ -38,10 +40,17 @@ struct GestureBubbleCapsule: View {
         
         // If condition fixes timing problem on mappedBubble deletion.
         if let bubble = mappedBubble.bubble {
+            // Never touch the order of these view modifiers. Will cause crashing.
             BubbleCapsule(bubble: bubble)
-                .offset(offset)
+                .overlay {
+                    if selected {
+                        Capsule()
+                            .stroke(Color.accentColor, lineWidth: 2)
+                    }
+                }
                 .position(x: mappedBubble.x, y: mappedBubble.y)
-                .gesture(selectedBubble == mappedBubble.bubble ? move : nil)
+                .offset(offset)
+                .gesture(selected ? move : nil)
                 .gesture(tool == .select ? tap : nil)
         }
     }

@@ -34,7 +34,7 @@
 		BA3CF0A6293525FD005753BE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A5293525FD005753BE /* MainView.swift */; };
 		BA3CF0AA293529DC005753BE /* AddMapSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0A9293529DC005753BE /* AddMapSheet.swift */; };
 		BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AB29353088005753BE /* OptionsSheet.swift */; };
-		BA49669D29384B7600CB2E44 /* AddBubbleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */; };
+		BA49669D29384B7600CB2E44 /* NewBubbleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA49669C29384B7600CB2E44 /* NewBubbleSheet.swift */; };
 		BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876D2937F89A003A8F9B /* Color+Standards.swift */; };
 		BA6A877029380886003A8F9B /* ScrollingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876F29380886003A8F9B /* ScrollingMapView.swift */; };
 		BA6C0C74293A782600756894 /* Bubble+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6C0C73293A782600756894 /* Bubble+Validate.swift */; };
@@ -98,7 +98,7 @@
 		BA3CF0A5293525FD005753BE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BA3CF0A9293529DC005753BE /* AddMapSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMapSheet.swift; sourceTree = "<group>"; };
 		BA3CF0AB29353088005753BE /* OptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSheet.swift; sourceTree = "<group>"; };
-		BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBubbleSheet.swift; sourceTree = "<group>"; };
+		BA49669C29384B7600CB2E44 /* NewBubbleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBubbleSheet.swift; sourceTree = "<group>"; };
 		BA6A876D2937F89A003A8F9B /* Color+Standards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Standards.swift"; sourceTree = "<group>"; };
 		BA6A876F29380886003A8F9B /* ScrollingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMapView.swift; sourceTree = "<group>"; };
 		BA6C0C73293A782600756894 /* Bubble+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bubble+Validate.swift"; sourceTree = "<group>"; };
@@ -168,7 +168,7 @@
 				BA06BDC329351A1200A1F497 /* MapMenu.swift */,
 				BA3CF0A9293529DC005753BE /* AddMapSheet.swift */,
 				BA3CF0AB29353088005753BE /* OptionsSheet.swift */,
-				BA49669C29384B7600CB2E44 /* AddBubbleSheet.swift */,
+				BA49669C29384B7600CB2E44 /* NewBubbleSheet.swift */,
 			);
 			path = Maps;
 			sourceTree = "<group>";
@@ -441,7 +441,7 @@
 				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
 				BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */,
 				BA6C0C74293A782600756894 /* Bubble+Validate.swift in Sources */,
-				BA49669D29384B7600CB2E44 /* AddBubbleSheet.swift in Sources */,
+				BA49669D29384B7600CB2E44 /* NewBubbleSheet.swift in Sources */,
 				BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */,
 				BA1D4BEC292453110017C9C9 /* CharacterView.swift in Sources */,
 				257297E1292D7E6000E6FF05 /* PhotoPickerView.swift in Sources */,

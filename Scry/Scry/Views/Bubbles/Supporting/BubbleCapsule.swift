@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BubbleCapsule: View {
     @ObservedObject var bubble: Bubble
-    
+
     var body: some View {
         Label(bubble.name!, systemImage: bubble.systemImageName!)
             .padding([.leading, .trailing], 7)

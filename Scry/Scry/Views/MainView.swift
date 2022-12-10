@@ -106,7 +106,7 @@ struct MainView: View {
     }
     
     func mapMenuButtonAction() {
-        if !showMapMenu {
+        if !mapMenuFullyOpen {
             openMapMenu()
         }
         else {

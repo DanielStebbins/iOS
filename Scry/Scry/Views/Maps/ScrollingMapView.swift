@@ -16,7 +16,8 @@ struct ScrollingMapView: View {
     @State var sheet: MapShownSheet?
     @State var x: Double = 0.0
     @State var y: Double = 0.0
-    @State var selectedBubble: Bubble?
+    @State var selectedMappedBubble: MappedBubble?
+    @State var sheetBubble: Bubble?
     @State var showSelectConfirmation: Bool = false
     @State var addMappedBubble: Bool = false
     @State var showAddConfirmation: Bool = false
@@ -29,13 +30,8 @@ struct ScrollingMapView: View {
     var body: some View {
         let defaultToolbar = ToolbarItemGroup(placement: .bottomBar) {
             Spacer()
-            Picker("Tool", selection: $tool) {
-                ForEach(Tool.allCases) {
-                    Label($0.rawValue, systemImage: $0.imageName).tag($0).imageScale(.large)
-                }
-            }
-            .pickerStyle(.menu)
-            .disabled(mapMenuFullyOpen)
+            ToolPicker(tool: $tool, selectedMappedBubble: $selectedMappedBubble)
+                .disabled(mapMenuFullyOpen)
             Spacer()
         }
         
@@ -43,13 +39,8 @@ struct ScrollingMapView: View {
             SizePicker(size: $drawSize)
                 .disabled(mapMenuFullyOpen)
             Spacer()
-            Picker("Tool", selection: $tool) {
-                ForEach(Tool.allCases) {
-                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
-                }
-            }
-            .pickerStyle(.menu)
-            .disabled(mapMenuFullyOpen)
+            ToolPicker(tool: $tool, selectedMappedBubble: $selectedMappedBubble)
+                .disabled(mapMenuFullyOpen)
             Spacer()
             ColorPicker("", selection: $drawColor)
                 .labelsHidden()
@@ -60,13 +51,8 @@ struct ScrollingMapView: View {
             SizePicker(size: $drawSize)
                 .disabled(mapMenuFullyOpen)
             Spacer()
-            Picker("Tool", selection: $tool) {
-                ForEach(Tool.allCases) {
-                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
-                }
-            }
-            .pickerStyle(.menu)
-            .disabled(mapMenuFullyOpen)
+            ToolPicker(tool: $tool, selectedMappedBubble: $selectedMappedBubble)
+                .disabled(mapMenuFullyOpen)
             Spacer()
         }
         
@@ -76,7 +62,7 @@ struct ScrollingMapView: View {
                     closeMapMenu()
                 }
                 else if tool == .select {
-                    selectedBubble = nil
+                    selectedMappedBubble = nil
                 }
                 else if tool == .addBubble {
                     x = value.location.x
@@ -110,7 +96,7 @@ struct ScrollingMapView: View {
             }
         
         ZoomingScrollView {
-            MapView(map: map, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
+            MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
                 .gesture(tool == .draw || tool == .erase ? drag : nil)
                 .gesture(tap)
         }
@@ -125,7 +111,7 @@ struct ScrollingMapView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if let linkedBubble = map.linkedBubble {
-                    Button(action: {selectedBubble = map.linkedBubble!; sheet = .bubbleDetails}) {
+                    Button(action: { sheetBubble = map.linkedBubble!; sheet = .bubbleDetails }) {
                         BubbleCapsule(bubble: linkedBubble)
                             .labelStyle(.titleAndIcon)
                     }
@@ -137,21 +123,21 @@ struct ScrollingMapView: View {
         }
         .sheet(item: $sheet, onDismiss: sheetDismiss) {item in
             switch item {
-            case .addBubble: AddBubbleSheet(selectedBubble: $selectedBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
-            case .bubbleList: SelectionBubbleList(selection: $selectedBubble, selected: $addMappedBubble)
-            case .bubbleDetails: UnknownBubbleView(bubble: Binding($selectedBubble)!)
+            case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
+            case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble)
+            case .bubbleDetails: UnknownBubbleView(bubble: Binding(Binding($selectedMappedBubble)!.bubble)!)
             }
         }
-        .confirmationDialog("", isPresented: $showSelectConfirmation, presenting: selectedBubble) {detail in
+        .confirmationDialog("", isPresented: $showSelectConfirmation, presenting: $selectedMappedBubble) {detail in
             Button(action: { sheet = .bubbleDetails }) {
                 Text("Show Details")
             }
-            Button(role: .destructive, action: { context.delete(selectedBubble!) }) {
+            Button(role: .destructive, action: { context.delete(selectedMappedBubble!) }) {
                 Text("Delete")
             }
         }
         .confirmationDialog("", isPresented: $showAddConfirmation) {
-            Button(action: { sheet = .addBubble }) {
+            Button(action: { sheet = .newBubble }) {
                 Text("New Bubble")
             }
             Button(action: { sheet = .bubbleList }) {
@@ -163,12 +149,29 @@ struct ScrollingMapView: View {
     func sheetDismiss() {
         if addMappedBubble {
             let mappedBubble = MappedBubble(context: context)
-            mappedBubble.bubble = selectedBubble
+            mappedBubble.bubble = sheetBubble
             mappedBubble.x = x
             mappedBubble.y = y
             map.addToMappedBubbles(mappedBubble)
             addMappedBubble = false
         }
+    }
+}
+
+struct ToolPicker: View {
+    @Binding var tool: Tool
+    @Binding var selectedMappedBubble: MappedBubble?
+    
+    var body: some View {
+        Picker("Tool", selection: $tool) {
+            ForEach(Tool.allCases) {
+                Label($0.rawValue, systemImage: $0.imageName).tag($0).imageScale(.large)
+            }
+        }
+        .onChange(of: tool) { _ in
+            selectedMappedBubble = nil
+        }
+        .pickerStyle(.menu)
     }
 }
 
@@ -229,6 +232,6 @@ enum Size: String, Identifiable, CaseIterable {
 }
 
 enum MapShownSheet: String, Identifiable {
-    case addBubble, bubbleList, bubbleDetails
+    case newBubble, bubbleList, bubbleDetails
     var id: RawValue { rawValue }
 }

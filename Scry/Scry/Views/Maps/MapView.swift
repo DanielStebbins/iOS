@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var map: Map
-    @Binding var selectedBubble: Bubble?
+    @Binding var selectedMappedBubble: MappedBubble?
     var tool: Tool
     @Binding var showConfirmation: Bool
     
@@ -34,7 +34,7 @@ struct MapView: View {
                 DrawnCircleView(circle: circle)
             }
             ForEach(mappedBubbles) { mappedBubble in
-                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedBubble: $selectedBubble, tool: tool, showConfirmation: $showConfirmation)
+                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
         }
     }

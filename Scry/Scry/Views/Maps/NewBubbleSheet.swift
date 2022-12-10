@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddBubbleSheet: View {
+struct NewBubbleSheet: View {
     @Binding var selectedBubble: Bubble?
     @Binding var added: Bool
     
