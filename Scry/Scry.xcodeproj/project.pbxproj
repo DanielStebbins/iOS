@@ -36,9 +36,10 @@
 		BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA3CF0AB29353088005753BE /* OptionsSheet.swift */; };
 		BA49669D29384B7600CB2E44 /* NewBubbleSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA49669C29384B7600CB2E44 /* NewBubbleSheet.swift */; };
 		BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876D2937F89A003A8F9B /* Color+Standards.swift */; };
-		BA6A877029380886003A8F9B /* ScrollingMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876F29380886003A8F9B /* ScrollingMapView.swift */; };
+		BA6A877029380886003A8F9B /* GestureMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6A876F29380886003A8F9B /* GestureMapView.swift */; };
 		BA6C0C74293A782600756894 /* Bubble+Validate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA6C0C73293A782600756894 /* Bubble+Validate.swift */; };
 		BAA0785E29426C3A00B3BDF2 /* GestureBubbleCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA0785D29426C3A00B3BDF2 /* GestureBubbleCapsule.swift */; };
+		BAB582FF29450DD800E8C5E5 /* ToolbarMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB582FE29450DD800E8C5E5 /* ToolbarMapView.swift */; };
 		BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3A6291EBEE2004B65EC /* ScryApp.swift */; };
 		BACCB3AB291EBEE3004B65EC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AA291EBEE3004B65EC /* Assets.xcassets */; };
 		BACCB3AE291EBEE3004B65EC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BACCB3AD291EBEE3004B65EC /* Preview Assets.xcassets */; };
@@ -100,9 +101,10 @@
 		BA3CF0AB29353088005753BE /* OptionsSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSheet.swift; sourceTree = "<group>"; };
 		BA49669C29384B7600CB2E44 /* NewBubbleSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewBubbleSheet.swift; sourceTree = "<group>"; };
 		BA6A876D2937F89A003A8F9B /* Color+Standards.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Standards.swift"; sourceTree = "<group>"; };
-		BA6A876F29380886003A8F9B /* ScrollingMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingMapView.swift; sourceTree = "<group>"; };
+		BA6A876F29380886003A8F9B /* GestureMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureMapView.swift; sourceTree = "<group>"; };
 		BA6C0C73293A782600756894 /* Bubble+Validate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bubble+Validate.swift"; sourceTree = "<group>"; };
 		BAA0785D29426C3A00B3BDF2 /* GestureBubbleCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureBubbleCapsule.swift; sourceTree = "<group>"; };
+		BAB582FE29450DD800E8C5E5 /* ToolbarMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarMapView.swift; sourceTree = "<group>"; };
 		BACCB3A3291EBEE2004B65EC /* Scry.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scry.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BACCB3A6291EBEE2004B65EC /* ScryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryApp.swift; sourceTree = "<group>"; };
 		BACCB3AA291EBEE3004B65EC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -162,9 +164,10 @@
 			isa = PBXGroup;
 			children = (
 				BA1A71F62942A9A900D44B2F /* DrawnCircleView.swift */,
-				257297E7292E8FFF00E6FF05 /* MapView.swift */,
-				BA6A876F29380886003A8F9B /* ScrollingMapView.swift */,
 				BA06BDC1293504BB00A1F497 /* ZoomingScrollView.swift */,
+				257297E7292E8FFF00E6FF05 /* MapView.swift */,
+				BA6A876F29380886003A8F9B /* GestureMapView.swift */,
+				BAB582FE29450DD800E8C5E5 /* ToolbarMapView.swift */,
 				BA06BDC329351A1200A1F497 /* MapMenu.swift */,
 				BA3CF0A9293529DC005753BE /* AddMapSheet.swift */,
 				BA3CF0AB29353088005753BE /* OptionsSheet.swift */,
@@ -447,6 +450,7 @@
 				257297E1292D7E6000E6FF05 /* PhotoPickerView.swift in Sources */,
 				BACCB3DC291EC693004B65EC /* Manager.swift in Sources */,
 				25CE8AD3292AFBA50041394F /* CharacterEditSheet.swift in Sources */,
+				BAB582FF29450DD800E8C5E5 /* ToolbarMapView.swift in Sources */,
 				BA15DAD6293EE3F5006646F9 /* UnknownBubbleView.swift in Sources */,
 				25CE8ACD292AF3CF0041394F /* BubbleEditSheet.swift in Sources */,
 				BAA0785E29426C3A00B3BDF2 /* GestureBubbleCapsule.swift in Sources */,
@@ -462,7 +466,7 @@
 				257297DF292D6D2D00E6FF05 /* BubbleCapsule.swift in Sources */,
 				BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */,
 				257297D9292C501700E6FF05 /* FactionEditSheet.swift in Sources */,
-				BA6A877029380886003A8F9B /* ScrollingMapView.swift in Sources */,
+				BA6A877029380886003A8F9B /* GestureMapView.swift in Sources */,
 				BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */,
 				BA3CF0A6293525FD005753BE /* MainView.swift in Sources */,
 				BA3CF0AC29353088005753BE /* OptionsSheet.swift in Sources */,

@@ -72,7 +72,7 @@ struct MainView: View {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {
                         if story.displayedMap != nil {
-                            ScrollingMapView(map: story.displayedMap!, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() })
+                            ToolbarMapView(map: story.displayedMap!, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() })
                         }
                         else {
                             Color.mapBackground

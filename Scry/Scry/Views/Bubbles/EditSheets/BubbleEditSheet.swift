@@ -63,4 +63,3 @@ struct BubbleEditSheet<Content>: View where Content: View {
         }
     }
 }
-

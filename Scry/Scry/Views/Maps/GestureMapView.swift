@@ -7,12 +7,14 @@
 
 import SwiftUI
 
-struct ScrollingMapView: View {
+struct GestureMapView: View {
     @ObservedObject var map: Map
     let mapMenuFullyOpen: Bool
     let closeMapMenu: () -> Void
-    
-    @State var tool: Tool = .select
+    let tool: Tool
+    let drawColor: Color
+    let drawSize: Size
+
     @State var sheet: MapShownSheet?
     @State var x: Double = 0.0
     @State var y: Double = 0.0
@@ -21,41 +23,10 @@ struct ScrollingMapView: View {
     @State var showSelectConfirmation: Bool = false
     @State var addMappedBubble: Bool = false
     @State var showAddConfirmation: Bool = false
-    
-    @State var drawColor: Color = Color.randomDarkColor
-    @State var drawSize: Size = .medium
-    
+
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let defaultToolbar = ToolbarItemGroup(placement: .bottomBar) {
-            Spacer()
-            ToolPicker(tool: $tool, selectedMappedBubble: $selectedMappedBubble)
-                .disabled(mapMenuFullyOpen)
-            Spacer()
-        }
-        
-        let drawToolbar = ToolbarItemGroup(placement: .bottomBar) {
-            SizePicker(size: $drawSize)
-                .disabled(mapMenuFullyOpen)
-            Spacer()
-            ToolPicker(tool: $tool, selectedMappedBubble: $selectedMappedBubble)
-                .disabled(mapMenuFullyOpen)
-            Spacer()
-            ColorPicker("", selection: $drawColor)
-                .labelsHidden()
-                .disabled(mapMenuFullyOpen)
-        }
-        
-        let eraseToolbar = ToolbarItemGroup(placement: .bottomBar) {
-            SizePicker(size: $drawSize)
-                .disabled(mapMenuFullyOpen)
-            Spacer()
-            ToolPicker(tool: $tool, selectedMappedBubble: $selectedMappedBubble)
-                .disabled(mapMenuFullyOpen)
-            Spacer()
-        }
-        
         let tap = SpatialTapGesture()
             .onEnded { value in
                 if mapMenuFullyOpen {
@@ -95,6 +66,7 @@ struct ScrollingMapView: View {
                 selectedMappedBubble!.fontSize = min(max(new, 5), 40)
             }
         
+        
         ZoomingScrollView(zoom: selectedMappedBubble == nil) {
             MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
                 .gesture(tool == .select && selectedMappedBubble != nil ? resize : nil)
@@ -102,13 +74,6 @@ struct ScrollingMapView: View {
                 .gesture(tap)
         }
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            switch(tool) {
-            case .draw: drawToolbar
-            case .erase: eraseToolbar
-            default: defaultToolbar
-            }
-        }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if let linkedBubble = map.linkedBubble {
@@ -174,78 +139,6 @@ struct ScrollingMapView: View {
         
     func erase() {
         map.erase(context: context, x: x, y: y, eraseRadius: drawSize.radius)
-    }
-}
-
-struct ToolPicker: View {
-    @Binding var tool: Tool
-    @Binding var selectedMappedBubble: MappedBubble?
-    
-    var body: some View {
-        Picker("Tool", selection: $tool) {
-            ForEach(Tool.allCases) {
-                Label($0.rawValue, systemImage: $0.imageName).tag($0).imageScale(.large)
-            }
-        }
-        .onChange(of: tool) { _ in
-            selectedMappedBubble = nil
-        }
-        .pickerStyle(.menu)
-    }
-}
-
-struct SizePicker: View {
-    @Binding var size: Size
-    
-    var body: some View {
-        Menu {
-            ForEach(Size.allCases, id:\.self) { s in
-                Button(action: { size = s }) {
-                    HStack {
-                        Text(s.rawValue)
-                        if size == s {
-                            Image(systemName: "checkmark")
-                        }
-                    }
-                }
-                .buttonStyle(.bordered)
-            }
-        } label: {
-            Image(systemName: "circle.fill")
-                .imageScale(size.imageScale)
-        }
-    }
-}
-
-enum Tool: String, Identifiable, CaseIterable {
-    case select = "Select", addBubble = "Add Bubble", draw = "Draw", erase = "Erase"
-    var id: RawValue { rawValue }
-    var imageName: String {
-        switch self {
-        case .select: return "cursorarrow"
-        case .addBubble: return "plus.circle"
-        case .draw: return "scribble.variable"
-        case .erase: return "trash.square"
-        }
-    }
-}
-
-enum Size: String, Identifiable, CaseIterable {
-    case small = "Small", medium = "Medium", large = "Large"
-    var id: RawValue { rawValue }
-    var imageScale: Image.Scale {
-        switch self {
-        case .small: return Image.Scale.small
-        case .medium: return Image.Scale.medium
-        case .large: return Image.Scale.large
-        }
-    }
-    var radius: Double {
-        switch self {
-        case .small: return 5
-        case .medium: return 10
-        case .large: return 20
-        }
     }
 }
 
