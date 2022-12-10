@@ -48,6 +48,7 @@ struct GestureBubbleCapsule: View {
                             .stroke(Color.accentColor, lineWidth: 2)
                     }
                 }
+                .font(.system(size: mappedBubble.fontSize))
                 .position(x: mappedBubble.x, y: mappedBubble.y)
                 .offset(offset)
                 .gesture(selected ? move : nil)

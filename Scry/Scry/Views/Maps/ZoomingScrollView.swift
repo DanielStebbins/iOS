@@ -30,7 +30,7 @@ struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
         hostedView.backgroundColor = UIColor(Color.mapBackground)
         return scrollView
     }
-
+    
     func updateUIView(_ uiScrollView: UIScrollView, context: Context) {
         context.coordinator.hostingController.rootView = self.content
         assert(context.coordinator.hostingController.view.superview == uiScrollView)

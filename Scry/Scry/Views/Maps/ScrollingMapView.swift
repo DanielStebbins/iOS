@@ -89,8 +89,15 @@ struct ScrollingMapView: View {
                 try? context.save()
             }
         
+        let resize = MagnificationGesture()
+            .onChanged { change in
+                let new = selectedMappedBubble!.fontSize * Double(change)
+                selectedMappedBubble!.fontSize = min(max(new, 7), 30)
+            }
+        
         ZoomingScrollView {
             MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
+                .gesture(tool == .select && selectedMappedBubble != nil ? resize : nil)
                 .gesture(tool == .draw || tool == .erase ? drag : nil)
                 .gesture(tap)
         }
