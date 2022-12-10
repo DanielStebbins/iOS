@@ -18,6 +18,7 @@ struct ItemEditSheet: View {
                 DisplayElementButton(text: "Held By Characters", display: $item.displayCharacters)
                 DisplayElementButton(text: "Held By Factions", display: $item.displayFactions)
             }
+            .navigationTitle("Edit Item")
         }
     }
 }

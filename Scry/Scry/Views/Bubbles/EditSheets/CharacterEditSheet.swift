@@ -18,6 +18,7 @@ struct CharacterEditSheet: View {
                 DisplayElementButton(text: "Locations", display: $character.displayLocations)
                 DisplayElementButton(text: "Items", display: $character.displayItems)
             }
+            .navigationTitle("Edit Character")
         }
     }
 }

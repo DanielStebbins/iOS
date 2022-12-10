@@ -13,8 +13,8 @@ struct UnknownBubbleView: View {
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
@@ -29,7 +29,7 @@ struct UnknownBubbleView: View {
                 default: Text("Error! Unknown Bubble Type")
                 }
             }
-            .toolbar { dismissButton }
+            .toolbar { closeButton }
         }
     }
 }

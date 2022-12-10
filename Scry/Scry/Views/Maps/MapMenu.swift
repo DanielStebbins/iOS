@@ -10,7 +10,7 @@ import SwiftUI
 struct MapMenu: View {
     @ObservedObject var story: Story
     let width: CGFloat
-    @Binding var shown: Bool
+    let close: () -> Void
     @Binding var sheet: ShownSheet?
     
     @Environment(\.managedObjectContext) var context
@@ -25,7 +25,7 @@ struct MapMenu: View {
                 Text("Maps")
                     .font(.headline)
                 Spacer()
-                Button(action: { sheet = .addMap; withAnimation { shown = false } }) {
+                Button(action: { sheet = .addMap; close() }) {
                     Image(systemName: "plus")
                         .imageScale(.large)
                         .padding(10)
@@ -35,7 +35,7 @@ struct MapMenu: View {
             .padding([.top, .leading, .trailing])
             ForEach(sortedMaps) {map in
 //                if searchText == "" || (map.linkedBubble != nil && map.linkedBubble!.name!.contains(searchText)) || (map.linkedBubble == nil && map.name!.contains(searchText)) {
-                    MapMenuRow(story: story, map: map, shown: $shown, width: width)
+                    MapMenuRow(story: story, map: map, close: close, width: width)
 //                }
             }
         }
@@ -49,12 +49,12 @@ struct MapMenu: View {
 struct MapMenuRow: View {
     @ObservedObject var story: Story
     @ObservedObject var map: Map
-    @Binding var shown: Bool
+    let close: () -> Void
     let width: CGFloat
     
     var body: some View {
         let uiImage = map.image == nil ? UIImage(imageLiteralResourceName: "square-grid") : UIImage(data: map.image!)!
-        Button(action: { story.displayedMap = map; withAnimation(.linear(duration: 0.25)) { shown = false } }) {
+        Button(action: { story.displayedMap = map; close() }) {
             ZStack {
                 Image(uiImage: uiImage)
                     .resizable()

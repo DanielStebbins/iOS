@@ -16,16 +16,17 @@ struct BubbleEditSheet<Content>: View where Content: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let dismissButton = ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Dismiss") {
+        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
+                Button("Close") {
                     dismiss()
                 }
             }
         
-        let deleteButton = ToolbarItem(placement: .navigationBarLeading) {
+        let deleteButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: { dismiss(); context.delete(bubble); dismissParent() }) {
                 Image(systemName: "trash")
                     .imageScale(.large)
+                    .tint(.red)
             }
         }
         
@@ -54,8 +55,10 @@ struct BubbleEditSheet<Content>: View where Content: View {
                 content()
                 Spacer()
             }
+            .navigationTitle("Edit Bubble")
+            .navigationBarTitleDisplayMode(.inline)
             .padding()
-            .toolbar { dismissButton }
+            .toolbar { closeButton }
             .toolbar { deleteButton }
         }
     }

@@ -59,12 +59,12 @@ struct MainView: View {
                         mapMenuPosition = -geometry.size.width
                     }
                 }
-                .onEnded {
-                    if !mapMenuFullyOpen && $0.translation.width > 50 {
-                        openMapMenu()
+                .onEnded { drag in
+                    if mapMenuFullyOpen {
+                        drag.translation.width < -50 ? closeMapMenu() : openMapMenu()
                     }
-                    if mapMenuFullyOpen && $0.translation.width < -50 {
-                        closeMapMenu()
+                    else {
+                        drag.translation.width > 50 ? openMapMenu() : closeMapMenu()
                     }
                 }
             
@@ -83,7 +83,7 @@ struct MainView: View {
                         }
                     }
                     if showMapMenu {
-                        MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu, sheet: $sheet)
+                        MapMenu(story: story, width: geometry.size.width * 0.8, close: { closeMapMenu() }, sheet: $sheet)
                             .transition(.move(edge: .leading))
                             .offset(x: mapMenuPosition, y: 0)
                             .zIndex(1)

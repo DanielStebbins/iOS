@@ -61,38 +61,32 @@ struct ScrollingMapView: View {
                 if mapMenuFullyOpen {
                     closeMapMenu()
                 }
-                else if tool == .select {
-                    selectedMappedBubble = nil
-                }
-                else if tool == .addBubble {
+                else {
                     x = value.location.x
                     y = value.location.y
-                    showAddConfirmation = true
+                    switch tool {
+                        // Selecting and moving handled on individual bubbles with GesturedCapsule.
+                    case .select: selectedMappedBubble = nil
+                    case .addBubble: showAddConfirmation = true
+                    case .draw: draw()
+                    case .erase: erase()
+                    }
                 }
-                // Selecting and moving handled on individual bubbles with GesturedCapsule.
             }
         
         let drag = DragGesture()
             .onChanged { value in
+                x = value.location.x
+                y = value.location.y
                 if tool == .draw {
-                    let circle = DrawnCircle(context: context)
-                    circle.x = value.location.x
-                    circle.y = value.location.y
-                    let components = drawColor.components
-                    circle.radius = drawSize.radius
-                    circle.red = Int16(components[0] * 255)
-                    circle.green = Int16(components[1] * 255)
-                    circle.blue = Int16(components[2] * 255)
-                    circle.opacity = components[3]
-                    circle.created = Date.now
-                    map.addToDrawnCircles(circle)
+                    draw()
                 }
                 else if tool == .erase {
-                    map.erase(context: context, x: value.location.x, y: value.location.y, eraseRadius: 10)
+                    erase()
                 }
             }
             .onEnded { value in
-
+                try? context.save()
             }
         
         ZoomingScrollView {
@@ -155,6 +149,24 @@ struct ScrollingMapView: View {
             map.addToMappedBubbles(mappedBubble)
             addMappedBubble = false
         }
+    }
+    
+    func draw() {
+        let circle = DrawnCircle(context: context)
+        circle.x = x
+        circle.y = y
+        let components = drawColor.components
+        circle.radius = drawSize.radius
+        circle.red = Int16(components[0] * 255)
+        circle.green = Int16(components[1] * 255)
+        circle.blue = Int16(components[2] * 255)
+        circle.opacity = components[3]
+        circle.created = Date.now
+        map.addToDrawnCircles(circle)
+    }
+        
+    func erase() {
+        map.erase(context: context, x: x, y: y, eraseRadius: drawSize.radius)
     }
 }
 
