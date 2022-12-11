@@ -58,14 +58,7 @@ struct ToolbarMapView: View {
 }
 
 class SelectedWrapper: ObservableObject {
-//    @Published var selected: MappedBubble? {
-//        didSet {
-//            points = []
-//        }
-//    }
-//    @Published var points: [MappedBubble] = []
     @Published var selected: MappedBubble?
-//    @Published var flag: Bool = false
 }
 
 enum Tool: String, Identifiable, CaseIterable {

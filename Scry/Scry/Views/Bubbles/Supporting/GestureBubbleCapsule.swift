@@ -48,7 +48,6 @@ struct GestureBubbleCapsule: View {
                 }
                 else {
                     toggleRelationship()
-//                    selectedMappedBubble.flag.toggle()
                     selectedMappedBubble.selected = selectedMappedBubble.selected
                 }
             }
