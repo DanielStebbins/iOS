@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddMapSheet: View {
+struct NewMapSheet: View {
     var story: Story
     @Binding var showMapMenu: Bool
     

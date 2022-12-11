@@ -18,23 +18,27 @@ struct PhotoPickerView: View {
         PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
             HStack {
                 Text(title)
+                    .foregroundColor(.white)
                 Spacer()
                 if let image = selection {
+                    Button(role: .destructive, action: { selection = nil }) {
+                        Image(systemName: "trash")
+                    }
+                    
                     Image(uiImage: UIImage(data: image)!)
                         .resizable()
-                        .scaledToFit()
-                        .overlay(alignment: .topTrailing) {
-                            Image(systemName: "square.grid.2x2")
-                        }
+                        .scaledToFill()
                         .frame(width: 50, height: 50)
+                        .clipped()
+                        .cornerRadius(25)
                 }
                 else {
                     Image(systemName: "square.grid.2x2")
                         .imageScale(.large)
                         .frame(width: 50, height: 50, alignment: .trailing)
+                        .foregroundColor(.white)
                 }
             }
-            .foregroundColor(Color(UIColor.label))
         }
         .onChange(of: selectedItem) {newItem in
             Task {

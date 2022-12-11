@@ -42,8 +42,7 @@ struct CapsuleGrid<T>: View where T: Bubble {
                         .stroke(.white, lineWidth: 2)
                 }
             }
-            .padding(10)
-            .padding(.bottom, 10)
+            .padding(15)
         }
     }
     

@@ -11,10 +11,10 @@ struct BubbleView<Content>: View where Content: View {
     @ObservedObject var bubble: Bubble
     
     @Binding var isEditing: Bool
-    let content: () -> Content
+    let content: (CGFloat) -> Content
     
     var body: some View {
-        GeometryReader { bubbleGeometry in
+        GeometryReader { geometry in
             ScrollView {
                 if let image = bubble.image {
                     Image(uiImage: UIImage(data: image)!)
@@ -28,7 +28,7 @@ struct BubbleView<Content>: View where Content: View {
                     MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
                 }
                 
-                content()
+                content(geometry.size.width)
                 Spacer()
             }
         }

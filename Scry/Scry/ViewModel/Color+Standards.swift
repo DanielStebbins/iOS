@@ -10,4 +10,5 @@ import SwiftUI
 extension Color {
     static let background = Color("BackgroundColor")
     static let mapBackground = Color("MapBackground")
+    static let offText = Color("OffText")
 }

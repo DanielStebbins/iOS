@@ -10,6 +10,7 @@ import SwiftUI
 struct NewBubbleSheet: View {
     @Binding var selectedBubble: Bubble?
     @Binding var added: Bool
+    var types: [BubbleType] = [.character, .faction, .item, .location]
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(\.managedObjectContext) var context
@@ -42,14 +43,21 @@ struct NewBubbleSheet: View {
             VStack {
                 HStack {
                     HStack {
-                        Picker("Bubble Type", selection: $bubbleType) {
-                            ForEach(BubbleType.allCases) {
-                                Label($0.rawValue, systemImage: $0.imageName).tag($0)
-                                    .labelStyle(.iconOnly)
-                            }
+                        if types.count == 1 {
+                            Image(systemName: types[0].imageName)
+                                .imageScale(.large)
+                                .padding(5)
                         }
-                        .tint(.white)
-                        .pickerStyle(.menu)
+                        else {
+                            Picker("Bubble Type", selection: $bubbleType) {
+                                ForEach(types) {
+                                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
+                                        .labelStyle(.iconOnly)
+                                }
+                            }
+                            .tint(.white)
+                            .pickerStyle(.menu)
+                        }
                         TextField("Name", text: $name)
                             .bold()
                             .italic()
@@ -69,7 +77,7 @@ struct NewBubbleSheet: View {
                 PhotoPickerView(title: "Bubble Image", selection: $image)
                 Spacer()
             }
-            .navigationTitle("Create a Bubble")
+            .navigationTitle("Create a \(types.count == 1 ? types[0].rawValue : "Bubble")")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { submitButton }
             .padding([.leading, .trailing])
@@ -86,6 +94,15 @@ enum BubbleType: String, Identifiable, CaseIterable {
         case .faction: return "flag"
         case .item: return "wand.and.stars"
         case .location: return "location"
+        }
+    }
+    static func find<T>(type: T.Type) -> BubbleType where T: Bubble {
+        switch type {
+        case is Character.Type: return .character
+        case is Faction.Type: return .faction
+        case is Item.Type: return .item
+        case is Location.Type: return .location
+        default: return .character
         }
     }
 }

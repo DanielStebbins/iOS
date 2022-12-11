@@ -99,7 +99,7 @@ struct MainView: View {
                 switch item {
                 case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.3)])
                 case .bubbleList: BubbleList()
-                case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
+                case .addMap: NewMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
                 }
             }
             .gesture(drag)

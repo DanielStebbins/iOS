@@ -84,7 +84,6 @@ struct GestureMapView: View {
             MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
                 .gesture(tool == .select && selectedMappedBubble != nil ? resize : nil)
                 .gesture(tool == .draw || tool == .erase ? drag : nil)
-//                .gesture(tool == .select ? tap : nil)
                 .gesture(tap)
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -103,7 +102,7 @@ struct GestureMapView: View {
         }
         .sheet(item: $sheet, onDismiss: sheetDismiss) {item in
             switch item {
-            case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
+            case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.25)])
             case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble, types: [.all])
             case .bubbleDetails: UnknownBubbleView(bubble: selectedMappedBubble!.bubble!)
             }

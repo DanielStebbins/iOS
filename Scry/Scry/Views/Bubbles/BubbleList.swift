@@ -25,7 +25,6 @@ struct BubbleList: View {
                     //                }
                 }
                 .searchable(text: $search)
-                .padding()
                 .navigationTitle("Bubble List")
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationDestination(for: Character.self) {value in
@@ -45,28 +44,6 @@ struct BubbleList: View {
     }
 }
 
-//struct ListSection<T>: View where T: Bubble {
-//    @Binding var search: String
-//
-//    @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
-//
-//    var searchResults: [T] {
-//        bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
-//    }
-//
-//    var body: some View {
-//        Section {
-//            ForEach(searchResults) {b in
-//                LinkedBubbleCapsule<T>(bubble: b)
-//                    .labelStyle(.titleOnly)
-//            }
-//        } header: {
-//            Text(String(describing: T.self))
-//        }
-//        .listRowBackground(Color.background)
-//    }
-//}
-
 struct ListCapsuleGrid<T>: View where T: Bubble {
     @Binding var search: String
     let width: CGFloat
@@ -77,33 +54,36 @@ struct ListCapsuleGrid<T>: View where T: Bubble {
         bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
     }
     
-    let padding: CGFloat = 17
+    let padding: CGFloat = 20
     
     var body: some View {
         let rows: [[T]] = split()
         
-        Section {
-            ZStack(alignment: .leading)
-            {
-                Color.clear
-                VStack(alignment: .leading) {
-                    ForEach(Array(rows.enumerated()), id: \.element) { index, element in
-                        CapsuleRow(bubbles: rows[index])
+        VStack(alignment: .leading) {
+            Section {
+                ZStack(alignment: .leading)
+                {
+                    Color.clear
+                    VStack(alignment: .leading) {
+                        ForEach(Array(rows.enumerated()), id: \.element) { index, element in
+                            CapsuleRow(bubbles: rows[index])
+                        }
                     }
                 }
-            }
-            .padding(7)
-            .padding(.top, rows.isEmpty ? 30 : 0)
-            .overlay {
-                RoundedRectangle(cornerRadius: 20)
-                    .stroke(.white, lineWidth: 2)
-            }
-        } header: {
-            HStack {
-                Text(String(describing: T.self))
-                ListBubbleAdder()
+                .padding(7)
+                .padding(.top, rows.isEmpty ? 30 : 0)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.offText, lineWidth: 2)
+                }
+            } header: {
+                HStack {
+                    Text(String(describing: T.self))
+                    ListBubbleAdder<T>()
+                }
             }
         }
+        .padding(15)
         .listRowBackground(Color.background)
     }
     
@@ -141,7 +121,8 @@ struct ListBubbleAdder<T>: View where T: Bubble {
                 .imageScale(.large)
         }
         .sheet(isPresented: $showAddSheet) {
-            NewBubbleSheet(selectedBubble: $selection, added: $selected)
+            NewBubbleSheet(selectedBubble: $selection, added: $selected, types: [BubbleType.find(type: T.self)])
+                .presentationDetents([.fraction(0.25)])
         }
     }
 }

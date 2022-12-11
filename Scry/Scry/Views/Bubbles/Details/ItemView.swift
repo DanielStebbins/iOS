@@ -14,14 +14,11 @@ struct ItemView: View {
     @State var isEditing = false
     
     var body: some View {
-        BubbleView(bubble: item, isEditing: $isEditing) {
-            GeometryReader { geometry in
-                let width = geometry.size.width
-                VStack(alignment: .leading) {
-                    CapsuleGrid<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations, shown: item.displayLocations, width: width)
-                    CapsuleGrid<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters, shown: item.displayCharacters, width: width)
-                    CapsuleGrid<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions, shown: item.displayFactions, width: width)
-                }
+        BubbleView(bubble: item, isEditing: $isEditing) { width in
+            VStack(alignment: .leading) {
+                CapsuleGrid<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations, shown: item.displayLocations, width: width)
+                CapsuleGrid<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters, shown: item.displayCharacters, width: width)
+                CapsuleGrid<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions, shown: item.displayFactions, width: width)
             }
         }
         .sheet(isPresented: $isEditing) {
