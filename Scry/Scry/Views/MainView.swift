@@ -18,6 +18,7 @@ struct MainView: View {
     @State var mapMenuPosition: CGFloat = 0.0
     @State var sheet: ShownSheet?
     @State var newDisplayedMap: Bool = false
+    @State var selectedMappedBubble: MappedBubble?
     
     var body: some View {
         let menuButton = ToolbarItem(placement: .navigationBarLeading) {
@@ -72,7 +73,7 @@ struct MainView: View {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {
                         if story.displayedMap != nil {
-                            ToolbarMapView(map: story.displayedMap!, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() })
+                            ToolbarMapView(map: story.displayedMap!, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() }, selectedMappedBubble: $selectedMappedBubble)
                         }
                         else {
                             Color.mapBackground
@@ -115,6 +116,7 @@ struct MainView: View {
     }
     
     func openMapMenu() {
+        selectedMappedBubble = nil
         withAnimation(.linear(duration: 0.25)) {
             showMapMenu = true
             mapMenuPosition = 0.0

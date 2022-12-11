@@ -11,9 +11,9 @@ struct ToolbarMapView: View {
     @ObservedObject var map: Map
     let mapMenuFullyOpen: Bool
     let closeMapMenu: () -> Void
+    @Binding var selectedMappedBubble: MappedBubble?
     
     @State var tool: Tool = .select
-    @State var selectedMappedBubble: MappedBubble?
     @State var drawColor: Color = Color.randomDarkColor
     @State var drawSize: Size = .medium
     
