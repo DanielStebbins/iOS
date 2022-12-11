@@ -13,13 +13,7 @@ struct BubbleList: View {
     @State var search: String = ""
     
     var body: some View {
-        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
-                    dismiss()
-                }
-            }
-        
-        NavigationStack {
+        ClosableSheet {
             List {
                 ListSection<Character>(search: $search)
                 ListSection<Faction>(search: $search)
@@ -42,7 +36,6 @@ struct BubbleList: View {
             .navigationDestination(for: Location.self) {value in
                 LocationView(location: value)
             }
-            .toolbar { closeButton }
         }
     }
 }

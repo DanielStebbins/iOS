@@ -100,8 +100,8 @@ struct GestureMapView: View {
         .sheet(item: $sheet, onDismiss: sheetDismiss) {item in
             switch item {
             case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
-            case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble)
-            case .bubbleDetails: UnknownBubbleView(bubble: Binding(Binding($selectedMappedBubble)!.bubble)!)
+            case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble, types: [.all])
+            case .bubbleDetails: UnknownBubbleView(bubble: selectedMappedBubble!.bubble!)
             }
         }
         .confirmationDialog("", isPresented: $showSelectConfirmation, presenting: $selectedMappedBubble) {detail in

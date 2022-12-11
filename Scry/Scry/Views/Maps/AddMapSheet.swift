@@ -17,13 +17,7 @@ struct AddMapSheet: View {
     @State var name: String = ""
     @State var image: Data?
     
-    var body: some View {
-        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
-                    dismiss()
-                }
-            }
-        
+    var body: some View {        
         let submitButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button("Submit") {
                 let map = Map(context: context)
@@ -37,7 +31,7 @@ struct AddMapSheet: View {
             }
         }
         
-        NavigationStack {
+        ClosableSheet {
             VStack {
                 TextField("Name", text: $name)
                     .multilineTextAlignment(.center)
@@ -56,7 +50,6 @@ struct AddMapSheet: View {
             }
             .navigationTitle("Create a Map")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar { closeButton }
             .toolbar { submitButton }
         }
     }

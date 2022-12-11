@@ -10,41 +10,37 @@ import SwiftUI
 struct SelectionBubbleList: View {
     @Binding var selection: Bubble?
     @Binding var selected: Bool
-    var mappableOnly: Bool = false
+    let types: [BubbleType]
+    var excluded: [UUID] = []
     
     @Environment (\.dismiss) private var dismiss
     
     @State var search: String = ""
     
     var body: some View {
-        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
-                    dismiss()
+        List {
+            if types.contains(.none) || types.contains(.all) {
+                Button(action: { selection = nil; selected = true; dismiss() }) {
+                    Text("None")
                 }
             }
-        
-        NavigationStack {
-            List {
-                if mappableOnly {
-                    Button(action: { selection = nil; selected = true; dismiss() }) {
-                        Text("None")
-                    }
-                }
-                if !mappableOnly {
-                    SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected)
-                }
-                SelectionListSection<Faction>(search: $search, selection: $selection, selected: $selected)
-                if !mappableOnly {
-                    SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected)
-                }
-                SelectionListSection<Location>(search: $search, selection: $selection, selected: $selected)
+            if types.contains(.character) || types.contains(.all) {
+                SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
             }
-            .searchable(text: $search)
-            .padding()
-            .navigationTitle("Select a Bubble")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar { closeButton }
+            if types.contains(.faction) || types.contains(.all) {
+                SelectionListSection<Faction>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
+            }
+            if types.contains(.item) || types.contains(.all) {
+                SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
+            }
+            if types.contains(.location) || types.contains(.all) {
+                SelectionListSection<Location>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
+            }
         }
+        .searchable(text: $search)
+        .padding()
+        .navigationTitle("Select a Bubble")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -52,6 +48,7 @@ struct SelectionListSection<T>: View where T: Bubble {
     @Binding var search: String
     @Binding var selection: Bubble?
     @Binding var selected: Bool
+    let excluded: [UUID]
     
     @Environment (\.dismiss) private var dismiss
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
@@ -63,9 +60,11 @@ struct SelectionListSection<T>: View where T: Bubble {
     var body: some View {
         Section {
             ForEach(searchResults) {b in
-                Button(action: { selection = b; selected = true; dismiss() }) {
-                    BubbleCapsule(bubble: b)
-                        .labelStyle(.titleOnly)
+                if !excluded.contains(b.uuid!) {
+                    Button(action: { selection = b; selected = true; dismiss() }) {
+                        BubbleCapsule(bubble: b)
+                            .labelStyle(.titleOnly)
+                    }
                 }
             }
         } header: {
@@ -75,3 +74,27 @@ struct SelectionListSection<T>: View where T: Bubble {
     }
 }
 
+enum BubbleType: String, Identifiable, CaseIterable {
+    case character = "Character", faction = "Faction", item = "Item", location = "Location", none = "None", all = "All"
+    var id: RawValue { rawValue }
+    var imageName: String {
+        switch self {
+        case .character: return "person"
+        case .faction: return "flag"
+        case .item: return "wand.and.stars"
+        case .location: return "location"
+        default: return "face.smiling"
+        }
+    }
+    
+    static func find<T>(type: T.Type) -> BubbleType where T: Bubble {
+        switch type {
+        case is Character.Type: return .character
+        case is Faction.Type: return .faction
+        case is Item.Type: return .item
+        case is Location.Type: return .location
+        default: return .none
+        }
+        
+    }
+}

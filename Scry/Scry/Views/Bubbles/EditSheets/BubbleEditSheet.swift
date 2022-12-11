@@ -16,12 +16,6 @@ struct BubbleEditSheet<Content>: View where Content: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
-        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
-                    dismiss()
-                }
-            }
-        
         let deleteButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: { dismiss(); context.delete(bubble); dismissParent() }) {
                 Image(systemName: "trash")
@@ -30,7 +24,7 @@ struct BubbleEditSheet<Content>: View where Content: View {
             }
         }
         
-        NavigationStack {
+        ClosableSheet {
             VStack {
                 TextField("Name", text: Binding($bubble.name)!)
                     .multilineTextAlignment(.center)
@@ -58,7 +52,6 @@ struct BubbleEditSheet<Content>: View where Content: View {
             .navigationTitle("Edit Bubble")
             .navigationBarTitleDisplayMode(.inline)
             .padding()
-            .toolbar { closeButton }
             .toolbar { deleteButton }
         }
     }

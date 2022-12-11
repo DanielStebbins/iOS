@@ -9,6 +9,7 @@
         <attribute name="notes" attributeType="String" defaultValueString=""/>
         <attribute name="red" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="systemImageName" optional="YES" attributeType="String"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO"/>
         <relationship name="map" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Map" inverseName="linkedBubble" inverseEntity="Map"/>
         <relationship name="mappedBubbles" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="MappedBubble" inverseName="bubble" inverseEntity="MappedBubble"/>
     </entity>

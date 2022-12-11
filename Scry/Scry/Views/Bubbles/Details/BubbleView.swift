@@ -9,23 +9,28 @@ import SwiftUI
 
 struct BubbleView<Content>: View where Content: View {
     @ObservedObject var bubble: Bubble
+    
     @Binding var isEditing: Bool
     let content: () -> Content
     
     var body: some View {
-        ScrollView {
-            if let image = bubble.image {
-                Image(uiImage: UIImage(data: image)!)
-                    .resizable()
-                    .scaledToFit()
-                    .border(Color(bubble: bubble), width: 2)
-                    .padding()
+        GeometryReader { bubbleGeometry in
+            ScrollView {
+                if let image = bubble.image {
+                    Image(uiImage: UIImage(data: image)!)
+                        .resizable()
+                        .scaledToFit()
+                        .border(Color(bubble: bubble), width: 2)
+                        .padding()
+                }
+                
+                if bubble.notes!.count != 0 || bubble.displayNotes {
+                    MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
+                }
+                
+                content()
+                Spacer()
             }
-            
-            MultilineTextInput(title: "Notes", text: Binding($bubble.notes)!)
-            
-            content()
-            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {

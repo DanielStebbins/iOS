@@ -9,15 +9,18 @@ import SwiftUI
 
 struct ItemView: View {
     @ObservedObject var item: Item
+    
     @Environment (\.dismiss) private var dismiss
     @State var isEditing = false
     
     var body: some View {
         BubbleView(bubble: item, isEditing: $isEditing) {
-            VStack {
-                CapsuleRow<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations, shown: item.displayLocations)
-                CapsuleRow<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters, shown: item.displayCharacters)
-                CapsuleRow<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions, shown: item.displayFactions)
+            GeometryReader { geometry in
+                VStack(alignment: .leading) {
+                    CapsuleGrid<Location>(bubble: item, title: "Locations", bubbles: item.locations!, addFunction: item.addToLocations, shown: item.displayLocations, maxWidth: geometry.size.width)
+                    CapsuleGrid<Character>(bubble: item, title: "Held By Characters", bubbles: item.characters!, addFunction: item.addToCharacters, shown: item.displayCharacters, maxWidth: geometry.size.width)
+                    CapsuleGrid<Faction>(bubble: item, title: "Held By Factions", bubbles: item.factions!, addFunction: item.addToFactions, shown: item.displayFactions, maxWidth: geometry.size.width)
+                }
             }
         }
         .sheet(isPresented: $isEditing) {

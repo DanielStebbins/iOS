@@ -18,12 +18,6 @@ struct OptionsSheet: View {
     @State var showSheet: Bool = false
     
     var body: some View {
-        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
-                    dismiss()
-                }
-            }
-        
         let deleteButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button(role: .destructive, action: { dismiss(); context.delete(map); newMap = true }) {
                 Image(systemName: "trash")
@@ -32,7 +26,7 @@ struct OptionsSheet: View {
             }
         }
         
-        NavigationStack {
+        ClosableSheet {
             VStack {
                 HStack {
                     Text("Name")
@@ -61,9 +55,8 @@ struct OptionsSheet: View {
             }
             .padding()
             .sheet(isPresented: $showSheet) {
-                SelectionBubbleList(selection: $map.linkedBubble, selected: Binding.constant(false), mappableOnly: true)
+                SelectionBubbleList(selection: $map.linkedBubble, selected: Binding.constant(false), types: [.location, .faction])
             }
-            .toolbar { closeButton }
             .toolbar { deleteButton}
         }
     }

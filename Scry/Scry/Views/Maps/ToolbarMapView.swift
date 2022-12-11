@@ -81,7 +81,6 @@ struct ToolPicker: View {
             }
         }
         .onChange(of: tool) { _ in
-            print("here")
             selectedMappedBubble = nil
         }
         .pickerStyle(.menu)

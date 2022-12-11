@@ -17,6 +17,7 @@ extension Bubble {
         blue = Int16(components[2] * 255)
         self.image = image
         self.systemImageName = systemImageName
+        self.uuid = UUID()
     }
 }
 

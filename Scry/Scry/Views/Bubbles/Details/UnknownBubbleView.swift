@@ -8,18 +8,12 @@
 import SwiftUI
 
 struct UnknownBubbleView: View {
-    @Binding var bubble: Bubble
+    @ObservedObject var bubble: Bubble
     
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
-        let closeButton = ToolbarItem(placement: .navigationBarLeading) {
-                Button("Close") {
-                    dismiss()
-                }
-            }
-        
-        NavigationStack {
+        ClosableSheet {
             ZStack {
                 switch bubble {
                 case let bubble as Character: CharacterView(character: bubble)
@@ -29,7 +23,18 @@ struct UnknownBubbleView: View {
                 default: Text("Error! Unknown Bubble Type")
                 }
             }
-            .toolbar { closeButton }
+            .navigationDestination(for: Character.self) {value in
+                CharacterView(character: value)
+            }
+            .navigationDestination(for: Faction.self) {value in
+                FactionView(faction: value)
+            }
+            .navigationDestination(for: Item.self) {value in
+                ItemView(item: value)
+            }
+            .navigationDestination(for: Location.self) {value in
+                LocationView(location: value)
+            }
         }
     }
 }
