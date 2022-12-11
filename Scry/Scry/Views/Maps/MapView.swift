@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var map: Map
-    @ObservedObject var selectedMappedBubble: SelectedWrapper
+    @Binding var selectedMappedBubble: MappedBubble?
     var tool: Tool
     @Binding var showConfirmation: Bool
 
@@ -34,13 +34,13 @@ struct MapView: View {
                 DrawnCircleView(circle: circle)
             }
             
-            if let s = selectedMappedBubble.selected {
+            if let s = selectedMappedBubble {
                 RelationshipLines(s: s, bubbles: sortedBubbles)
             }
             
             // I separated out the selectedMappedBubble so it will be displayed on top.
             ForEach(sortedBubbles) { mappedBubble in
-                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble.selected, tool: tool, showConfirmation: $showConfirmation)
+                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
         }
     }
