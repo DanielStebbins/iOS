@@ -9,10 +9,10 @@ import SwiftUI
 
 struct MapView: View {
     @ObservedObject var map: Map
-    @Binding var selectedMappedBubble: MappedBubble?
+    @ObservedObject var selectedMappedBubble: SelectedWrapper
     var tool: Tool
     @Binding var showConfirmation: Bool
-    
+
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
@@ -34,51 +34,71 @@ struct MapView: View {
                 DrawnCircleView(circle: circle)
             }
             
-            if let selected = selectedMappedBubble {
-                RelationshipLines(selected: selected, bubbles: sortedBubbles)
+            if let s = selectedMappedBubble.selected {
+                RelationshipLines(selected: selectedMappedBubble, s: s, bubbles: sortedBubbles)
             }
             
             // I separated out the selectedMappedBubble so it will be displayed on top.
             ForEach(sortedBubbles) { mappedBubble in
-                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
+                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
         }
     }
 }
 
 struct RelationshipLines: View {
-    @ObservedObject var selected: MappedBubble
+    @ObservedObject var selected: SelectedWrapper
+    @ObservedObject var s: MappedBubble
     let bubbles: [MappedBubble]
     
     var body: some View {
         ForEach(bubbles) { b in
-            RelationshipLine(current: b, selected: selected)
+            Path { path in
+                path.move(to: CGPoint(x: b.x, y: b.y))
+                path.addLine(to: CGPoint(x: s.x, y: s.y))
+            }
+            .stroke(lineColor(bubble: b.bubble!), lineWidth: 2)
+        }
+    }
+    
+    func lineColor(bubble: Bubble) -> Color {
+        if let s = selected.selected {
+            switch bubble {
+            case let current as Character: return current.relationshipColor(bubble: s.bubble)
+            case let current as Faction: return current.relationshipColor(bubble: s.bubble)
+            case let current as Item: return current.relationshipColor(bubble: s.bubble)
+            case let current as Location: return current.relationshipColor(bubble: s.bubble)
+            default: return Color.clear
+            }
+        }
+        else {
+            return Color.clear
         }
     }
 }
 
-struct RelationshipLine: View {
-    let current: MappedBubble
-    @ObservedObject var selected: MappedBubble
-    
-    var body: some View {
-        let color = lineColor()
-        if color != .clear {
-            Path { path in
-                path.move(to: CGPoint(x: current.x, y: current.y))
-                path.addLine(to: CGPoint(x: selected.x, y: selected.y))
-            }
-            .stroke(color, lineWidth: 2)
-        }
-    }
-    
-    func lineColor() -> Color {
-        switch current.bubble {
-        case let current as Character: return current.relationshipColor(bubble: selected.bubble)
-        case let current as Faction: return current.relationshipColor(bubble: selected.bubble)
-        case let current as Item: return current.relationshipColor(bubble: selected.bubble)
-        case let current as Location: return current.relationshipColor(bubble: selected.bubble)
-        default: return Color.clear
-        }
-    }
-}
+//struct RelationshipLine: View {
+//    let current: MappedBubble
+//    @ObservedObject var selected: MappedBubble
+//
+//    var body: some View {
+//        let color = lineColor()
+//        if color != .clear {
+//            Path { path in
+//                path.move(to: CGPoint(x: current.x, y: current.y))
+//                path.addLine(to: CGPoint(x: selected.x, y: selected.y))
+//            }
+//            .stroke(lineColor(), lineWidth: 2)
+//        }
+//    }
+//
+//    func lineColor() -> Color {
+//        switch current.bubble {
+//        case let current as Character: return current.relationshipColor(bubble: selected.bubble)
+//        case let current as Faction: return current.relationshipColor(bubble: selected.bubble)
+//        case let current as Item: return current.relationshipColor(bubble: selected.bubble)
+//        case let current as Location: return current.relationshipColor(bubble: selected.bubble)
+//        default: return Color.clear
+//        }
+//    }
+//}

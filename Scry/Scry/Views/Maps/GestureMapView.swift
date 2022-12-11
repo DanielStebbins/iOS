@@ -11,7 +11,7 @@ struct GestureMapView: View {
     @ObservedObject var map: Map
     let mapMenuFullyOpen: Bool
     let closeMapMenu: () -> Void
-    @Binding var selectedMappedBubble: MappedBubble?
+    @ObservedObject var selectedMappedBubble: SelectedWrapper
     let tool: Tool
     let drawColor: Color
     let drawSize: Size
@@ -40,7 +40,7 @@ struct GestureMapView: View {
                     showAddConfirmation = false
                     // Selecting and moving handled on individual bubbles with GesturedCapsule.
                     switch tool {
-                    case .select: selectedMappedBubble = nil
+                    case .select: selectedMappedBubble.selected = nil
                     case .addBubble: showAddConfirmation = true
                     case .draw: draw()
                     case .erase: erase()
@@ -69,8 +69,8 @@ struct GestureMapView: View {
                 if previousResize != -1.0 {
                     c /= previousResize
                 }
-                let new = selectedMappedBubble!.fontSize * c
-                selectedMappedBubble!.fontSize = min(max(new, 5), 40)
+                let new = selectedMappedBubble.selected!.fontSize * c
+                selectedMappedBubble.selected!.fontSize = min(max(new, 5), 40)
                 previousResize = Double(change)
             }
             .onEnded { _ in
@@ -78,9 +78,9 @@ struct GestureMapView: View {
             }
         
         
-        ZoomingScrollView(zoom: selectedMappedBubble == nil) {
-            MapView(map: map, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
-                .gesture(tool == .select && selectedMappedBubble != nil ? resize : nil)
+        ZoomingScrollView(zoom: selectedMappedBubble.selected == nil) {
+            MapView(map: map, selectedMappedBubble: selectedMappedBubble, tool: tool, showConfirmation: $showSelectConfirmation)
+                .gesture(tool == .select && selectedMappedBubble.selected != nil ? resize : nil)
                 .gesture(tool == .draw || tool == .erase ? drag : nil)
 //                .gesture(tool == .select ? tap : nil)
                 .gesture(tap)
@@ -103,14 +103,14 @@ struct GestureMapView: View {
             switch item {
             case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.3)])
             case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble, types: [.all])
-            case .bubbleDetails: UnknownBubbleView(bubble: selectedMappedBubble!.bubble!)
+            case .bubbleDetails: UnknownBubbleView(bubble: selectedMappedBubble.selected!.bubble!)
             }
         }
         .confirmationDialog("", isPresented: $showSelectConfirmation, presenting: $selectedMappedBubble) {detail in
             Button(action: { sheet = .bubbleDetails }) {
                 Text("Show Details")
             }
-            Button(role: .destructive, action: { context.delete(selectedMappedBubble!); selectedMappedBubble = nil; }) {
+            Button(role: .destructive, action: { context.delete(selectedMappedBubble.selected!); selectedMappedBubble.selected = nil; }) {
                 Text("Delete")
             }
         }
