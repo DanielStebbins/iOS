@@ -110,7 +110,7 @@ struct GestureMapView: View {
             Button(action: { sheet = .bubbleDetails }) {
                 Text("Show Details")
             }
-            Button(role: .destructive, action: { context.delete(selectedMappedBubble!) }) {
+            Button(role: .destructive, action: { context.delete(selectedMappedBubble!); selectedMappedBubble = nil; }) {
                 Text("Delete")
             }
         }

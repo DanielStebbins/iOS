@@ -27,12 +27,22 @@ extension Character {
         self.setup(name: name, color: color, image: image, systemImageName: "person")
     }
     
-    func relationshipColor(bubble: Bubble) -> Color {
-        if self.factions!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
+    func relationshipColor(bubble: Bubble?) -> Color {
+        if let bubble, self.factions!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
             return Color.blue
         }
         else {
             return Color.clear
+        }
+    }
+    
+    func toggleRelationship(bubble: Bubble) {
+        switch bubble {
+        case _ as Character: return
+        case let faction as Faction: self.factions!.contains(faction) ? self.removeFromFactions(faction) : self.addToFactions(faction)
+        case let item as Item: self.items!.contains(item) ? self.removeFromItems(item) : self.addToItems(item)
+        case let location as Location: self.locations!.contains(location) ? self.removeFromLocations(location) : self.addToLocations(location)
+        default: return
         }
     }
 }
@@ -43,15 +53,25 @@ extension Faction {
         self.setup(name: name, color: color, image: image, systemImageName: "flag")
     }
     
-    func relationshipColor(bubble: Bubble) -> Color {
-        if self.subfactions!.contains(bubble) || self.members!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
+    func relationshipColor(bubble: Bubble?) -> Color {
+        if let bubble, self.subfactions!.contains(bubble) || self.members!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
             return Color.red
         }
-        else if self.superfactions!.contains(bubble) {
+        else if let bubble, self.superfactions!.contains(bubble) {
             return Color.orange
         }
         else {
             return Color.clear
+        }
+    }
+    
+    func toggleRelationship(bubble: Bubble) {
+        switch bubble {
+        case let character as Character: self.members!.contains(character) ? self.removeFromMembers(character) : self.addToMembers(character)
+        case _ as Faction: return
+        case let item as Item: self.items!.contains(item) ? self.removeFromItems(item) : self.addToItems(item)
+        case let location as Location: self.locations!.contains(location) ? self.removeFromLocations(location) : self.addToLocations(location)
+        default: return
         }
     }
 }
@@ -62,12 +82,22 @@ extension Item {
         self.setup(name: name, color: color, image: image, systemImageName: "wand.and.stars")
     }
     
-    func relationshipColor(bubble: Bubble) -> Color {
-        if self.factions!.contains(bubble) || self.characters!.contains(bubble) || self.locations!.contains(bubble) {
+    func relationshipColor(bubble: Bubble?) -> Color {
+        if let bubble, self.factions!.contains(bubble) || self.characters!.contains(bubble) || self.locations!.contains(bubble) {
             return Color.purple
         }
         else {
             return Color.clear
+        }
+    }
+    
+    func toggleRelationship(bubble: Bubble) {
+        switch bubble {
+        case let character as Character: self.characters!.contains(character) ? self.removeFromCharacters(character) : self.addToCharacters(character)
+        case let faction as Faction: self.factions!.contains(faction) ? self.removeFromFactions(faction) : self.addToFactions(faction)
+        case _ as Item: return
+        case let location as Location: self.locations!.contains(location) ? self.removeFromLocations(location) : self.addToLocations(location)
+        default: return
         }
     }
 }
@@ -78,12 +108,22 @@ extension Location {
         self.setup(name: name, color: color, image: image, systemImageName: "location")
     }
     
-    func relationshipColor(bubble: Bubble) -> Color {
-        if self.factions!.contains(bubble) || self.characters!.contains(bubble) || self.items!.contains(bubble) {
+    func relationshipColor(bubble: Bubble?) -> Color {
+        if let bubble, self.factions!.contains(bubble) || self.characters!.contains(bubble) || self.items!.contains(bubble) {
             return Color.green
         }
         else {
             return Color.clear
+        }
+    }
+    
+    func toggleRelationship(bubble: Bubble) {
+        switch bubble {
+        case let character as Character: self.characters!.contains(character) ? self.removeFromCharacters(character) : self.addToCharacters(character)
+        case let faction as Faction: self.factions!.contains(faction) ? self.removeFromFactions(faction) : self.addToFactions(faction)
+        case let item as Item: self.items!.contains(item) ? self.removeFromItems(item) : self.addToItems(item)
+        case _ as Location: return
+        default: return
         }
     }
 }

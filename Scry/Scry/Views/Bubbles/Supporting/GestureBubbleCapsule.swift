@@ -43,7 +43,12 @@ struct GestureBubbleCapsule: View {
         
         let press = LongPressGesture(maximumDistance: 3)
             .onEnded { _ in
-                showConfirmation = true
+                if selected {
+                    showConfirmation = true
+                }
+                else {
+                    toggleRelationship()
+                }
             }
         
         // If condition fixes timing problem on mappedBubble deletion.
@@ -60,7 +65,17 @@ struct GestureBubbleCapsule: View {
                 .position(x: mappedBubble.x, y: mappedBubble.y)
                 .gesture(selected ? move : nil)
                 .gesture(tool == .select ? tap : nil)
-                .simultaneousGesture(selected ? press : nil)
+                .simultaneousGesture(selectedMappedBubble != nil ? press : nil)
+        }
+    }
+    
+    func toggleRelationship() {
+        switch mappedBubble.bubble {
+        case let current as Character: current.toggleRelationship(bubble: selectedMappedBubble!.bubble!)
+        case let current as Faction: current.toggleRelationship(bubble: selectedMappedBubble!.bubble!)
+        case let current as Item: current.toggleRelationship(bubble: selectedMappedBubble!.bubble!)
+        case let current as Location: current.toggleRelationship(bubble: selectedMappedBubble!.bubble!)
+        default: return
         }
     }
 }

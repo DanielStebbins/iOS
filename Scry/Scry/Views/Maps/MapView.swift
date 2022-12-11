@@ -74,10 +74,10 @@ struct RelationshipLine: View {
     
     func lineColor() -> Color {
         switch current.bubble {
-        case let current as Character: return current.relationshipColor(bubble: selected.bubble!)
-        case let current as Faction: return current.relationshipColor(bubble: selected.bubble!)
-        case let current as Item: return current.relationshipColor(bubble: selected.bubble!)
-        case let current as Location: return current.relationshipColor(bubble: selected.bubble!)
+        case let current as Character: return current.relationshipColor(bubble: selected.bubble)
+        case let current as Faction: return current.relationshipColor(bubble: selected.bubble)
+        case let current as Item: return current.relationshipColor(bubble: selected.bubble)
+        case let current as Location: return current.relationshipColor(bubble: selected.bubble)
         default: return Color.clear
         }
     }
