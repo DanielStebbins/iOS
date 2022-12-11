@@ -81,7 +81,7 @@ struct BubbleAdder<T>: View where T: Bubble {
     
     var body : some View {
         let excluded: [UUID] = (bubbles.allObjects as! [Bubble]).map({ $0.uuid! })
-        NavigationLink(destination: SelectionBubbleList(selection: $selection, selected: $selected, types: [BubbleType.find(type: T.self)], excluded: excluded)
+        NavigationLink(destination: SelectionBubbleList(selection: $selection, selected: $selected, types: [BubbleListSection.find(type: T.self)], excluded: excluded)
             .onDisappear { bubbleSelected() }){
                 Image(systemName: "plus")
                     .imageScale(.large)

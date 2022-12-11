@@ -26,12 +26,33 @@ extension Character {
         self.init(context: context)
         self.setup(name: name, color: color, image: image, systemImageName: "person")
     }
+    
+    func relationshipColor(bubble: Bubble) -> Color {
+        if self.factions!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
+            return Color.blue
+        }
+        else {
+            return Color.clear
+        }
+    }
 }
 
 extension Faction {
     convenience init(context: NSManagedObjectContext, name: String, color: Color, image: Data?) {
         self.init(context: context)
         self.setup(name: name, color: color, image: image, systemImageName: "flag")
+    }
+    
+    func relationshipColor(bubble: Bubble) -> Color {
+        if self.subfactions!.contains(bubble) || self.members!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
+            return Color.red
+        }
+        else if self.superfactions!.contains(bubble) {
+            return Color.orange
+        }
+        else {
+            return Color.clear
+        }
     }
 }
 
@@ -40,12 +61,30 @@ extension Item {
         self.init(context: context)
         self.setup(name: name, color: color, image: image, systemImageName: "wand.and.stars")
     }
+    
+    func relationshipColor(bubble: Bubble) -> Color {
+        if self.factions!.contains(bubble) || self.characters!.contains(bubble) || self.locations!.contains(bubble) {
+            return Color.purple
+        }
+        else {
+            return Color.clear
+        }
+    }
 }
 
 extension Location {
     convenience init(context: NSManagedObjectContext, name: String, color: Color, image: Data?) {
         self.init(context: context)
         self.setup(name: name, color: color, image: image, systemImageName: "location")
+    }
+    
+    func relationshipColor(bubble: Bubble) -> Color {
+        if self.factions!.contains(bubble) || self.characters!.contains(bubble) || self.items!.contains(bubble) {
+            return Color.green
+        }
+        else {
+            return Color.clear
+        }
     }
 }
 

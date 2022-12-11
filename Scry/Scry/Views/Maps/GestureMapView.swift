@@ -36,8 +36,10 @@ struct GestureMapView: View {
                 else {
                     x = value.location.x
                     y = value.location.y
+                    // Trying to fix it getting stuck some times saying "trying to present what's already presented.
+                    showAddConfirmation = false
+                    // Selecting and moving handled on individual bubbles with GesturedCapsule.
                     switch tool {
-                        // Selecting and moving handled on individual bubbles with GesturedCapsule.
                     case .select: selectedMappedBubble = nil
                     case .addBubble: showAddConfirmation = true
                     case .draw: draw()

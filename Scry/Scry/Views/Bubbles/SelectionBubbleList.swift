@@ -10,7 +10,7 @@ import SwiftUI
 struct SelectionBubbleList: View {
     @Binding var selection: Bubble?
     @Binding var selected: Bool
-    let types: [BubbleType]
+    let types: [BubbleListSection]
     var excluded: [UUID] = []
     
     @Environment (\.dismiss) private var dismiss
@@ -74,20 +74,11 @@ struct SelectionListSection<T>: View where T: Bubble {
     }
 }
 
-enum BubbleType: String, Identifiable, CaseIterable {
+enum BubbleListSection: String, Identifiable, CaseIterable {
     case character = "Character", faction = "Faction", item = "Item", location = "Location", none = "None", all = "All"
     var id: RawValue { rawValue }
-    var imageName: String {
-        switch self {
-        case .character: return "person"
-        case .faction: return "flag"
-        case .item: return "wand.and.stars"
-        case .location: return "location"
-        default: return "face.smiling"
-        }
-    }
     
-    static func find<T>(type: T.Type) -> BubbleType where T: Bubble {
+    static func find<T>(type: T.Type) -> BubbleListSection where T: Bubble {
         switch type {
         case is Character.Type: return .character
         case is Faction.Type: return .faction
@@ -95,6 +86,5 @@ enum BubbleType: String, Identifiable, CaseIterable {
         case is Location.Type: return .location
         default: return .none
         }
-        
     }
 }

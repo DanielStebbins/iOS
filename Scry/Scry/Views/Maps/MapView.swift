@@ -34,10 +34,51 @@ struct MapView: View {
                 DrawnCircleView(circle: circle)
             }
             
+            if let selected = selectedMappedBubble {
+                RelationshipLines(selected: selected, bubbles: sortedBubbles)
+            }
+            
             // I separated out the selectedMappedBubble so it will be displayed on top.
             ForEach(sortedBubbles) { mappedBubble in
                 GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
             }
+        }
+    }
+}
+
+struct RelationshipLines: View {
+    @ObservedObject var selected: MappedBubble
+    let bubbles: [MappedBubble]
+    
+    var body: some View {
+        ForEach(bubbles) { b in
+            RelationshipLine(current: b, selected: selected)
+        }
+    }
+}
+
+struct RelationshipLine: View {
+    let current: MappedBubble
+    @ObservedObject var selected: MappedBubble
+    
+    var body: some View {
+        let color = lineColor()
+        if color != .clear {
+            Path { path in
+                path.move(to: CGPoint(x: current.x, y: current.y))
+                path.addLine(to: CGPoint(x: selected.x, y: selected.y))
+            }
+            .stroke(color, lineWidth: 2)
+        }
+    }
+    
+    func lineColor() -> Color {
+        switch current.bubble {
+        case let current as Character: return current.relationshipColor(bubble: selected.bubble!)
+        case let current as Faction: return current.relationshipColor(bubble: selected.bubble!)
+        case let current as Item: return current.relationshipColor(bubble: selected.bubble!)
+        case let current as Location: return current.relationshipColor(bubble: selected.bubble!)
+        default: return Color.clear
         }
     }
 }

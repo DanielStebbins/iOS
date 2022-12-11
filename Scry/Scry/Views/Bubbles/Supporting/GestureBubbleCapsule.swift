@@ -13,19 +13,21 @@ struct GestureBubbleCapsule: View {
     var tool: Tool
     @Binding var showConfirmation: Bool
     
-    @State private var offset = CGSize.zero
+    @State private var initial = CGPoint.zero
     
     var body: some View {
         let selected: Bool = selectedMappedBubble == mappedBubble
         
         let move = DragGesture()
             .onChanged {value in
-                offset = value.translation
+                if initial == CGPoint.zero {
+                    initial = CGPoint(x: mappedBubble.x, y: mappedBubble.y)
+                }
+                mappedBubble.x = initial.x + value.translation.width
+                mappedBubble.y = initial.y + value.translation.height
             }
             .onEnded { value in
-                mappedBubble.x += value.translation.width
-                mappedBubble.y += value.translation.height
-                offset = CGSize.zero
+                initial = CGPoint.zero
             }
         
         let tap = TapGesture()
@@ -56,7 +58,6 @@ struct GestureBubbleCapsule: View {
                 }
                 .font(.system(size: mappedBubble.fontSize))
                 .position(x: mappedBubble.x, y: mappedBubble.y)
-                .offset(offset)
                 .gesture(selected ? move : nil)
                 .gesture(tool == .select ? tap : nil)
                 .simultaneousGesture(selected ? press : nil)

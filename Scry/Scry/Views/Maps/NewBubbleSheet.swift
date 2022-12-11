@@ -29,7 +29,6 @@ struct NewBubbleSheet: View {
                 case .faction: bubble = Faction(context: context, name: name, color: color, image: image)
                 case .item: bubble = Item(context: context, name: name, color: color, image: image)
                 case .location: bubble = Location(context: context, name: name, color: color, image: image)
-                default: bubble = Bubble(context: context)
                 }
                 selectedBubble = bubble
                 added = true
@@ -74,6 +73,19 @@ struct NewBubbleSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { submitButton }
             .padding([.leading, .trailing])
+        }
+    }
+}
+
+enum BubbleType: String, Identifiable, CaseIterable {
+    case character = "Character", faction = "Faction", item = "Item", location = "Location"
+    var id: RawValue { rawValue }
+    var imageName: String {
+        switch self {
+        case .character: return "person"
+        case .faction: return "flag"
+        case .item: return "wand.and.stars"
+        case .location: return "location"
         }
     }
 }
