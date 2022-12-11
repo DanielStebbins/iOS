@@ -34,8 +34,8 @@ struct MapView: View {
                 DrawnCircleView(circle: circle)
             }
             
-            if let s = selectedMappedBubble {
-                RelationshipLines(s: s, bubbles: sortedBubbles)
+            if let selected = selectedMappedBubble {
+                RelationshipLines(selected: selected, bubbles: sortedBubbles)
             }
             
             // I separated out the selectedMappedBubble so it will be displayed on top.
@@ -47,26 +47,31 @@ struct MapView: View {
 }
 
 struct RelationshipLines: View {
-    @ObservedObject var s: MappedBubble
+    @ObservedObject var selected: MappedBubble
     let bubbles: [MappedBubble]
     
     var body: some View {
         ForEach(bubbles) { b in
             Path { path in
                 path.move(to: CGPoint(x: b.x, y: b.y))
-                path.addLine(to: CGPoint(x: s.x, y: s.y))
+                path.addLine(to: CGPoint(x: selected.x, y: selected.y))
             }
-            .stroke(lineColor(bubble: b.bubble!), lineWidth: 2)
+            .stroke(lineColor(bubble: b.bubble), lineWidth: 2)
         }
     }
     
-    func lineColor(bubble: Bubble) -> Color {
-        switch bubble {
-        case let current as Character: return current.relationshipColor(bubble: s.bubble)
-        case let current as Faction: return current.relationshipColor(bubble: s.bubble)
-        case let current as Item: return current.relationshipColor(bubble: s.bubble)
-        case let current as Location: return current.relationshipColor(bubble: s.bubble)
-        default: return Color.black
+    func lineColor(bubble: Bubble?) -> Color {
+        if let bubble {
+            switch bubble {
+            case let current as Character: return current.relationshipColor(bubble: selected.bubble)
+            case let current as Faction: return current.relationshipColor(bubble: selected.bubble)
+            case let current as Item: return current.relationshipColor(bubble: selected.bubble)
+            case let current as Location: return current.relationshipColor(bubble: selected.bubble)
+            default: return Color.black
+            }
+        }
+        else {
+            return Color.white
         }
     }
 }

@@ -26,23 +26,27 @@ struct BubbleEditSheet<Content>: View where Content: View {
         
         ClosableView {
             VStack {
-                TextField("Name", text: Binding($bubble.name)!)
-                    .multilineTextAlignment(.center)
-                    .bold()
-                    .italic()
-                    .font(.headline)
+                HStack {
+                    HStack {
+                        Image(systemName: bubble.systemImageName!)
+                            .imageScale(.large)
+                            .padding(5)
+                        TextField("Name", text: Binding($bubble.name)!)
+                            .bold()
+                            .italic()
+                            .font(.headline)
+                            .foregroundColor(Color(bubble: bubble).darkness < 0.5 ? .white : .black)
+                    }
                     .padding([.leading, .trailing], 7)
                     .padding([.top, .bottom], 5)
                     .background {
                         Capsule()
                             .fill(Color(bubble: bubble))
                     }
-                ColorPicker("Choose Color", selection: Binding(get: { Color(bubble: bubble) }, set: {newColor in
-                    let components = newColor.components
-                    bubble.red = Int16(components[0] * 255)
-                    bubble.green = Int16(components[0] * 255)
-                    bubble.blue = Int16(components[0] * 255)
-                }), supportsOpacity: false)
+                    ColorPicker("", selection: Binding(get: { Color(bubble: bubble) }, set: { _,_ in }), supportsOpacity: false)
+                        .labelsHidden()
+                }
+                .padding(.bottom, 5)
                 PhotoPickerView(title: "Choose Image", selection: $bubble.image)
                 
                 DisplayElementButton(text: "Notes", display: $bubble.displayNotes)
@@ -53,6 +57,9 @@ struct BubbleEditSheet<Content>: View where Content: View {
             .navigationBarTitleDisplayMode(.inline)
             .padding()
             .toolbar { deleteButton }
+            .onTapGesture {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
         }
     }
 }

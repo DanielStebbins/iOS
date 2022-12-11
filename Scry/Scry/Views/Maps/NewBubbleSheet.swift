@@ -41,39 +41,7 @@ struct NewBubbleSheet: View {
         
         ClosableView {
             VStack {
-                HStack {
-                    HStack {
-                        if types.count == 1 {
-                            Image(systemName: types[0].imageName)
-                                .imageScale(.large)
-                                .padding(5)
-                        }
-                        else {
-                            Picker("Bubble Type", selection: $bubbleType) {
-                                ForEach(types) {
-                                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
-                                        .labelStyle(.iconOnly)
-                                }
-                            }
-                            .tint(.white)
-                            .pickerStyle(.menu)
-                        }
-                        TextField("Name", text: $name)
-                            .bold()
-                            .italic()
-                            .font(.headline)
-                            .foregroundColor(color.darkness < 0.5 ? .white : .black)
-                    }
-                    .padding([.leading, .trailing], 7)
-                    .padding([.top, .bottom], 5)
-                    .background {
-                        Capsule()
-                            .fill(color)
-                    }
-                    ColorPicker("", selection: $color, supportsOpacity: false)
-                        .labelsHidden()
-                }
-                .padding(.bottom)
+                InputCapsule(name: $name, color: $color, image: $image, bubbleType: $bubbleType, types: types)
                 PhotoPickerView(title: "Bubble Image", selection: $image)
                 Spacer()
             }
@@ -81,6 +49,59 @@ struct NewBubbleSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { submitButton }
             .padding([.leading, .trailing])
+        }
+    }
+}
+
+struct InputCapsule: View {
+    @Binding var name: String
+    @Binding var color: Color
+    @Binding var image: Data?
+    @Binding var bubbleType: BubbleType
+    let types: [BubbleType]
+    
+    var body: some View {
+        HStack {
+            HStack {
+                TypePicker(types: types, selection: $bubbleType)
+                TextField("Name", text: $name)
+                    .bold()
+                    .italic()
+                    .font(.headline)
+                    .foregroundColor(color.darkness < 0.5 ? .white : .black)
+            }
+            .padding([.leading, .trailing], 7)
+            .padding([.top, .bottom], 5)
+            .background {
+                Capsule()
+                    .fill(color)
+            }
+            ColorPicker("", selection: $color, supportsOpacity: false)
+                .labelsHidden()
+        }
+        .padding(.bottom, 5)
+    }
+}
+
+struct TypePicker: View {
+    let types: [BubbleType]
+    @Binding var selection: BubbleType
+    
+    var body: some View {
+        if types.count == 1 {
+            Image(systemName: types[0].imageName)
+                .imageScale(.large)
+                .padding(5)
+        }
+        else {
+            Picker("Bubble Type", selection: $selection) {
+                ForEach(types) {
+                    Label($0.rawValue, systemImage: $0.imageName).tag($0)
+                        .labelStyle(.iconOnly)
+                }
+            }
+            .tint(.white)
+            .pickerStyle(.menu)
         }
     }
 }

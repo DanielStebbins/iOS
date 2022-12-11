@@ -90,7 +90,7 @@ struct GestureMapView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 if let linkedBubble = map.linkedBubble {
-                    Button(action: { sheetBubble = map.linkedBubble!; sheet = .bubbleDetails }) {
+                    Button(action: { sheet = .linkedBubbleDetails }) {
                         BubbleCapsule(bubble: linkedBubble)
                             .labelStyle(.titleAndIcon)
                     }
@@ -105,6 +105,7 @@ struct GestureMapView: View {
             case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.25)])
             case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble, types: [.all])
             case .bubbleDetails: UnknownBubbleView(bubble: selectedMappedBubble!.bubble!)
+            case .linkedBubbleDetails: UnknownBubbleView(bubble: map.linkedBubble!)
             }
         }
         .confirmationDialog("", isPresented: $showSelectConfirmation, presenting: $selectedMappedBubble) {detail in
@@ -153,6 +154,6 @@ struct GestureMapView: View {
 }
 
 enum MapShownSheet: String, Identifiable {
-    case newBubble, bubbleList, bubbleDetails
+    case newBubble, bubbleList, bubbleDetails, linkedBubbleDetails
     var id: RawValue { rawValue }
 }

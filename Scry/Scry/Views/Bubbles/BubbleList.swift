@@ -71,7 +71,7 @@ struct ListCapsuleGrid<T>: View where T: Bubble {
                     }
                 }
                 .padding(7)
-                .padding(.top, rows.isEmpty ? 30 : 0)
+                .padding(.top, rows.isEmpty ? 20 : 0)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.offText, lineWidth: 2)
