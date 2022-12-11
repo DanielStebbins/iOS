@@ -13,7 +13,7 @@ struct UnknownBubbleView: View {
     @Environment (\.dismiss) private var dismiss
     
     var body: some View {
-        ClosableSheet {
+        ClosableView {
             ZStack {
                 switch bubble {
                 case let bubble as Character: CharacterView(character: bubble)

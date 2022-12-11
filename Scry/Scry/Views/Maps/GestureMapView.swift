@@ -38,6 +38,8 @@ struct GestureMapView: View {
                     y = value.location.y
                     // Trying to fix it getting stuck some times saying "trying to present what's already presented.
                     showAddConfirmation = false
+                    showSelectConfirmation = false
+                    sheet = nil
                     // Selecting and moving handled on individual bubbles with GesturedCapsule.
                     switch tool {
                     case .select: selectedMappedBubble = nil

@@ -26,7 +26,7 @@ struct OptionsSheet: View {
             }
         }
         
-        ClosableSheet {
+        ClosableView {
             VStack {
                 HStack {
                     Text("Name")

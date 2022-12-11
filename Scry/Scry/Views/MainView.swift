@@ -39,7 +39,7 @@ struct MainView: View {
 
         let bubbleListButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: { closeMapMenu(); sheet = .bubbleList }) {
-                Image(systemName: "list.bullet")
+                Image(systemName: "list.bullet.circle")
                     .imageScale(.large)
             }
             .disabled(story.displayedMap == nil)

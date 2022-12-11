@@ -24,7 +24,7 @@ struct BubbleEditSheet<Content>: View where Content: View {
             }
         }
         
-        ClosableSheet {
+        ClosableView {
             VStack {
                 TextField("Name", text: Binding($bubble.name)!)
                     .multilineTextAlignment(.center)

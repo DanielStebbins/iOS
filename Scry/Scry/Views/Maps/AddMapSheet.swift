@@ -31,7 +31,7 @@ struct AddMapSheet: View {
             }
         }
         
-        ClosableSheet {
+        ClosableView {
             VStack {
                 TextField("Name", text: $name)
                     .multilineTextAlignment(.center)

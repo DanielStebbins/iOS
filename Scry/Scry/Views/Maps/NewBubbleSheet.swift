@@ -38,7 +38,7 @@ struct NewBubbleSheet: View {
             }
         }
         
-        ClosableSheet {
+        ClosableView {
             VStack {
                 HStack {
                     HStack {

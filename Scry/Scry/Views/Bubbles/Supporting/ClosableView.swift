@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ClosableSheet<Content>: View where Content: View {
+struct ClosableView<Content>: View where Content: View {
     let content: () -> Content
     
     @Environment (\.dismiss) private var dismiss

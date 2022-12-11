@@ -16,10 +16,11 @@ struct LocationView: View {
     var body: some View {
         BubbleView(bubble: location, isEditing: $isEditing) {
             GeometryReader { geometry in
+                let width = geometry.size.width
                 VStack {
-                    CapsuleGrid<Faction>(bubble: location, title: "Factions", bubbles: location.factions!, addFunction: location.addToFactions, shown: location.displayFactions, maxWidth: geometry.size.width)
-                    CapsuleGrid<Character>(bubble: location, title: "Characters", bubbles: location.characters!, addFunction: location.addToCharacters, shown: location.displayCharacters, maxWidth: geometry.size.width)
-                    CapsuleGrid<Item>(bubble: location, title: "Items", bubbles: location.items!, addFunction: location.addToItems, shown: location.displayItems, maxWidth: geometry.size.width)
+                    CapsuleGrid<Faction>(bubble: location, title: "Factions", bubbles: location.factions!, addFunction: location.addToFactions, shown: location.displayFactions, width: width)
+                    CapsuleGrid<Character>(bubble: location, title: "Characters", bubbles: location.characters!, addFunction: location.addToCharacters, shown: location.displayCharacters, width: width)
+                    CapsuleGrid<Item>(bubble: location, title: "Items", bubbles: location.items!, addFunction: location.addToItems, shown: location.displayItems, width: width)
                 }
             }
         }

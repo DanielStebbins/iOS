@@ -13,7 +13,7 @@ struct BubbleList: View {
     @State var search: String = ""
     
     var body: some View {
-        ClosableSheet {
+        ClosableView {
             List {
                 ListSection<Character>(search: $search)
                 ListSection<Faction>(search: $search)
@@ -42,13 +42,13 @@ struct BubbleList: View {
 
 struct ListSection<T>: View where T: Bubble {
     @Binding var search: String
-    
+
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
-    
+
     var searchResults: [T] {
         bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
     }
-    
+
     var body: some View {
         Section {
             ForEach(searchResults) {b in
