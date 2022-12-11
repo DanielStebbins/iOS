@@ -24,7 +24,7 @@ struct CapsuleGrid<T>: View where T: Bubble {
             VStack(alignment: .leading) {
                 HStack {
                     Text(title)
-                    BubbleAdder(bubble: bubble, bubbles: bubbles, addFunction: addFunction)
+                    GridBubbleAdder(bubble: bubble, bubbles: bubbles, addFunction: addFunction)
                 }
                 ZStack(alignment: .leading)
                 {
@@ -71,7 +71,7 @@ struct CapsuleGrid<T>: View where T: Bubble {
     }
 }
 
-struct BubbleAdder<T>: View where T: Bubble {
+struct GridBubbleAdder<T>: View where T: Bubble {
     var bubble: Bubble? = nil
     let bubbles: NSSet
     let addFunction: (T) -> Void
