@@ -35,19 +35,18 @@ struct MapView: View {
             }
             
             if let s = selectedMappedBubble.selected {
-                RelationshipLines(selected: selectedMappedBubble, s: s, bubbles: sortedBubbles)
+                RelationshipLines(s: s, bubbles: sortedBubbles)
             }
             
             // I separated out the selectedMappedBubble so it will be displayed on top.
             ForEach(sortedBubbles) { mappedBubble in
-                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: selectedMappedBubble, tool: tool, showConfirmation: $showConfirmation)
+                GestureBubbleCapsule(mappedBubble: mappedBubble, selectedMappedBubble: $selectedMappedBubble.selected, tool: tool, showConfirmation: $showConfirmation)
             }
         }
     }
 }
 
 struct RelationshipLines: View {
-    @ObservedObject var selected: SelectedWrapper
     @ObservedObject var s: MappedBubble
     let bubbles: [MappedBubble]
     
@@ -62,17 +61,12 @@ struct RelationshipLines: View {
     }
     
     func lineColor(bubble: Bubble) -> Color {
-        if let s = selected.selected {
-            switch bubble {
-            case let current as Character: return current.relationshipColor(bubble: s.bubble)
-            case let current as Faction: return current.relationshipColor(bubble: s.bubble)
-            case let current as Item: return current.relationshipColor(bubble: s.bubble)
-            case let current as Location: return current.relationshipColor(bubble: s.bubble)
-            default: return Color.clear
-            }
-        }
-        else {
-            return Color.clear
+        switch bubble {
+        case let current as Character: return current.relationshipColor(bubble: s.bubble)
+        case let current as Faction: return current.relationshipColor(bubble: s.bubble)
+        case let current as Item: return current.relationshipColor(bubble: s.bubble)
+        case let current as Location: return current.relationshipColor(bubble: s.bubble)
+        default: return Color.black
         }
     }
 }

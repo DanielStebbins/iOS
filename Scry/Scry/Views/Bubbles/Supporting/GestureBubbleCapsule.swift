@@ -9,14 +9,14 @@ import SwiftUI
 
 struct GestureBubbleCapsule: View {
     @ObservedObject var mappedBubble: MappedBubble
-    @ObservedObject var selectedMappedBubble: SelectedWrapper
+    @Binding var selectedMappedBubble: MappedBubble?
     var tool: Tool
     @Binding var showConfirmation: Bool
     
     @State private var initial = CGPoint.zero
     
     var body: some View {
-//        let selected: Bool = selectedMappedBubble.selected == mappedBubble
+        let selected: Bool = selectedMappedBubble == mappedBubble
         
         let move = DragGesture()
             .onChanged {value in
@@ -32,23 +32,24 @@ struct GestureBubbleCapsule: View {
         
         let tap = TapGesture()
             .onEnded {
-                if selectedMappedBubble.selected != mappedBubble {
-                    selectedMappedBubble.selected = mappedBubble
+                if !selected {
+                    selectedMappedBubble = mappedBubble
                     mappedBubble.lastChanged = Date.now
                 }
                 else {
-                    selectedMappedBubble.selected = nil
+                    selectedMappedBubble = nil
                 }
             }
         
         let press = LongPressGesture(minimumDuration: 0.75, maximumDistance: 3)
             .onEnded { _ in
-                if selectedMappedBubble.selected == mappedBubble {
+                if selected {
                     showConfirmation = true
                 }
                 else {
                     toggleRelationship()
-                    selectedMappedBubble.selected = selectedMappedBubble.selected
+                    // Changing the relationships wasn't updating the lines, this line forces a redraw.
+                    selectedMappedBubble!.bubble = selectedMappedBubble!.bubble!
                 }
             }
         
@@ -57,21 +58,21 @@ struct GestureBubbleCapsule: View {
             // Never touch the order of these view modifiers. Will cause crashing.
             BubbleCapsule(bubble: bubble, size: mappedBubble.fontSize)
                 .overlay {
-                    if selectedMappedBubble.selected == mappedBubble {
+                    if selected {
                         Capsule()
                             .stroke(Color.accentColor, lineWidth: 2)
                     }
                 }
                 .font(.system(size: mappedBubble.fontSize))
                 .position(x: mappedBubble.x, y: mappedBubble.y)
-                .gesture(selectedMappedBubble.selected == mappedBubble ? move : nil)
+                .gesture(selected ? move : nil)
                 .gesture(tool == .select ? tap : nil)
-                .simultaneousGesture(selectedMappedBubble.selected != nil ? press : nil)
+                .simultaneousGesture(selectedMappedBubble != nil ? press : nil)
         }
     }
     
     func toggleRelationship() {
-        switch selectedMappedBubble.selected!.bubble! {
+        switch selectedMappedBubble!.bubble! {
         case let character as Character: character.toggleRelationship(bubble: mappedBubble.bubble!)
         case let faction as Faction: faction.toggleRelationship(bubble: mappedBubble.bubble!)
         case let item as Item: item.toggleRelationship(bubble: mappedBubble.bubble!)
