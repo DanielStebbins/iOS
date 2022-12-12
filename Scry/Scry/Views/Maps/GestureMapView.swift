@@ -97,6 +97,7 @@ struct GestureMapView: View {
                 }
                 else {
                     Text(map.name!)
+                        .font(.system(size: 20, weight: .bold))
                 }
             }
         }

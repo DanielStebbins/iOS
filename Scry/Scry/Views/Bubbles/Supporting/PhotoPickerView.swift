@@ -28,14 +28,14 @@ struct PhotoPickerView: View {
                     Image(uiImage: UIImage(data: image)!)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 50, height: 50)
+                        .frame(width: 40, height: 40)
                         .clipped()
-                        .cornerRadius(25)
+                        .cornerRadius(20)
                 }
                 else {
                     Image(systemName: "square.grid.2x2")
                         .imageScale(.large)
-                        .frame(width: 50, height: 50, alignment: .trailing)
+                        .frame(width: 30, height: 30, alignment: .trailing)
                         .foregroundColor(.white)
                 }
             }

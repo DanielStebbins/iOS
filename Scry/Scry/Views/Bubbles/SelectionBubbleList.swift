@@ -18,29 +18,29 @@ struct SelectionBubbleList: View {
     @State var search: String = ""
     
     var body: some View {
-        List {
-            if types.contains(.none) || types.contains(.all) {
-                Button(action: { selection = nil; selected = true; dismiss() }) {
-                    Text("None")
+        GeometryReader { geometry in
+            ClosableView {
+                ScrollView {
+                    let width = geometry.size.width
+                    if types.contains(.character) || types.contains(.all) {
+                        SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected, excluded: excluded, width: width)
+                    }
+                    if types.contains(.faction) || types.contains(.all) {
+                        SelectionListSection<Faction>(search: $search, selection: $selection, selected: $selected, excluded: excluded, width: width)
+                    }
+                    if types.contains(.item) || types.contains(.all) {
+                        SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected, excluded: excluded, width: width)
+                    }
+                    if types.contains(.location) || types.contains(.all) {
+                        SelectionListSection<Location>(search: $search, selection: $selection, selected: $selected, excluded: excluded, width: width)
+                    }
                 }
-            }
-            if types.contains(.character) || types.contains(.all) {
-                SelectionListSection<Character>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
-            }
-            if types.contains(.faction) || types.contains(.all) {
-                SelectionListSection<Faction>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
-            }
-            if types.contains(.item) || types.contains(.all) {
-                SelectionListSection<Item>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
-            }
-            if types.contains(.location) || types.contains(.all) {
-                SelectionListSection<Location>(search: $search, selection: $selection, selected: $selected, excluded: excluded)
+                .searchable(text: $search)
+                .padding()
+                .navigationTitle("Select a Bubble")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .searchable(text: $search)
-        .padding()
-        .navigationTitle("Select a Bubble")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -49,6 +49,7 @@ struct SelectionListSection<T>: View where T: Bubble {
     @Binding var selection: Bubble?
     @Binding var selected: Bool
     let excluded: [UUID]
+    let width: CGFloat
     
     @Environment (\.dismiss) private var dismiss
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
@@ -57,25 +58,68 @@ struct SelectionListSection<T>: View where T: Bubble {
         bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
     }
     
+    let padding: CGFloat = 20
+    
     var body: some View {
-        Section {
-            ForEach(searchResults) {b in
-                if !excluded.contains(b.uuid!) {
-                    Button(action: { selection = b; selected = true; dismiss() }) {
-                        BubbleCapsule(bubble: b)
-                            .labelStyle(.titleOnly)
+        let rows: [[T]] = split()
+        VStack(alignment: .leading) {
+            Section {
+                ZStack(alignment: .leading)
+                {
+                    Color.clear
+                    VStack(alignment: .leading) {
+                        ForEach(Array(rows.enumerated()), id: \.element) { index, element in
+                            HStack {
+                                ForEach(bubbles) { b in
+                                    Button(action: { selection = b; selected = true; dismiss() }) {
+                                        BubbleCapsule(bubble: b)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
+                .padding(7)
+                .padding(.top, rows.isEmpty ? 20 : 0)
+                .overlay {
+                    RoundedRectangle(cornerRadius: 20)
+                        .stroke(Color.offText, lineWidth: 2)
+                }
+            } header: {
+                HStack {
+                    Text(String(describing: T.self))
+                    ListBubbleAdder<T>()
+                }
             }
-        } header: {
-            Text(String(describing: T.self))
         }
-        .listRowBackground(Color.background)
+        .padding(15)
+    }
+    
+    func split() -> [[T]] {
+        let sortedBubbles = searchResults.sorted(by: { $0.name! < $1.name! })
+        
+        var count: CGFloat = 0.0
+        var rows: [[T]] = []
+        var row: [T] = []
+        for bubble in sortedBubbles {
+            let textWidth: CGFloat = bubble.name!.size(withAttributes: [.font: UIFont.systemFont(ofSize: 20)]).width
+            if count + textWidth + 30 + padding > width {
+                rows.append(row)
+                row = []
+                count = 0.0
+            }
+            row.append(bubble)
+            count += textWidth + 30 + padding
+        }
+        if !row.isEmpty {
+            rows.append(row)
+        }
+        return rows
     }
 }
 
 enum BubbleListSection: String, Identifiable, CaseIterable {
-    case character = "Character", faction = "Faction", item = "Item", location = "Location", none = "None", all = "All"
+    case character = "Character", faction = "Faction", item = "Item", location = "Location", all = "All"
     var id: RawValue { rawValue }
     
     static func find<T>(type: T.Type) -> BubbleListSection where T: Bubble {
@@ -84,7 +128,7 @@ enum BubbleListSection: String, Identifiable, CaseIterable {
         case is Faction.Type: return .faction
         case is Item.Type: return .item
         case is Location.Type: return .location
-        default: return .none
+        default: return .character
         }
     }
 }

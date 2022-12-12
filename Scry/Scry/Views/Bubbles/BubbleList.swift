@@ -8,22 +8,19 @@
 import SwiftUI
 
 struct BubbleList: View {
-    @Environment (\.dismiss) private var dismiss
-    
     @State var search: String = ""
     
     var body: some View {
         GeometryReader { geometry in
             ClosableView {
-
-//                List {
                 ScrollView {
-                    ListCapsuleGrid<Character>(search: $search, width: geometry.size.width)
-                    ListCapsuleGrid<Faction>(search: $search, width: geometry.size.width)
-                    ListCapsuleGrid<Item>(search: $search, width: geometry.size.width)
-                    ListCapsuleGrid<Location>(search: $search, width: geometry.size.width)
-                    //                }
+                    let width = geometry.size.width
+                    ListCapsuleGrid<Character>(search: $search, width: width)
+                    ListCapsuleGrid<Faction>(search: $search, width: width)
+                    ListCapsuleGrid<Item>(search: $search, width: width)
+                    ListCapsuleGrid<Location>(search: $search, width: width)
                 }
+                .background(Color.listBackground)
                 .searchable(text: $search)
                 .navigationTitle("Bubble List")
                 .navigationBarTitleDisplayMode(.inline)
@@ -84,7 +81,6 @@ struct ListCapsuleGrid<T>: View where T: Bubble {
             }
         }
         .padding(15)
-        .listRowBackground(Color.background)
     }
     
     func split() -> [[T]] {

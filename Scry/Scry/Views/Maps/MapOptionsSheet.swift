@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OptionsSheet: View {
+struct MapOptionsSheet: View {
     @ObservedObject var map: Map
     @Binding var newMap: Bool
     
@@ -37,7 +37,7 @@ struct OptionsSheet: View {
                         .italic()
                         .font(.headline)
                 }
-                PhotoPickerView(title: "Map Image", selection: $map.image)
+                .padding([.top, .bottom], 20)
                 HStack {
                     Text("Linked Bubble")
                     Spacer()
@@ -50,10 +50,13 @@ struct OptionsSheet: View {
                         }
                     }
                 }
-                .navigationTitle("Map Options")
-                .navigationBarTitleDisplayMode(.inline)
+                .padding(.bottom, 15)
+                PhotoPickerView(title: "Map Image", selection: $map.image)
+                Spacer()
             }
-            .padding()
+            .padding([.leading, .trailing], 20)
+            .navigationTitle("Map Options")
+            .navigationBarTitleDisplayMode(.inline)
             .sheet(isPresented: $showSheet) {
                 SelectionBubbleList(selection: $map.linkedBubble, selected: Binding.constant(false), types: [.location, .faction])
             }

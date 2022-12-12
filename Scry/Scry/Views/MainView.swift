@@ -97,9 +97,9 @@ struct MainView: View {
             }
             .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
                 switch item {
-                case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.3)])
+                case .options: MapOptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.25)])
                 case .bubbleList: BubbleList()
-                case .addMap: NewMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
+                case .addMap: NewMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.25)])
                 }
             }
             .gesture(drag)

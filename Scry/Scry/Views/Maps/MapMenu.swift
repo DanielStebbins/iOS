@@ -15,8 +15,6 @@ struct MapMenu: View {
     
     @Environment(\.managedObjectContext) var context
     
-//    @State var searchText: String = ""
-    
     var body: some View {
         let maps = story.maps!.allObjects as! [Map]
         let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
@@ -34,12 +32,9 @@ struct MapMenu: View {
             }
             .padding([.top, .leading, .trailing])
             ForEach(sortedMaps) {map in
-//                if searchText == "" || (map.linkedBubble != nil && map.linkedBubble!.name!.contains(searchText)) || (map.linkedBubble == nil && map.name!.contains(searchText)) {
-                    MapMenuRow(story: story, map: map, close: close, width: width)
-//                }
+                MapMenuRow(story: story, map: map, close: close, width: width)
             }
         }
-//        .searchable(text: $searchText, placement: .toolbar)
         .padding([.leading, .trailing])
         .frame(width: width)
         .background(Color.background, ignoresSafeAreaEdges: [])
@@ -64,7 +59,7 @@ struct MapMenuRow: View {
                     .cornerRadius(width * 0.06)
                     .overlay {
                         RoundedRectangle(cornerRadius: width * 0.06)
-                            .stroke(Color.accentColor, lineWidth: 2)
+                            .stroke(Color.offText, lineWidth: 3)
                     }
                 if let linkedBubble = map.linkedBubble {
                     BubbleCapsule(bubble: linkedBubble)
@@ -72,10 +67,11 @@ struct MapMenuRow: View {
                 else {
                     Text(map.name!)
                         .fontWeight(.heavy)
-                        .foregroundColor(.accentColor)
+                        .foregroundColor(.offText)
                 }
             }
         }
+        .padding(2)
     }
 }
 
