@@ -103,7 +103,7 @@ struct GestureMapView: View {
         }
         .sheet(item: $sheet, onDismiss: sheetDismiss) {item in
             switch item {
-            case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.25)])
+            case .newBubble: NewBubbleSheet(selectedBubble: $sheetBubble, added: $addMappedBubble).presentationDetents([.fraction(0.2)])
             case .bubbleList: SelectionBubbleList(selection: $sheetBubble, selected: $addMappedBubble, types: [.all])
             case .bubbleDetails: UnknownBubbleView(bubble: selectedMappedBubble!.bubble!)
             case .linkedBubbleDetails: UnknownBubbleView(bubble: map.linkedBubble!)

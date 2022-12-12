@@ -53,6 +53,7 @@
 		BACCB3DC291EC693004B65EC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DB291EC693004B65EC /* Manager.swift */; };
 		BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DD291ECB41004B65EC /* Color+Random.swift */; };
 		BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */; };
+		BAD993802946CF7700CD8C99 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9937F2946CF7700CD8C99 /* Constants.swift */; };
 		BAF76FDF2925BF2C00F4A641 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF76FDE2925BF2C00F4A641 /* BubbleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		BACCB3DB291EC693004B65EC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		BACCB3DD291ECB41004B65EC /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
 		BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleRow.swift; sourceTree = "<group>"; };
+		BAD9937F2946CF7700CD8C99 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BAF76FDE2925BF2C00F4A641 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,6 +309,7 @@
 				BA1D4BF52924566F0017C9C9 /* Color+Bubble.swift */,
 				25CE8ACE292AF85F0041394F /* Color+Components.swift */,
 				BA6A876D2937F89A003A8F9B /* Color+Standards.swift */,
+				BAD9937F2946CF7700CD8C99 /* Constants.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				25CE8AD8292B2F1B0041394F /* Bubbles.xcdatamodeld in Sources */,
 				BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */,
 				BA6A876E2937F89A003A8F9B /* Color+Standards.swift in Sources */,
+				BAD993802946CF7700CD8C99 /* Constants.swift in Sources */,
 				BA6C0C74293A782600756894 /* Bubble+Validate.swift in Sources */,
 				BA49669D29384B7600CB2E44 /* NewBubbleSheet.swift in Sources */,
 				BA1D4BE429244A340017C9C9 /* BubbleList.swift in Sources */,

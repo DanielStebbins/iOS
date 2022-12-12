@@ -118,7 +118,7 @@ struct ListBubbleAdder<T>: View where T: Bubble {
         }
         .sheet(isPresented: $showAddSheet) {
             NewBubbleSheet(selectedBubble: $selection, added: $selected, types: [BubbleType.find(type: T.self)])
-                .presentationDetents([.fraction(0.25)])
+                .presentationDetents([.fraction(0.2)])
         }
     }
 }

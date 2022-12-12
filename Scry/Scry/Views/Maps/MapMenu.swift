@@ -18,7 +18,7 @@ struct MapMenu: View {
     var body: some View {
         let maps = story.maps!.allObjects as! [Map]
         let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             HStack {
                 Text("Maps")
                     .font(.headline)
@@ -54,7 +54,7 @@ struct MapMenuRow: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: width * 0.9, height: width * 0.2)
+                    .frame(width: width * 0.9, height: width * 0.9)
                     .clipped()
                     .cornerRadius(width * 0.06)
                     .overlay {
