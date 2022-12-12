@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// All of these type specific edit sheets are really just to tell the edit sheet which relationships are possible.
 struct CharacterEditSheet: View {
     @ObservedObject var character: Character
     let dismissParent: DismissAction
@@ -18,7 +19,6 @@ struct CharacterEditSheet: View {
                 DisplayElementButton(text: "Locations", display: $character.displayLocations)
                 DisplayElementButton(text: "Items", display: $character.displayItems)
             }
-            .navigationTitle("Edit Character")
         }
     }
 }

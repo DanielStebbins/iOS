@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// Just a BubbleCapsule that navigates to the bubble's detail page.
+// The destination is set in the container view for type reasons.
 struct LinkedBubbleCapsule<T>: View where T: Bubble{
     @ObservedObject var bubble: T
     var font: Font? = .body

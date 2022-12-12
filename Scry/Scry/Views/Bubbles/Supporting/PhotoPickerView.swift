@@ -8,11 +8,14 @@
 import SwiftUI
 import PhotosUI
 
+// Stylized SwiftUI PhotosPicker.
 struct PhotoPickerView: View {
     let title: String
     @Binding var selection: Data?
     
     @State private var selectedItem: PhotosPickerItem? = nil
+    
+    let size = Constants.photoPickerPictureSize
     
     var body: some View {
         PhotosPicker(selection: $selectedItem, matching: .images, photoLibrary: .shared()) {
@@ -25,17 +28,18 @@ struct PhotoPickerView: View {
                         Image(systemName: "trash")
                     }
                     
+                    // Small circular picture of the current picture.
                     Image(uiImage: UIImage(data: image)!)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 40, height: 40)
+                        .frame(width: size, height: size, alignment: .trailing)
                         .clipped()
-                        .cornerRadius(20)
+                        .cornerRadius(size / 2)
                 }
                 else {
                     Image(systemName: "square.grid.2x2")
                         .imageScale(.large)
-                        .frame(width: 30, height: 30, alignment: .trailing)
+                        .frame(width: size, height: size, alignment: .trailing)
                         .foregroundColor(.white)
                 }
             }

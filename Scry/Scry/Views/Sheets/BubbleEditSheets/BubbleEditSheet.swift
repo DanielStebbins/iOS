@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// ViewBuilder that handles the dismiss button, delete button, name, color, image, and show notes button.
 struct BubbleEditSheet<Content>: View where Content: View {
     @ObservedObject var bubble: Bubble
     let dismissParent: DismissAction
@@ -16,6 +17,7 @@ struct BubbleEditSheet<Content>: View where Content: View {
     @Environment(\.managedObjectContext) var context
     
     var body: some View {
+        // Has to dismiss this view and the parent view (bubble details), or else the deletion causes bugs.
         let deleteButton = ToolbarItem(placement: .navigationBarTrailing) {
             Button(action: { dismiss(); context.delete(bubble); dismissParent() }) {
                 Image(systemName: "trash")
@@ -24,37 +26,20 @@ struct BubbleEditSheet<Content>: View where Content: View {
             }
         }
         
+        let type = BubbleType(bubble: bubble)
         ClosableView {
             VStack {
-                HStack {
-                    HStack {
-                        Image(systemName: bubble.systemImageName!)
-                            .imageScale(.large)
-                            .padding(5)
-                        TextField("Name", text: Binding($bubble.name)!)
-                            .bold()
-                            .italic()
-                            .font(.headline)
-                    }
-                    .foregroundColor(.white)
-                    .padding([.leading, .trailing], 7)
-                    .padding([.top, .bottom], 5)
-                    .background {
-                        Capsule()
-                            .fill(Color(bubble: bubble))
-                    }
-                    ColorPicker("", selection: Binding(get: { Color(bubble: bubble) }, set: { bubble.changeColor(color: $0) }), supportsOpacity: false)
-                        .labelsHidden()
-                }
-                .padding(.bottom, 5)
+                // Uses the same input capsule design as the new button sheet.
+                InputCapsule(name: Binding($bubble.name)!, color: Binding(get: { Color(bubble: bubble) }, set: { bubble.changeColor(color: $0) }), image: $bubble.image, bubbleType: Binding.constant(type), types: [type])
+                    .padding(.bottom, 5)
                 PhotoPickerView(title: "Choose Image", selection: $bubble.image)
                 DisplayElementButton(text: "Notes", display: $bubble.displayNotes)
                 content()
                 Spacer()
             }
-            .navigationTitle("Edit Bubble")
-            .navigationBarTitleDisplayMode(.inline)
             .padding()
+            .navigationTitle("Edit \(type.rawValue)")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar { deleteButton }
         }
     }

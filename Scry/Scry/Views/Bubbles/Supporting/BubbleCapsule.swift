@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+// The main capsule view for all bubbles.
 struct BubbleCapsule: View {
     @ObservedObject var bubble: Bubble
-    var size: Double = 20
+    var size: Double = Constants.capsuleSize
     
     var body: some View {
         HStack {
@@ -25,10 +26,10 @@ struct BubbleCapsule: View {
                 Image(systemName: bubble.systemImageName!)
             }
             Text(bubble.name!)
-                .padding(.leading, -8 + size / 15)
+                .padding(.leading, Constants.capsuleCenterPadding + size * Constants.capsuleCenterPaddingFraction)
         }
-        .padding([.leading, .trailing], size / 2)
-        .padding([.top, .bottom], size / 4)
+        .padding([.leading, .trailing], size * Constants.capsuleVerticalPaddingFraction)
+        .padding([.top, .bottom], size * Constants.capsuleHorizontalPaddingFraction)
         .background {
             Capsule()
                 .fill(Color(bubble: bubble))

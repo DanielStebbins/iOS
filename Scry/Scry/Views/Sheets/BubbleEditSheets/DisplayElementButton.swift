@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// For setting relationship lists (Factions: Faction1 ...) visible or not.
+// If they have elements in them they will remain visible.
 struct DisplayElementButton: View {
     let text: String
     @Binding var display: Bool

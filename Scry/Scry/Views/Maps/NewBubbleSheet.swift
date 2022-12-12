@@ -105,25 +105,3 @@ struct TypePicker: View {
         }
     }
 }
-
-enum BubbleType: String, Identifiable, CaseIterable {
-    case character = "Character", faction = "Faction", item = "Item", location = "Location"
-    var id: RawValue { rawValue }
-    var imageName: String {
-        switch self {
-        case .character: return "person"
-        case .faction: return "flag"
-        case .item: return "wand.and.stars"
-        case .location: return "location"
-        }
-    }
-    static func find<T>(type: T.Type) -> BubbleType where T: Bubble {
-        switch type {
-        case is Character.Type: return .character
-        case is Faction.Type: return .faction
-        case is Item.Type: return .item
-        case is Location.Type: return .location
-        default: return .character
-        }
-    }
-}

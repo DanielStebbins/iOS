@@ -51,7 +51,7 @@ struct ListCapsuleGrid<T>: View where T: Bubble {
         bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
     }
     
-    let padding: CGFloat = 20
+    let padding: CGFloat = 25
     
     var body: some View {
         let rows: [[T]] = split()
@@ -68,7 +68,7 @@ struct ListCapsuleGrid<T>: View where T: Bubble {
                     }
                 }
                 .padding(7)
-                .padding(.top, rows.isEmpty ? 20 : 0)
+                .padding(.top, rows.isEmpty ? Constants.capsuleSize : 0)
                 .overlay {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color.offText, lineWidth: 2)
@@ -117,7 +117,7 @@ struct ListBubbleAdder<T>: View where T: Bubble {
                 .imageScale(.large)
         }
         .sheet(isPresented: $showAddSheet) {
-            NewBubbleSheet(selectedBubble: $selection, added: $selected, types: [BubbleType.find(type: T.self)])
+            NewBubbleSheet(selectedBubble: $selection, added: $selected, types: [BubbleType(type: T.self)])
                 .presentationDetents([.fraction(0.2)])
         }
     }

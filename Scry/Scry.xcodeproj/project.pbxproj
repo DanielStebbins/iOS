@@ -48,11 +48,11 @@
 		BACCB3C2291EBEE4004B65EC /* ScryUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */; };
 		BACCB3C4291EBEE4004B65EC /* ScryUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */; };
 		BACCB3D2291EBF68004B65EC /* LinkedBubbleCapsule.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D1291EBF68004B65EC /* LinkedBubbleCapsule.swift */; };
-		BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */; };
 		BACCB3DC291EC693004B65EC /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DB291EC693004B65EC /* Manager.swift */; };
 		BACCB3DE291ECB41004B65EC /* Color+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DD291ECB41004B65EC /* Color+Random.swift */; };
 		BACCB3E0291ECDB1004B65EC /* CapsuleRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */; };
 		BAD993802946CF7700CD8C99 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD9937F2946CF7700CD8C99 /* Constants.swift */; };
+		BAD993832946D7C900CD8C99 /* BubbleTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD993822946D7C900CD8C99 /* BubbleTypes.swift */; };
 		BAF76FDF2925BF2C00F4A641 /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF76FDE2925BF2C00F4A641 /* BubbleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -118,11 +118,11 @@
 		BACCB3C1291EBEE4004B65EC /* ScryUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryUITests.swift; sourceTree = "<group>"; };
 		BACCB3C3291EBEE4004B65EC /* ScryUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScryUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BACCB3D1291EBF68004B65EC /* LinkedBubbleCapsule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedBubbleCapsule.swift; sourceTree = "<group>"; };
-		BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextInput.swift; sourceTree = "<group>"; };
 		BACCB3DB291EC693004B65EC /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		BACCB3DD291ECB41004B65EC /* Color+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Random.swift"; sourceTree = "<group>"; };
 		BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleRow.swift; sourceTree = "<group>"; };
 		BAD9937F2946CF7700CD8C99 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BAD993822946D7C900CD8C99 /* BubbleTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTypes.swift; sourceTree = "<group>"; };
 		BAF76FDE2925BF2C00F4A641 /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,7 +180,7 @@
 			path = Maps;
 			sourceTree = "<group>";
 		};
-		25CE8ACB292AF3B80041394F /* EditSheets */ = {
+		25CE8ACB292AF3B80041394F /* BubbleEditSheets */ = {
 			isa = PBXGroup;
 			children = (
 				25CE8ACC292AF3CF0041394F /* BubbleEditSheet.swift */,
@@ -190,13 +190,12 @@
 				257297DC292C572600E6FF05 /* LocationEditSheet.swift */,
 				25CE8AD4292AFF9E0041394F /* DisplayElementButton.swift */,
 			);
-			path = EditSheets;
+			path = BubbleEditSheets;
 			sourceTree = "<group>";
 		};
 		BA1D4BE7292452810017C9C9 /* Bubbles */ = {
 			isa = PBXGroup;
 			children = (
-				25CE8ACB292AF3B80041394F /* EditSheets */,
 				BA1D4BEA292452E10017C9C9 /* Supporting */,
 				257297E4292E8F9F00E6FF05 /* Details */,
 				BA1D4BE329244A340017C9C9 /* BubbleList.swift */,
@@ -208,7 +207,6 @@
 		BA1D4BEA292452E10017C9C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
-				BACCB3D8291EC43C004B65EC /* MultilineTextInput.swift */,
 				BACCB3D1291EBF68004B65EC /* LinkedBubbleCapsule.swift */,
 				BACCB3DF291ECDB1004B65EC /* CapsuleRow.swift */,
 				257297DE292D6D2D00E6FF05 /* BubbleCapsule.swift */,
@@ -281,6 +279,7 @@
 		BACCB3D0291EBF4A004B65EC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BAD993842946DAA300CD8C99 /* Sheets */,
 				BA1D4BE7292452810017C9C9 /* Bubbles */,
 				257297E5292E8FE300E6FF05 /* Maps */,
 				BA3CF0A5293525FD005753BE /* MainView.swift */,
@@ -304,6 +303,7 @@
 				BAD993812946D20900CD8C99 /* Color */,
 				BACCB3DB291EC693004B65EC /* Manager.swift */,
 				BAD9937F2946CF7700CD8C99 /* Constants.swift */,
+				BAD993822946D7C900CD8C99 /* BubbleTypes.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -317,6 +317,14 @@
 				BA6A876D2937F89A003A8F9B /* Color+Standards.swift */,
 			);
 			path = Color;
+			sourceTree = "<group>";
+		};
+		BAD993842946DAA300CD8C99 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				25CE8ACB292AF3B80041394F /* BubbleEditSheets */,
+			);
+			path = Sheets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -481,12 +489,12 @@
 				257297DF292D6D2D00E6FF05 /* BubbleCapsule.swift in Sources */,
 				BA1D4BEE292453FF0017C9C9 /* FactionView.swift in Sources */,
 				257297D9292C501700E6FF05 /* FactionEditSheet.swift in Sources */,
+				BAD993832946D7C900CD8C99 /* BubbleTypes.swift in Sources */,
 				BA6A877029380886003A8F9B /* GestureMapView.swift in Sources */,
 				BA1D4BF62924566F0017C9C9 /* Color+Bubble.swift in Sources */,
 				BA3CF0A6293525FD005753BE /* MainView.swift in Sources */,
 				BA3CF0AC29353088005753BE /* MapOptionsSheet.swift in Sources */,
 				BAB25FB3294537F300ED7E83 /* CapsuleGrid.swift in Sources */,
-				BACCB3D9291EC43C004B65EC /* MultilineTextInput.swift in Sources */,
 				BA1D4BF0292454430017C9C9 /* ItemView.swift in Sources */,
 				BACCB3A7291EBEE2004B65EC /* ScryApp.swift in Sources */,
 				BA15DAD4293ED46D006646F9 /* SelectionBubbleList.swift in Sources */,

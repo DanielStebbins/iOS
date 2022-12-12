@@ -52,3 +52,16 @@ struct BubbleView<Content>: View where Content: View {
         }
     }
 }
+
+struct MultilineTextInput: View {
+    let title: String
+    @Binding var text: String
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(title)
+            TextField(title, text: $text, axis: .vertical)
+                .textFieldStyle(.roundedBorder)
+        }
+        .padding()
+    }
+}

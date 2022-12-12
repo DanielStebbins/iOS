@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+// Runs all of the gestures that happen on a MappedBubble.
+// Gestures that involve the whole map, like resize, happen in GestureMapView.
 struct GestureBubbleCapsule: View {
     @ObservedObject var mappedBubble: MappedBubble
     @Binding var selectedMappedBubble: MappedBubble?
@@ -16,8 +18,10 @@ struct GestureBubbleCapsule: View {
     @State private var initial = CGPoint.zero
     
     var body: some View {
+        // Boolean for whether this bubble is the selected bubble.
         let selected: Bool = selectedMappedBubble == mappedBubble
         
+        // Drag moving (only if selected).
         let move = DragGesture()
             .onChanged {value in
                 if initial == CGPoint.zero {
@@ -30,6 +34,7 @@ struct GestureBubbleCapsule: View {
                 initial = CGPoint.zero
             }
         
+        // Tapping selects and de-selects.
         let tap = TapGesture()
             .onEnded {
                 if !selected {
@@ -41,6 +46,7 @@ struct GestureBubbleCapsule: View {
                 }
             }
         
+        // Long press brings up options if selected, creates a new relationship with the selected if not.
         let press = LongPressGesture(minimumDuration: 0.75, maximumDistance: 3)
             .onEnded { _ in
                 if selected {
@@ -71,6 +77,7 @@ struct GestureBubbleCapsule: View {
         }
     }
     
+    // Makes or breaks a relationship between this bubble and the selected bubble.
     func toggleRelationship() {
         switch selectedMappedBubble!.bubble! {
         case let character as Character: character.toggleRelationship(bubble: mappedBubble.bubble!)

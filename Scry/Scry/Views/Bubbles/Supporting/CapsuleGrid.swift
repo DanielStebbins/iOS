@@ -15,7 +15,7 @@ struct CapsuleGrid<T>: View where T: Bubble {
     var shown: Bool = false
     let width: CGFloat
     
-    let padding: CGFloat = 17
+    let padding: CGFloat = 25
     
     var body: some View {
         if shown || bubbles.count != 0 {

@@ -51,14 +51,13 @@ struct SelectionListSection<T>: View where T: Bubble {
     let excluded: [UUID]
     let width: CGFloat
     
-    @Environment (\.dismiss) private var dismiss
     @FetchRequest(sortDescriptors: [SortDescriptor(\.name)]) var bubbles: FetchedResults<T>
     
     var searchResults: [T] {
         bubbles.filter({ b in search.isEmpty || b.name!.lowercased().contains(search.lowercased()) }) as [T]
     }
     
-    let padding: CGFloat = 20
+    let padding: CGFloat = 25
     
     var body: some View {
         let rows: [[T]] = split()
@@ -69,13 +68,7 @@ struct SelectionListSection<T>: View where T: Bubble {
                     Color.clear
                     VStack(alignment: .leading) {
                         ForEach(Array(rows.enumerated()), id: \.element) { index, element in
-                            HStack {
-                                ForEach(bubbles) { b in
-                                    Button(action: { selection = b; selected = true; dismiss() }) {
-                                        BubbleCapsule(bubble: b)
-                                    }
-                                }
-                            }
+                            selectionRow(bubbles: rows[index], selection: $selection, selected: $selected)
                         }
                     }
                 }
@@ -92,7 +85,8 @@ struct SelectionListSection<T>: View where T: Bubble {
                 }
             }
         }
-        .padding(15)
+        .padding(5)
+        .padding([.bottom], 10)
     }
     
     func split() -> [[T]] {
@@ -129,6 +123,24 @@ enum BubbleListSection: String, Identifiable, CaseIterable {
         case is Item.Type: return .item
         case is Location.Type: return .location
         default: return .character
+        }
+    }
+}
+
+struct selectionRow: View {
+    let bubbles: [Bubble]
+    @Binding var selection: Bubble?
+    @Binding var selected: Bool
+    
+    @Environment (\.dismiss) private var dismiss
+    
+    var body: some View {
+        HStack {
+            ForEach(bubbles) { b in
+                Button(action: { selection = b; selected = true; dismiss() }) {
+                    BubbleCapsule(bubble: b)
+                }
+            }
         }
     }
 }

@@ -18,7 +18,6 @@ struct LocationEditSheet: View {
                 DisplayElementButton(text: "Characters", display: $location.displayCharacters)
                 DisplayElementButton(text: "Items", display: $location.displayItems)
             }
-            .navigationTitle("Edit Location")
         }
     }
 }

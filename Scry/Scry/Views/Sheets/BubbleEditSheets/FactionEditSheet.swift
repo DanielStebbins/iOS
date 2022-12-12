@@ -20,7 +20,6 @@ struct FactionEditSheet: View {
                 DisplayElementButton(text: "Superfactions", display: $faction.displaySuperfactions)
                 DisplayElementButton(text: "Subfactions", display: $faction.displaySubfactions)
             }
-            .navigationTitle("Edit Faction")
         }
     }
 }

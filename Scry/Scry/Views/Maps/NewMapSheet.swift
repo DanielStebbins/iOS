@@ -25,6 +25,7 @@ struct NewMapSheet: View {
                 let map = Map(context: context)
                 map.name = name
                 map.image = image
+                map.linkedBubble = linkedBubble
                 story.addToMaps(map)
                 story.displayedMap = map
                 try? context.save()

@@ -54,7 +54,7 @@ struct MapMenuRow: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .scaledToFill()
-                    .frame(width: width * 0.9, height: width * 0.9)
+                    .frame(width: width * 0.9, height: width * 0.2)
                     .clipped()
                     .cornerRadius(width * 0.06)
                     .overlay {
