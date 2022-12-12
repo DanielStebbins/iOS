@@ -5,15 +5,14 @@
 //  Created by Stebbins, Daniel Ross on 11/28/22.
 //
 
-// Referenced jtbandes post for the idea to use a UIScrollView for the map.
-// https://stackoverflow.com/questions/58341820/isnt-there-an-easy-way-to-pinch-to-zoom-in-an-image-in-swiftui
-
 import SwiftUI
 
-struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
-    let content: T
+struct ZoomingScrollView<Content>: UIViewRepresentable where Content: View {
+    let content: Content
+    let zoom: Bool
 
-    init(@ViewBuilder content: () -> T) {
+    init(zoom: Bool, @ViewBuilder content: () -> Content) {
+        self.zoom = zoom
         self.content = content()
     }
 
@@ -35,6 +34,7 @@ struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
     }
 
     func updateUIView(_ uiScrollView: UIScrollView, context: Context) {
+        uiScrollView.pinchGestureRecognizer!.isEnabled = zoom
         context.coordinator.hostingController.rootView = self.content
         assert(context.coordinator.hostingController.view.superview == uiScrollView)
     }
@@ -44,9 +44,9 @@ struct ZoomingScrollView<T>: UIViewRepresentable where T: View {
     }
 
     class Coordinator: NSObject, UIScrollViewDelegate {
-        var hostingController: UIHostingController<T>
+        var hostingController: UIHostingController<Content>
 
-        init(hostingController: UIHostingController<T>) {
+        init(hostingController: UIHostingController<Content>) {
             self.hostingController = hostingController
         }
 

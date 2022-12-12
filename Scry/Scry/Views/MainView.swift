@@ -11,13 +11,18 @@ struct MainView: View {
     @ObservedObject var story: Story
     
     @Environment(\.managedObjectContext) var context
+    @Environment(\.dismissSearch) private var dismissSearch
+    
     @State var showMapMenu: Bool = false
+    @State var mapMenuFullyOpen: Bool = false
+    @State var mapMenuPosition: CGFloat = 0.0
     @State var sheet: ShownSheet?
     @State var newDisplayedMap: Bool = false
+    @State var selectedMappedBubble: MappedBubble?
     
     var body: some View {
         let menuButton = ToolbarItem(placement: .navigationBarLeading) {
-            Button(action: { withAnimation { showMapMenu.toggle() } }) {
+            Button(action: { mapMenuButtonAction() }) {
                 Image(systemName: "line.horizontal.3")
                     .imageScale(.large)
                     .padding([.top, .bottom, .trailing])
@@ -25,36 +30,50 @@ struct MainView: View {
         }
         
         let optionsButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: { withAnimation { showMapMenu = false; sheet = .options } }) {
+            Button(action: { closeMapMenu(); sheet = .options  }) {
                 Image(systemName: "gearshape")
                     .imageScale(.large)
             }
             .disabled(story.displayedMap == nil)
         }
-        
+
         let bubbleListButton = ToolbarItem(placement: .navigationBarTrailing) {
-            Button(action: { withAnimation { showMapMenu = false; sheet = .bubbleList } }) {
-                Image(systemName: "list.bullet")
+            Button(action: { closeMapMenu(); sheet = .bubbleList }) {
+                Image(systemName: "list.bullet.circle")
                     .imageScale(.large)
             }
             .disabled(story.displayedMap == nil)
         }
-        
-        let drag = DragGesture()
-            .onEnded {
-                if $0.translation.width < -30 {
-                    withAnimation {
-                        self.showMapMenu = false
+
+        GeometryReader { geometry in
+            let drag = DragGesture()
+                .onChanged { value in
+                    if mapMenuFullyOpen{
+                        mapMenuPosition = min(0, value.translation.width)
+                    }
+                    else {
+                        mapMenuPosition = max(-geometry.size.width, value.translation.width - geometry.size.width)
+                    }
+                    
+                    if !showMapMenu {
+                        showMapMenu = true
+                        mapMenuPosition = -geometry.size.width
                     }
                 }
-            }
-        
-        GeometryReader { geometry in
+                .onEnded { drag in
+                    if mapMenuFullyOpen {
+                        drag.translation.width < -50 ? closeMapMenu() : openMapMenu()
+                    }
+                    else {
+                        drag.translation.width > 70 ? openMapMenu() : closeMapMenu()
+                    }
+                }
+            
             NavigationStack {
                 ZStack(alignment: .leading) {
                     ZStack(alignment: .center) {
                         if story.displayedMap != nil {
-                            ScrollingMapView(map: story.displayedMap!, showMapMenu: $showMapMenu)
+                            ToolbarMapView(map: story.displayedMap!, mapMenuFullyOpen: mapMenuFullyOpen, closeMapMenu: { closeMapMenu() }, selectedMappedBubble: $selectedMappedBubble)
                         }
                         else {
                             Color.mapBackground
@@ -65,25 +84,52 @@ struct MainView: View {
                         }
                     }
                     if showMapMenu {
-                        MapMenu(story: story, width: geometry.size.width * 0.8, shown: $showMapMenu, sheet: $sheet)
+                        MapMenu(story: story, width: geometry.size.width * 0.8, close: { closeMapMenu() }, sheet: $sheet)
                             .transition(.move(edge: .leading))
+                            .offset(x: mapMenuPosition, y: 0)
                             .zIndex(1)
                     }
                 }
                 .background(Color.background)
-                .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
-                    switch item {
-                    case .options: OptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.2)])
-                    case .bubbleList: BubbleList()
-                    case .addMap: AddMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.2)])
-                    }
-                }
                 .toolbar { menuButton }
                 .toolbar { optionsButton }
                 .toolbar { bubbleListButton }
             }
+            .sheet(item: $sheet, onDismiss: { sheetDismiss() }) {item in
+                switch item {
+                case .options: MapOptionsSheet(map: story.displayedMap!, newMap: $newDisplayedMap).presentationDetents([.fraction(0.25)])
+                case .bubbleList: BubbleList()
+                case .addMap: NewMapSheet(story: story, showMapMenu: $showMapMenu).presentationDetents([.fraction(0.25)])
+                }
+            }
             .gesture(drag)
         }
+    }
+    
+    func mapMenuButtonAction() {
+        if !mapMenuFullyOpen {
+            openMapMenu()
+        }
+        else {
+            closeMapMenu()
+        }
+    }
+    
+    func openMapMenu() {
+        selectedMappedBubble = nil
+        withAnimation(.linear(duration: 0.25)) {
+            showMapMenu = true
+            mapMenuPosition = 0.0
+        }
+        mapMenuFullyOpen = true
+    }
+    
+    func closeMapMenu() {
+        withAnimation(.linear(duration: 0.25)) {
+            showMapMenu = false
+            mapMenuPosition = 0.0
+        }
+        mapMenuFullyOpen = false
     }
     
     func sheetDismiss() {

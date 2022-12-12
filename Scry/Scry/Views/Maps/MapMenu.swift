@@ -10,7 +10,7 @@ import SwiftUI
 struct MapMenu: View {
     @ObservedObject var story: Story
     let width: CGFloat
-    @Binding var shown: Bool
+    let close: () -> Void
     @Binding var sheet: ShownSheet?
     
     @Environment(\.managedObjectContext) var context
@@ -18,22 +18,24 @@ struct MapMenu: View {
     var body: some View {
         let maps = story.maps!.allObjects as! [Map]
         let sortedMaps = maps.sorted(by: { $0.name! < $1.name! })
-        
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             HStack {
                 Text("Maps")
                     .font(.headline)
                 Spacer()
-                Button(action: { sheet = .addMap; withAnimation { shown = false } }) {
+                Button(action: { sheet = .addMap; close() }) {
                     Image(systemName: "plus")
                         .imageScale(.large)
+                        .padding(10)
                 }
+                .padding(.trailing, -10)
             }
-            .padding()
+            .padding([.top, .leading, .trailing])
             ForEach(sortedMaps) {map in
-                MapMenuRow(story: story, map: map, shown: $shown, width: width)
+                MapMenuRow(story: story, map: map, close: close, width: width)
             }
         }
+        .padding([.leading, .trailing])
         .frame(width: width)
         .background(Color.background, ignoresSafeAreaEdges: [])
     }
@@ -42,12 +44,12 @@ struct MapMenu: View {
 struct MapMenuRow: View {
     @ObservedObject var story: Story
     @ObservedObject var map: Map
-    @Binding var shown: Bool
+    let close: () -> Void
     let width: CGFloat
     
     var body: some View {
         let uiImage = map.image == nil ? UIImage(imageLiteralResourceName: "square-grid") : UIImage(data: map.image!)!
-        Button(action: { story.displayedMap = map; withAnimation { shown = false } }) {
+        Button(action: { story.displayedMap = map; close() }) {
             ZStack {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -57,25 +59,19 @@ struct MapMenuRow: View {
                     .cornerRadius(width * 0.06)
                     .overlay {
                         RoundedRectangle(cornerRadius: width * 0.06)
-                            .stroke(Color.accentColor, lineWidth: 2)
+                            .stroke(Color.offText, lineWidth: 3)
                     }
-                Text(map.name!)
-                    .fontWeight(.heavy)
-                    .foregroundColor(.accentColor)
+                if let linkedBubble = map.linkedBubble {
+                    BubbleCapsule(bubble: linkedBubble)
+                }
+                else {
+                    Text(map.name!)
+                        .fontWeight(.heavy)
+                        .foregroundColor(.offText)
+                }
             }
         }
-//        HStack {
-//            Text(map.name!)
-//                .fontWeight(.heavy)
-//                .foregroundColor(.accentColor)
-//            Spacer()
-//            Image(uiImage: uiImage)
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 50, height: 50)
-//                .clipped()
-//        }
-//        .padding([.leading, .trailing])
+        .padding(2)
     }
 }
 
