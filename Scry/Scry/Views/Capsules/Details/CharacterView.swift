@@ -23,7 +23,7 @@ struct CharacterView: View {
         }
         .sheet(isPresented: $isEditing) {
             CharacterEditSheet(character: character, dismissParent: dismiss)
-                .presentationDetents([.fraction(0.6)])
+                .presentationDetents([.fraction(0.5)])
         }
     }
 }

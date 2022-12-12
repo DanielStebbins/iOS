@@ -112,7 +112,7 @@ struct ListBubbleAdder<T>: View where T: Bubble {
     @State var showAddSheet: Bool = false
     
     var body : some View {
-        Button(action: { showAddSheet = true }) {
+        Button(action: { showAddSheet = true; print(BubbleType(type: T.self))}) {
             Image(systemName: "plus")
                 .imageScale(.large)
         }

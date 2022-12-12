@@ -81,7 +81,6 @@ struct SelectionListSection<T>: View where T: Bubble {
             } header: {
                 HStack {
                     Text(String(describing: T.self))
-                    ListBubbleAdder<T>()
                 }
             }
         }

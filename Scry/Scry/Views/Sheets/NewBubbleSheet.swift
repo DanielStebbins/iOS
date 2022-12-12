@@ -49,6 +49,9 @@ struct NewBubbleSheet: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { submitButton }
             .padding([.leading, .trailing])
+            .onAppear() {
+                bubbleType = types.count == 1 ? types[0] : .character
+            }
         }
     }
 }

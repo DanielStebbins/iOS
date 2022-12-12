@@ -25,7 +25,7 @@ struct FactionView: View {
         }
         .sheet(isPresented: $isEditing) {
             FactionEditSheet(faction: faction, dismissParent: dismiss)
-                .presentationDetents([.fraction(0.7)])
+                .presentationDetents([.fraction(0.5)])
         }
     }
 }

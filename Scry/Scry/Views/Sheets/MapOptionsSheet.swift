@@ -60,7 +60,7 @@ struct MapOptionsSheet: View {
             .sheet(isPresented: $showSheet) {
                 SelectionBubbleList(selection: $map.linkedBubble, selected: Binding.constant(false), types: [.location, .faction])
             }
-            .toolbar { deleteButton}
+            .toolbar { deleteButton }
         }
     }
 }

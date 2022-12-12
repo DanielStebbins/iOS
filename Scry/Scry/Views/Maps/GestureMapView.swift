@@ -132,6 +132,7 @@ struct GestureMapView: View {
             let mappedBubble = MappedBubble(context: context, bubble: sheetBubble!, x: x, y: y)
             map.addToMappedBubbles(mappedBubble)
             addMappedBubble = false
+            try? context.save()
         }
     }
     
