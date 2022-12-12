@@ -64,12 +64,12 @@ struct InputCapsule: View {
         HStack {
             HStack {
                 TypePicker(types: types, selection: $bubbleType)
-                    .tint(color.darkness < 0.5 ? .white : .black)
+                    .tint(.white)
                 TextField("Name", text: $name)
                     .bold()
                     .italic()
                     .font(.headline)
-                    .foregroundColor(color.darkness < 0.5 ? .white : Color.accentColor)
+                    .foregroundColor(.white)
             }
             .padding([.leading, .trailing], 7)
             .padding([.top, .bottom], 5)

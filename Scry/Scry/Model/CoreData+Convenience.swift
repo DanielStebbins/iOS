@@ -8,25 +8,45 @@
 import CoreData
 import SwiftUI
 
+
+// These values need to be set for every bubble, regardless of type.
 extension Bubble {
     func setup(name: String, color: Color, image: Data?, systemImageName: String) {
         self.name = name
-        let components = color.components
-        red = Int16(components[0] * 255)
-        green = Int16(components[1] * 255)
-        blue = Int16(components[2] * 255)
+        changeColor(color: color)
         self.image = image
         self.systemImageName = systemImageName
         self.uuid = UUID()
     }
+    
+    func changeColor(color: Color) {
+        let components = color.components
+        red = Int16(components[0] * 255)
+        green = Int16(components[1] * 255)
+        blue = Int16(components[2] * 255)
+    }
 }
 
+// Convenience init for MappedBubbles, all of them have a location and date.
+extension MappedBubble {
+    convenience init(context: NSManagedObjectContext, bubble: Bubble, x: Double, y: Double) {
+        self.init(context: context)
+        self.bubble = bubble
+        self.x = x
+        self.y = y
+        self.lastChanged = Date.now
+    }
+}
+
+// For each Core Data class I created these 3 methods.
 extension Character {
     convenience init(context: NSManagedObjectContext, name: String, color: Color, image: Data?) {
         self.init(context: context)
         self.setup(name: name, color: color, image: image, systemImageName: "person")
     }
     
+    // Returns the color of the line between this bubble (selected) and some other bubble (unselected).
+    // Returns clear for no relationship.
     func relationshipColor(bubble: Bubble?) -> Color {
         if let bubble, self.factions!.contains(bubble) || self.items!.contains(bubble) || self.locations!.contains(bubble) {
             return Color.blue
@@ -36,6 +56,7 @@ extension Character {
         }
     }
     
+    // Finds the type of the bubble passed in and either adds it or removes it from the relationships.
     func toggleRelationship(bubble: Bubble) {
         switch bubble {
         case _ as Character: return
@@ -125,15 +146,5 @@ extension Location {
         case _ as Location: return
         default: return
         }
-    }
-}
-
-extension MappedBubble {
-    convenience init(context: NSManagedObjectContext, bubble: Bubble, x: Double, y: Double) {
-        self.init(context: context)
-        self.bubble = bubble
-        self.x = x
-        self.y = y
-        self.lastChanged = Date.now
     }
 }

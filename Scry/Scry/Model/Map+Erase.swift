@@ -7,6 +7,7 @@
 
 import CoreData
 
+// Deletes user "paint" from the map during erase tool.
 extension Map {
     func erase(context: NSManagedObjectContext, x: Double, y: Double, eraseRadius: Double) {
         let circles = drawnCircles!.allObjects as! [DrawnCircle]

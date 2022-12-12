@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// Convenience extension so I can use .background instead of Color("BackgroundColor").
 extension Color {
     static let background = Color("BackgroundColor")
     static let mapBackground = Color("MapBackground")

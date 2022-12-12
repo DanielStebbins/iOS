@@ -35,20 +35,19 @@ struct BubbleEditSheet<Content>: View where Content: View {
                             .bold()
                             .italic()
                             .font(.headline)
-                            .foregroundColor(Color(bubble: bubble).darkness < 0.5 ? .white : .black)
                     }
+                    .foregroundColor(.white)
                     .padding([.leading, .trailing], 7)
                     .padding([.top, .bottom], 5)
                     .background {
                         Capsule()
                             .fill(Color(bubble: bubble))
                     }
-                    ColorPicker("", selection: Binding(get: { Color(bubble: bubble) }, set: { _,_ in }), supportsOpacity: false)
+                    ColorPicker("", selection: Binding(get: { Color(bubble: bubble) }, set: { bubble.changeColor(color: $0) }), supportsOpacity: false)
                         .labelsHidden()
                 }
                 .padding(.bottom, 5)
                 PhotoPickerView(title: "Choose Image", selection: $bubble.image)
-                
                 DisplayElementButton(text: "Notes", display: $bubble.displayNotes)
                 content()
                 Spacer()
@@ -57,9 +56,6 @@ struct BubbleEditSheet<Content>: View where Content: View {
             .navigationBarTitleDisplayMode(.inline)
             .padding()
             .toolbar { deleteButton }
-            .onTapGesture {
-                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-            }
         }
     }
 }
